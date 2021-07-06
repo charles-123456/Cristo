@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_root" name="Helpdesk"  action="helpdesk_ticket_categ_act0" web_icon="helpdesk_lite,static/description/icon512.png" />
+
+    <menuitem id="menu_dash" name="Dashboard"  parent="menu_root" sequence="0"/>
+    
+    <!-- Configuration Menu -->
+    
+    <menuitem id="menu_config" name="Configuration"  parent="menu_root" sequence="20" groups="base.group_system"/>
+	<menuitem id="support_team_config"  name="Support teams" action="support_team_config_action" parent="menu_config" groups="base.group_system" />
+    <menuitem id="menu_helpdesk_stage_act" name="Stages" sequence="20" action="helpdesk_stage_action" parent="menu_config" groups="base.group_no_one"/>
+	
+	<!-- Search Menu -->
+	
+	<menuitem id="menu_tickets" name="Search"  parent="menu_root" sequence="10"/>
+    <menuitem id="menu_tickets_act" name="Tickets"  parent="menu_tickets" action="helpdesk_ticket_categ_act0"/>
+
+</odoo>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Chronicle -->
+		<record id="view_chronicle_form" model="ir.ui.view">
+			<field name="name">cristo.chronicle.form</field>
+			<field name="model">cristo.chronicle</field>
+			<field name="arch" type="xml">
+				<form string="Chronicle" duplicate="0">
+					<sheet>
+						<group>
+							<group>
+								<field name="date" />
+								<field name="user_id" groups="base.group_erp_manager" />
+								<field name="keywords" required="1" />
+							</group>
+							<group>
+								<field name="type" widget="radio" options="{'horizontal': true}" />
+								<field name="calendar_ref_ids" widget="many2many_tags"
+									options="{'no_create_edit':1}"
+									attrs="{'invisible': [('type','!=','calendar')], 'required':[('type','=','calendar')]}" />
+								<field name="meeting_ref_ids" widget="many2many_tags"
+									options="{'no_create_edit':1}"
+									attrs="{'invisible': [('type','!=','meeting')], 'required':[('type','=','meeting')]}" />
+								<field name="name" placeholder="Name" attrs="{'invisible': [('type','!=','other')], 'required':[('type','=','other')]}" />
+								<field name="institute_id"
+									groups="base.group_erp_manager, cristo.group_role_cristo_bsa_super_admin" />
+								<field name="rel_province_id" domain="[('institute_id','=',institute_id)]" />
+								<field name="community_id" invisible="context.get('my_chr',False)" />
+								<field name="institution_id" invisible="context.get('my_chr',False)" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Description">
+								<field name="description" />
+							</page>
+							<page string="Photos">
+								<field name="org_image_ids" class="o_website_sale_image_list"
+									mode="kanban" domain="['|',('calendar_id','!=',False),('chronicle_id','!=',False)]"
+									context="{'default_chronicle_id':active_id,'search_view_ref': 'cristo_dashboard.view_org_image_search'}"
+									options="{'create_text':'Add a Photo'}" nolabel="1" />
+							</page>
+							<page string="Attachments">
+								<div class="alert alert-warning" role="alert">
+                        			<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        		</div>
+								<field name="attachment_ids" widget="many2many_binary" />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_chronicle_tree" model="ir.ui.view">
+			<field name="name">cristo.chronicle.tree</field>
+			<field name="model">cristo.chronicle</field>
+			<field name="arch" type="xml">
+				<tree string="Chronicle" expand="0" default_order="date desc">
+					<field name="date" />
+					<field name="keywords" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_chronicle_search" model="ir.ui.view">
+			<field name="name">cristo.chronicle.search</field>
+			<field name="model">cristo.chronicle</field>
+			<field name="arch" type="xml">
+				<search string="Chronicle">
+					<field name="date" />
+					<field name="keywords" />
+					<field name="description"/>
+					<group expand="0" string="Group By">
+						<filter string="Congregation" name="institute_id"
+							context="{'group_by':'institute_id'}" />
+						<filter string="Province" name="rel_province_id"
+							context="{'group_by':'rel_province_id'}" />
+						<filter string="Community" name="community_id"
+							context="{'group_by':'community_id'}" />
+						<filter string="Institution" name="institution_id"
+							context="{'group_by':'institution_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="view_chronicle_calendar" model="ir.ui.view">
+			<field name="name">cristo.chronicle.calendar</field>
+			<field name="model">cristo.chronicle</field>
+			<field name="arch" type="xml">
+				<calendar string="Chronicle" date_start="date" color="keywords"
+					mode="month">
+					<field name="date" />
+					<field name="keywords" />
+				</calendar>
+			</field>
+		</record>
+
+		<record id="action_my_chronicle" model="ir.actions.act_window">
+			<field name="name">My Chronicle</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">cristo.chronicle</field>
+			<field name="view_mode">tree,form,search,calendar</field>
+			<field name="domain">[('user_id','=',uid)]</field>
+			<field name="context">{'my_chr':1}</field>
+			<field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Chronicle
+              </p>
+            </field>
+		</record>
+
+		<!-- Other Chronicle -->
+
+		<record id="action_other_chronicle" model="ir.actions.act_window">
+			<field name="name">Other Chronicle</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">cristo.chronicle</field>
+			<field name="view_mode">tree,form,search,calendar</field>
+			<field name="domain">[('user_id','!=',uid)]</field>
+			<field name="context">{'my_chr':0}</field>
+			<field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                You can view other Chronicle here
+              </p>
+            </field>
+		</record>
+
+	</data>
+</odoo>

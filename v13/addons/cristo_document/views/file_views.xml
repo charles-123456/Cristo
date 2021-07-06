@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+    
+    	<record id="view_cristo_dms_file_form" model="ir.ui.view">
+			<field name="name">muk_dms_file.form.inherit</field>
+			<field name="model">muk_dms.file</field>
+			<field name="inherit_id" ref="muk_dms.view_dms_file_form" />
+			<field name="arch" type="xml">
+				<field name="storage" position="after">
+					<field name="check_province" invisible="1" />
+					<field name="check_community" invisible="1" />
+					<field name="check_congregation" invisible="1" />
+					<field name="check_institution" invisible="1" />
+					<field name="check_diocese" invisible="1"/>
+					<field name="check_vicariate" invisible="1"/>
+					<field name="check_parish" invisible="1"/>
+					<field name="institute_id" attrs="{'invisible':[('check_congregation', '=', False)]}" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"/>
+					<field name="rel_province_id" attrs="{'invisible':[('check_province', '=', False)]}" domain="[('institute_id', '=', institute_id)]" />
+					<field name="community_id" attrs="{'invisible':[('check_community', '=', False)]}" domain="[('rel_province_id', '=', rel_province_id)]" />
+					<field name="institution_id" attrs="{'invisible':[('check_institution', '=', False)]}" domain="[('community_id', '=', community_id)]" />
+					<field name="diocese_id" attrs="{'invisible':[('check_diocese', '=', False)]}"/>
+					<field name="vicariate_id" attrs="{'invisible':[('check_vicariate', '=', False)]}" domain="[('diocese_id', '=', diocese_id)]"/>
+					<field name="parish_id" attrs="{'invisible':[('check_parish', '=', False)]}" domain="[('vicariate_id', '=', vicariate_id)]"/>
+				</field>
+				<xpath expr="//page[@name='page_meta']" position="before">
+					<page string="Shared with" name="shared_with">
+						<group>
+							<field name="shared_ids" widget="many2many_tags_avatar" string="Contacts" options='{"no_open": True, "no_create": True}'/>
+							<!-- <field name="user_id"></field> -->
+						</group>
+					</page>
+				</xpath>
+				<xpath expr="//field[@name='name']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//div/h1" position="inside">
+					<field name="document_name"/>
+				</xpath>
+				<xpath expr="//form/sheet" position="after">
+					<div class="oe_chatter">
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</xpath>
+				<xpath expr="//field[@name='locked_by']" position="replace">
+				</xpath>
+				<field name="create_uid" position="after">
+					<field name="locked_by" readonly="1" force_save="1" />
+				</field>
+				<xpath expr="//page[@name='page_access']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,muk_dms.group_dms_manager</attribute>
+				</xpath>
+				<xpath expr="//field[@name='extension']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,muk_dms.group_dms_manager</attribute>
+				</xpath>
+				<xpath expr="//field[@name='mimetype']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,muk_dms.group_dms_manager</attribute>
+				</xpath>
+				<xpath expr="//field[@name='storage']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,muk_dms.group_dms_manager</attribute>
+				</xpath>
+				<xpath expr="//div[@name='button_box']" position="inside">
+					<button name="download_file" class="mk_field_preview_button" type="object" string="Download File" icon="fa-download"/>
+				</xpath>
+				<field name="directory" position="attributes">
+					<attribute name="domain">[('is_root_directory','=',False)]</attribute>
+				</field>
+				<xpath expr="//form" position="attributes">
+					<attribute name="duplicate">0</attribute>
+				</xpath>
+				<field name="tags" position="after">
+					<field name="can_lock" invisible="1"/>
+					<field name="is_locked" invisible="1"/>
+					<field name="is_lock_editor" invisible="1"/>
+					<field name="view_cong_low_lev" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin"/>
+					<field name="view_pro_low_lev" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province"/>
+					<field name="view_house_low_lev" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_house"/>
+				</field>
+				<xpath expr="//page[@name='page_meta']/group/group[2]" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//button[@name='lock']" position="attributes">
+					<attribute name="attrs">{'invisible': ['|',('can_lock','=',False),('is_locked','=',True)]}</attribute>
+				</xpath>
+				<xpath expr="//button[@name='unlock']" position="attributes">
+					<attribute name="attrs">{'invisible': [('is_lock_editor','=',False)]}</attribute>
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="view_cristo_dms_file_search" model="ir.ui.view">
+			<field name="name">muk_dms_file.search.inherit</field>
+			<field name="model">muk_dms.file</field>
+			<field name="inherit_id" ref="muk_dms.search_dms_file" />
+			<field name="arch" type="xml">
+				<field name="name" position="replace">
+					<field name="document_name" filter_domain="[('document_name','ilike',self)]"/>
+				</field>
+				<xpath expr="//field[@name='document_name']" position="after">
+					<field name="category" />
+					<field name="tags" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_cristo_dms_file_kanban" model="ir.ui.view">
+			<field name="name">muk_dms_file.kanban.inherit</field>
+			<field name="model">muk_dms.file</field>
+			<field name="inherit_id" ref="muk_dms.view_dms_file_kanban" />
+			<field name="arch" type="xml">
+				<xpath expr="//templates" position="before">
+					<field name="document_name"/>
+				</xpath>
+				<xpath expr="//div[@class='o_kanban_details']/div[1]/div[1]/field" position="replace">
+					<field name="document_name"/>
+				</xpath>
+				<xpath expr="//kanban" position="attributes">
+					<attribute name="import">0</attribute>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_cristo_dms_file_tree" model="ir.ui.view">
+			<field name="name">muk_dms_file.tree.inherit</field>
+			<field name="model">muk_dms.file</field>
+			<field name="inherit_id" ref="muk_dms.view_dms_file_tree" />
+			<field name="arch" type="xml">
+				<field name="name" position="replace">
+					<field name="document_name"></field>
+				</field>
+				<field name="write_date" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</field>
+				<xpath expr="//tree" position="attributes">
+					<attribute name="import">0</attribute>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>

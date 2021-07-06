@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="statistics_family_report">
+		<t t-call="web.basic_layout">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<style>
+						table tr {
+						page-break-inside: avoid;
+						}
+						table td {
+						padding:
+						0.25rem !important;
+						}
+					</style>
+					<center>
+						<strong style="font-size:25px;">STATISTICS OF FAMILIES - BY BCC</strong>
+					</center>
+					<br />
+					<table class="table table-striped">
+						<thead style="color: #00a09d;">
+							<th>Language</th>
+							<th>#</th>
+							<th>Name of the Zone</th>
+							<th>#</th>
+							<th>Name of the BCC</th>
+							<th>#Families</th>
+							<th>ZSum</th>
+							<th>LSum</th>
+						</thead>
+						<t t-set="colcount" t-value="0" />
+						<t t-set="colcount2" t-value="0" />
+						<t t-set="total" t-value="0" />
+						<tbody>
+							<t t-foreach="family_list" t-as="fl">
+								<tr>
+									<td>
+										<t t-esc="fl[1]" />
+									</td>
+									<td>
+										<t t-if="fl[3]">
+											<t t-set="colcount" t-value="colcount +1" />
+											<span t-esc="colcount" />
+											<t t-set="colcount2" t-value="0" />
+										</t>
+									</td>
+									<td>
+										<span t-esc="fl[3]" />
+									</td>
+									<td>
+										<t t-set="colcount2" t-value="colcount2 +1" />
+										<span t-esc="colcount2" />
+									</td>
+									<td>
+										<span t-esc="fl[4]" />
+									</td>
+
+									<td>
+										<span t-esc="fl[5]" />
+									</td>
+									<td>
+										<span t-esc="fl[6]" />
+									</td>
+									<td>
+										<span t-esc="fl[7]" />
+									</td>
+								</tr>
+								<t t-set="total" t-value="total +fl[5]" />
+							</t>
+							<tr class="border-silver">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+
+								<td>Total</td>
+								<td>
+									<span t-esc="total" />
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

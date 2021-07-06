@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="activity_report">
+		<t t-call="web.basic_layout">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<style>
+						table tr {
+						page-break-inside: avoid;
+						}
+						table td {
+						padding:
+						0.25rem !important;
+						}
+					</style>
+					<center>
+						<strong style="font-size:25px;">LIST OF ACTIVITIES</strong>
+					</center>
+					<t t-foreach="plan_ids" t-as="plan_id">
+						<table width="100%">
+							<tr>
+								<th style="height: 38px">Plan Name</th>
+								<td>
+									:
+									<span t-esc="plan_id.name"/>
+								</td>
+								<th style="height: 38px">Category</th>
+								<td>
+									:
+									<span t-esc="plan_id.category_id.name"/>
+								</td>
+							</tr>
+							<tr>
+								<th style="height: 38px">Plan Type</th>
+								<td>
+									:
+									<span t-esc="plan_id.plan_type"/>
+								</td>
+								<th style="height: 38px">Responsible</th>
+								<td>
+									:
+									<span t-esc="plan_id.responsible_id.display_name"/>
+								</td>
+							</tr>
+						</table>
+						<table class="table table-striped">
+							<thead style="color: #00a09d;">
+								<th>S.No</th>
+								<th>Activity Name</th>
+								<th>Start Date</th>
+								<th>End Date </th>
+								<th>Responsible</th>
+								<th>Status</th>
+								<th>Actual Expenditure</th>
+							</thead>
+							<tbody>
+								<t t-set="count" t-value="1"/>
+								<t t-set="activity" t-value="env['plan.activity'].search([('id','in',activity_ids.ids),('plan_id','=',plan_id.id)])" />
+								<t t-if="activity">
+									<t t-foreach="activity" t-as="act_id">
+										<tr>
+											<td>
+												<t t-esc="count"/>
+											</td>
+											<td>
+												<t t-esc="act_id.name"/>
+											</td>
+											<td>
+												<span t-field="act_id.start_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+											</td>
+											<td>
+												<span t-field="act_id.end_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+											</td>
+											<td>
+												<t t-esc="act_id.responsible_id.display_name"/>
+											</td>
+											<td>
+												<t t-if="act_id.status == 'yet to start'">
+													<span>Yet to Start</span>
+												</t>
+												<t t-if="act_id.status == 'inprogress'">
+													<span>Inprogress</span>
+												</t>
+												<t t-if="act_id.status == 'completed'">
+													<span>Completed</span>
+												</t>
+											</td>
+											<td>
+											  <t t-esc="act_id.actual_expenditure"/>
+											</td>
+										</tr>
+										<t t-set="count" t-value="count + 1"/>
+									</t>
+								</t>
+								<t t-if="not activity">
+								  <tr>
+								  <td colspan="7" style="text-align:center;">
+											No Activity Found.
+									</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+						<br/>
+						<hr size="3" color="green" />
+						<br/>
+					</t>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

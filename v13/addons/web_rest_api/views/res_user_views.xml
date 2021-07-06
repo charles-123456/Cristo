@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="res_user_token_form" model="ir.ui.view">
+		<field name="name">res.user.token.form</field>
+		<field name="model">res.user.token</field>
+		<field name="arch" type="xml">
+			<form string="Token">
+				<sheet>
+					<group>
+						<field name="user_id" />
+						<field name="access_token" style="width: 100%; word-break:break-all;" />
+						<field name="last_request" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="res_user_token_tree" model="ir.ui.view">
+		<field name="name">res.user.token.tree</field>
+		<field name="model">res.user.token</field>
+		<field name="arch" type="xml">
+			<tree string="Token">
+				<field name="user_id" />
+				<field name="access_token" />
+				<field name="last_request" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_res_user_token" model="ir.actions.act_window">
+		<field name="name">Tokens</field>
+		<field name="res_model">res.user.token</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem action="action_res_user_token" id="menu_res_user_token"
+		parent="base.menu_users" groups="base.group_no_one" sequence="4" />
+
+</odoo>

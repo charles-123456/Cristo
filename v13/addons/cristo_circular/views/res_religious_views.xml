@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Religious Province -->
+	
+	<record id="res_religious_province_circular_view" model="ir.ui.view">
+        <field name="name">res.religious.province.form.inherit</field>
+        <field name="model">res.religious.province</field>
+        <field name="inherit_id" ref="cristo.view_religious_province_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//page[@name='settings']/group[1]/group" position="before">
+				<group>
+					<field name="cir_header_img" />
+				</group>
+        	</xpath>
+        </field>
+    </record>
+	
+
+</odoo>

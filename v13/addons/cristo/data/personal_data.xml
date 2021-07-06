@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data noupdate="0">
+		<!-- Physical Status -->
+		<record id="res_member_physical_status1" model="res.member.physical.status">
+			<field name="name">Normal</field>
+		</record>
+		<record id="res_member_physical_status2" model="res.member.physical.status">
+			<field name="name">Dumb</field>
+		</record>
+		<record id="res_member_physical_status3" model="res.member.physical.status">
+			<field name="name">Lame</field>
+		</record>
+		<record id="res_member_physical_status4" model="res.member.physical.status">
+			<field name="name">Blind</field>
+		</record>
+		<record id="res_member_physical_status5" model="res.member.physical.status">
+			<field name="name">Terminal Illness</field>
+		</record>
+		<record id="res_member_physical_status6" model="res.member.physical.status">
+			<field name="name">Sick</field>
+		</record>
+		<record id="res_member_physical_status7" model="res.member.physical.status">
+			<field name="name">Healthy</field>
+		</record>
+		
+		<!-- Citizenship  -->
+		<record id="res_member_citizenship1" model="res.member.citizenship">
+			<field name="name">Indian</field>
+		</record>
+		
+		<!-- Blood Group -->
+		<record id="res_blood_group1" model="res.blood.group">
+			<field name="name">A-</field>
+		</record>
+		<record id="res_blood_group2" model="res.blood.group">
+			<field name="name">A+</field>
+		</record>
+		<record id="res_blood_group3" model="res.blood.group">
+			<field name="name">B-</field>
+		</record>
+		<record id="res_blood_group4" model="res.blood.group">
+			<field name="name">B+</field>
+		</record>
+		<record id="res_blood_group5" model="res.blood.group">
+			<field name="name">AB-</field>
+		</record>
+		<record id="res_blood_group6" model="res.blood.group">
+			<field name="name">AB+</field>
+		</record>
+		<record id="res_blood_group7" model="res.blood.group">
+			<field name="name">O-</field>
+		</record>
+		<record id="res_blood_group8" model="res.blood.group">
+			<field name="name">O+</field>
+		</record>
+		
+		<!-- Marital Status -->
+		<record id="res_member_marital_status1" model="res.member.marital.status">
+			<field name="name">Bachelor</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_marital_status2" model="res.member.marital.status">
+			<field name="name">Widower</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_marital_status3" model="res.member.marital.status">
+			<field name="name">Married</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_marital_status4" model="res.member.marital.status">
+			<field name="name">Annulled</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_marital_status5" model="res.member.marital.status">
+			<field name="name">Divorced</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_marital_status6" model="res.member.marital.status">
+			<field name="name">Spinster</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_marital_status7" model="res.member.marital.status">
+			<field name="name">Widow</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_marital_status8" model="res.member.marital.status">
+			<field name="name">Married</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_marital_status9" model="res.member.marital.status">
+			<field name="name">Annulled</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_marital_status10" model="res.member.marital.status">
+			<field name="name">Divorced</field>
+			<field name="gender">female</field>
+		</record>
+		
+		<!-- Relationship -->
+		<record id="res_member_relationship1" model="res.member.relationship">
+			<field name="name">Husband</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship2" model="res.member.relationship">
+			<field name="name">Wife</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_relationship3" model="res.member.relationship">
+			<field name="name">Son</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship4" model="res.member.relationship">
+			<field name="name">Daughter</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_relationship5" model="res.member.relationship">
+			<field name="name">Father</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_relationship6" model="res.member.relationship">
+			<field name="name">Mother</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_relationship7" model="res.member.relationship">
+			<field name="name">Brother</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship8" model="res.member.relationship">
+			<field name="name">Sister</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_relationship9" model="res.member.relationship">
+			<field name="name">Grand Father</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship10" model="res.member.relationship">
+			<field name="name">Grand Mother</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_relationship11" model="res.member.relationship">
+			<field name="name">Mother-in-Law</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_relationship12" model="res.member.relationship">
+			<field name="name">Father-in-Law</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship13" model="res.member.relationship">
+			<field name="name">Son-in-Law</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship14" model="res.member.relationship">
+			<field name="name">Daughter-in-Law</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_relationship15" model="res.member.relationship">
+			<field name="name">Sister-in-Law</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_relationship16" model="res.member.relationship">
+			<field name="name">Brother-in-Law</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship17" model="res.member.relationship">
+			<field name="name">Aunty</field>
+			<field name="gender">female</field>
+		</record>
+		<record id="res_member_relationship18" model="res.member.relationship">
+			<field name="name">Uncle</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship19" model="res.member.relationship">
+			<field name="name">Other</field>
+			<field name="gender">male</field>
+		</record>
+		<record id="res_member_relationship20" model="res.member.relationship">
+			<field name="name">Other</field>
+			<field name="gender">female</field>
+		</record>
+		
+		<!-- Religion -->
+		<record id="res_member_religion1" model="res.member.religion">
+			<field name="name">Catholic</field>
+			<field name="code">CAT</field>
+		</record>
+		<record id="res_member_religion2" model="res.member.religion">
+			<field name="name">Protestant</field>
+			<field name="code">PRO</field>
+		</record>
+		<record id="res_member_religion3" model="res.member.religion">
+			<field name="name">Pentacost</field>
+			<field name="code">PEN</field>
+		</record>
+		<record id="res_member_religion4" model="res.member.religion">
+			<field name="name">Buddhism</field>
+			<field name="code">BUD</field>
+		</record>
+		<record id="res_member_religion5" model="res.member.religion">
+			<field name="name">Jainism</field>
+			<field name="code">JAI</field>
+		</record>
+		<record id="res_member_religion6" model="res.member.religion">
+			<field name="name">Muslim</field>
+			<field name="code">MUS</field>
+		</record>
+		<record id="res_member_religion7" model="res.member.religion">
+			<field name="name">Sikhism</field>
+			<field name="code">SIK</field>
+		</record>
+		<record id="res_member_religion8" model="res.member.religion">
+			<field name="name">Hindu</field>
+			<field name="code">HIN</field>
+		</record>
+		<record id="res_member_religion9" model="res.member.religion">
+			<field name="name">Zoroastrians</field>
+			<field name="code">ZOR</field>
+		</record>
+		<record id="res_member_religion10" model="res.member.religion">
+			<field name="name">Other</field>
+			<field name="code">OT</field>
+		</record>
+		
+		<!-- House Type -->
+		<record id="res_house_type1" model="res.house.type" >
+			<field name="name">Concrete Roof</field>
+			<field name="sequence">1</field>
+		</record>
+		<record id="res_house_type2" model="res.house.type" >
+			<field name="name">Thatched Roof</field>
+			<field name="sequence">2</field>
+		</record>
+		<record id="res_house_type3" model="res.house.type" >
+			<field name="name">Tiled Roof</field>
+			<field name="sequence">3</field>
+		</record>
+		<record id="res_house_type4" model="res.house.type" >
+			<field name="name">Other</field>
+			<field name="sequence">4</field>
+		</record>
+		
+		<!-- Main Category -->
+		<!-- <record id="res_main_category1" model="res.main.category" >
+			<field name="name">Generalate</field>
+			<field name="code">GE</field>
+		</record> -->
+		
+		<record id="res_main_category2" model="res.main.category" >
+			<field name="name">Religious Region</field>
+			<field name="code">RR</field>
+			<field name="sequence">2</field>
+		</record>
+		
+		<record id="res_main_category3" model="res.main.category" >
+			<field name="name">Religious Province</field>
+			<field name="code">RP</field>
+			<field name="sequence">3</field>
+		</record>
+		
+		<record id="res_main_category4" model="res.main.category" >
+			<field name="name">Congregation</field>
+			<field name="code">RC</field>
+			<field name="sequence">1</field>
+		</record>
+		
+		<record id="res_main_category5" model="res.main.category" >
+			<field name="name">Area</field>
+			<field name="code">RZ</field>
+			<field name="sequence">4</field>
+		</record>
+		
+		<record id="res_main_category6" model="res.main.category" >
+			<field name="name">House/Community</field>
+			<field name="code">HC</field>
+			<field name="sequence">5</field>
+		</record>
+		
+		<record id="res_main_category7" model="res.main.category" >
+			<field name="name">House-Centre</field>
+			<field name="code">CN</field>
+			<field name="sequence">6</field>
+		</record>
+		
+		<record id="res_main_category8" model="res.main.category" >
+			<field name="name">Legal Entity</field>
+			<field name="code">LE</field>
+		</record>
+		
+		<record id="res_main_category20" model="res.main.category" >
+			<field name="name">Religious Institution</field>
+			<field name="code">RI</field>
+			<field name="sequence">7</field>
+		</record>
+		
+		<record id="res_main_category19" model="res.main.category" >
+			<field name="name">Association</field>
+			<field name="code">AS</field>
+			<field name="sequence">8</field>
+		</record>
+				
+		<record id="res_main_category9" model="res.main.category" >
+			<field name="name">Ecclesia Region</field>
+			<field name="code">ER</field>
+			<field name="sequence">9</field>
+		</record>
+		
+		<record id="res_main_category10" model="res.main.category" >
+			<field name="name">Ecclesia Province</field>
+			<field name="code">EP</field>
+			<field name="sequence">10</field>
+		</record>
+		
+		<record id="res_main_category11" model="res.main.category" >
+			<field name="name">Diocese</field>
+			<field name="code">DI</field>
+			<field name="sequence">11</field>
+		</record>
+		
+		<record id="res_main_category12" model="res.main.category" >
+			<field name="name">Vicariate</field>
+			<field name="code">VI</field>
+			<field name="sequence">12</field>
+		</record>
+		
+		<record id="res_main_category13" model="res.main.category" >
+			<field name="name">Parish</field>
+			<field name="code">PA</field>
+			<field name="sequence">13</field>
+		</record>
+		
+		<record id="res_main_category14" model="res.main.category" >
+			<field name="name">Substation</field>
+			<field name="code">SS</field>
+			<field name="sequence">14</field>
+		</record>
+		
+		<record id="res_main_category15" model="res.main.category" >
+			<field name="name">Ecclesia Zone</field>
+			<field name="code">EZ</field>
+			<field name="sequence">15</field>
+		</record>
+		
+		<record id="res_main_category16" model="res.main.category" >
+			<field name="name">BCC</field>
+			<field name="code">BC</field>
+			<field name="sequence">16</field>
+		</record>
+		
+		<record id="res_main_category17" model="res.main.category" >
+			<field name="name">Family</field>
+			<field name="code">FA</field>
+			<field name="sequence">17</field>
+		</record>
+		
+		<record id="res_main_category18" model="res.main.category" >
+			<field name="name">Member</field>
+			<field name="code">MR</field>
+			<field name="sequence">18</field>
+		</record>
+		
+		<!-- Month -->
+		
+		<record id="res_month1" model="res.month" >
+			<field name="name">January</field>
+			<field name="code">January</field>
+			<field name="sequence">1</field>
+		</record>
+		
+		<record id="res_month2" model="res.month" >
+			<field name="name">February</field>
+			<field name="code">February</field>
+			<field name="sequence">2</field>
+		</record>
+		
+		<record id="res_month3" model="res.month" >
+			<field name="name">March</field>
+			<field name="code">March</field>
+			<field name="sequence">3</field>
+		</record>
+		
+		<record id="res_month4" model="res.month" >
+			<field name="name">April</field>
+			<field name="code">April</field>
+			<field name="sequence">4</field>
+		</record>
+		
+		<record id="res_month5" model="res.month" >
+			<field name="name">May</field>
+			<field name="code">May</field>
+			<field name="sequence">5</field>
+		</record>
+		
+		<record id="res_month6" model="res.month" >
+			<field name="name">June</field>
+			<field name="code">June</field>
+			<field name="sequence">6</field>
+		</record>
+		
+		<record id="res_month7" model="res.month" >
+			<field name="name">July</field>
+			<field name="code">July</field>
+			<field name="sequence">7</field>
+		</record>
+		
+		<record id="res_month8" model="res.month" >
+			<field name="name">August</field>
+			<field name="code">August</field>
+			<field name="sequence">8</field>
+		</record>
+		
+		<record id="res_month9" model="res.month" >
+			<field name="name">September</field>
+			<field name="code">September</field>
+			<field name="sequence">9</field>
+		</record>
+		
+		<record id="res_month10" model="res.month" >
+			<field name="name">October</field>
+			<field name="code">October</field>
+			<field name="sequence">10</field>
+		</record>
+		
+		<record id="res_month11" model="res.month" >
+			<field name="name">November</field>
+			<field name="code">November</field>
+			<field name="sequence">11</field>
+		</record>
+		
+		<record id="res_month12" model="res.month" >
+			<field name="name">December</field>
+			<field name="code">December</field>
+			<field name="sequence">12</field>
+		</record>
+		
+	</data>
+</odoo>

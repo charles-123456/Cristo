@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Concern Menus -->
+	<menuitem id="cristo_concern_main_menu" name="Concern/Issue" sequence="16"  web_icon="cristo_concern,static/description/icon.png" />
+	
+	<menuitem id="concern_menu" name="Concern/Issue" parent="cristo_concern_main_menu" action="action_concern" sequence="1" />
+	
+<!-- Configuration Menus -->
+	<menuitem id="configuration_menu" name="Configuration" parent="cristo_concern_main_menu" sequence="2" />
+	
+	<menuitem id="tags_sub_menu" name="Tags" action="action_concern_tags" parent="configuration_menu" sequence="1" />
+</odoo>

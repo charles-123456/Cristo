@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cristo_asset_user,res.asset,model_res_asset,group_asset_user,1,1,1,1
+access_cristo_asset_admin,res.asset,model_res_asset,group_asset_admin,1,1,1,1
+,,,,,,,
+access_cristo_asset_user_category,asset.category,model_asset_category,group_asset_user,1,1,1,0
+access_cristo_asset_user_location,asset.location,model_asset_location,group_asset_user,1,1,1,0
+access_cristo_asset_user_clasification,land.classification,model_land_classification,group_asset_user,1,1,1,0
+access_cristo_asset_user_building,building.type,model_building_type,group_asset_user,1,1,1,0
+access_cristo_asset_user_species,tree.species,model_tree_species,group_asset_user,1,1,1,0
+access_cristo_asset_user_machinery,machinery.type,model_machinery_type,group_asset_user,1,1,1,0
+,,,,,,,
+access_cristo_asset_admin_category,asset.category,model_asset_category,group_asset_admin,1,1,1,1
+access_cristo_asset_admin_location,asset.location,model_asset_location,group_asset_admin,1,1,1,1
+access_cristo_asset_admin_clasification,land.classification,model_land_classification,group_asset_admin,1,1,1,1
+access_cristo_asset_admin_building,building.type,model_building_type,group_asset_admin,1,1,1,1
+access_cristo_asset_admin_species,tree.species,model_tree_species,group_asset_admin,1,1,1,1
+access_cristo_asset_admin_machinery,machinery.type,model_machinery_type,group_asset_admin,1,1,1,1

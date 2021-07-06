@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_assignment_member_profile_form" model="ir.ui.view">
+		<field name="name">res.member.form.transfer</field>
+		<field name="model">res.member</field>
+		<field name="inherit_id" ref="cristo.view_res_member_common_form" />
+		<field name="arch" type="xml">
+			<field name="known_language_ids" position="after">
+				<field name="next_transfer_date" groups="cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager"/>
+			</field>
+		</field>
+	</record>
+	
+	<record id="view_assignment_member_all_form" model="ir.ui.view">
+		<field name="name">res.member.form.all.transfer</field>
+		<field name="model">res.member</field>
+		<field name="inherit_id" ref="cristo.view_res_member_all_form" />
+		<field name="arch" type="xml">
+			<field name="known_language_ids" position="after">
+				<field name="next_transfer_date" groups="cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager"/>
+			</field>
+		</field>
+	</record>
+
+</odoo>

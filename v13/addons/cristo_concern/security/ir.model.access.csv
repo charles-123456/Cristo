@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_concern_user,cristo.concern,model_cristo_concern,group_concern_user,1,1,0,0
+access_concern_unit_head,cristo.concern,model_cristo_concern,group_concern_unit_head,1,1,1,1
+access_concern_admin,cristo.concern,model_cristo_concern,group_concern_admin,1,1,1,1
+,,,,,,,
+access_concern_team_user,concern.team,model_concern_team,group_concern_user,1,1,1,0
+access_concern_team_unit_head,concern.team,model_concern_team,group_concern_unit_head,1,1,1,1
+access_concern_team_admin,concern.team,model_concern_team,group_concern_admin,1,1,1,1
+,,,,,,,
+access_concern_history_user,concern.history,model_concern_history,group_concern_user,1,1,1,0
+access_concern_history_unit_head,concern.history,model_concern_history,group_concern_unit_head,1,1,1,1
+access_concern_history_admin,concern.history,model_concern_history,group_concern_admin,1,1,1,1
+,,,,,,,
+access_concern_tags_user,concern.tags,model_concern_tags,group_concern_user,1,1,0,0
+access_concern_tags_unit_head,concern.tags,model_concern_tags,group_concern_unit_head,1,1,1,1
+access_concern_tags_admin,concern.tags,model_concern_tags,group_concern_admin,1,1,1,1

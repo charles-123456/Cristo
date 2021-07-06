@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="anniversary_report_template">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.basic_layout">
+						<div class="page">
+							<style>
+								table tr {
+									page-break-inside: avoid;
+								}
+								table td {
+									padding: 0.25rem !important;
+								}
+							</style>
+							
+							<center>
+							<!-- 	<t t-if="data['birth_day'] == True and data['feast_day'] == True and data['ordination_day'] == True">
+									<h3>Birthday, Feastday &amp; Ordination Anniversary of the Confreres</h3>
+								</t>
+								<t t-if="data['birth_day'] == True and data['feast_day'] == True and data['ordination_day'] == False">
+									<h3>Birthday, Feastday Anniversary of the Confreres</h3>
+								</t>
+								<t t-if="data['birth_day'] == True and data['ordination_day'] == True and data['feast_day'] == False">
+									<h3>Birthday &amp; Ordination Anniversary of the Confreres</h3>
+								</t>
+								<t t-if="data['feast_day'] == True and data['ordination_day'] == True and data['birth_day'] == False">
+									<h3>Feastday &amp; Ordination Anniversary of the Confreres</h3>
+								</t>
+								<t t-if="data['birth_day'] == True and data['feast_day'] == False and data['ordination_day'] == False">
+									<h3>Birthday Anniversary of the Confreres</h3>
+								</t>
+								<t t-if="data['feast_day'] == True and data['birth_day'] == False and data['ordination_day'] == False">
+									<h3>Feastday Anniversary of the Confreres</h3>
+								</t>
+								<t t-if="data['ordination_day'] == True and data['feast_day'] == False and data['birth_day'] == False">
+									<h3>Ordination Anniversary of the Confreres</h3>
+								</t> -->
+								
+								
+								
+								<t t-if="data['birth_day'] == True and data['ordination_day'] == True">
+									<h3>Birthday &amp; Ordination Anniversary of the Confreres</h3>
+								</t>
+								<t t-if="data['birth_day'] == True and data['ordination_day'] == False">
+									<h3>Birthday Anniversary of the Confreres</h3>
+								</t>
+								<t t-if="data['birth_day'] == False and data['ordination_day'] == True">
+									<h3>Ordination Anniversary of the Confreres</h3>
+								</t>
+							</center>
+							<br/>
+							<table class="table table-striped">
+								<thead style="color:#4db8ff">
+									<tr>
+										<th>Month</th>
+										<th>Date</th>
+										<t t-if="data['birth_day']">
+											<th>Birth Day</th>
+										</t>
+										<!-- <t t-if="data['feast_day']">
+											<th>Feast Day</th>
+										</t> -->
+										<t t-if="data['ordination_day']">
+											<th>Ordination Day</th>
+										</t>
+									</tr>
+								</thead>
+								<t t-foreach="anniversary_list" t-as="ep">
+									<tr>
+										<td>
+											<span t-esc="ep['month']"/>
+										</td>
+										<td>
+											<span t-esc="ep['day']"/>
+										</td>
+										<t t-if="data['birth_day']">
+											<td>
+												<span t-esc="ep['birth_members']" />
+											</td>
+										</t>
+										<!-- <t t-if="data['feast_day']">
+											<td>
+												<span t-esc="ep['feast_members']" />
+											</td>
+										</t> -->
+										<t t-if="data['ordination_day']">
+											<td>
+												<span t-esc="ep['ordi_members']" />
+											</td>
+										</t>
+									</tr>
+								</t>
+							</table>
+						</div>
+					</t>	
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>				

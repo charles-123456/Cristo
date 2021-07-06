@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_member_ministry_report" model="ir.ui.view">
+		<field name="name">wizard.member.profile.form</field>
+		<field name="model">member.profile.report</field>
+		<field name="arch" type="xml">
+			<form string="">
+				<group>
+					<group>
+						<field name="type" />
+					</group>
+				</group>
+				<footer>
+					<button name="print_pdf" string="EXPORT TO PDF" type="object" class="oe_highlight" />
+					or
+					<button string="CANCEL" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_member_ministry_report" model="ir.actions.act_window">
+		<field name="name">Profile</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">member.profile.report</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="binding_model_id" ref="cristo.model_res_member"/>
+		<field name="binding_type">report</field>
+	</record>
+
+</odoo>

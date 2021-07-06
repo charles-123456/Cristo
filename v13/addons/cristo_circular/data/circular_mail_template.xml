@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+	<data noupdate="0">
+
+		<!-- Circular Mail -->
+ 
+		<record id="email_template_circular_mail" model="mail.template">
+			<field name="name">Circular Mail</field>
+			<field name="model_id" ref="cristo_circular.model_cristo_circular" />
+			<field name="email_from">${ctx.get('email_from') | safe}</field>
+			<field name="email_to">${ctx.get('email_to') | safe}</field>
+			<field name="auto_delete">False</field>
+			<field name="subject">${ctx.get('subject')| safe}</field>
+			<field name="body_html"><![CDATA[
+				<div>${ctx.get('body') | safe}</div>
+				]]></field>
+		</record>
+		
+	</data>
+</odoo>

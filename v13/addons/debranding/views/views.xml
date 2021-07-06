@@ -1,0 +1,45 @@
+<odoo>
+    <template id="debranding_title" name="Debranding Common Assets (used in backend interface and website)" inherit_id="web.assets_common">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/debranding/static/src/js/crash_manager.js"/>
+            <script type="text/javascript" src="/debranding/static/src/js/web_client.js"/>
+        </xpath>
+    </template>
+    
+    <template id="debranding_title_frontend" name="Debranding Assets Website" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/debranding/static/src/js/public_crash_manager.js"/>
+        </xpath>
+    </template>
+
+    <template id="title_debrand" inherit_id="web.layout">
+        <xpath expr="//head" position="replace">
+            <head>
+                <meta charset="utf-8"/>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
+                <title t-esc="CristO"/>
+                <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/debranding/static/src/img/favicon.ico'"/>
+
+                <script type="text/javascript">
+                    var odoo = {
+                        csrf_token: "<t t-esc="request.csrf_token(None)"/>",
+                        debug: "<t t-esc="debug"/>",
+                    };
+                </script>
+
+                <t t-raw="head or ''"/>
+            </head>
+        </xpath>
+    </template>
+    
+    <template id="debrand_login_layout" inherit_id="web.login_layout">
+        <xpath expr="//div[@class='text-center small mt-4 pt-3 border-top']" position="replace">
+        	<!-- <div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
+                 <a class="pr-2 mr-1" href="/web/database/manager">Manage Databases</a>
+            </div> -->
+        </xpath>
+    </template>
+    
+</odoo>

@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="CristoDashboardMain">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_dashboard" style="">
+            </div>
+        </div>
+    </t>
+    <t t-name="LoginMemberDetails">
+		<!-- 
+		<link rel="stylesheet" href="/cristo_dashboard/static/lib/bower_components/font-awesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="/cristo_dashboard/static/lib/bower_components/Ionicons/css/ionicons.min.css"/>
+		 -->
+		<link rel="stylesheet" href="/cristo_dashboard/static/lib/dist/css/AdminLTE.min.css"/>
+		<link rel="stylesheet" href="/cristo_dashboard/static/lib/dist/css/skins/_all-skins.min.css"/>
+		
+		  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+		  <!-- Theme style -->
+		  <!-- <link rel="stylesheet" href="/cristo_dashboard/static/lib/dist/css/adminlte.min.css"/> -->
+		  <link rel="stylesheet" href="/cristo_dashboard/static/lib/dist/css/alt/adminlte.components.css"/>
+		  
+        <div class="row main-section">
+        	<div class="col-xs-12 col-sm-12 col-lg-12" style="border: 1px dotted lightseagreen;background: lightcyan;">
+        		<h1 style="padding-top: 4px;" class="float-left"><t t-esc="widget.login_member['sl_msg']"/></h1>
+        		<div class="btn float-right goto_my_profile" style="margin-top:5px;background-color:#875a7b;color:white;">My Profile <i class="fa fa-home fa-lg"></i>
+        		</div>
+        	</div>
+            <div class="col-xs-12 col-sm-12 col-lg-12">
+            	<script type="text/javascript">
+			        window.jssor_1_slider_init = function() {
+			
+			            var jssor_1_SlideoTransitions = [
+			              [{b:500,d:1000,x:0,e:{x:6}}],
+			              [{b:-1,d:1,x:100,p:{x:{d:1,dO:9}}},{b:0,d:2000,x:0,e:{x:6},p:{x:{dl:0.1}}}],
+			              [{b:-1,d:1,x:200,p:{x:{d:1,dO:9}}},{b:0,d:2000,x:0,e:{x:6},p:{x:{dl:0.1}}}],
+			              [{b:-1,d:1,rX:20,rY:90},{b:0,d:4000,rX:0,e:{rX:1}}],
+			              [{b:-1,d:1,rY:-20},{b:0,d:4000,rY:-90,e:{rY:7}}],
+			              [{b:-1,d:1,sX:2,sY:2},{b:1000,d:3000,sX:1,sY:1,e:{sX:1,sY:1}}],
+			              [{b:-1,d:1,sX:2,sY:2},{b:1000,d:5000,sX:1,sY:1,e:{sX:3,sY:3}}],
+			              [{b:-1,d:1,tZ:300},{b:0,d:2000,o:1},{b:3500,d:3500,tZ:0,e:{tZ:1}}],
+			              [{b:-1,d:1,x:20,p:{x:{o:33,r:0.5}}},{b:0,d:1000,x:0,o:0.5,e:{x:3,o:1},p:{x:{dl:0.05,o:33},o:{dl:0.02,o:68,rd:2}}},{b:1000,d:1000,o:1,e:{o:1},p:{o:{dl:0.05,o:68,rd:2}}}],
+			              [{b:-1,d:1,da:[0,700]},{b:0,d:600,da:[700,700],e:{da:1}}],
+			              [{b:600,d:1000,o:0.4}],
+			              [{b:-1,d:1,da:[0,400]},{b:200,d:600,da:[400,400],e:{da:1}}],
+			              [{b:800,d:1000,o:0.4}],
+			              [{b:-1,d:1,sX:1.1,sY:1.1},{b:0,d:1600,o:1},{b:1600,d:5000,sX:0.9,sY:0.9,e:{sX:1,sY:1}}],
+			              [{b:0,d:1000,o:1,p:{o:{o:4}}}],
+			              [{b:1000,d:1000,o:1,p:{o:{o:4}}}]
+			            ];
+			
+			            var jssor_1_options = {
+			              $AutoPlay: 1,
+			              $SlideDuration:3000,
+			              $CaptionSliderOptions: {
+			                $Class: $JssorCaptionSlideo$,
+			                $Transitions: jssor_1_SlideoTransitions
+			              },
+			              $ArrowNavigatorOptions: {
+			                $Class: $JssorArrowNavigator$
+			              },
+			              $BulletNavigatorOptions: {
+			                $Class: $JssorBulletNavigator$
+			              }
+			            };
+			
+			            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+			
+			            <!-- #region responsive code begin -->
+			
+			            var MAX_WIDTH = 0;
+			
+			            function ScaleSlider() {
+			                var containerElement = jssor_1_slider.$Elmt.parentNode;
+			                var containerWidth = containerElement.clientWidth;
+			
+			                if (containerWidth) {
+			                    var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+			                    jssor_1_slider.$ScaleWidth(expectedWidth);
+			                }
+			                else {
+			                    window.setTimeout(ScaleSlider, 30);
+			                }
+			            }
+			
+			            ScaleSlider();
+			
+			            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+			            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+			            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+			            <!-- #endregion responsive code end -->
+			        };
+			    </script>
+			    <style>
+			        <!-- jssor slider loading skin double-tail-spin css -->
+			        .jssorl-004-double-tail-spin img {
+			            animation-name: jssorl-004-double-tail-spin;
+			            animation-duration: 1.6s;
+			            animation-iteration-count: infinite;
+			            animation-timing-function: linear;
+			        }
+			
+			        @keyframes jssorl-004-double-tail-spin {
+			            from { transform: rotate(0deg); }
+			            to { transform: rotate(360deg); }
+			        }
+			
+			        <!-- jssor slider bullet skin 031 css -->
+			        .jssorb031 {position:absolute;}
+			        .jssorb031 .i {position:absolute;cursor:pointer;}
+			        .jssorb031 .i .b {fill:#000;fill-opacity:0.5;stroke:#fff;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.3;}
+			        .jssorb031 .i:hover .b {fill:#fff;fill-opacity:.7;stroke:#000;stroke-opacity:.5;}
+			        .jssorb031 .iav .b {fill:#fff;stroke:#000;fill-opacity:1;}
+			        .jssorb031 .i.idn {opacity:.3;}
+			
+			        <!-- jssor slider arrow skin 051 css -->
+			        .jssora051 {display:block;position:absolute;cursor:pointer;}
+			        .jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
+			        .jssora051:hover {opacity:.8;}
+			        .jssora051.jssora051dn {opacity:.5;}
+			        .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
+			    </style>
+			    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:-16px;width:980px;height:230px;overflow:hidden;visibility:hidden;">
+			        <!-- Loading Screen -->
+			        <div data-u="loading" class="jssorl-004-double-tail-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+			            <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="/cristo_dashboard/static/src/img/double-tail-spin.svg" />
+			        </div>
+			        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:240px;overflow:hidden;">
+		        		<t t-if="!widget.login_member['default_img']">
+		        			<!-- <div>
+		        				<img data-u="image" src="/cristo_dashboard/static/src/img/italy_florence_cattedrale.png" />
+		        				<div data-ts="flat" data-p="320" style="border-radius: 10px;left:80px;top:15px;width:800px;height:150px;position:absolute;overflow:hidden;">
+				                    <div data-to="50% 50%" data-ts="preserve-3d" data-t="0" style="left:550px;top:0px;width:800px;height:150px;position:absolute;overflow:hidden;">
+				                        <div data-to="50% 50%" data-arr="1" style="left:20px;top:18px;width:200px;height:100px;position:absolute;color:#25c8ba;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:0.1em;">Welcome to</div>
+				                        <div data-to="50% 50%" data-arr="2" style="left:60px;top:45px;width:700px;height:100px;position:absolute;color:#edf1f2;font-size:28px;line-height:1.2;letter-spacing:0.02em;"><span style="font-weight:900;color:white;word-wrap: break-word;"><t t-esc="widget.login_member['sl_msg']"/></span></div>
+				                    </div>
+				                </div>
+		        			</div> -->
+			        		<t t-foreach="widget.login_member['slider_ids']" t-as="id">
+			        			<div>
+			        				<img data-u="image" t-att-src="widget.get_slider_image_url(id)" />
+			        			</div>
+			        		</t>
+			        	</t>
+		        		<t t-if="widget.login_member['default_img']">
+		        			<div>
+		        				<img data-u="image" src="/cristo_dashboard/static/src/img/main_banner.png" />
+		        				<div data-ts="flat" data-p="320" style="border-radius: 10px;left:80px;top:15px;width:800px;height:150px;position:absolute;overflow:hidden;">
+				                    <div data-to="50% 50%" data-ts="preserve-3d" data-t="0" style="left:550px;top:0px;width:800px;height:150px;position:absolute;overflow:hidden;">
+				                        <!-- <div data-to="50% 50%" data-arr="1" style="left:20px;top:18px;width:200px;height:100px;position:absolute;color:#25c8ba;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:0.1em;">Welcome to</div>
+				                        <div data-to="50% 50%" data-arr="2" style="left:60px;top:45px;width:700px;height:100px;position:absolute;color:#edf1f2;font-size:28px;line-height:1.2;letter-spacing:0.02em;"><span style="font-weight:900;color:white;overflow-wrap: break-word !important;word-wrap: break-word;" t-esc="widget.login_member['sl_msg']"></span></div> -->
+				                    </div>
+				                </div>
+		        			</div>
+		        		</t>
+			        </div>
+			        <!-- Bullet Navigator -->
+			        <div data-u="navigator" class="jssorb031" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+			            <div data-u="prototype" class="i" style="width:16px;height:16px;">
+			                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+			                    <circle class="b" cx="8000" cy="8000" r="5800"></circle>
+			                </svg>
+			            </div>
+			        </div>
+			        <!-- Arrow Navigator -->
+			        <div data-u="arrowleft" class="jssora051" style="width:55px;height:55px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+			            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+			                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+			            </svg>
+			        </div>
+			        <div data-u="arrowright" class="jssora051" style="width:55px;height:55px;top:0px;right:25px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+			            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+			                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+			            </svg>
+			        </div>
+			    </div>
+			    <script type="text/javascript">jssor_1_slider_init();
+    			</script>
+            </div>
+            </div>
+            <div class="container-fluid custom_content">
+            	
+            <!-- <div class="row main-section">
+            	<div class="col-xs-12 col-sm-12 col-lg-12">
+            		<div id="breaking-news-container">
+						<div id="breaking-news-colour" class="slideup animated">
+						  
+						</div>  
+						<span class="breaking-news-title delay-animated slidein">
+						    // Latest News //
+						</span> 
+						<a class="breaking-news-headline delay-animated2 fadein marquee">
+						    Pallottine Youth Conventions january 2019 Visitation of Fr. Denilson Geraldo SAC Ordination to Diaconate 29th June 2018.
+						</a>  
+					</div>
+            	</div>
+            </div> -->
+            </div>
+            <br/>
+            <div class="row">
+            	<style>
+            		.scroll_style-1::-webkit-scrollbar-track
+					{
+						border-radius: 10px;
+						background-color: #F5F5F5;
+					}
+					.scroll_style-1::-webkit-scrollbar
+					{
+						width: 6px;
+					}
+					.scroll_style-1::-webkit-scrollbar-thumb
+					{
+						border-radius: 10px;
+						-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+						background-color: #B5B5B5;
+					}
+					.box_ct{
+						font-size:13px !important;
+					}
+            	</style>
+            	<section class="col-lg-9 connectedSortable ui-sortable">
+            		<div class="stat_box_cont" style="display: flex;flex-wrap: wrap;">
+            		<t t-if="widget.login_member['all']">
+			        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12">
+			          <div class="small-box bg-olive">
+			            <div class="inner" style="height: 155px;">
+			              <p class="box_title" style="font-family: inherit;"><b>Congregation (<t t-esc="widget.login_member['total_cong']"/>)</b></p>
+			              <ul class="scroll_style-1" style="list-style-type:none;margin-left: -37px;margin-left: -40px;height: 100px;overflow-y: auto;">
+			              	<t t-foreach="widget.login_member['congregations']" t-as="cong">
+				              	<li><span class="box_ct"><t t-esc="cong['name']"/></span></li>
+				            </t>
+			              </ul>
+			            </div>
+			            <div class="icon">
+			              <i class="fa fa-institution"></i>
+			            </div>
+			            <div class="small-box-footer cr_congregation cr_navigate">More info <i class="fa fa-arrow-circle-right"></i></div>
+			          </div>
+			        </div>
+			        </t>
+	            	<t t-if="widget.login_member['all'] or widget.login_member['ri']">
+			        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12">
+			          <div class="small-box bg-teal">
+			            <div class="inner" style="height: 155px;">
+			              <p class="box_title" style="font-family: inherit;">Province (<t t-esc="widget.login_member['total_pro']"/>)</p>
+			              <ul class="scroll_style-1" style="list-style-type:none;margin-left: -37px;margin-left: -40px;height: 100px;overflow-y: auto;">
+			              	<t t-foreach="widget.login_member['provinces']" t-as="pro">
+				              	<li><span class="box_ct"><t t-esc="pro['name']"/></span></li>
+				            </t>
+			              </ul>
+			            </div>
+			            <div class="icon">
+			              <i class="fa fa-institution"></i>
+			            </div>
+			            <div class="small-box-footer cr_province cr_navigate">More info <i class="fa fa-arrow-circle-right"></i></div>
+			          </div>
+			        </div>
+			        </t>
+	            	<t t-if="widget.login_member['all'] or widget.login_member['ri'] or widget.login_member['rp']">
+			        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12">
+			          <div class="small-box bg-aqua">
+			            <div class="inner" style="height: 155px;">
+			              <p class="box_title" style="font-family: inherit;">House/Community (<t t-esc="widget.login_member['total_com']"/>)</p>
+			              <ul class="scroll_style-1" style="list-style-type:none;margin-left: -37px;margin-left: -40px;height: 100px;overflow-y: auto;">
+			              	<t t-foreach="widget.login_member['communities']" t-as="com">
+				              	<li><span class="box_ct"><t t-esc="com['name']"/> (<t t-esc="com['count']"/>)</span></li>
+				            </t>
+			              </ul>
+			            </div>
+			            <div class="icon">
+			              <i class="fa fa-home"></i>
+			            </div>
+			            <div class="small-box-footer cr_house cr_navigate">More info <i class="fa fa-arrow-circle-right"></i></div>
+			          </div>
+			        </div>
+			        </t>
+			        <!-- Institutions -->
+			        <t t-if="widget.login_member['all'] or widget.login_member['ri'] or widget.login_member['rp'] or widget.login_member['rh']">
+			        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12">
+			          <div class="small-box bg-yellow">
+			            <div class="inner" style="height: 155px;">
+			              <p class="box_title" style="font-family: inherit;">Institutions (<t t-esc="widget.login_member['tot_insti']"/>)</p>
+			              <ul class="scroll_style-1" style="list-style-type:none;margin-left: -37px;height: 100px;overflow-y: auto;">
+				          	<t t-if="widget.login_member['school_count'] > 0">
+				          		<li><span class="box_ct">School (<t t-esc="widget.login_member['school_count']"/>)</span></li>
+				          	</t>
+				          	<t t-if="widget.login_member['parish_count'] > 0">
+				          		<li><span class="box_ct">Parish (<t t-esc="widget.login_member['parish_count']"/>)</span></li>
+				          	</t>
+				          	<t t-if="widget.login_member['boarding_co'] > 0">
+				          		<li><span class="box_ct">Boarding &amp; Hostel (<t t-esc="widget.login_member['boarding_co']"/>)</span></li>
+				          	</t>
+				          	<t t-if="widget.login_member['format_co'] > 0">
+				          		<li><span class="box_ct">Formation (<t t-esc="widget.login_member['format_co']"/>)</span></li>
+				          	</t>
+				          	<t t-if="widget.login_member['health_co'] > 0">
+				          		<li><span class="box_ct">Health Care (<t t-esc="widget.login_member['health_co']"/>)</span></li>
+				          	</t>
+				          	<t t-if="widget.login_member['retreat_co'] > 0">
+				          		<li><span class="box_ct">Retreat Centre (<t t-esc="widget.login_member['retreat_co']"/>)</span></li>
+				          	</t>
+				          	<t t-if="widget.login_member['technical_co'] > 0">
+				          		<li><span class="box_ct">Technical (<t t-esc="widget.login_member['technical_co']"/>)</span></li>
+				          	</t>
+			              </ul>
+			            </div>
+			            <div class="icon">
+			              <i class="fa fa fa-university"></i>
+			            </div>
+			            <div class="small-box-footer cr_institution cr_navigate">More info <i class="fa fa-arrow-circle-right"></i></div>
+			          </div>
+			        </div>
+			        </t>
+			        <!-- Members -->
+			        <t t-if="!widget.login_member['member']">
+			        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12 mem_box">
+			          <div class="small-box bg-green">
+			            <div class="inner" style="height: 155px;">
+			              <p class="box_title" style="font-family: inherit;">Members (<t t-esc="widget.login_member['tot_members']"/>)</p>
+			              <ul class="scroll_style-1" style="list-style-type:none;margin-left: -37px;height: 100px;overflow-y: auto;">
+			              	<t t-foreach="widget.login_member['members']" t-as="mem">
+			              		<t t-if="mem[1] >= 1">
+				              		<li><span class="box_ct"><t t-esc="mem[0]"/> (<t t-esc="mem[1]"/>)</span></li>
+				            	</t>
+				            </t>
+				           </ul>
+			            </div>
+			            <div class="icon">
+			              <i class="fa fa-users"></i>
+			            </div>
+			            <div class="small-box-footer cr_conferer cr_navigate">More info <i class="fa fa-arrow-circle-right"></i></div>
+			          </div>
+			        </div>
+			        </t>
+			     </div>
+			     
+			     <div class="sm_box_cont" style="display: flex;flex-wrap: wrap;">
+			        
+			     </div>
+			     <t t-if="!widget.login_member['member']">
+				     <div class="renewal_box_cont" style="display: flex;flex-wrap: wrap;">
+				     	<div class="col-md-6">
+				     		<div class="card card-olive">
+				              <div class="card-header">
+				                <h3 class="card-title" style="font-weight: 600;">Statutory Renewals</h3>
+				                <div class="card-tools">
+				                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+				                    <i class="fa fa-minus"></i>
+				                  </button>
+				                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+				                    <i class="fa fa-times"></i>
+				                  </button>
+				                </div>
+				              </div>
+				              <div class="card-body p-0" style="height: 280px;overflow-y:auto;">
+	                				<t t-if="widget.login_member['renewals']">
+	                				<table class="table m-0 table-condensed">
+					                    <thead>
+					                    <tr>
+					                    	<th style="width: 40px;">S.No.</th>
+					                      	<th>Member/Organization</th>
+					                      	<th>Document Type</th>
+					                      	<th>Expiry Date</th>
+					                    </tr>
+					                    </thead>
+					                    <tbody>
+					                    	<t t-foreach="widget.login_member['renewals']" t-as="ren">
+					                    		<tr>
+					                    			<td><t t-esc="ren['sno']"/></td>
+					                    			<td><t t-esc="ren['member']"/></td>
+					                    			<td><t t-esc="ren['doc_type']"/></td>
+					                    			<td><t t-esc="ren['valid_to']"/></td>
+					                    		</tr>
+					                    	</t>
+					                    </tbody>
+					                 </table>
+					                 </t>
+					                 <t t-if="!widget.login_member['renewals']">
+					                 	<div class="p-3">
+					                 		<b><span>No data found.</span></b>
+					                 	</div>
+					                 </t>
+	                		  </div>
+				            </div>
+				     	</div>
+				     	<div class="col-md-6">
+				     		<div class="card card-info">
+			              <div class="card-header">
+			                <h3 class="card-title" style="font-weight: 600;">Member Statistics</h3>
+			
+			                <div class="card-tools">
+			                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+			                  </button>
+			                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fa fa-times"></i>
+			                  </button>
+			                </div>
+			              </div>
+		             	 <!-- /.card-header -->
+			              <div class="card-body">
+			                <div class="row">
+			                  <div class="col-md-12">
+			                    <div class="chart-responsive">
+			                       <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+			                    </div>
+			                  </div>
+			                </div>
+			              </div>
+				  	 	</div>
+				     </div>
+				   </div>
+			     </t>
+			     
+			     <t t-if="widget.login_member['member']">
+				     <div class="renewal_box_cont" style="display: flex;flex-wrap: wrap;">
+					     	<div class="col-md-6">
+					     		<div class="card card-olive">
+					              <div class="card-header">
+					                <h3 class="card-title" style="font-weight: 600;">Statutory Renewals</h3>
+					                <div class="card-tools">
+					                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+					                    <i class="fa fa-minus"></i>
+					                  </button>
+					                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+					                    <i class="fa fa-times"></i>
+					                  </button>
+					                </div>
+					              </div>
+					              <div class="card-body p-0" style="height: 280px;overflow-y:auto;">
+		                				<t t-if="widget.login_member['renewals']">
+		                				<table class="table m-0 table-condensed">
+						                    <thead>
+							                    <tr>
+							                    	<th style="width: 40px;">S.No.</th>
+							                      	<th>Member/Organization</th>
+							                      	<th>Document Type</th>
+							                      	<th>Expiry Date</th>
+							                    </tr>
+						                    </thead>
+						                    <tbody>
+						                    	<t t-foreach="widget.login_member['renewals']" t-as="ren">
+						                    		<tr>
+						                    			<td><t t-esc="ren['sno']"/></td>
+						                    			<td><t t-esc="ren['member']"/></td>
+						                    			<td><t t-esc="ren['doc_type']"/></td>
+						                    			<td><t t-esc="ren['valid_to']"/></td>
+						                    		</tr>
+						                    	</t>
+						                    </tbody>
+						                 </table>
+						                 </t>
+						                 <t t-if="!widget.login_member['renewals']">
+						                 	<div class="p-3">
+						                 		<b><span>No data found.</span></b>
+						                 	</div>
+						                 </t>
+		                		  </div>
+					            </div>
+					     	</div>
+				     	</div>
+			     	</t>
+            	</section>
+            	<section class="col-lg-3 connectedSortable ui-sortable">
+            		<div class="hr_notification">
+		        	<script type="text/javascript">
+        	    		function myFunction() {
+							 if (window.pageYOffset > sticky) {
+							   header.classList.add("sticky");
+							 } else {
+							   header.classList.remove("sticky");
+							 }
+						}
+        	    	</script>
+		            <div class="box-header with-border sticky bg-blue">
+		              <div class="box-title hr_notification_head" style="font-size:17px;">Upcoming Birthdays</div>
+		            </div>
+		            <div class="birthday_data scroll_style-1">
+		                <t t-foreach="widget.login_member['birthdays']" t-as="bir">
+		                	<div class="birth_style" t-if="bir['birthday'] == widget.login_member['today']">
+								<img src="/cristo_dashboard/static/src/img/happy-birthday.gif" alt="B'day" style="width: 65px !important;height:50px;"/>
+							</div>
+			                <div class="media">
+			                	<img t-if="bir['img_data']" class="align-self-center rounded-circle mr-3" style="border: 1px solid beige;" alt="IMG" t-att-src="bir['img_data']"/>
+			                    <img t-if="!bir['img_data']" class="align-self-center rounded-circle mr-3" style="border: 1px solid beige;" alt="IMG" src="/web/static/src/img/placeholder.png"/>
+			                     <div class="media-body">
+			                      <h2 class="text-color display-6" style="font-size: 14px;font-family: inherit;"><t t-esc="bir['name']"/></h2>
+			                      <p class="dob"><t t-esc="bir['birthday']"/></p>
+			                     </div>
+			                </div>
+			            </t>
+			            <t t-if="!widget.login_member['birthdays']">
+			            	<h4 style="font-family: inherit;padding: 20px;text-align: center;color: palevioletred;">No Birthday for next 30 days</h4>
+			            </t>
+			        </div>
+			        
+			        <!-- Ordination Anniversary -->
+			        
+			        <t t-if="widget.login_member['view_holyorder']">
+			        <div class="box-header with-border sticky bg-orange">
+		              <div class="box-title hr_notification_head" style="font-size:17px;">Ordination Anniversary</div>
+		            </div>
+		            <div class="birthday_data scroll_style-1">
+		                <t t-foreach="widget.login_member['anniversary']" t-as="ann">
+			                <div class="media">
+			                	<img t-if="ann['img_data']" class="align-self-center rounded-circle mr-3" alt="IMG" t-att-src="ann['img_data']"/>
+			                    <img t-if="!ann['img_data']" class="align-self-center rounded-circle mr-3" alt="IMG" src="/web/static/src/img/placeholder.png"/>
+			                     <div class="media-body">
+			                      <h2 class="text-color display-6" style="font-size: 14px;font-family: inherit;"><t t-esc="ann['name']"/></h2>
+			                      <p class="dob"><t t-esc="ann['od']"/><span style="color:#0073b7;padding-left: 10px; padding-right: 10px;"></span><!-- <span style="color:green"><t t-esc="ann['order']"/></span> --></p>
+			                     </div>
+			                </div>
+			            </t>
+			            <t t-if="!widget.login_member['anniversary']">
+			            	<h4 style="font-family: inherit;padding: 20px;text-align: center;color: palevioletred;">No Ordination Anniversary for next 30 days</h4>
+			            </t>
+			        </div>
+			        </t>
+
+					<div class="box-header with-border sticky bg-maroon">
+					  	<div class="box-title hr_notification_head" style="font-size:17px;">Feast Day</div>
+					</div>
+		            <div class="birthday_data scroll_style-1">
+		                <t t-foreach="widget.login_member['feast_dates']" t-as="feast">
+			                <div class="media">
+  			                     <div class="media-body">
+									  <h2 class="text-color display-6" style="font-size: 14px;font-family: inherit;padding-left:10px"><t t-esc="feast['name']"/></h2>
+									  <p class="dob" style="padding-left:10px"><t t-esc="feast['day']"/></p>
+			                     </div>
+			                </div>
+			            </t>
+			            <t t-if="!widget.login_member['feast_dates']">
+			            	<h4 style="font-family: inherit;padding: 20px;text-align: center;color: palevioletred;">No Feast dates found</h4>
+			            </t>
+			        </div>
+
+		        </div>
+            		
+            	</section>
+            
+		    <!-- Member Statistics Pie Chart -->
+		        <!-- <div class="col-sm-7 col-lg-7">
+                    <div class="col-sm-12 col-lg-12  graph_view" style="padding:0">
+                        <div class="text-color hr-chart-1">
+                            <div class="oh-card-body pb-0">
+                                <h4 class="mb-0">
+                                </h4>
+                                <div class="oh-ribbon"><span>Department Employees</span></div>
+                            </div>
+                            <div class="emp_graph"/>
+                        </div>
+                    </div>
+                </div> -->
+		    
+		    </div>
+		    
+			<!-- Bootstrap 4 -->
+			<!-- <script src="/cristo_dashboard/static/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+			<!-- AdminLTE App -->
+			<script src="/cristo_dashboard/static/lib/dist/js/adminlte.js"></script>
+			
+    </t>
+
+    <t t-name="MemberWarning">
+        <div style="margin-top: 150px;text-align: center;">
+        	<h3>
+	            <p>Sorry!!! Could not find member linked to user or Main Role not assigned to user</p>
+	            <p>Please contact system admin for the setup</p>
+            </h3>
+        </div>
+    </t>
+
+</templates>

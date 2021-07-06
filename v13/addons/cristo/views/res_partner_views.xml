@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<!-- Cristo Contacts -->
+		<record id="view_cristo_res_partner_form" model="ir.ui.view">
+			<field name="name">cristo.res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<form string="Contacts" create="0" edit="0" delete="0">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="explore_the_view" type="object" string="Explore"
+								context="{'parish_address':1,'is_rgs':1}"
+								class="oe_stat_button" icon="fa-expand" />
+						</div>	
+						<field name="image_1920" widget='image' class="oe_avatar"
+							   options='{"zoom": true, "preview_image": "image_128"}'/>
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="Name"
+									required="1" />
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="full_name" />
+								<field name="code" />
+								<label for="street" string="Address" attrs="{'invisible': [('main_category_code','in',['RR','RP','RC','RZ','ER','EP','EZ'])]}" />
+								<div class="o_address_format" attrs="{'invisible': [('main_category_code','in',['RR','RP','RC','RZ','EP','EZ'])]}">
+									<field name="street" placeholder="Address line 1" help="Address line 1"
+										class="o_address_street" string="Street" />
+									<field name="street2" string="Street 2" placeholder="Area/Street"
+										help="Area/Street" class="o_address_street" />
+									<field name="place" string="Place" placeholder="Place"
+										help="Place" class="o_address_street" />
+									<field name="city" string="City" placeholder="City/Town/Taluk"
+										help="City/Town/Taluk" class="o_address_street" />
+									<div class="address_format">
+										<field name="district_id" string="District" placeholder="District" help="District"
+											style="width: 60%%" options="{'no_open': True, 'no_create': True}" />
+										<field name="state_id" string="State" placeholder="State"
+											help="State" style="width: 40%%" options="{'no_open': True, 'no_create': True}" />
+									</div>
+									<div class="address_format">
+										<field name="country_id" string="Country" placeholder="Country"
+											style="width: 60%%" help="Country" options='{"no_open": True, "no_create": True}' />
+										<field name="zip" string="Zip" placeholder="PIN Code" help="PIN Code"
+												style="width: 40%%" />
+									</div>				
+								</div>
+							</group>
+							<group>
+								<field name="mobile" />
+								<field name="phone" />
+								<field name="fax" />
+								<field name="email" />
+								<field name="website" widget="url"/>
+								<field name="main_category_id"
+									options='{"no_open": True, "no_create": True}' readonly="0" />
+								<field name="main_category_code" invisible="1" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Remarks">
+								<field name="comment" />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_cristo_res_partner_tree" model="ir.ui.view">
+			<field name="name">cristo.res.partner.tree</field>
+			<field name="model">res.partner</field>
+			<field name="mode">primary</field>
+	        <field name="priority">1</field>
+			<field name="arch" type="xml">
+				<tree string="Contacts" import="0" expand="0" create="0">
+					<field name="full_name" />
+					<field name="phone" optional="show"/>
+                    <field name="email" optional="show"/>
+					<field name="code" optional="hide"/>
+					<field name="city" optional="hide"/>
+                    <field name="state_id" optional="hide"/>
+					<field name="main_category_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_cristo_res_partner_search" model="ir.ui.view">
+			<field name="name">cristo.res.partner.search</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="code" />
+					<field name="main_category_id" />
+					<filter string="Congregation" name="institute_id" domain="[('main_category_code','=','RC')]" />
+					<filter string="Religious Province" name="rel_province_id" domain="[('main_category_code','=','RP')]" />
+					<filter string="House/Community" name="community_id" domain="[('main_category_code','=','HC')]" />
+					<filter string="Institution" name="institution_id" domain="[('main_category_code','=','RI')]" />
+					<filter string="Members" name="member_id" domain="[('main_category_code','=','MR')]" />
+					<group expand="0" string="Group By">
+						<filter string="Main Category" name="main_category_id" context="{'group_by':'main_category_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="view_cristo_res_partner_kanban" model="ir.ui.view">
+			<field name="name">cristo.res.partner.kanban</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<kanban class="o_res_partner_kanban" import="0" create="0">
+					<field name="id" />
+					<field name="display_name" />
+					<field name="full_name" />
+					<field name="main_category_id" />
+					<field name="main_category_code" />
+					<field name="image_128" />
+					<templates>
+						<t t-name="kanban-box">
+							<t t-set="cr_bdg_color" t-value="'#999900'" />
+							<t t-if="record.main_category_code.value == 'ER'">
+								<t t-set="cr_bdg_color" t-value="'#ed8ebe'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/region_province.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'EP'">
+								<t t-set="cr_bdg_color" t-value="'#404561'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/region_province.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'RR'">
+								<t t-set="cr_bdg_color" t-value="'#9370DB'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/region_province.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'RP'">
+								<t t-set="cr_bdg_color" t-value="'#F08080'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/region_province.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'DI'">
+							<t t-set="cr_bdg_color" t-value="'#FF6347'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/diocese.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'VI'">
+							<t t-set="cr_bdg_color" t-value="'#3CB371'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/vicariate.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'PA'">
+								<t t-set="cr_bdg_color" t-value="'#6767c2'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/parish.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'SS'">
+								<t t-set="cr_bdg_color" t-value="'#5F9EA0'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/substation.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'EZ'">
+							<t t-set="cr_bdg_color" t-value="'#708090'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/zone.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'BC'">
+							<t t-set="cr_bdg_color" t-value="'#a66262'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/bcc.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'FA'">
+							<t t-set="cr_bdg_color" t-value="'#ff4d4d'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/family.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'MR'">
+							<t t-set="cr_bdg_color" t-value="'#069a8d'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/member.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'RC'">
+								<t t-set="cr_bdg_color" t-value="'#662d13'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/congregation.png'" />
+							</t>
+							<t t-elif="record.main_category_code.value == 'RZ'">
+								<t t-set="cr_bdg_color" t-value="'#4db8ff'" />
+								<t t-set="placeholder"
+									t-value="'/cristo/static/img/zone.png'" />
+							</t>
+							<div
+								class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+								<t t-if="!record.image_128.raw_value">
+									<div
+										class="o_kanban_image_fill_left o_kanban_image_full o_image_64_contain"
+										t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.id.raw_value, placeholder)})"
+										role="img" />
+								</t>
+								<t t-elif="record.image_128.raw_value">
+									<div
+										class="o_kanban_image_fill_left o_kanban_image_full o_image_64_contain"
+										t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.id.raw_value, placeholder)})"
+										role="img" />
+								</t>
+								<div class="oe_kanban_details">
+									<div class="o_kanban_record_top">
+										<div class="o_kanban_record_title oe_partner_heading">
+											<strong>
+												<field name="full_name" />
+											</strong>
+										</div>
+									</div>
+									<ul>
+										<li
+											t-if="record.code.raw_value and !record.mobile.raw_value">
+											<t t-if="record.main_category_code.value != 'MR'">
+												<field name="code" />
+											</t>
+										</li>
+										<li
+											t-if="!record.code.raw_value and record.mobile.raw_value">
+											<i class="fa fa-mobile fa-lg"></i> <field name="mobile" />
+										</li>
+										<li
+											t-if="record.code.raw_value and record.mobile.raw_value">
+											<t t-if="record.main_category_code.value != 'MR'">
+												<field name="code" />
+												,
+												<i class="fa fa-mobile fa-lg"></i> <field name="mobile" />
+											</t>	
+										</li>
+										<li t-if="record.email.raw_value" class="o_text_overflow">
+											<i class="fa fa-envelope"></i> <field name="email" />
+										</li>
+									</ul>
+									<t t-if="record.main_category_id.raw_value">
+										<div
+											t-attf-style="position: absolute;bottom: 3px;right: 3px;padding: 0.25em 0.4em;color: #fff;border-radius: 5px;line-height: 1;background-color: {{cr_bdg_color}}">
+											<field name="main_category_id" />
+										</div>
+									</t>
+								</div>
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+
+		<record id="action_cristo_res_partner"
+			model="ir.actions.act_window">
+			<field name="name">All Contacts</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_mode">kanban,tree,form,search</field>
+			<field name="search_view_id"
+				ref="cristo.view_cristo_res_partner_search" />
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('cristo.view_cristo_res_partner_kanban')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('cristo.view_cristo_res_partner_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('cristo.view_cristo_res_partner_form')}),
+                          ]" />
+            <field name="context">{'search_default_member_id':1}</field>
+            <field name="domain">[('is_outsider','=',False)]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                You can view different type of Contacts here
+              </p>
+            </field>
+		</record>
+		
+		<!-- Cristo Contacts Outsider-->
+		<record id="view_cristo_res_partner_outsider_form" model="ir.ui.view">
+			<field name="name">cristo.res.partner.form.outsider</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<form string="Contacts">
+					<sheet>
+						<field name="image_1920" widget='image' class="oe_avatar"
+							options='{"preview_image": "image_128"}' />
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="Name"
+									required="1" />
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="code" />
+								<label for="street" string="Address" />
+								<div class="o_address_format">
+									<field name="street" placeholder="Address line 1" help="Address line 1"
+										class="o_address_street" string="Street" />
+									<field name="street2" string="Street 2" placeholder="Area/Street"
+										help="Area/Street" class="o_address_street" />
+									<field name="place" string="Place" placeholder="Place"
+										help="Place" class="o_address_street" />
+									<field name="city" string="City" placeholder="City/Town/Taluk"
+										help="City/Town/Taluk" class="o_address_street" />
+									<div class="address_format">
+										<field name="district_id" string="District" placeholder="District" help="District"
+											style="width: 60%%" options="{'no_open': True, 'no_create': True}" />
+										<field name="state_id" string="State" placeholder="State"
+											help="State" style="width: 40%%" options="{'no_open': True, 'no_create': True}" />
+									</div>
+									<div class="address_format">
+										<field name="country_id" string="Country" placeholder="Country"
+											style="width: 60%%" help="Country" options='{"no_open": True, "no_create": True}' />
+										<field name="zip" string="Zip" placeholder="PIN Code" help="PIN Code"
+												style="width: 40%%" />
+									</div>				
+								</div>
+								<field name="occupation_id" />
+							</group>
+							<group>
+								<field name="mobile" />
+								<field name="phone" />
+								<field name="email" />
+								<field name="is_outsider" invisible="1"/>
+								
+								<field name="check_province" invisible="1" />
+								<field name="check_community" invisible="1" />
+								<field name="check_congregation" invisible="1" />
+								<field name="check_institution" invisible="1" />
+								<field name="institute_id" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"/>
+								<field name="rel_province_id" attrs="{'invisible':[('check_province', '=', False)]}" domain="[('institute_id', '=', institute_id)]" />
+								<field name="community_id" attrs="{'invisible':[('check_community', '=', False)]}" domain="[('rel_province_id', '=', rel_province_id)]" />
+								<field name="institution_id" attrs="{'invisible':[('check_institution', '=', False)]}" domain="[('community_id', '=', community_id)]" />
+								<field name="association_id" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Remarks">
+								<field name="comment" />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_cristo_res_partner_outsider_tree" model="ir.ui.view">
+			<field name="name">cristo.res.partner.tree.outsider</field>
+			<field name="model">res.partner</field>
+			<field name="mode">primary</field>
+	        <field name="priority">2</field>
+			<field name="arch" type="xml">
+				<tree string="Contacts">
+					<field name="name" />
+					<field name="phone" />
+                    <field name="email" />
+                    <field name="occupation_id" />
+					<field name="code" optional="hide"/>
+					<field name="city" />
+                    <field name="state_id" optional="hide"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_cristo_res_partner_outsider_search" model="ir.ui.view">
+			<field name="name">cristo.res.partner.search.outsider</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="mobile" />
+					<field name="email" />
+					<field name="occupation_id" />
+				</search>
+			</field>
+		</record>
+		
+		<record id="view_cristo_res_partner_outsider_kanban" model="ir.ui.view">
+			<field name="name">cristo.res.partner.kanban.outsider</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<kanban class="o_res_partner_kanban">
+					<field name="id" />
+					<field name="display_name" />
+					<field name="full_name" />
+					<field name="image_128" />
+					<field name="city" />
+					<field name="occupation_id" />
+					<templates>
+						<t t-name="kanban-box">
+							<t t-set="placeholder" t-value="'/cristo/static/img/member.png'" />
+							<div
+								class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+								<t t-if="!record.image_128.raw_value">
+									<div
+										class="o_kanban_image_fill_left o_kanban_image_full o_image_64_contain"
+										t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.id.raw_value, placeholder)})"
+										role="img" />
+								</t>
+								<t t-elif="record.image_128.raw_value">
+									<div
+										class="o_kanban_image_fill_left o_kanban_image_full o_image_64_contain"
+										t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.id.raw_value, placeholder)})"
+										role="img" />
+								</t>
+								<div class="oe_kanban_details">
+									<div class="o_kanban_record_top">
+										<div class="o_kanban_record_title oe_partner_heading">
+											<strong>
+												<field name="name" />
+											</strong>
+										</div>
+									</div>
+									<ul>
+										<li t-if="record.mobile.raw_value">
+											<i class="fa fa-mobile fa-lg"></i> <field name="mobile" />
+										</li>
+										<li t-if="record.email.raw_value" class="o_text_overflow">
+											<i class="fa fa-envelope"></i> <field name="email" />
+										</li>
+										<li t-if="record.occupation_id.raw_value">
+											<field name="occupation_id" />
+										</li>
+									</ul>
+								</div>
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+		
+		<record id="action_cristo_res_partner_outsiders"
+			model="ir.actions.act_window">
+			<field name="name">Associates</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_mode">kanban,tree,form,search</field>
+			<field name="search_view_id"
+				ref="cristo.view_cristo_res_partner_outsider_search" />
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+						  (0, 0, {'view_mode': 'kanban', 'view_id': ref('cristo.view_cristo_res_partner_outsider_kanban')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('cristo.view_cristo_res_partner_outsider_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('cristo.view_cristo_res_partner_outsider_form')}),
+                          ]" />
+            <field name="context">{'default_is_outsider':True,'is_member':1}</field>
+            <field name="domain">[('is_outsider','=',True)]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Associate
+              </p>
+            </field>
+		</record>
+	</data>
+</odoo>

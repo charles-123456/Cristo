@@ -1,0 +1,32 @@
+// Variables
+$o-cw-color-today: nth($o-colors, 3);
+$o-cw-color-today-accent: #FC3D39;
+$o-cw-popup-avatar-size: 16px;
+$o-cw-filter-avatar-size: 20px;
+
+
+// ===============  Generate color classes ===============
+@for $i from 1 through length($o-colors-complete) {
+    $color: nth($o-colors-complete, $i);
+
+    .o_calendar_view .fc-view {
+        .fc-event.o_calendar_color_#{$i} {
+            border-color: $color;
+            color: darken($color, 35%);
+			background: lighten($color, 30%);
+            .fc-bg {
+                background: mix($color, white);
+            }
+
+            &.o_cw_custom_hover, &.o_cw_custom_highlight {
+                box-shadow: 0 12px 12px -5px rgba($color, 0.3);
+                color: color-yiq($color);
+
+                .fc-bg {
+                    background: $color;
+                }
+            }
+        }
+    }
+
+}

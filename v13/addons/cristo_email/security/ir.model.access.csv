@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_member_mail,member.mail,model_member_mail,base.group_erp_manager,1,1,1,1
+access_member_mail_user,member.mail,model_member_mail,base.group_user,1,1,1,0
+access_email_gateway_user,ir.mail_server,model_ir_mail_server,base.group_user,1,1,1,0
+,,,,,,,
+access_organization_mail,org.mail,model_org_mail,base.group_erp_manager,1,1,1,1
+access_organization_mail_user,org.mail,model_org_mail,base.group_user,1,1,1,0

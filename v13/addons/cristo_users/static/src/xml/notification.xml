@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-extend="CristoDashboardMain">
+        <t t-jquery=".oh_dashboards" t-operation="prepend">
+        	<t t-if="widget.license['enable_notification']" >
+        		<div class="alert alert-warning text-center" role="alert" >
+				  <span style="font-size:larger;font-weight:bolder;">Warning!</span> <t t-raw="widget.license['message']" />
+				</div>
+        	</t>
+        </t>
+    </t>
+
+</templates>

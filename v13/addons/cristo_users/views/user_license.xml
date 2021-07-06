@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Inherit the User table -->
+	<record id="user_license_view_users_form_inherit" model="ir.ui.view">
+		<field name="name">res.users.form.license</field>
+		<field name="model">res.users</field>
+		<field name="inherit_id" ref="base.view_users_form" />
+		<field name="arch" type="xml">
+			<group name="preferences" position="after">
+				<group string="License" name="license">
+					<field name="is_license_user"/>
+					<field name="user_creation_limit" attrs="{'required':[('is_license_user','=',True)],'invisible':[('is_license_user','!=',True)]}"/>
+					<field name="expiry_date" />
+				</group>
+			</group>
+		</field>
+	</record>
+    
+    <!-- User License Expiry -->
+    <record id="view_user_license_expiry_form" model="ir.ui.view">
+			<field name="name">user_license_expiry.form</field>
+			<field name="model">user.license.expiry</field>
+			<field name="arch" type="xml">
+				<form string="License Expiry Configuration" duplicate="0">
+					<header>
+						<button name="action_update_license_details" string="Update License" type="object" class="btn-primary" />
+					</header>
+					<sheet>
+						<group>
+							<group attrs="{'invisible': [('mc_code','=','MR')]}">
+								<p class="alert alert-warning" role="alert">
+									Based on the selection of Main Category, Those users and the lower level users expire date will be updated.
+								</p>
+							</group>
+						</group>
+						<group>
+							<group>
+								<field name="main_category_id" required="1"/>
+								<field name="mc_code" invisible="1"/>
+								<field name="next_expiry_date" />
+								<field name="is_empty_date" />
+							</group>
+							<group>
+								<field name="institute_id" attrs="{'required':[('mc_code','in',['RC','RP','HC','RI'])]}"/>
+								<field name="rel_province_id" domain="[('institute_id','=',institute_id)]" attrs="{'required':[('mc_code','in',['RP','HC','RI'])]}"/>
+								<field name="community_id" domain="[('rel_province_id','=',rel_province_id)]" attrs="{'required':[('mc_code','in',['HC','RI'])]}"/>
+								<field name="institution_id" domain="[('community_id','=',community_id)]" attrs="{'required':[('mc_code','in',['RI'])]}"/>
+							</group>
+							<label for="member_ids" string="Members"/> 
+							<field name="member_ids" attrs="{'required':[('mc_code','=','MR')]}">
+								<tree>
+									<field name="member_name"/>
+									<field name="community_id"/>
+									<field name="email"/>
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_user_license_expiry_tree" model="ir.ui.view">
+			<field name="name">user_license_expiry.tree</field>
+			<field name="model">user.license.expiry</field>
+			<field name="arch" type="xml">
+				<tree string="License Expiry Configuration" duplicate="0">
+					<field name="main_category_id" />
+					<field name="next_expiry_date" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_user_license_expiry_role" model="ir.actions.act_window">
+			<field name="name">License Expiry Configuration</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">user.license.expiry</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+    
+</odoo>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Circular -->
+
+		<record id="view_circular_form" model="ir.ui.view">
+			<field name="name">cristo.circular.form</field>
+			<field name="model">cristo.circular</field>
+			<field name="arch" type="xml">
+				<form string="Circular">
+					<header>
+						<button name="action_circular_mail" string="Send by email to All" type='object' class="oe_highlight" icon="fa-envelope" context="{'default_status':'all'}" />
+						<button name="action_circular_mail" string="Send by email to Specific Group" type='object' class="oe_highlight" icon="fa-envelope" context="{'default_status':'group'}" />
+						<button name="action_circular_mail" string="Send email to Individual" type='object' class="oe_highlight" icon="fa-envelope" context="{'default_status':'individual'}" />
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="save_circular" type="object" string="Save Circular to Document" class="oe_stat_button"
+								icon="fa-share-square-o">
+							</button>
+						</div>
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="Name" required="1" />
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="member_id" required="1" options='{"no_open": True, "no_create": True}'/>
+								<field name="theme" />
+								<field name="cir_code" force_save="1" readonly="1"/>
+								<field name="month_value" invisible="1" />
+								<!--<field name="check_province" invisible="1" />-->
+								<field name="check_community" invisible="1" />
+								<!--<field name="check_congregation" invisible="1" />-->
+								<field name="check_institution" invisible="1" />
+								<field name="type" required="1" />
+			                    <label for="" string="Upload" attrs="{'invisible':[('type','=','create_content')]}"/>
+			                    <div attrs="{'invisible':[('type','=','create_content')]}">
+			                    	<div class="alert alert-warning text-center" role="alert" style="width: fit-content;padding: 3px;">
+			                    		<span name="hint_text">Note:You Can upload only .pdf file.</span>
+			                    	</div>
+									<field name="upload" filename="file_name" />
+								</div>
+								<field name="file_name" invisible="1" />
+							</group>
+							<group>
+								<label for="month" string="Date" />
+								<div class="o_row">
+									<!-- <field name="day" placeholder="Day" style="width: 50%%" /> -->
+									<field name="month" placeholder="Month" style="width: 50%%" required="1" />
+									<field name="year" placeholder="Year" style="width: 50%%" required="1" />
+								</div>
+								<field name="institute_id" required="1"/>
+								<field name="rel_province_id" required="1" domain="[('institute_id', '=', institute_id)]" />
+								<field name="community_id" attrs="{'invisible':[('check_community', '=', False)]}" domain="[('rel_province_id', '=', rel_province_id)]" />
+								<field name="institution_id" attrs="{'invisible':[('check_institution', '=', False)]}" domain="[('community_id', '=', community_id)]" />
+								<!-- <field name="user_id" /> -->
+							</group>
+						</group>
+						<notebook attrs="{'invisible':[('type','=','upload')]}">
+							<page string="Content">
+								<field name="content" />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_circular_tree" model="ir.ui.view">
+			<field name="name">cristo.circular.tree</field>
+			<field name="model">cristo.circular</field>
+			<field name="arch" type="xml">
+				<tree string="Circular">
+					<field name="name" />
+					<field name="member_id" />
+					<field name="cir_code" />
+					<field name="theme" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_circular_search" model="ir.ui.view">
+			<field name="name">cristo.circular.search</field>
+			<field name="model">cristo.circular</field>
+			<field name="arch" type="xml">
+				<search string="Circular">
+					<field name="name" />
+					<field name="member_id" />
+					<field name="cir_code" />
+					<field name="theme" />
+				</search>
+			</field>
+		</record>
+			
+		<record id="action_circular" model="ir.actions.act_window">
+			<field name="name">Circular</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">cristo.circular</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+	</data>
+</odoo>

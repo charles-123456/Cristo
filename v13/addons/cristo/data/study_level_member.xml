@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data noupdate="0">
+	
+		<!-- Study Level Member -->
+		
+		<record id="study_level_member1" model="study.level.member">
+			<field name="name">member</field>
+		</record>
+		
+		<record id="study_level_member2" model="study.level.member">
+			<field name="name">bishop</field>
+		</record>
+		
+		<record id="study_level_member3" model="study.level.member">
+			<field name="name">priest</field>
+		</record>
+		
+		<record id="study_level_member4" model="study.level.member">
+			<field name="name">deacon</field>
+		</record>
+		
+		<record id="study_level_member5" model="study.level.member">
+			<field name="name">lay_brother</field>
+		</record>
+		
+		<record id="study_level_member6" model="study.level.member">
+			<field name="name">brother</field>
+		</record>
+		
+		<record id="study_level_member7" model="study.level.member">
+			<field name="name">sister</field>
+		</record>
+		
+		<record id="study_level_member8" model="study.level.member">
+			<field name="name">junior_sister</field>
+		</record>
+		
+		<record id="study_level_member9" model="study.level.member">
+			<field name="name">novice</field>
+		</record>
+		
+	</data>
+</odoo>

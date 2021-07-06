@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cristo_assets_backend" name="Backend Assets (used in backend interface)" inherit_id="web.assets_backend">
+    	<xpath expr="." position="inside">
+        	<link rel="stylesheet" type="text/scss" href="/cristo_dashboard/static/src/scss/web_calendar.scss"/>
+		</xpath>
+    </template>
+
+</odoo>

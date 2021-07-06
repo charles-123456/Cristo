@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-extend="LoginMemberDetails">
+        <t t-jquery=".sm_box_cont" t-operation="prepend">
+        	<t t-if="widget.login_member['chronicle']">
+        		<div class="col-md-4 col-sm-6 col-xs-12">
+		          <div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+		            <span class="info-box-icon bg-red box_curve_st"><i class="fa fa-file-text-o"></i></span>
+		
+		            <div class="info-box-content">
+		              <span class="info-box-number box_title">Chronicle (<t t-esc="widget.login_member['total_chr']" />)</span>
+		              <span class="text cr_chronicle cr_navigate">My Chronicle &#160;<i class="fa fa-external-link-square" style="font-size:15px;"></i></span><br/>
+		              <span class="text other_cr_chronicle cr_navigate">Other Chronicle &#160;<i class="fa fa-external-link-square" style="font-size:15px;"></i></span>
+		            </div>
+		          </div>
+		        </div>
+		    </t>
+        </t>
+    </t>
+
+</templates>

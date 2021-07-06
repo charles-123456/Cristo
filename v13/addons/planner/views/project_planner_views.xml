@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<!-- Project Plan -->
+
+		<record id="view_project_plan_form" model="ir.ui.view">
+			<field name="name">project.plan.form</field>
+			<field name="model">project.plan</field>
+			<field name="arch" type="xml">
+				<form string="Plan">
+					<header>
+						<button name="action_open" type="object" string="Open"
+							states="draft" class="oe_highlight" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,planner.group_planner_admin,planner.group_planner_manager" />
+						
+						<button name="action_confirm" type="object" string="Confirm"
+							states="open" class="oe_highlight" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,planner.group_planner_admin,planner.group_planner_manager" />
+							
+						<button name="action_approve" type="object" string="Approve"
+							states="confirm" class="oe_highlight" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,planner.group_planner_admin,planner.group_planner_manager" />
+							
+						<button name="action_close" type="object" string="Close"
+							states="approve" class="oe_highlight" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,planner.group_planner_admin,planner.group_planner_manager" />
+						
+						<field name="state" widget="statusbar" />
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="generate_mom_report" type="object" string="Plan Document" class="oe_stat_button"
+								icon="fa-file-text">
+							</button>
+							<button name="generate_plan_analysis" type="object" string="Plan Analysis" class="oe_stat_button"
+								icon="fa-bar-chart">
+							</button>
+							
+							<button name="open_main_section" type="object" id="sec1" string="Open Section 1" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':['|',('show_section','!=','sec1'),('state', '=', 'draft')]}">
+							</button>
+							<button name="open_main_section" type="object" id="sec2" string="Open Section 2" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':['|',('show_section','!=','sec2'),('state', '=', 'draft')]}">
+							</button>
+							<button name="open_main_section" type="object" id="sec3" string="Open Section 3" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':['|',('show_section','!=','sec3'),('state', '=', 'draft')]}">
+							</button>
+							<button name="open_main_section" type="object" id="sec4" string="Open Section 4" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':['|',('show_section','!=','sec4'),('state', '=', 'draft')]}">
+							</button>
+							
+							<button name="open_all_activities" type="object" string="All Activities" class="oe_stat_button"
+								icon="fa-tasks">
+							</button>
+							<button name="open_all_expenditure" type="object" string="All Expenditure" class="oe_stat_button"
+								icon="fa-money">
+							</button>
+						</div>
+						
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="Name" required="1" attrs="{'readonly':[('state', '=', 'close')]}" />
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="category_id" required="1" attrs="{'readonly':[('state', '=', 'close')]}" />
+								<field name="plan_type" required="1" attrs="{'readonly':[('state', '=', 'close')]}"/>
+								<field name="start_date" required="1" attrs="{'readonly':[('state', '=', 'close')]}" />
+								<field name="end_date" required="1" attrs="{'readonly':[('state', '=', 'close')]}" />
+								<field name="responsible_id" required="1" attrs="{'readonly':[('state', '=', 'close')]}" options='{"no_open": True, "no_create": True}' />
+								<field name="activity_type_ids" widget="many2many_tags" required="1" attrs="{'readonly':[('state', '=', 'close')]}" />
+								<field name="activities_count" />
+								<field name="estimated_expenditure" attrs="{'readonly':[('state', '=', 'close')]}" widget="monetary" options="{'currency_field': 'currency_id'}" />
+								<field name="actual_expenditure" widget="monetary" options="{'currency_field': 'currency_id'}" />
+								<field name="show_section" invisible="1"/>
+								<field name="attachment_id" invisible="1"/>
+								<field name="user_id" invisible="1" />
+								<field name="currency_id" invisible="1" />
+							</group>
+							<group string="Structure">
+								<field name="section1" options="{'horizontal': true}" widget="radio" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+								<field name="section2" options="{'horizontal': true}" widget="radio" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+								<field name="section3" options="{'horizontal': true}" widget="radio" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+								<field name="section4" options="{'horizontal': true}" widget="radio" attrs="{'readonly':[('state', '!=', 'draft')]}" />
+								<field name="note" attrs="{'readonly':[('state', '=', 'close')]}" />
+							</group>
+						</group>
+						<!-- <group string="Structure">
+						<group>
+							
+						</group>
+						<group></group>
+						
+						</group> -->
+						<notebook>
+							<page string="Description">
+								<field name="description" attrs="{'readonly':[('state', '=', 'close')]}" />
+							</page>
+							<page string="Section" invisible="1">
+								<div id="plan_sec1" attrs="{'invisible':[('show_section','!=','sec1')]}">
+									<h3></h3>
+									<field name="section1_ids" context="{'default_plan_id':active_id}"/>
+								</div>
+								<div id="plan_sec2" attrs="{'invisible':[('show_section','!=','sec2')]}">
+									<h3></h3>
+									<field name="section2_ids" context="{'default_plan_id':active_id}"/>
+								</div>
+								<div id="plan_sec3" attrs="{'invisible':[('show_section','!=','sec3')]}">
+									<h3></h3>
+									<field name="section3_ids" context="{'default_plan_id':active_id}"/>
+								</div>
+								<div id="plan_sec4" attrs="{'invisible':[('show_section','!=','sec4')]}">
+									<h3></h3>
+									<field name="section4_ids" context="{'default_plan_id':active_id}"/>
+								</div>
+							</page>
+							<page string="Funding Source" attrs="{'invisible':[('state', '=', 'draft')]}">
+								<field name="income_source_ids" attrs="{'readonly':[('state', '=', 'close')]}">
+									<tree editable="bottom">
+										<field name="source_name" />
+										<field name="source_type_id" required="1" />
+										<field name="currency_id" invisible="1" />
+										<field name="amount_identified" widget="monetary" options="{'currency_field': 'currency_id'}" />
+										<field name="plan_id" invisible="1" />
+									</tree>
+								</field>
+							</page>
+							<!-- <page string="Expenditure" attrs="{'invisible':[('state', '=', 'draft')]}">
+								<field name="expenditure_ids" attrs="{'readonly':[('state', '=', 'close')]}" />
+							</page> -->
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_project_plan_tree" model="ir.ui.view">
+			<field name="name">project.plan.tree</field>
+			<field name="model">project.plan</field>
+			<field name="arch" type="xml">
+				<tree string="Plan">
+					<field name="name" />
+					<field name="category_id" />
+					<field name="plan_type" optional="show"/>
+					<field name="start_date" optional="hide"/>
+					<field name="end_date" optional="hide"/>
+					<field name="state" />
+					<field name="responsible_id" />
+					<field name="estimated_expenditure" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total" optional="show"/>
+					<field name="actual_expenditure" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total" optional="show"/>
+					<field name="currency_id" invisible="1" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_project_plan_search" model="ir.ui.view">
+			<field name="name">project.plan.search</field>
+			<field name="model">project.plan</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="category_id" />
+					<field name="plan_type" />
+					<field name="responsible_id" />
+					<filter string="Strategic Plan" name="trategic" domain="[('plan_type','=','Strategic')]" />
+					<filter string="Operational Plan" name="sperational" domain="[('plan_type','=','Operational')]" />
+					<group expand="0" string="Group By">
+                        <filter string="Category" name="category_id" context="{'group_by':'category_id'}" />
+                        <filter string="Plan Type" name="plan_type" context="{'group_by':'plan_type'}" />
+                        <filter string="Responsible" name="responsible_id" context="{'group_by':'responsible_id'}" />
+                        <filter string="Status" name="status" context="{'group_by':'state'}" />
+                    </group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_project_plan" model="ir.actions.act_window">
+			<field name="name">Planner</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.plan</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Plan Section 1 -->
+		
+		<record id="view_plan_section1_form" model="ir.ui.view">
+			<field name="name">plan.section1.form</field>
+			<field name="model">plan.section1</field>
+			<field name="arch" type="xml">
+				<form string="Plan Section 1">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="open_from_sec1" type="object" id="sec2" string="Open Section 2" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':[('plan_sec2','!=',True)]}" context="{'open_sec':'sec2'}">
+							</button>
+							<button name="open_from_sec1" type="object" id="sec3" string="Open Section 3" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':['|',('plan_sec3','!=',True),('plan_sec2','=',True)]}" context="{'open_sec':'sec3'}">
+							</button>
+							<button name="open_from_sec1" type="object" id="sec4" string="Open Section 4" class="oe_stat_button" context="{'open_sec':'sec4'}"
+								icon="fa-tasks" attrs="{'invisible':['|','|',('plan_sec4','!=',True),('plan_sec2','=',True),('plan_sec3','=',True)]}">
+							</button>
+							<button name="open_activity" type="object" string="Open Activity" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':['|','|',('plan_sec2','=',True),('plan_sec3','=',True),('plan_sec4','=',True)]}">
+							</button>
+						</div>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+							<group>
+								<field name="plan_id" invisible="1" />
+								<field name="plan_sec1" invisible="1" />
+								<field name="plan_sec2" invisible="1" />
+								<field name="plan_sec3" invisible="1" />
+								<field name="plan_sec4" invisible="1" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Description">
+								<field name="description" />
+							</page>
+							<!-- <page string="Section 2" attrs="{'invisible':[('plan_sec2','!=',True)]}">
+								<field name="section2_ids" context="{'default_plan_id':plan_id,'default_section1_id':active_id}"/>
+							</page>
+							<page string="Section 3" attrs="{'invisible':['|',('plan_sec3','!=',True),('plan_sec2','=',True)]}">
+								<field name="section3_ids" context="{'default_plan_id':plan_id,'default_section1_id':active_id}"/>
+							</page>
+							<page string="Section 4" attrs="{'invisible':['|','|',('plan_sec4','!=',True),('plan_sec2','=',True),('plan_sec3','=',True)]}">
+								<field name="section4_ids" context="{'default_plan_id':plan_id,'default_section1_id':active_id}"/>
+							</page> -->
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_section1_tree" model="ir.ui.view">
+			<field name="name">plan.section1.tree</field>
+			<field name="model">plan.section1</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Section 1">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_section1_search" model="ir.ui.view">
+			<field name="name">plan.section1.search</field>
+			<field name="model">plan.section1</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_section1" model="ir.actions.act_window">
+			<field name="name">Plan Section 1</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.section1</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Plan Section 2 -->
+		
+		<record id="view_plan_section2_form" model="ir.ui.view">
+			<field name="name">plan.section2.form</field>
+			<field name="model">plan.section2</field>
+			<field name="arch" type="xml">
+				<form string="Plan Section 2">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="open_from_sec2" type="object" id="sec3" string="Open Section 3" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':[('plan_sec3','!=',True)]}" context="{'open_sec':'sec3'}">
+							</button>
+							<button name="open_from_sec2" type="object" id="sec4" string="Open Section 4" class="oe_stat_button" context="{'open_sec':'sec4'}"
+								icon="fa-tasks" attrs="{'invisible':['|',('plan_sec4','!=',True),('plan_sec3','=',True)]}">
+							</button>
+							<button name="open_activity" type="object" string="Open Activity" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':['|',('plan_sec3','=',True),('plan_sec4','=',True)]}">
+							</button>
+						</div>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="section1_id" invisible="1"/>
+							</group>
+							<group>
+								<field name="plan_id" invisible="1"/>
+								<field name="plan_sec1" invisible="1"/>
+								<field name="plan_sec2" invisible="1"/>
+								<field name="plan_sec3" invisible="1"/>
+								<field name="plan_sec4" invisible="1"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Description">
+								<field name="description" />
+							</page>
+							<!-- <page string="Section 3" attrs="{'invisible':[('plan_sec3','!=',True)]}">
+								<field name="section3_ids" context="{'default_plan_id':plan_id,'default_section2_id':active_id,'default_section1_id':section1_id}"/>
+							</page>
+							<page string="Section 4" attrs="{'invisible':['|',('plan_sec4','!=',True),('plan_sec3','=',True)]}">
+								<field name="section4_ids" context="{'default_plan_id':plan_id,'default_section2_id':active_id,'default_section1_id':section1_id}"/>
+							</page> -->
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_section2_tree" model="ir.ui.view">
+			<field name="name">plan.section2.tree</field>
+			<field name="model">plan.section2</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Section 2">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_section2_search" model="ir.ui.view">
+			<field name="name">plan.section2.search</field>
+			<field name="model">plan.section2</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_section2" model="ir.actions.act_window">
+			<field name="name">Plan Section 2</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.section2</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Plan Section 3 -->
+		
+		<record id="view_plan_section3_form" model="ir.ui.view">
+			<field name="name">plan.section3.form</field>
+			<field name="model">plan.section3</field>
+			<field name="arch" type="xml">
+				<form string="Plan Section 3">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="open_from_sec3" type="object" id="sec4" string="Open Section 4" class="oe_stat_button" context="{'open_sec':'sec4'}"
+								icon="fa-tasks" attrs="{'invisible':[('plan_sec4','!=',True)]}">
+							</button>
+							<button name="open_activity" type="object" string="Open Activity" class="oe_stat_button"
+								icon="fa-tasks" attrs="{'invisible':[('plan_sec4','=',True)]}">
+							</button>
+						</div>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="section1_id" invisible="1"/>
+								<field name="section2_id" invisible="1"/>
+							</group>
+							<group>
+								<field name="plan_id" invisible="1"/>
+								<field name="plan_sec1" invisible="1"/>
+								<field name="plan_sec2" invisible="1"/>
+								<field name="plan_sec3" invisible="1"/>
+								<field name="plan_sec4" invisible="1"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Description">
+								<field name="description" />
+							</page>
+							<!-- <page string="Section 4" attrs="{'invisible':[('plan_sec4','!=',True)]}">
+								<field name="section4_ids" context="{'default_plan_id':plan_id,'default_section1_id':section1_id,'default_section2_id':section2_id,'default_section3_id':active_id}"/>
+							</page> -->
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_section3_tree" model="ir.ui.view">
+			<field name="name">plan.section3.tree</field>
+			<field name="model">plan.section3</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Section 3">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_section3_search" model="ir.ui.view">
+			<field name="name">plan.section3.search</field>
+			<field name="model">plan.section3</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_section3" model="ir.actions.act_window">
+			<field name="name">Plan Section 3</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.section3</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Plan Section 4 -->
+		
+		<record id="view_plan_section4_form" model="ir.ui.view">
+			<field name="name">plan.section4.form</field>
+			<field name="model">plan.section4</field>
+			<field name="arch" type="xml">
+				<form string="Plan Section 4">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="open_activity" type="object" string="Open Activity" class="oe_stat_button"
+								icon="fa-tasks">
+							</button>
+						</div>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="section1_id" invisible="1"/>
+								<field name="section2_id" invisible="1"/>
+								<field name="section3_id" invisible="1"/>
+							</group>
+							<group>
+								<field name="plan_id" invisible="1"/>
+								<field name="plan_sec1" invisible="1"/>
+								<field name="plan_sec2" invisible="1"/>
+								<field name="plan_sec3" invisible="1"/>
+								<field name="plan_sec4" invisible="1"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Description">
+								<field name="description" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_section4_tree" model="ir.ui.view">
+			<field name="name">plan.section4.tree</field>
+			<field name="model">plan.section4</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Section 4">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_section4_search" model="ir.ui.view">
+			<field name="name">plan.section4.search</field>
+			<field name="model">plan.section4</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_section4" model="ir.actions.act_window">
+			<field name="name">Plan Section 4</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.section4</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Plan Activity -->
+
+		<record id="view_plan_activity_form" model="ir.ui.view">
+			<field name="name">plan.activity.form</field>
+			<field name="model">plan.activity</field>
+			<field name="arch" type="xml">
+				<form string="Plan Activity">
+					<sheet>
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="Activity Name" />
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="main_activity_type_id" options='{"no_open": True, "no_create": True}' />
+								<field name="start_date" required="1" />
+								<field name="end_date" />
+								<field name="responsible_id" required="1" options='{"no_open": True, "no_create": True}' />
+								<field name="expected_outcome" />
+								<field name="plan_id" invisible="1" />
+								<field name="section1_id" invisible="1"/>
+								<field name="section2_id" invisible="1"/>
+								<field name="section3_id" invisible="1"/>
+								<field name="section4_id" invisible="1"/>
+							</group>
+							<group>
+								<field name="status" options="{'horizontal': true}" widget="radio" required="1"/>
+								<field name="analysis_status" options="{'horizontal': true}" widget="radio" />
+								<field name="evaluation_criteria" />
+								<field name="currency_id" invisible="1" />
+								<field name="actual_expenditure" widget="monetary" options="{'currency_field': 'currency_id'}" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Details">
+								<field name="details" />
+							</page>
+							<page string="Expenditure">
+								<field name="expenditure_ids" context="{'default_plan_id':plan_id}">
+									<form>
+										<group>
+											<group>
+												<field name="particular" required="1" />
+												<field name="quantity" required="1" />
+											</group>
+											<group>
+												<field name="currency_id" invisible="1" />
+												<field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}" />
+												<field name="plan_id" invisible="1"/>
+											</group>
+										</group>
+										<notebook>
+											<page string="Expenditure Item">
+												<field name="expenditure_item_ids">
+													<tree editable="bottom">
+														<field name="item" />
+														<field name="expenditure_date" width="0.8" />
+														<field name="expenditure_id" invisible="1" />
+													</tree>
+												</field>
+											</page>
+										</notebook>
+									</form>
+									<tree>
+										<field name="particular" />
+										<field name="quantity" />
+										<field name="currency_id" invisible="1" />
+										<field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_activity_tree" model="ir.ui.view">
+			<field name="name">plan.activity.tree</field>
+			<field name="model">plan.activity</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Activity">
+					<field name="plan_id" optional="hide"/>
+					<field name="name" />
+					<field name="main_activity_type_id" />
+					<field name="responsible_id" />
+					<field name="status" />
+					<field name="start_date" />
+					<field name="end_date" />
+					<field name="actual_expenditure" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total"/>
+					<field name="currency_id" invisible="1" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_activity_search" model="ir.ui.view">
+			<field name="name">plan.activity.search</field>
+			<field name="model">plan.activity</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="main_activity_type_id" />
+					<field name="responsible_id" />
+					<group expand="0" string="Group By">
+                        <filter string="Activity Type" name="main_activity_type_id" context="{'group_by':'main_activity_type_id'}" />
+                        <filter string="Status" name="status" context="{'group_by':'status'}" />
+                        <filter string="Responsible" name="responsible_id" context="{'group_by':'responsible_id'}" />
+                    </group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_activity" model="ir.actions.act_window">
+			<field name="name">Plan Activity</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.activity</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Plan Expenditure -->
+
+		<record id="view_plan_expenditure_form" model="ir.ui.view">
+			<field name="name">plan.expenditure.form</field>
+			<field name="model">plan.expenditure</field>
+			<field name="arch" type="xml">
+				<form string="Plan Expenditure">
+					<sheet>
+						<group>
+							<group>
+								<field name="activity_id" required="1" options='{"no_open": True, "no_create": True}' domain="[('plan_id','=',plan_id)]"/>
+								<field name="particular" required="1" />
+							</group>
+							<group>
+								<field name="quantity" required="1" />
+								<field name="currency_id" invisible="1" />
+								<field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}" />
+								<field name="plan_id" invisible="1"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Expenditure Item">
+								<field name="expenditure_item_ids">
+									<tree editable="bottom">
+										<field name="item" />
+										<field name="expenditure_date" width="0.8" />
+										<field name="expenditure_id" invisible="1" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_expenditure_tree" model="ir.ui.view">
+			<field name="name">plan.expenditure.tree</field>
+			<field name="model">plan.expenditure</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Expenditure">
+					<field name="plan_id" optional="hide" />
+					<field name="activity_id" />
+					<field name="particular" />
+					<field name="quantity" />
+					<field name="currency_id" invisible="1" />
+					<field name="amount"  widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_expenditure_search" model="ir.ui.view">
+			<field name="name">plan.expenditure.search</field>
+			<field name="model">plan.expenditure</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="activity_id" />
+					<group expand="0" string="Group By">
+                        <filter string="Activity" name="activity_id" context="{'group_by':'activity_id'}" />
+                    </group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_expenditure" model="ir.actions.act_window">
+			<field name="name">Plan Expenditure</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.expenditure</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+	</data>
+</odoo>

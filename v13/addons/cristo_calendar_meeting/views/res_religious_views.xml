@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Religious Institute -->
+	
+	<record id="res_religious_institute_calendar_meeting_view" model="ir.ui.view">
+        <field name="name">res.religious.institute.form.inherit</field>
+        <field name="model">res.religious.institute</field>
+        <field name="inherit_id" ref="cristo.view_religious_institute_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//div[@name='button_box']" position="inside">
+        		<!-- <button name="open_calendar" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Calendar"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_calendar_meeting_read">
+				</button> -->
+				<button name="open_meeting" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Meeting(s)"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_calendar_meeting_read">
+				</button>
+        	</xpath>
+        </field>
+    </record>
+	
+	<!-- Religious Province -->
+	
+	<record id="res_religious_province_calendar_meeting_view" model="ir.ui.view">
+        <field name="name">res.religious.province.form.inherit</field>
+        <field name="model">res.religious.province</field>
+        <field name="inherit_id" ref="cristo.view_religious_province_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//div[@name='button_box']" position="inside">
+        		<!-- <button name="open_calendar" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Calendar"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_chronicle_read">
+				</button> -->
+				<button name="open_meeting" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Meeting(s)"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_calendar_meeting_read">
+				</button>
+        	</xpath>
+        </field>
+    </record>
+	
+	<!-- House/Community -->
+	
+	<record id="res_community_calendar_meeting_view" model="ir.ui.view">
+        <field name="name">res.community.form.inherit</field>
+        <field name="model">res.community</field>
+        <field name="inherit_id" ref="cristo.view_religious_community_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//div[@name='button_box']" position="inside">
+        		<!-- <button name="open_calendar" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Calendar"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_chronicle_read">
+				</button> -->
+				<button name="open_meeting" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Meeting(s)"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_calendar_meeting_read">
+				</button>
+        	</xpath>
+        </field>
+    </record>
+    
+    <!-- Institution -->
+    
+	<record id="res_institution_calendar_meeting_view" model="ir.ui.view">
+        <field name="name">res.institution.form.inherit</field>
+        <field name="model">res.institution</field>
+        <field name="inherit_id" ref="cristo.view_institution_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//div[@name='button_box']" position="inside">
+        		<!-- <button name="open_calendar" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Calendar"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_chronicle_read">
+				</button> -->
+				<button name="open_meeting" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Meeting(s)"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_calendar_meeting_read">
+				</button>
+        	</xpath>
+        </field>
+    </record>
+
+</odoo>

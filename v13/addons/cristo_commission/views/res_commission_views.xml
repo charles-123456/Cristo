@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Commission -->
+
+		<record id="view_res_commission_form" model="ir.ui.view">
+			<field name="name">res.commission.form</field>
+			<field name="model">res.commission</field>
+			<field name="arch" type="xml">
+				<form string="Commission">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="check_congregation" invisible="1" />
+								<field name="check_province" invisible="1" />
+								<field name="institute_id" attrs="{'invisible':[('check_congregation', '=', False)]}" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin" />
+								<field name="rel_province_id" attrs="{'invisible':[('check_province', '=', False)]}"/>
+								<field name="check_diocese" invisible="1"/>
+								<field name="check_vicariate" invisible="1"/>
+								<field name="check_parish" invisible="1"/>
+								<field name="diocese_id" attrs="{'invisible':[('check_diocese', '=', False)]}" />
+								<field name="vicariate_id" attrs="{'invisible':[('check_vicariate', '=', False)]}"/>
+								<field name="parish_id" attrs="{'invisible':[('check_parish', '=', False)]}"/>
+							</group>
+							<group>
+								<field name="check_community" invisible="1" />
+								<field name="check_institution" invisible="1" />
+								<field name="community_id" attrs="{'invisible':[('check_community', '=', False)]}"/>
+								<field name="institution_id" attrs="{'invisible':[('check_institution', '=', False)]}"/>
+								<field name="user_id" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Commission Member">
+								<field name="commission_member_ids">
+									<tree editable="bottom" decoration-success="status == 'active'" decoration-muted="status == 'archive'">
+										<field name="role_id" required="1"/>
+										<!-- <field name="member_id" /> -->
+										<field name="partner_id" domain="['|',('main_category_code','=','MR'), ('is_outsider','!=', False)]" />
+										<field name="date_from" width="0.8" />
+										<field name="date_to" width="0.8" />
+										<field name="status" required="1"/>
+									</tree>
+									<form>
+										<group>
+											<field name="role_id" />
+											<!-- <field name="member_id" /> -->
+											<field name="partner_id" />
+											<field name="date_from" />
+											<field name="date_to" />
+										</group>
+									</form>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_res_commission_tree" model="ir.ui.view">
+			<field name="name">res.commission.tree</field>
+			<field name="model">res.commission</field>
+			<field name="arch" type="xml">
+				<tree string="Commission">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_res_commission" model="ir.actions.act_window">
+			<field name="name">Commission</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.commission</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	</data>
+</odoo>

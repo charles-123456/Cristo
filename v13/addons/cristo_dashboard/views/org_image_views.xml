@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- This view should only be used from the product o2m because the required field product_tmpl_id has to be automatically set. -->
+    <record id="view_org_image_form" model="ir.ui.view">
+        <field name="name">org.image.view.form</field>
+        <field name="model">org.image</field>
+        <field name="arch" type="xml">
+            <form string="Org Images">
+                <field name="sequence" invisible="1"/>
+                <div class="row o_website_sale_image_modal">
+                    <div class="col-md-6 col-xl-5">
+                        <label for="name" string="Title"/>
+                        <h2><field name="name" placeholder="Title"/></h2>
+                        <label for="video_url" string="Video URL" invisible="context.get('warning',False)"/><br/>
+                        <field name="video_url" invisible="context.get('warning',False)"/><br/>
+                    </div>
+                    <div class="col-md-6 col-xl-7 text-center o_website_sale_image_modal_container">
+                    	<div class="alert alert-warning" role="alert" invisible="not context.get('warning',False)" attrs="{'invisible': [('video_url', 'not in', ['', False])]}">
+                        	<p><b>Note:</b> We require 1000 px (width) x 250 px (height) size image</p>
+                        </div>
+                        <div class="alert alert-warning" role="alert" attrs="{'invisible': [('video_url', 'in', ['', False])]}">
+                        	<p><b>Note:</b> Choose the Video Thumbnail Image</p>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <field name="image_1920" widget="image" filename="name" />
+                            </div>
+                            <div class="col" attrs="{'invisible': [('video_url', 'in', ['', False])]}">
+                                <div class="o_video_container p-2">
+                                    <span>Video Preview</span>
+                                    <field name="embed_code" class="mt-2" widget="video_preview"/>
+                                    <h4 class="o_invalid_warning text-muted text-center" attrs="{'invisible': [('embed_code', '!=', False)]}">
+                                        Please enter a valid Video URL.
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="org_image_view_tree" model="ir.ui.view">
+        <field name="name">org.image.view.tree</field>
+        <field name="model">org.image</field>
+        <field name="arch" type="xml">
+        	<tree string="Images">
+				<field name="image_1920" widget="image" options='{"zoom": true,"preview_image": "image_128","size": [80, 80]}'/>
+				<field name="name" />
+			</tree>
+        </field>
+    </record>
+    
+    <record id="org_image_view_kanban" model="ir.ui.view">
+        <field name="name">org.image.view.kanban</field>
+        <field name="model">org.image</field>
+        <field name="arch" type="xml">
+            <kanban string="Org Images" default_order="sequence">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="image_1920"/>
+                <field name="sequence" widget="handle"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="card oe_kanban_global_click p-0">
+                            <div class="o_squared_image">
+                                <img class="card-img-top" t-att-src="kanban_image('org.image', 'image_1920', record.id.value)" t-att-alt="record.name.value"/>
+                            </div>
+                            <div class="card-body p-0">
+                                <h4 class="card-title p-2 m-0 bg-200">
+                                    <small><field name="name"/></small>
+                                </h4>
+                            </div>
+                            <!-- below 100 Kb: good -->
+                            <t t-if="record.image_1920.raw_value.length &lt; 100*1000">
+                                <t t-set="size_status" t-value="'badge-success'"/>
+                                <t t-set="message">Acceptable file size</t>
+                            </t>
+                            <!-- below 1000 Kb: decent -->
+                            <t t-elif="record.image_1920.raw_value.length &lt; 1000*1000">
+                                <t t-set="size_status" t-value="'badge-warning'" />
+                                <t t-set="message">Huge file size. The image should be optimized/reduced.</t>
+                            </t>
+                            <!-- above 1000 Kb: bad -->
+                            <t t-else="1">
+                                <t t-set="size_status" t-value="'badge-danger'"/>
+                                <t t-set="message">Optimization required! Reduce the image size or increase your compression settings.</t>
+                            </t>
+                            <span t-attf-class="badge #{size_status} o_product_image_size" t-esc="record.image_1920.value" t-att-title="message"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="view_org_image_search" model="ir.ui.view">
+			<field name="name">org.image.view.search</field>
+			<field name="model">org.image</field>
+			<field name="arch" type="xml">
+				<search string="Org Images">
+					<field name="name" />
+					<group expand="0" string="Group By">
+						<filter string="Name" name="name" context="{'group_by':'name'}" />
+					</group>
+				</search>
+			</field>
+	</record>
+
+</odoo>

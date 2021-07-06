@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_cristo_users_form" model="ir.ui.view">
+			<field name="name">cristo.users.form</field>
+			<field name="model">cristo.users</field>
+			<field name="arch" type="xml">
+				<form string="Cristo Users" duplicate="0">
+					<header>
+						<button name="action_draft_activate" string="Activate User" type="object" states="draft" class="btn-primary" />
+						<button name="action_update_rights" string="Update User Rights" type="object" states="activated" class="btn-primary" />
+						<button name="action_deactivate" string="Deactivate" type="object" states="activated" class="btn-primary" 
+							confirm="You are going to Archive this user. Do you confirm the action?"/>
+						<button name="action_deact_activate" string="Activate" type="object" states="deactivated" class="btn-primary" />
+						<button name="%(action_change_password)d" string="Change Password" states="activated" type="action" class="btn-primary"
+							context="{'default_cristo_user_id':active_id}"/>
+						<field name="state" widget="statusbar" />
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name"/>
+							<h2>
+								<field name="name" default_focus="1" placeholder="Name" required="1" force_save="1" readonly="1"/>
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="main_category_id" required="1" options="{'no_create': True,'no_open': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="partner_id" required="1" options="{'no_create': True,'no_open': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="login" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="password" password="True" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="main_role_id" required="1" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_create': True,'no_open': True}"/>
+								<field name="member_id" attrs="{'required':[('mc_code','=','MR')]}" options="{'no_create': True,'no_open': True}"/>
+							</group>
+							<group>
+								<field name="mc_code" invisible="1"/>
+								<field name="institute_id" options="{'no_create': True,'no_open': True}" attrs="{'required':[('mc_code','in',['RC','RP','HC','RI','MR'])],'readonly':[('state','!=','draft')]}"/>
+								<field name="rel_province_id" domain="[('institute_id','=',institute_id)]" attrs="{'required':[('mc_code','in',['RP','HC','RI'])]}" options="{'no_create': True,'no_open': True}" />
+								<field name="community_id" domain="[('rel_province_id','=',rel_province_id)]" attrs="{'required':[('mc_code','in',['HC','RI'])]}" options="{'no_create': True,'no_open': True}" />
+								<field name="institution_id" domain="[('community_id','=',community_id)]" attrs="{'required':[('mc_code','=','RI')]}" options="{'no_create': True,'no_open': True}" />
+							</group>
+							<group>
+								<field name="module_roles" invisible="1"/>
+								<field name="module_access_role_ids" widget="many2many_tags" domain="[('id','in',module_roles)]"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_cristo_users_tree" model="ir.ui.view">
+			<field name="name">cristo.users.tree</field>
+			<field name="model">cristo.users</field>
+			<field name="arch" type="xml">
+				<tree string="Cristo Users">
+					<field name="name" />
+					<field name="login" />
+					<field name="main_role_id" />
+					<field name="state" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_cristo_users_search" model="ir.ui.view">
+			<field name="name">cristo.users.search</field>
+			<field name="model">cristo.users</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="login" />
+					<field name="partner_id" />
+					<field name="state" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_cristo_users" model="ir.actions.act_window">
+			<field name="name">Cristo Users</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">cristo.users</field>
+			<field name="view_mode">tree,form,search</field>
+			<field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new user in your Cristo
+              </p><p>
+                This helps you easily track all activities related to the user creation.
+              </p>
+            </field>
+		</record>
+		
+		<!-- Custom User Roles -->
+		<record id="view_cristo_custom_user_role_form" model="ir.ui.view">
+			<field name="name">custom.user.role.form</field>
+			<field name="model">custom.user.role</field>
+			<field name="arch" type="xml">
+				<form string="Custom User Role" duplicate="0">
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="code" />
+							<field name="group_ids" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_cristo_custom_user_role_tree" model="ir.ui.view">
+			<field name="name">custom.user.role.tree</field>
+			<field name="model">custom.user.role</field>
+			<field name="arch" type="xml">
+				<tree string="Custom User Role" duplicate="0">
+					<field name="name" />
+					<field name="code" />
+					<field name="group_ids" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_cristo_custom_user_role" model="ir.actions.act_window">
+			<field name="name">Custom User Role</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">custom.user.role</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+    
+</odoo>

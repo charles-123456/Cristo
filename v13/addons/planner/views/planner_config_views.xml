@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Plan Category -->
+		
+		<record id="view_plan_category_form" model="ir.ui.view">
+			<field name="name">plan.category.form</field>
+			<field name="model">plan.category</field>
+			<field name="arch" type="xml">
+				<form string="Plan Category">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_category_tree" model="ir.ui.view">
+			<field name="name">plan.category.tree</field>
+			<field name="model">plan.category</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Category">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_category_search" model="ir.ui.view">
+			<field name="name">plan.category.search</field>
+			<field name="model">plan.category</field>
+			<field name="arch" type="xml">
+				<search string="Plan Category">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_category" model="ir.actions.act_window">
+			<field name="name">Plan Category</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.category</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+		<!-- Plan Activity Type -->
+		
+		<record id="view_plan_main_activity_type_form" model="ir.ui.view">
+			<field name="name">plan.main.activity.type.form</field>
+			<field name="model">plan.main.activity.type</field>
+			<field name="arch" type="xml">
+				<form string="Plan Activity Type">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_main_activity_type_tree" model="ir.ui.view">
+			<field name="name">plan.main.activity.type.tree</field>
+			<field name="model">plan.main.activity.type</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Activity Type">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_main_activity_type_search" model="ir.ui.view">
+			<field name="name">plan.main.activity.type.search</field>
+			<field name="model">plan.main.activity.type</field>
+			<field name="arch" type="xml">
+				<search string="Plan Activity Type">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_main_activity_type" model="ir.actions.act_window">
+			<field name="name">Plan Activity Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.main.activity.type</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Fund Source Type -->
+		
+		<record id="view_fund_source_type_form" model="ir.ui.view">
+			<field name="name">fund.source.type.form</field>
+			<field name="model">fund.source.type</field>
+			<field name="arch" type="xml">
+				<form string="Fund Source Type">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_fund_source_type_tree" model="ir.ui.view">
+			<field name="name">fund.source.type.tree</field>
+			<field name="model">fund.source.type</field>
+			<field name="arch" type="xml">
+				<tree string="Fund Source Type">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_fund_source_type_search" model="ir.ui.view">
+			<field name="name">fund.source.type.search</field>
+			<field name="model">fund.source.type</field>
+			<field name="arch" type="xml">
+				<search string="Fund Source Type">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_fund_source_type" model="ir.actions.act_window">
+			<field name="name">Fund Source Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">fund.source.type</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Plan Section Config -->
+		
+		<record id="view_plan_section_config_form" model="ir.ui.view">
+			<field name="name">plan.section.config.form</field>
+			<field name="model">plan.section.config</field>
+			<field name="arch" type="xml">
+				<form string="Plan Section Config">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="section_type" required="1"/>
+							</group>
+							<group>
+								<field name="user_ids" widget="many2many_tags" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_plan_section_config_tree" model="ir.ui.view">
+			<field name="name">plan.section.config.tree</field>
+			<field name="model">plan.section.config</field>
+			<field name="arch" type="xml">
+				<tree string="Plan Section Config">
+					<field name="name" />
+					<field name="section_type" />
+					<field name="user_ids" widget="many2many_tags" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_plan_section_config_search" model="ir.ui.view">
+			<field name="name">plan.section.config.search</field>
+			<field name="model">plan.section.config</field>
+			<field name="arch" type="xml">
+				<search string="Plan Section Config">
+					<field name="name" />
+					<field name="section_type" />
+					<field name="user_ids" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_plan_section_config" model="ir.actions.act_window">
+			<field name="name">Plan Section Config</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">plan.section.config</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+	</data>
+
+</odoo>

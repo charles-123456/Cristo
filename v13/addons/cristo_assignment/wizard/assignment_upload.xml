@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_upload_assignment" model="ir.ui.view">
+		<field name="name">upload.assignment.form</field>
+		<field name="model">upload.assignment</field>
+		<field name="arch" type="xml">
+			<form string="Transfer" >
+                <group>
+                    <field name="file" />
+                    <field name="assignment_id" invisible='1'/>
+                </group>	
+				<footer>
+					<button string="Upload" name="upload_new_assignment" type="object" class="oe_highlight" />
+					<button string="Cancel" special="cancel" class="oe_highlight"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	
+	<record id="action_upload_assignment" model="ir.actions.act_window">
+		<field name="name">Transfer</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">upload.assignment</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+	
+</odoo>	

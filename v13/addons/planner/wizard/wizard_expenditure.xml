@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_expenditure" model="ir.ui.view">
+		<field name="name">wizard.expenditure.form</field>
+		<field name="model">wizard.expenditure</field>
+		<field name="arch" type="xml">
+			<form string="Activity">
+				<group>
+					<group>
+						<field name="all" />
+						<field name="plan_ids" attrs="{'invisible':[('all', '=', True)], 'required': [('all', '!=', True)]}" widget="many2many_tags" options='{"no_open": True, "no_create": True}'/>
+<!--						<field name="start_date" required="1" />-->
+					</group>
+<!--					<group>-->
+<!--						<field name="duration" />-->
+<!--						<field name="end_date" required="1" />-->
+<!--					</group>-->
+				</group>
+				<footer>
+					<button name="print_expeniture" string="EXPORT TO PDF" type="object"
+						class="oe_highlight"  />
+					or
+					<button string="CANCEL" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_view_expenditure" model="ir.actions.act_window">
+		<field name="name">Expenditure</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.expenditure</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

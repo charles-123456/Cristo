@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="report_ecc_parish_profiles">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+						<div class="page">
+                          <style>
+								th,td{
+								padding: 7px;
+								}
+								thead
+								{
+								display:table-header-group;
+								vertical-align: middle;
+								}
+								tr {
+								page-break-inside: avoid;
+								}
+
+								thead {
+								display:table-header-group;
+								}
+								tfoot{ display:table-footer-group}
+								.count {
+								border-collapse:
+								separate;
+								border-spacing: 25px;
+								}
+								table,td{
+								vertical-align:middle;
+								border-collapse: collapse;
+								}
+								.align_center{
+								text-align:center;
+								}
+								.count {
+								border-collapse:
+								separate;
+								border-spacing: 10px;
+
+								.align_left{
+								text-align:left;
+								}
+								.img{
+								box-shadow: 7px 7px 3px
+								#D6D6D6;
+								border-radius: 50%;
+								}
+								table.th{
+								background-color:4682B4;
+								text-align:left;
+								}
+								.hide_color{
+								background-color:white;
+								color:black;
+								}
+								tr:nth-child(even){
+								background-color: #efeff8;
+								}
+								.head th{
+									background-color:#008B8B;
+									color:white;
+									font-size:18px;
+								}
+ 					</style>
+                        <table width="100%">
+                            <tr>
+                                <td class="align-left">
+                                    <t t-if="o.parish_logo">
+                                        <img t-att-src="image_data_uri(o.parish_logo)" style="height:75px;width:75px;"/>
+                                    </t>
+                                </td>
+                                <td width="80%" style="vertical-align: middle;font-size:20px;">
+                                    <center>
+                                        <strong style="font-size:27px;margin-left:-150px;">
+                                            <span t-field="o.name"/>
+                                            <t>Parish</t>
+                                        </strong>
+                                        <div width="100" style="margin-left:-75px;margin-right:75px;">
+                                          <span t-field="o.street"/>
+                                          <t t-if="o.street and o.street2">, </t>
+                                          <span t-field="o.street2"/>
+                                          <span t-field="o.place"/>
+                                          <t t-if="o.place and o.city">, </t>
+                                          <span t-field="o.city"/>
+                                          <span t-field="o.state_id"/>
+                                          <t t-if="o.state_id and o.country_id">, </t>
+                                          <span t-field="o.country_id"/>
+                                          <t t-if="o.zip and o.country_id">-</t>
+                                          <span t-field="o.zip"/>
+                                        </div>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                             <br/>
+                            		 <table class="count" width="100%">
+                            		 <tr>
+									<td class="align_center" style="border:1px solid black;vertical-align: middle;">
+										<b>
+											BCC (<span t-field="o.bcc_count" /> 
+											)
+										</b>
+									</td>
+									<td class="align_center" style="border:1px solid black;vertical-align: middle;">
+										<b>
+											Families (<span t-field="o.family_count" />)
+										</b>
+									</td>
+									<td class="align_center" style="border:1px solid black;vertical-align: middle;">
+										<b>
+											Members (<span t-field="o.member_count" />)
+										</b>
+									</td>
+									<td class="align_center" style="border:1px solid black;vertical-align: middle;">
+										<b>
+											Communities (<span t-field="o.community_count" />)
+										</b>
+									</td>
+									<td class="align_center" style="border:1px solid black;vertical-align: middle;">
+										<b>
+											Institutions (<span t-field="o.institution_count" />)
+										</b>
+									</td>
+								</tr>
+								</table>
+                             
+                      
+                            <br/>
+                        <table width="100%" class="light-border" style="font-size:18px;">
+                            <tr>
+                                <th width="50%" class="hide_colo align_left">
+                                    Code
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <span t-field="o.code"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left"> Diocese </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.diocese_id">
+                                        <span t-field="o.diocese_id.name"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left"> Vicariate </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.vicariate_id">
+                                        <span t-field="o.vicariate_id.name"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th width="50%" class="hide_color align_left"> Name of the Parish Priest </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.current_parishpriest_id">
+                                        <span t-field="o.current_parishpriest_id.name"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            
+                             <tr>
+                                <th width="50%" class="hide_color align_left"> Church in regional language </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.church_in_regional_lang_ids">
+                                    	<t t-foreach="o.church_in_regional_lang_ids" t-as="d">
+                                        <span t-field="d.name">/</span>
+                                        </t> 
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                             <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Establishment Date
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.establishment_date">
+                                        <span t-field="o.establishment_date" t-options="{'widget':'date','format': 'dd-MMM-yyyy'}"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left"> Patron of the Parish </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.patron_id">
+                                        <span t-field="o.patron_id.name"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left"> Rite </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.rite_id">
+                                        <span t-field="o.rite_id.name"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                             <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Mobile
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.mobile">
+                                        <span t-field="o.mobile"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Phone No.
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.phone">
+                                        <span t-field="o.phone"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Fax
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.fax">
+                                        <span t-field="o.fax"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Email
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.email">
+                                        <span t-field="o.email"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Website
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.website">
+                                        <span t-field="o.website"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            </table>
+                            <center>
+
+								<h4>
+									<b>Members</b>
+								</h4>
+
+							</center>
+							<table width="100%" class="table table-condensed  ">
+								<thead style="background-color:#4682B4;text-align:left;">
+									<tr>
+										<th class="a_right">Category
+										</th>
+										<th class="a_right">0-5
+										</th>
+										<th class="a_right">6-13
+										</th>
+										<th class="a_right">14-18
+										</th>
+										<th class="a_right">19-25
+										</th>
+										<th class="a_right">26-40
+										</th>
+										<th class="a_right">40+
+										</th>
+										<th class="a_right">Total
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+								<t t-foreach="get_members_gender_count(o.id)" t-as="lt">
+									<tr>
+										<td><span t-esc="lt[0]" style="text-transform: capitalize;"/></td>
+										<td><span t-esc="lt[1]"/></td>
+										<td><span t-esc="lt[2]"/></td>
+										<td><span t-esc="lt[3]"/></td>
+										<td><span t-esc="lt[4]"/></td>
+										<td><span t-esc="lt[5]"/></td>
+										<td><span t-esc="lt[6]"/></td>
+										<td><span t-esc="lt[7]"/></td>
+									</tr>
+										</t>
+									</tbody>
+									</table>
+									<center>
+									<h4>
+									<b>Income</b>
+								</h4>
+									</center>
+									<table width="100%" class="table table-condensed">
+								<thead style="background-color:#4682B4;text-align:left;">
+									<tr>
+										<th class="a_right">Category
+										</th>
+										<th class="a_right">0-5000
+										</th>
+										<th class="a_right">5001-10000
+										</th>
+										<th class="a_right">10001-20000
+										</th>
+										<th class="a_right">20001-30000
+										</th>
+										<th class="a_right">30001-50000
+										</th>
+										<th class="a_right">50001-75000
+										</th>
+										<th class="a_right">Above 75000 
+										</th>
+										<th class="a_right">Total
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+								<t t-foreach="parish_member_incomes(o.id)" t-as="In">
+									<tr>
+										<td><span t-esc="In[0]"/></td>
+										<td><span t-esc="In[1]"/></td>
+										<td><span t-esc="In[2]"/></td>
+										<td><span t-esc="In[3]"/></td>
+										<td><span t-esc="In[4]"/></td>
+										<td><span t-esc="In[5]"/></td>
+										<td><span t-esc="In[6]"/></td>
+										<td><span t-esc="In[7]"/></td>
+										<td><span t-esc="In[8]"/></td>
+										
+									</tr>
+										</t>
+									</tbody>
+									</table>
+                            <t t-set="get_parish_house_type_count" t-value="get_parish_house_type_count(o.id)" />
+							<t t-if="get_parish_house_type_count">
+								<center>
+									<h4>
+										<b>House Type</b>
+									</h4>
+								</center>
+								<t t-set="colcount" t-value="0" />
+								<t t-set="col_house_type_count" t-value="0" />
+								<t t-set="len_house_type" t-value="len(get_parish_house_type_count)" />
+								<table width="100%" class="table table-condensed">
+									<thead style="background-color:#4682B4;text-align:left;">
+										<tr>
+											<th>S.No. </th>
+											<th>House type
+											</th>
+											<th class="a_right">Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										<t t-foreach="get_parish_house_type_count" t-as="house">
+											<tr>
+												<td>
+													<t t-set="colcount" t-value="colcount +1" />
+													<span t-esc="colcount" />
+												</td>
+												<td>
+													<span t-esc="house['house_type_name']" />
+												</td>
+												<td class="a_right">
+													<span t-esc="house['house_type_count']" />
+													<t t-set="col_house_type_count"
+														t-value="col_house_type_count + int(house['house_type_count'])" />
+												</td>
+											</tr>
+											<t t-if="colcount == len_house_type">
+												<td>
+												</td>
+												<td>
+												</td>
+												<td class="a_right">
+													<b>
+														<span t-esc="col_house_type_count" />
+													</b>
+												</td>
+											</t>
+										</t>
+									</tbody>
+								</table>
+							</t>
+							
+							
+							<center>
+							<h4>
+									<b>Register</b>
+								</h4>
+
+							</center>
+
+							<table width="100%" class="table table-condensed">
+								<thead style="background-color:#4682B4;text-align:left;">
+									<tr>
+										<th class="a_left">Year
+										</th>
+										<t t-foreach="get_parish_register_count(o.id)" t-as="register">
+											<th class="a_right">
+												<span t-esc="register" />
+											</th>
+										</t>
+										<th class="a_right">
+											Total
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="border-silver">
+										<th class="a_left">Baptism</th>
+										<t t-set="row_bapt_count" t-value="0" />
+										<t t-foreach="get_parish_register_baptism_count(o.id)" t-as="bapt">
+											<td class="a_right">
+												<t t-set="row_bapt_count" t-value="row_bapt_count + int(bapt)" />
+												<span t-esc="bapt" />
+											</td>
+										</t>
+										<td class="a_right">
+											<b>
+												<span t-esc="row_bapt_count" />
+											</b>
+										</td>
+									</tr>
+									<tr class="border-silver">
+										<th class="a_left">First Holy Communion</th>
+										<t t-set="row_fhc_count" t-value="0" />
+										<t t-foreach="get_parish_register_fhc_count(o.id)" t-as="fhc">
+											<td class="a_right">
+												<t t-set="row_fhc_count" t-value="row_fhc_count + int(fhc)" />
+												<span t-esc="fhc" />
+											</td>
+										</t>
+										<td class="a_right">
+											<b>
+												<span t-esc="row_fhc_count" />
+											</b>
+										</td>
+									</tr>
+									<tr class="border-silver">
+										<th class="a_left">Confirmation</th>
+										<t t-set="row_cnf_count" t-value="0" />
+										<t t-foreach="get_parish_register_cnf_count(o.id)" t-as="cnf">
+											<td class="a_right">
+												<t t-set="row_cnf_count" t-value="row_cnf_count + int(cnf)" />
+												<span t-esc="cnf" />
+											</td>
+										</t>
+										<td class="a_right">
+											<b>
+												<span t-esc="row_cnf_count" />
+											</b>
+										</td>
+									</tr>
+									<tr class="border-silver">
+										<th class="a_left">Marriage</th>
+										<t t-set="row_mrg_count" t-value="0" />
+										<t t-foreach="get_parish_register_mrg_count(o.id)" t-as="mrg">
+											<td class="a_right">
+												<t t-set="row_mrg_count" t-value="row_mrg_count + int(mrg)" />
+												<span t-esc="mrg" />
+											</td>
+										</t>
+										<td class="a_right">
+											<b>
+												<span t-esc="row_mrg_count" />
+											</b>
+										</td>
+									</tr>
+									<tr class="border-silver">
+										<th class="a_left">Death</th>
+										<t t-set="row_death_count" t-value="0" />
+										<t t-foreach="get_parish_register_death_count(o.id)" t-as="death">
+											<td class="a_right">
+												<t t-set="row_death_count" t-value="row_death_count + int(death)" />
+												<span t-esc="death" />
+											</td>
+										</t>
+										<td class="a_right">
+											<b>
+												<span t-esc="row_death_count" />
+											</b>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							
+							
+<!--  				                   Education Status
+ -->				
+ 							 <t t-set="get_parish_study_status" t-value="get_parish_study_status(o.id)" />
+							<t t-if="get_parish_study_status">
+								<center>
+									<h4>
+										<b>Education Status</b>
+									</h4>
+								</center>
+								<t t-set="colcount" t-value="0" />
+								<t t-set="col_study_count" t-value="0" />
+								<t t-set="len_study_type" t-value="len(get_parish_study_status)" />
+								<table width="100%" class="table table-condensed">
+									<thead style="background-color:#4682B4;text-align:left;">
+										<tr>
+											<th>S.No. </th>
+											<th>Education type
+											</th>
+											<th class="a_right">Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										<t t-foreach="get_parish_study_status" t-as="edu">
+											<tr>
+												<td>
+													<t t-set="colcount" t-value="colcount +1" />
+													<span t-esc="colcount" />
+												</td>
+												<td>
+													<span t-esc="edu['study_name']" />
+												</td>
+												<td class="a_right">
+													<span t-esc="edu['count']" />
+													<t t-set="col_study_count"
+														t-value="col_study_count + int(edu['count'])" />
+												</td>
+											</tr>
+											<t t-if="colcount == len_study_type">
+												<td>
+												</td>
+												<td>
+												</td>
+												<td class="a_right">
+													<b>
+														<span t-esc="col_study_count" />
+													</b>
+												</td>
+											</t>
+										</t>
+									</tbody>
+								</table>
+							</t>
+<!-- 				                               Physical Status
+ -->				
+ 
+ 								<t t-set="get_parish_physical_status_count" t-value="get_parish_physical_status_count(o.id)" />
+							<t t-if="get_parish_physical_status_count">
+								<center>
+									<h4>
+										<b>Physical Status</b>
+									</h4>
+								</center>
+								<t t-set="colcount" t-value="0" />
+								<t t-set="col_physical_status_count" t-value="0" />
+								<t t-set="len_physical_status" t-value="get_parish_physical_status_count" />
+								<table width="100%" class="table table-condensed">
+									<thead style="background-color:#4682B4;text-align:left;">
+										<tr>
+											<th>S.No. </th>
+											<th>Physical Status
+											</th>
+											<th class="a_right">Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										<t t-foreach="get_parish_physical_status_count" t-as="physical">
+											<tr>
+												<td>
+													<t t-set="colcount" t-value="colcount +1" />
+													<span t-esc="colcount" />
+												</td>
+												<td>
+													<span t-esc="physical['physical_status_name']" />
+												</td>
+												<td class="a_right">
+													<span t-esc="physical['physical_status_count']" />
+													<t t-set="col_physical_status_count"
+														t-value="col_physical_status_count + int(physical['physical_status_count'])" />
+												</td>
+											</tr>
+											<t t-if="colcount == len_physical_status">
+												<td>
+												</td>
+												<td>
+												</td>
+												<td class="a_right">
+													<b>
+														<span t-esc="col_physical_status_count" />
+													</b>
+												</td>
+											</t>
+										</t>
+									</tbody>
+								</table>
+							</t>
+				
+							<!-- 				                               Blood Group
+ -->				
+ 
+ 								<t t-set="get_parish_Blood_group_count" t-value="get_parish_Blood_group_count(o.id)" />
+							<t t-if="get_parish_Blood_group_count">
+								<center>
+									<h4>
+										<b>Blood Group</b>
+									</h4>
+								</center>
+								<t t-set="colcount" t-value="0" />
+								<t t-set="col_Blood_group_count" t-value="0" />
+								<t t-set="len_Blood_group" t-value="get_parish_Blood_group_count" />
+								<table width="100%" class="table table-condensed">
+									<thead style="background-color:#4682B4;text-align:left;">
+										<tr>
+											<th>S.No. </th>
+											<th> Blood Group
+											</th>
+											<th class="a_right">Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										<t t-foreach="get_parish_Blood_group_count" t-as="Blood">
+											<tr>
+												<td>
+													<t t-set="colcount" t-value="colcount +1" />
+													<span t-esc="colcount" />
+												</td>
+												<td>
+													<span t-esc="Blood['Blood_group_name']" />
+												</td>
+												<td class="a_right">
+													<span t-esc="Blood['Blood_group_count']" />
+													<t t-set="col_Blood_group_count"
+														t-value="col_Blood_group_count + int(Blood['Blood_group_count'])" />
+												</td>
+											</tr>
+											<t t-if="colcount == len_Blood_group">
+												<td>
+												</td>
+												<td>
+												</td>
+												<td class="a_right">
+													<b>
+														<span t-esc="col_Blood_group_count" />
+													</b>
+												</td>
+											</t>
+										</t>
+									</tbody>
+								</table>
+							</t>
+				
+				
+				
+<!-- 				                    Membership Status
+ -->							
+							
+							<t t-set="get_parish_member_status" t-value="get_parish_member_status(o.id)" />
+							<t t-if="get_parish_member_status">
+								<center>
+									<h4>
+										<b>Membership Status</b>
+									</h4>
+								</center>
+								<t t-set="colcount" t-value="0" />
+								<t t-set="col_membership_count" t-value="0" />
+								<t t-set="len_membership" t-value="len(get_parish_member_status)" />
+								<table width="100%" class="table table-condensed">
+									<thead style="background-color:#4682B4;text-align:left;">
+										<tr>
+											<th>S.No. </th>
+											<th>Membership Status
+											</th>
+											<th class="a_right">Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										<t t-foreach="get_parish_member_status" t-as="membership">
+											<tr>
+												<td>
+													<t t-set="colcount" t-value="colcount +1" />
+													<span t-esc="colcount" />
+												</td>
+												<td>
+													<span t-esc="membership['membership']" />
+												</td>
+												<td class="a_right">
+													<span t-esc="membership['members_count']" />
+													<t t-set="col_membership_count"
+														t-value="col_membership_count + int(membership['members_count'])" />
+												</td>
+											</tr>
+											<t t-if="colcount == len_membership">
+												<td>
+												</td>
+												<td>
+												</td>
+												<td class="a_right">
+													<b>
+														<span t-esc="col_membership_count" />
+													</b>
+												</td>
+											</t>
+										</t>
+									</tbody>
+								</table>
+							</t>
+							
+							
+							<!-- 				                    Employment Status
+ -->							
+							
+							<t t-set="get_parish_employment_status" t-value="get_parish_employment_status(o.id)" />
+							<t t-if="get_parish_employment_status">
+								<center>
+									<h4>
+										<b>Employment Status</b>
+									</h4>
+								</center>
+								<t t-set="colcount" t-value="0" />
+								<t t-set="col_mem_count" t-value="0" />
+								<t t-set="len_mem" t-value="len(get_parish_employment_status)" />
+								<table width="100%" class="table table-condensed">
+									<thead style="background-color:#4682B4;text-align:left;">
+										<tr>
+											<th>S.No. </th>
+											<th>Membership Status
+											</th>
+											<th class="a_right">Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										<t t-foreach="get_parish_employment_status" t-as="membership">
+											<tr>
+												<td>
+													<t t-set="colcount" t-value="colcount +1" />
+													<span t-esc="colcount" />
+												</td>
+												<td>
+													<span t-esc="membership['memberships']" />
+												</td>
+												<td class="a_right">
+													<span t-esc="membership['occupation_type_count']" />
+													<t t-set="col_mem_count"
+														t-value="col_mem_count + int(membership['occupation_type_count'])" />
+												</td>
+											</tr>
+											<t t-if="colcount == len_mem">
+												<td>
+												</td>
+												<td>
+												</td>
+												<td class="a_right">
+													<b>
+														<span t-esc="col_mem_count" />
+													</b>
+												</td>
+											</t>
+										</t>
+									</tbody>
+								</table>
+							</t>
+							<t t-if="o.history">
+								<center>
+									<h4>
+										<b>History of Parish</b>
+									</h4>
+								</center>
+
+								<div>
+									<span style="align:center;" t-field="o.history"/>
+									</div>
+									</t>
+							
+  </div>
+          </t>
+       </t>
+    </template>
+  </data>
+</odoo>
+                            
+                            
+                            
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                        

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<!-- Collaboration -->
+		
+		<record id="view_collaboration_form" model="ir.ui.view">
+			<field name="name">cristo.collaboration.form</field>
+			<field name="model">cristo.collaboration</field>
+			<field name="arch" type="xml">
+				<form string="Collaboration">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" required="1" />
+								<field name="start_date" required="1" />
+								<field name="end_date" required="1" />
+								<field name="state" required="1" />
+							</group>
+							<group>
+								<field name="associated_with_id" required="1" domain="[('code','in',['RI','RP','DI'])]" options="{'no_open': True, 'no_create': True}" />
+								<field name="co_rel_province_id" domain="[('main_category_code','=',mc_code)]" attrs="{'required':[('mc_code','=','RP')],'invisible':[('mc_code','!=','RP')]}" options="{'no_open': True, 'no_create': True}" />
+								<field name="co_diocese_id"  domain="[('main_category_code','=',mc_code)]" attrs="{'required':[('mc_code','=','DI')],'invisible':[('mc_code','!=','DI')]}" options="{'no_open': True, 'no_create': True}" />
+								<field name="co_institution_id" domain="[('main_category_code','=',mc_code)]" attrs="{'required':[('mc_code','=','RI')],'invisible':[('mc_code','!=','RI')]}" options="{'no_open': True, 'no_create': True}" />
+								<field name="mc_code" invisible="1" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Documents">
+								<field name="attachment_ids" widget="many2many_binary" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_collaboration_tree" model="ir.ui.view">
+			<field name="name">cristo.collaboration.tree</field>
+			<field name="model">cristo.collaboration</field>
+			<field name="arch" type="xml">
+				<tree string="Collaboration">
+					<field name="name" />
+					<field name="associated_with_id" />
+					<field name="start_date" width="0.8" />
+					<field name="end_date" width="0.8" />
+					<field name="state" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_collaboration_search" model="ir.ui.view">
+			<field name="name">cristo.collaboration.search</field>
+			<field name="model">cristo.collaboration</field>
+			<field name="arch" type="xml">
+				<search string="Collaboration">
+					<field name="associated_with_id" />
+					<field name="state" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_collaboration" model="ir.actions.act_window">
+			<field name="name">Collaboration</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">cristo.collaboration</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+	</data>
+</odoo>

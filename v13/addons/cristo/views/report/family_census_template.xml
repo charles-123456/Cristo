@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="family_census_report">
+		<t t-call="web.basic_layout">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<style>
+						table tr {
+						page-break-inside: avoid;
+						}
+						table td {
+						padding:
+						0.25rem !important;
+						}
+					</style>
+					<center>
+						<strong style="font-size:25px;">STATISTICS OF FAMILIES - BY BCC</strong>
+					</center>
+					<br />
+					<table class="table table-striped">
+						<thead style="color: #00a09d;">
+							<th>#</th>
+							<th>Language</th>
+							<th>Name of the BCC</th>
+							<th>Families</th>
+						</thead>
+						<t t-set="count" t-value="1" />
+						<t t-foreach="get_family_list" t-as="family">
+							<tbody>
+								<tr>
+									<td>
+										<t t-esc="count" />
+									</td>
+									<td>
+									
+									</td>
+									<td>
+										<span t-field="family.parish_bcc_id" />
+									</td>
+									<td>
+										<t t-esc="len(family)" />
+									</td>
+								</tr>
+								<t t-set="count" t-value="count + 1" />
+							</tbody>
+						</t>
+					</table>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

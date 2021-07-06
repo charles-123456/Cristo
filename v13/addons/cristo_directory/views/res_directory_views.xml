@@ -1,0 +1,441 @@
+<odoo>
+    <data>
+        <record id="res_directory_form_view" model="ir.ui.view">
+            <field name="name">res.directory.form</field>
+            <field name="model">res.directory</field>
+            <field name="arch" type="xml">
+                <form string="Directory">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+							<button type="object" string="Report View" class="oe_stat_button"
+								icon="fa-share-square-o" name="directory_view">
+							</button>
+                            <button type="object" string="Download Report" class="oe_stat_button"
+								icon="fa-download" name="directory_download" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo_directory.group_cristo_directory_manager">
+							</button>
+						</div>
+                        <group>
+                            <group>
+                                <field name="name" />
+                            </group>
+                            <group>
+                                <field name="active"/>
+                                <field name="institute_id" options='{"no_open": True, "no_create": True}' groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"/>
+                                <field name="rel_province_id" domain="[('institute_id', '=', institute_id)]" options='{"no_open": True, "no_create": True}' groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin"/>
+                            </group>
+                        </group>
+                        <div class="alert alert-warning text-center" role="alert" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin">
+                    	    <span name="hint_text">Note: Please save the sheet then go for adding fields.</span>
+                        </div>
+                        <notebook groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin">
+                            <page name="Sheets" string="Sheets">
+                                <field name="sheet_ids" context="{'default_directory_id':active_id}"></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+			    </form>
+            </field>
+        </record>
+
+        <record id="res_directory_tree_view" model="ir.ui.view">
+            <field name="name">res.directory.tree</field>
+            <field name="model">res.directory</field>
+            <field name="arch" type="xml">
+                <tree string="Directory">
+                    <field name="name" />
+                    <field name="institute_id" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"/>
+                    <field name="rel_province_id" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="res_directory_search_view" model="ir.ui.view">
+            <field name="name">res.directory.search</field>
+            <field name="model">res.directory</field>
+            <field name="arch" type="xml">
+				<search string="Directory">
+					<field name="name" />
+					<filter string="Archived" name="inactive" domain="[('active', '=', False)]" />
+				</search>
+			</field>
+		</record>
+
+        <record id="action_res_directory" model="ir.actions.act_window">
+			<field name="name">Directory</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.directory</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+        <menuitem id="res_directory_main_menu" name="Directory" action="action_res_directory" groups="base.group_erp_manager,cristo_directory.group_cristo_directory_user" web_icon="cristo_directory,static/description/icon.png"/>
+
+        <record id="res_directory_sheet_form_view" model="ir.ui.view">
+            <field name="name">res.directory.sheet.form</field>
+            <field name="model">res.directory.sheet</field>
+            <field name="arch" type="xml">
+                <form string="Directory Sheet">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" />
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="based_on" invisible="1"/>
+                                <field name="type" widget="radio" />
+                                <field name="custom_statistic" attrs="{'invisible':[('type','!=','statistic')]}"/>
+                                <field name="model_id" attrs="{'invisible':[('type','=','statistic')],'required':[('type','=','filter')]}"/>
+                                <field name="is_date_filter" attrs="{'invisible':[('type','=','statistic')]}"/>
+                            </group>
+                            <group>
+                                 <div>
+                                    <field name="domain" widget="domain" options="{'model': 'based_on'}" attrs="{'invisible':[('type','=','statistic')]}"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Date Fields" attrs="{'invisible':[('is_date_filter','=',False)],'required':[('is_date_filter','=',True)]}">
+                                <field name="date_field_ids" >
+                                    <tree editable="bottom">
+                                        <field name="field_id" domain="[('model_id','=',parent.model_id),('ttype', 'in', ('datetime', 'date'))]" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="name"/>
+                                        <field name="date_sheet_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="Fields" string="Fields" attrs="{'invisible':[('type','=','statistic')]}">
+                                <field name="sheet_field_ids" options='{"no_open": True, "no_create": True}' context="{'default_main_sheet_id':active_id}">
+                                    <tree editable="bottom">
+                                        <field name="field_id" domain="[('model_id','=',parent.model_id)]" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="name"/>
+                                        <field name="sheet_id" invisible="1"/>
+                                        <field name="sub_model_id" invisible="1"/>
+                                        <field name="rel_sub_model_id" invisible="1"/>
+                                        <field name="main_sheet_id" invisible="1"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="field_id" domain="[('model_id','=',parent.model_id)]" options='{"no_open": True, "no_create": True}'/>
+                                                <field name="name"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Statistic Count" attrs="{'invisible':['|',('type','=','filter'),('custom_statistic','=',True)]}">
+                                <field name="statistic_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="count"/>
+                                        <field name="model_id"/>
+                                        <field name="domain"/>
+                                    </tree>
+                                     <form>
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="model_id" />
+                                                <field name="based_on" invisible="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="count" readonly="1"/>
+                                            </group>
+                                        </group>
+                                         <group>
+                                             <field name="domain" widget="domain" options="{'model': 'based_on'}"/>
+                                         </group>
+                                     </form>
+                                </field>
+                            </page>
+                            <page string="Custom Statistic" attrs="{'invisible':['|',('type','=','filter'),('custom_statistic','=',False)]}">
+                            	<field name="custom_statistic_ids">
+                            		<tree>
+                            			<field name="name" />
+                            			<field name="model_id"/>
+                            		</tree>
+                            		<form>
+	                            		<group>
+	                            			<group>
+	                            				<field name="name" required="1"/>
+	                            				<field name="model_id"/>
+	                            				<field name="based_on" invisible="1"/>
+	                            			</group>
+	                            			<group>
+	                            				<field name="domain" widget="domain" options="{'model': 'based_on'}"/>
+	                            			</group>
+	                            		</group>
+	                            		<notebook>
+	                            			<page string="Descriptions">
+	                            				<field name="custom_description_ids">
+	                            					<tree>
+	                            						<field name="name" />
+	                            						<field name="domain"></field>
+	                            					</tree>
+	                            					<form>
+	                            						<group>
+	                            							<group>
+		                            							<field name="name" required="1"/>
+		                            							<field name="model_id"/>
+		                            							<field name="based_on" invisible="1"/>
+		                            						</group>
+		                            						<group>
+		                            							<field name="title_id" invisible="1"/>
+		                            							<field name="domain" widget="domain" options="{'model': 'based_on'}" required="1"/>
+		                            						</group>
+	                            						</group>
+	                            					</form>
+	                            				</field>
+	                            			</page>
+	                            			<page string="Titles(Column)">
+	                            				<field name="title_ids">
+	                            					<tree>
+	                            						<field name="name"/>
+	                            						<field name="domain"></field>
+	                            					</tree>
+	                            					<form>
+	                            						<group>
+	                            							<group>
+		                            							<field name="name" required="1"/>
+		                            							<field name="model_id"/>
+		                            							<field name="based_on" invisible="1"/>
+		                            						</group>
+		                            						<group>
+		                            							<field name="domain" widget="domain" options="{'model': 'based_on'}" required="1"/>
+		                            							<field name="custom_title_id" invisible="1"/>
+		                            						</group>
+	                            						</group>
+	                            					</form>
+	                            				</field>
+	                            			</page>
+	                            		</notebook>
+                            		</form>
+                            	</field>
+                            </page>
+                            <page string="Sub Model" attrs="{'invisible':['|',('type','=','statistic'),('is_date_filter','=',True)]}">
+                                <field name="sub_model_ids" context="{'default_sheet_id':active_id}"/>
+                            </page>
+                            <page string="Header Fields Content" attrs="{'invisible':['|',('type','=','statistic'),('is_date_filter','=',True)]}">
+                                <field name="religious_field_ids"/>
+                            </page>
+                            <page string="Manage fields sequence" attrs="{'invisible':[('type','!=','filter')]}">
+                                <field name="main_sheet_field_ids" >
+                                    <tree>
+                                        <field name="sequence" widget="handle" />
+                                        <field name="field_id"/>
+                                        <field name="name"/>
+                                        <field name="sheet_id" invisible="1"/>
+                                        <field name="sub_model_id" invisible="1"/>
+                                        <field name="rel_sub_model_id" invisible="1"/>
+                                        <field name="main_sheet_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+			    </form>
+            </field>
+        </record>
+
+        <record id="res_directory_sheet_tree_view" model="ir.ui.view">
+            <field name="name">res.directory.sheet.tree</field>
+            <field name="model">res.directory.sheet</field>
+            <field name="arch" type="xml">
+                <tree string="Directory">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name" />
+                    <field name="model_id"/>
+                    <field name="domain"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_res_directory_sheet" model="ir.actions.act_window">
+			<field name="name">Directory Sheet</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.directory.sheet</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+        <menuitem id="res_directory_sheet_menu" name="Sheet"  parent="res_directory_main_menu" action="action_res_directory_sheet" groups="base.group_erp_manager" sequence="10"/>
+
+        <record id="res_religious_field_form_view" model="ir.ui.view">
+            <field name="name">res.religious.fields.form</field>
+            <field name="model">res.religious.fields</field>
+            <field name="arch" type="xml">
+                <form string="Religious Model">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="type" />
+                                <field name="model_id"/>
+                            </group>
+                            <group>
+                                <field name="institute_id" attrs="{'invisible':[('type','!=','cong')],'required':[('type','=','cong')]}" options='{"no_open": True, "no_create": True}'/>
+                                <field name="rel_province_id" attrs="{'invisible':[('type','!=','prov')],'required':[('type','=','prov')]}" options='{"no_open": True, "no_create": True}'/>
+                                <field name="community_id" attrs="{'invisible':[('type','!=','house')],'required':[('type','=','house')]}" options='{"no_open": True, "no_create": True}'/>
+                                <field name="institution_id" attrs="{'invisible':[('type','!=','inst')],'required':[('type','=','inst')]}" options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Fields">
+                                <field name="field_ids">
+                                    <tree editable="bottom">
+                                        <field name="field_id" domain="[('model_id','=',parent.model_id)]" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="name"/>
+                                        <field name="sheet_id" invisible="1"/>
+                                        <field name="sub_model_id" invisible="1"/>
+                                        <field name="rel_sub_model_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+			    </form>
+            </field>
+        </record>
+
+        <record id="res_religious_fields_tree_view" model="ir.ui.view">
+            <field name="name">res.religious.fields.tree</field>
+            <field name="model">res.religious.fields</field>
+            <field name="arch" type="xml">
+                <tree string="Religious">
+                    <field name="name"/>
+                    <field name="type" />
+                    <field name="institute_id" />
+                    <field name="rel_province_id" />
+                    <field name="community_id" />
+                    <field name="institution_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_res_religious_fields" model="ir.actions.act_window">
+			<field name="name">Religious Fields</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.religious.fields</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+        <record id="res_sub_model_fields_form_view" model="ir.ui.view">
+            <field name="name">res.sub.model.fields.form</field>
+            <field name="model">res.sub.model.fields</field>
+            <field name="arch" type="xml">
+                <form string="Sub Model">
+                    <sheet>
+                        <div class="alert alert-warning text-center" role="alert" style="width: fit-content;padding: 3px;">
+                            <span name="hint_text">Note: This fields are showing based on the <b>base model</b> field.
+                                And by selecting one of these fields, you can get access to that field's model and choose the fields which you need for the report under Fields Tab.</span>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="field_id" domain="[('ttype','in',['many2one','one2many']),('model_id','=',parent.model_id)]" required="1"/>
+                                <field name="type" invisible="1"/>
+                                <field name="sub_model" invisible="1"/>
+                                <field name="sheet_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="domain" widget="domain" options="{'model': 'sub_model'}" attrs="{'invisible':[('type','=','many2one')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Field Names">
+                                <field name="field_ids" context="{'default_main_sheet_id':sheet_id}">
+                                    <tree editable="bottom">
+                                        <field name="field_id" domain="[('model_id','=',parent.sub_model)]" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="name"/>
+                                        <field name="sheet_id" invisible="1"/>
+                                        <field name="sub_model_id" invisible="1"/>
+                                        <field name="rel_sub_model_id" invisible="1"/>
+                                        <field name="main_sheet_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Relation Model" attrs="{'invisible':[('type','=','one2many')]}">
+                                <field name="relation_model_ids" widget="one2many" context="{'default_sub_model_id':active_id}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+			    </form>
+            </field>
+        </record>
+
+        <record id="res_sub_model_fields_tree_view" model="ir.ui.view">
+            <field name="name">res.sub.model.fields.tree</field>
+            <field name="model">res.sub.model.fields</field>
+            <field name="arch" type="xml">
+                <tree string="Sub Model">
+                    <field name="field_id" />
+                    <field name="type" />
+                    <field name="sub_model" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_res_sub_model_fields" model="ir.actions.act_window">
+			<field name="name">Sub Model Fields</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.sub.model.fields</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+        <record id="res_sub_model_relation_fields_form_view" model="ir.ui.view">
+            <field name="name">res.sub.model.relation.fields.form</field>
+            <field name="model">res.sub.model.relation.fields</field>
+            <field name="arch" type="xml">
+                <form string="Relation Model">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="field_id" domain="[('ttype','in',['many2one','one2many']),('model_id','=',parent.sub_model)]" required="1"/>
+                                <field name="type" invisible="1"/>
+                                <field name="sub_model" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="domain" widget="domain" options="{'model': 'sub_model'}" attrs="{'invisible':[('type','=','many2one')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Field Names">
+                                <field name="field_ids" context="{'default_main_sheet_id':parent.sheet_id}">
+                                    <tree editable="bottom">
+                                        <field name="field_id" domain="[('model_id','=',parent.sub_model)]" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="name"/>
+                                        <field name="sheet_id" invisible="1"/>
+                                        <field name="sub_model_id" invisible="1"/>
+                                        <field name="rel_sub_model_id" invisible="1"/>
+                                        <field name="main_sheet_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+			    </form>
+            </field>
+        </record>
+
+        <record id="res_sub_model_relation_fields_tree_view" model="ir.ui.view">
+            <field name="name">res.sub.model.relation.fields.tree</field>
+            <field name="model">res.sub.model.relation.fields</field>
+            <field name="arch" type="xml">
+                <tree string="Relation Model">
+                    <field name="field_id" />
+                    <field name="type" />
+                    <field name="sub_model" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_res_sub_model_relation_fields" model="ir.actions.act_window">
+			<field name="name">Sub Model Relation Fields</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.sub.model.relation.fields</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+    </data>
+</odoo>

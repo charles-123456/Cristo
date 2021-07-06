@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<!-- Groups -->
+
+		<record id="module_category_cristo_chronicle" model="ir.module.category">
+			<field name="name">Chronicle</field>
+			<field name="sequence">1</field>
+		</record>
+		
+		<record id="group_role_cristo_chronicle_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_chronicle" />
+		</record>
+
+		<record id="group_role_cristo_chronicle_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_chronicle" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_chronicle_read'))]" />
+		</record>
+		
+		<record id="group_role_cristo_chronicle_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_chronicle" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_chronicle_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_chronicle_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_chronicle" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_chronicle_read'))]" />
+		</record>
+		
+		<!-- Other Roles -->
+		
+		<!-- <record id="module_category_cristo_enable_chronicle_menu" model="ir.module.category">
+			<field name="name">Cristo</field>
+			<field name="sequence">0</field>
+		</record> -->
+		
+		<record id="group_role_enable_chronicle" model="res.groups">
+			<field name="name">Enable Chronicle</field>
+			<field name="category_id" ref="cristo.module_category_cristo_module_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_chronicle_create')),(4, ref('group_role_cristo_chronicle_delete'))]" />
+		</record>
+		
+<!-- **************************************** RECORD RULE BEGIN ************************************************** -->		
+		
+		<record model="ir.rule" id="cristo_chronicle_institute_rule">
+			<field name="name">Own Institute Chronicle</field>
+			<field name="model_id" ref="model_cristo_chronicle" />
+			<field name="domain_force">[('institute_id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="cristo_chronicle_province_rule">
+			<field name="name">Own Province Chronicle</field>
+			<field name="model_id" ref="model_cristo_chronicle" />
+			<field name="domain_force">[('rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="cristo_chronicle_community_rule">
+			<field name="name">Own House Chronicle</field>
+			<field name="model_id" ref="model_cristo_chronicle" />
+			<field name="domain_force">[('community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="cristo_chronicle_institution_rule">
+			<field name="name">Own Institution Chronicle</field>
+			<field name="model_id" ref="model_cristo_chronicle" />
+			<field name="domain_force">[('institution_id','=',user.institution_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+	</data>
+</odoo>

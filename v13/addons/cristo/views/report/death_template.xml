@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="report_death">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<div class="page" style=" border:6px double black;color:black;">
+						<style>
+							table.mra_table
+							{
+							border-collapse: collapse;
+							}
+							table.mra_table td,
+							table.mra_table tr {
+							border: 1px solid black;
+							vertical-align:center;
+							text-align:center;
+							padding:3px;
+							}
+							table{
+							color: black;
+							}
+						</style>
+						<div class="oe_structure" />
+						<table align="center">
+							<div align="center" width="100%" style="line-height:1.5">
+								<p>
+									<span style="align:center;font-size:20px;">
+
+										<b>
+											Extract from the Register of Burials
+
+										</b>
+										<br />
+										<b>
+											Kept at
+											<span t-field="o.parish_id.street" />
+											,
+											<span t-field="o.parish_id" />.
+										</b>
+
+									</span>
+								</p>
+							</div>
+							<br />
+							<table>
+								<table class="mra_table" align="center" width="96%">
+									<tr>
+										<td>
+											<b>Register No</b>
+										</td>
+										<td>
+											<center>
+												<b>When died</b>
+											</center>
+										</td>
+										<td>
+											<center>
+												<b>Cause of death</b>
+											</center>
+										</td>
+										<td>
+											<center>
+												<b>Name of The Person</b>
+											</center>
+										</td>
+										<td>
+											<center>
+												<b>Age</b>
+											</center>
+										</td>
+										<td>
+											<center>
+												<b>Occupation</b>
+											</center>
+										</td>
+										<td>
+											<center>
+												<b>When burried</b>
+											</center>
+										</td>
+										<td>
+											<center>
+												<b>Person officiating</b>
+											</center>
+										</td>
+										<td>
+											<center>
+												<b>Where burried</b>
+											</center>
+										</td>
+										<td>
+											<center>
+												<b>Minister's Name</b>
+											</center>
+										</td>
+									</tr>
+									<tr style="padding:5px;">
+										<td>
+											<center>
+												<span t-esc="o.death_register_ref" />
+											</center>
+
+										</td>
+										<td>
+											<center>
+												<span t-esc="o.death_date"  t-options='{"widget":"date","format": "dd/MM/yyyy"}'/>
+											</center>
+
+										</td>
+										<td>
+											<center>
+												<span t-esc="o.death_cause" />
+											</center>
+
+										</td>
+										<td>
+											<center>
+												<t t-esc="o.name" />
+												<t t-esc="o.last_name"/>
+											</center>
+										</td>
+										<td>
+											<center>
+												<span t-esc="o.age" />
+											</center>
+
+										</td>
+										<td>
+											<center>
+												<span t-esc="o.occupation_id.name" />
+											</center>
+
+										</td>
+										<td>
+											<center>
+												<span t-esc="o.burial_date" t-options='{"widget":"date","format": "dd/MM/yyyy"}'/>
+											</center>
+										</td>
+										<td>
+											<center>
+											<t t-if="o.spouse">
+												<t t-esc="o.spouse"/>
+											</t>
+											<t t-if="not o.spouse">
+												<t t-esc="o.father_name" />
+											</t>
+											<t t-if="not o.father_name">
+												<t t-esc="o.mother_name"/>
+											</t>
+											</center>
+										</td>
+										<td>
+											<center>
+												<span t-esc="o.burial_parish" />
+											</center>
+
+										</td>
+										<td>
+											<center>
+												<span t-esc="o.burial_minister" />
+											</center>
+										</td>
+									</tr>
+								</table>
+							</table>
+						</table>
+						<div style="margin-top: 30px;font-size: 20px;text-align:center">
+							I certify that the above extract is a true copy of an entry in
+							the register of Baptism.
+						</div>
+						<br />
+						<br />
+						<br />
+						<table width="100%" style="font-size:15px;">
+							<tr>
+								<td width="100%" colspan="2" style="padding-left:15px;">
+									<b>Place :</b>
+									<span t-field="o.parish_id.street" />
+									,
+									<span t-field="o.parish_id" />
+								</td>
+							</tr>
+							<tr>
+								<td width="37%" style="padding-left:15px;">
+									<b>Date &#160;:</b>
+									<span t-esc="time.strftime('%d/%m/%Y')" />
+								</td>
+								<td width="33%" style="text-align:center;">
+									<span>
+										<b>Catholic Priest</b>
+									</span>
+								</td>
+							</tr>
+						</table>
+						<br />
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>
+								

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Religious Institute -->
+	
+	<record id="res_religious_institute_cri_view" model="ir.ui.view">
+        <field name="name">res.religious.institute.form.inherit</field>
+        <field name="model">res.religious.institute</field>
+        <field name="inherit_id" ref="cristo.view_religious_institute_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='code']" position="after">
+        		<field name="cri_code" />
+        	</xpath>
+        	<xpath expr="//notebook/page[@name='history']" position="after">
+        		<page string="Members" name='members'
+        			groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin">
+        			<field name="member_statistics_ids">
+        				<tree editable="bottom">
+        					<field name="year" width="0.5" />
+        					<field name="temporary_count" width="0.5" />
+        					<field name="perpetual_count" width="0.5" />
+        					<field name="novices_count" width="0.5" />
+        					<field name="total" width="0.5" />
+        				</tree>
+        			</field>
+        		</page>
+        		<page string="Ministries" name='ministries'
+        			groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin">
+        			<field name="is_education" invisible="1"/>
+        			<field name="is_ecclesiastical" invisible="1"/>
+					<field name="is_formation" invisible="1"/>
+					<field name="is_health_care" invisible="1"/>
+					<field name="is_media" invisible="1"/>
+					<field name="is_pastoral" invisible="1"/>
+					<field name="is_retreat_animation" invisible="1"/>
+					<field name="is_welfare" invisible="1"/>
+        			<notebook>
+        				<page string="Education" attrs="{'invisible': [('is_education','=', False)]}">
+        					<field name="education_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="['|',('parent_id.code','=','EDU'),('parent_id.code','=','EHE'),('code','!=','EHE')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="student_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Ecclesiastical" attrs="{'invisible': [('is_ecclesiastical','=', False)]}">
+        					<field name="ecclesiastical_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','ECC')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="beneficiary_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Formation" attrs="{'invisible': [('is_formation','=', False)]}">
+        					<field name="formation_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','FOR')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="members_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Health Care" attrs="{'invisible': [('is_health_care','=', False)]}">
+        					<field name="healthcare_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','HC')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="avg_patient_count" width="0.5" />
+		        					<field name="out_patient_count" width="0.5" />
+		        					<field name="bed_strength_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Media" attrs="{'invisible': [('is_media','=', False)]}">
+        					<field name="media_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','ME')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Pastoral" attrs="{'invisible': [('is_pastoral','=', False)]}">
+        					<field name="pastoral_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','PAS')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="family_count" width="0.5" />
+		        					<field name="members_count" width="0.5" />
+		        					<field name="baptism_count" width="0.5" />
+		        					<field name="confirmation_count" width="0.5" />
+		        					<field name="marriage_count" width="0.5" />
+		        					<field name="association_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Retreat and Animation" attrs="{'invisible': [('is_retreat_animation','=', False)]}">
+        					<field name="retreat_animation_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','RA')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="beneficiary_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Welfare" attrs="{'invisible': [('is_welfare','=', False)]}">
+        					<field name="welfare_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','WF')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="beneficiary_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        			</notebook>
+        		</page>
+        	</xpath>
+        </field>
+    </record>
+    
+    <!-- <record id="view_religious_institute_search_inherit" model="ir.ui.view">
+			<field name="name">res.religious.institute.search.inherit</field>
+			<field name="model">res.religious.institute</field>
+			<field name="inherit_id" ref="cristo.view_religious_institute_search"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='code']" position="after">
+        			<field name="cri_code" />
+        		</xpath>
+			</field>
+	</record> -->
+	
+	<!-- Religious Province -->
+	
+	<record id="res_religious_province_chronicle_view" model="ir.ui.view">
+        <field name="name">res.religious.province.form.inherit</field>
+        <field name="model">res.religious.province</field>
+        <field name="inherit_id" ref="cristo.view_religious_province_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='code']" position="after">
+        		<field name="cri_code" />
+        	</xpath>
+        	<xpath expr="//field[@name='house_id']" position="after">
+        		<field name="institute_category_ids" widget="many2many_tags" options='{"no_open": True, "no_create": True, "color_field": "color"}' />
+        	</xpath>
+        	<xpath expr="//notebook/page[@name='history']" position="after">
+        		<page string="Members" name='members' attrs="{'invisible':[('is_authorize','=',False)]}"
+        		groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province">
+        			<field name="member_statistics_ids">
+        				<tree editable="bottom">
+        					<field name="year" width="0.5" />
+        					<field name="temporary_count"  width="0.5" />
+        					<field name="perpetual_count"  width="0.5" />
+        					<field name="novices_count" width="0.5" />
+        					<field name="total" width="0.5" />
+        				</tree>
+        			</field>
+        		</page>
+        		<page string="Ministries" name='ministries' attrs="{'invisible':[('is_authorize','=',False)]}" 
+        		groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province">
+        			<field name="is_education" invisible="1"/>
+        			<field name="is_ecclesiastical" invisible="1"/>
+					<field name="is_formation" invisible="1"/>
+					<field name="is_health_care" invisible="1"/>
+					<field name="is_media" invisible="1"/>
+					<field name="is_pastoral" invisible="1"/>
+					<field name="is_retreat_animation" invisible="1"/>
+					<field name="is_welfare" invisible="1"/>
+        			<notebook>
+        				<page string="Education" attrs="{'invisible': [('is_education','=', False)]}">
+        					<field name="education_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="['|',('parent_id.code','=','EDU'),('parent_id.code','=','EHE'),('code','!=','EHE')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="student_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Ecclesiastical" attrs="{'invisible': [('is_ecclesiastical','=', False)]}">
+        					<field name="ecclesiastical_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','ECC')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="beneficiary_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Formation" attrs="{'invisible': [('is_formation','=', False)]}">
+        					<field name="formation_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','FOR')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="members_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Health Care" attrs="{'invisible': [('is_health_care','=', False)]}">
+        					<field name="healthcare_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','HC')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="avg_patient_count" width="0.5" />
+		        					<field name="out_patient_count" width="0.5" />
+		        					<field name="bed_strength_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Media" attrs="{'invisible': [('is_media','=', False)]}">
+        					<field name="media_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','ME')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Pastoral" attrs="{'invisible': [('is_pastoral','=', False)]}">
+        					<field name="pastoral_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','PAS')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="family_count" width="0.5" />
+		        					<field name="members_count" width="0.5" />
+		        					<field name="baptism_count" width="0.5" />
+		        					<field name="confirmation_count" width="0.5" />
+		        					<field name="marriage_count" width="0.5" />
+		        					<field name="association_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Retreat and Animation" attrs="{'invisible': [('is_retreat_animation','=', False)]}">
+        					<field name="retreat_animation_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','RA')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="beneficiary_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        				<page string="Welfare" attrs="{'invisible': [('is_welfare','=', False)]}">
+        					<field name="welfare_statistics_ids">
+	        					<tree editable="bottom">
+		        					<field name="year" width="0.5" />
+		        					<field name="type_id" width="0.5" domain="[('parent_id.code','=','WF')]" options='{"no_open": True, "no_create": True}' />
+		        					<field name="institution_count" width="0.5" />
+		        					<field name="beneficiary_count" width="0.5" />
+		        					<field name="staff_count" width="0.5" />
+	        					</tree>
+        					</field>
+        				</page>
+        			</notebook>
+        		</page>
+        	</xpath>
+        </field>
+    </record>
+    
+    <record id="view_religious_province_search_inherit" model="ir.ui.view">
+			<field name="name">res.religious.province.search.inherit</field>
+			<field name="model">res.religious.province</field>
+			<field name="inherit_id" ref="cristo.view_religious_province_search"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='code']" position="after">
+        			<field name="cri_code" />
+        			<field name="institute_category_ids" />
+        		</xpath>
+			</field>
+		</record>
+	
+</odoo>

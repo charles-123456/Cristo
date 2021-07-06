@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cristo_collaboration,cristo.collaboration,model_cristo_collaboration,base.group_erp_manager,1,1,1,1
+access_cristo_collaboration_province,cristo.collaboration,model_cristo_collaboration,cristo.group_role_cristo_religious_province,1,1,1,1
+access_cristo_collaboration_diocese,cristo.collaboration,model_cristo_collaboration,cristo.group_role_cristo_diocese,1,1,1,1
+,,,,,,,
+access_cristo_collaboration_all_user,cristo.collaboration,model_cristo_collaboration,,1,0,0,0

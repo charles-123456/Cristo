@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="cristo.report_member_profile">
+		<t t-call="cristo.cristo_report_layout">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.html_container"> 
+					<div class="page" style="page-break-after:always;">
+						<style type="text/css">
+							label {
+							font-size:14px;
+							font-weight: bold;
+							line-height: 15px;
+							}
+							.span4 {
+							height:auto;
+							padding:0px 0px;
+							float:left;
+							border:0px solid #000;
+							font-size:14px;
+							margin-top: 4px;
+
+							}
+							.data_lbl {
+							width:20%;
+							}
+							.data_val {
+							width:29%;
+
+							}
+							.space-colon {
+							width:1%;
+							float:left;
+							padding-top:3px;
+							}
+							.row_div {
+							float:left;
+							width:100%;
+							}
+							.topics tr {
+							line-height: 8px;
+							}
+							.education,languages {
+							font-weight: normal;
+							}
+							.languages {
+							font-weight: normal;
+							}
+						</style>
+						<div class="oe_structure" />
+						<table width="100%" style="line-height: 0.2;">
+
+							<tr>
+								<td width="10%">
+									<t t-if="o.membership_type == 'SE'">
+										<img t-if="o.diocese_id.image_1920"
+											t-att-src="image_data_uri(o.diocese_id.image_1920)"
+											style="height:100px;width:100px;border-radius: 50%; padding-left:1px;" />
+									</t>
+									<t t-if="o.membership_type == 'RE'">
+										<img t-if="o.rel_province_id.sudo().image_1920"
+											t-att-src="image_data_uri(o.rel_province_id.sudo().image_1920)"
+											style="height:100px;width:100px;border-radius: 50%; padding-left:1px;" />
+									</t>
+								</td>
+								<td width="80%"
+									style="vertical-align: middle;font-size:20px;">
+									<center>
+										<strong style="font-size:27px;">
+											<t t-if="o.membership_type == 'SE'">
+												<h3>
+													<span t-field="o.diocese_id" />
+												</h3>
+											</t>
+											<t t-if="o.membership_type == 'RE'">
+												<h3>
+													<span t-field="o.rel_province_id" />
+												</h3>
+											</t>
+											<h4>
+												Member Profile
+											</h4>
+										</strong>
+									</center>
+								</td>
+								<td width="10%">
+									<img t-if="o.image_1920"
+										t-att-src="image_data_uri(o.image_1920)"
+										style="height:100px;width:100px;border-radius: 50%; padding-right:1px;" />
+								</td>
+							</tr>
+						</table>
+						<t t-if="o.membership_type == 'RE'">
+							<div style="width:100%;">
+								<div style="width:100%;float:left;">
+									<t t-if="o.rel_province_id.custom_area_label">
+										<div class="span4 data_lbl">
+											<label>
+												<span t-field="o.rel_province_id.custom_area_label" />
+											</label>
+										</div>
+									</t>
+									<t t-if="not o.rel_province_id.custom_area_label">
+										<div class="span4 data_lbl">
+											<label>Area</label>
+										</div>
+									</t>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.rel_zone_id" />
+									</div>
+								</div>
+
+								<div style="width:100%;float:left;">
+									<div class="span4 data_lbl">
+										<label>Community</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 " style="width=100%">
+										<span t-field="o.community_id" />
+									</div>
+								</div>
+							</div>
+						</t>
+						<div style="background: #d2e0e0;margin-top: 57px;">
+							<h2
+								style="font-size: 20px;text-align:center;padding:15px;margin:0;font-family:Avenir LT Std,Helvetica,Arial,sans-serif">
+								<b>PERSONNEL BIO-DATA</b>
+							</h2>
+						</div>
+
+						<fieldset style="margin-top:10px; border:0px solid #ccc">
+							<div
+								style="background: #ccc none repeat scroll 0 0;margin-bottom: 10px;">
+								<h2
+									style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">
+									<b>Personal Details</b>
+								</h2>
+							</div>
+							<div class="row_div">
+								<div style="width:100%;float:left;">
+									<div class="span4 data_lbl">
+										<label>First Name</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.name" />
+									</div>
+									<div class="span4 data_lbl">
+										<label>Last Name</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.last_name" />
+									</div>
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Certificate Name</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-if="o.certificate_name"
+										t-field="o.certificate_name" />
+									<span t-if="not o.certificate_name"
+										style="padding-left: 29%;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>Seminary Joining Year</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+								</div>
+							</div>
+							<div class="row_div">
+								<t t-if="o.membership_type == 'RE'">
+									<div class="span4 data_lbl">
+										<label>Belonging to</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.rel_province_id" />
+										<span t-if="not o.rel_province_id"
+											style="padding-left: 29%;" />
+									</div>
+								</t>
+								<div class="span4 data_lbl">
+									<label>D/M/Y of Birth</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.dob"
+										t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Place of Birth</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.place_of_birth" />
+									<span t-if="not o.place_of_birth"
+										style="padding-left: 29%;" />
+								</div>
+								<!-- <div class="span4 data_lbl">
+									<label>Feast Day</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.feast_month" />
+									<span t-field="o.feast_day" style="padding-left:8px;" />
+								</div> -->
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Priestly Ordination Anniversary</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span
+										t-field="o.holyorder_ids.filtered(lambda pro:pro.order == 'priest').date"
+										t-options="{&quot;format&quot;:&quot;MMM d&quot;}" />
+									<span
+										t-if="not o.holyorder_ids.filtered(lambda pro:pro.order == 'priest').date"
+										t-options="{&quot;format&quot;:&quot;MMM d&quot;}"
+										style="padding-left: 29%;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>Year of first Consecration</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+
+									<span style="padding-left:8px;" />
+								</div>
+							</div>
+							<!-- <div class="row_div"> <div class="span4 data_lbl"> <label>Year 
+								of Philosophy</label> </div> <div class="space-colon">:</div> <div class="span4 
+								data_val" > <span style="padding-left: 29%;"></span> </div> <div class="span4 
+								data_lbl"> <label>Year of Graduation</label> </div> <div class="space-colon">:</div> 
+								<div class="span4 data_val" > <span style="padding-left:8px;"/> </div> </div> 
+								<div class="row_div"> <div class="span4 data_lbl"> <label>Year of Philosophy 
+								cum Graduation</label> </div> <div class="space-colon">:</div> <div class="span4 
+								data_val" > <span style="padding-left: 29%;"></span> </div> <div class="span4 
+								data_lbl"> <label>Year of Theology</label> </div> <div class="space-colon">:</div> 
+								<div class="span4 data_val" > <span style="padding-left:8px;"/> </div> </div> 
+								<div class="row_div"> <div class="span4 data_lbl"> <label>Year of Perpetual 
+								Consecration</label> </div> <div class="space-colon">:</div> <div class="span4 
+								data_val" > <span style="padding-left: 29%;"></span> </div> <div class="span4 
+								data_lbl"> <label>Year of Diaconate Consecration</label> </div> <div class="space-colon">:</div> 
+								<div class="span4 data_val" > <span style="padding-left:8px;"/> </div> </div> -->
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>D/M/Y of Ordination</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span
+										t-field="o.holyorder_ids.filtered(lambda pro:pro.order == 'priest').date"
+										t-options="{'format':'dd/MM/yyyy'}" />
+									<span
+										t-if="not o.holyorder_ids.filtered(lambda pro:pro.order == 'priest')"
+										style="padding-left: 29%;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>Native Parish</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.native_parish_id" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Native Diocese</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.native_diocese_id" />
+									<span t-if="not o.native_diocese_id"
+										style="padding-left: 29%;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>District</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.native_district_id" />
+									<span t-if="not o.native_district_id"
+										style="padding-left:8px;" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>State</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.state_id" />
+									<span t-if="not o.state_id" style="padding-left: 29%;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>Blood Group</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.blood_group_id" />
+									<span t-if="not o.blood_group_id"
+										style="padding-left:8px;" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Aadhaar Card No.</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.unique_code" />
+									<span t-if="not o.unique_code" style="padding-left:8px;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>Pan Card No.</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.pancard_no" />
+									<span t-if="not o.pancard_no" style="padding-left: 29%;" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Passport No.</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.passport_no" />
+									<span t-if="not o.passport_no" style="padding-left:8px;" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Personal Email</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.personal_email" />
+									<span t-if="not o.personal_email"
+										style="padding-left: 29%;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>Personal Mobile No.</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.personal_mobile" />
+									<span t-if="not o.personal_mobile"
+										style="padding-left:8px;" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>House Email</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.email" />
+									<span t-if="not o.email" style="padding-left: 29%;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>House Mobile No.</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.mobile" />
+									<span t-if="not o.mobile" style="padding-left:8px;" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Home Address</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.street" />
+									<span t-field="o.street2" />
+									<span t-field="o.place" />
+									<span t-field="o.city" />
+									<span t-field="o.state_id" />
+									-
+									<span t-field="o.zip" />
+									<span t-field="o.country_id" />
+									<span t-if="not o.email" style="padding-left: 29%;" />
+								</div>
+								<div class="span4 data_lbl">
+									<label>Active Roles</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.role_ids"/>
+									<span t-if="not o.role_ids" style="padding-left:8px;"/>
+								</div>
+							</div>
+						</fieldset>
+
+						<!-- Start Sacraments Details -->
+
+						<fieldset style="margin-top:10px; border:0px solid #ccc">
+							<div
+								style="background: #ccc none repeat scroll 0 0; border: 0px solid #000">
+								<h2
+									style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Sacraments</h2>
+							</div>
+							<div>
+								<h3
+									style="color: #600;font-size: 18px;padding-left:0px;padding-top:5px;padding-bottom:5px;margin:0;font-family:Open Sans">
+									Baptism
+									<span
+										style="color: #600;font-size: 18px;padding-left:42%;margin:0;font-family:Open Sans"> Confirmation</span>
+								</h3>
+							</div>
+							<div class="row_div">
+								<div style="width:100%;float:left;">
+									<div class="span4 data_lbl">
+										<label>Date of Baptism</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.bapt_date"
+											t-options="{'format':'dd/MM/yyyy'}" />
+										<span t-if="not o.bapt_date" style="padding-left: 29%;" />
+									</div>
+									<div class="span4 data_lbl">
+										<label>Date of Confirmation</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.cnf_date"
+											t-options="{'format':'dd/MM/yyyy'}" />
+										<span t-if="not o.cnf_date" style="padding-left: 29%;" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row_div">
+								<div style="width:100%;float:left;">
+									<div class="span4 data_lbl">
+										<label>Diocese</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.sudo().baptism_parish_id.diocese_id" />
+										<span t-if="not o.sudo().baptism_parish_id.diocese_id"
+											style="padding-left: 29%;" />
+									</div>
+									<div class="span4 data_lbl">
+										<label>Diocese</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.sudo().cnf_parish_id.diocese_id" />
+										<span t-if="not o.sudo().cnf_parish_id.diocese_id"
+											style="padding-left: 29%;" />
+									</div>
+								</div>
+							</div>
+							<div class="row_div">
+								<div style="width:100%;float:left;">
+									<div class="span4 data_lbl">
+										<label>Parish</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.baptism_parish_id" />
+										<span t-if="not o.baptism_parish_id"
+											style="padding-left: 29%;" />
+									</div>
+									<div class="span4 data_lbl">
+										<label>Parish</label>
+									</div>
+									<div class="space-colon">:</div>
+									<div class="span4 data_val">
+										<span t-field="o.cnf_parish_id" />
+										<span t-if="not o.cnf_parish_id"
+											style="padding-left: 29%;" />
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3
+									style="color: #600;font-size: 18px;padding-left:0px;padding-top:5px;padding-bottom:5px;margin:0;font-family:Open Sans">
+									First Holy Communion
+								</h3>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Date of FHC</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.fhc_date" />
+									<span t-if="not o.fhc_date" style="padding-left:8px;" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Diocese</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.sudo().fhc_parish_id.diocese_id" />
+									<span t-if="not o.sudo().fhc_parish_id.diocese_id"
+										style="padding-left: 29%;" />
+								</div>
+							</div>
+							<div class="row_div">
+								<div class="span4 data_lbl">
+									<label>Parish</label>
+								</div>
+								<div class="space-colon">:</div>
+								<div class="span4 data_val">
+									<span t-field="o.fhc_parish_id" />
+									<span t-if="not o.fhc_parish_id"
+										style="padding-left: 29%;" />
+								</div>
+							</div>
+							<t t-if="o.living_status == 'no'">
+								<div>
+									<h3
+										style="color: #600;font-size: 18px;padding-left:0px;padding-top:5px;padding-bottom:5px;margin:0;font-family:Open Sans">
+										Death and Burial
+									</h3>
+								</div>
+								<div class="row_div">
+									<div style="width:100%;float:left;">
+										<div class="span4 data_lbl">
+											<label>Date of Death</label>
+										</div>
+										<div class="space-colon">:</div>
+										<div class="span4 data_val">
+											<t t-if="o.death_date">
+												<span t-field="o.death_date"
+													t-options="{'format':'dd/MM/yyyy'}" />
+											</t>
+											<span t-if="not o.death_date" style="padding-left: 29%;" />
+										</div>
+										<div class="span4 data_lbl">
+											<label>Date of Burial</label>
+										</div>
+										<div class="space-colon">:</div>
+										<div class="span4 data_val">
+											<t t-if="o.burial_date">
+												<span
+													t-esc="context_timestamp(o.burial_date).strftime('%d/%m/%Y %I:%M %p')" />
+											</t>
+											<span t-if="not o.burial_date"
+												style="padding-left: 29%;" />
+										</div>
+									</div>
+								</div>
+								<div class="row_div">
+									<div style="width:100%;float:left;">
+										<div class="span4 data_lbl">
+											<label>Parish</label>
+										</div>
+										<div class="space-colon">:</div>
+										<div class="span4 data_val">
+											<span t-field="o.death_parish_id" />
+											<span t-if="not o.death_parish_id"
+												style="padding-left: 29%;" />
+										</div>
+										<div class="span4 data_lbl">
+											<label>Cause of Death</label>
+										</div>
+										<div class="space-colon">:</div>
+										<div class="span4 data_val">
+											<span t-field="o.cause_of_death" />
+											<span t-if="not o.cause_of_death"
+												style="padding-left: 29%;" />
+										</div>
+									</div>
+								</div>
+								<div class="row_div">
+									<div style="width:100%;float:left;">
+										<div class="span4 data_lbl">
+											<label>Death Place</label>
+										</div>
+										<div class="space-colon">:</div>
+										<div class="span4 data_val">
+											<span t-field="o.place_of_death" />
+											<span t-if="not o.place_of_death"
+												style="padding-left: 29%;" />
+										</div>
+										<div class="span4 data_lbl">
+											<label>Burial Place</label>
+										</div>
+										<div class="space-colon">:</div>
+										<div class="span4 data_val">
+											<span t-field="o.burial_place" />
+											<span t-if="not o.burial_place"
+												style="padding-left: 29%;" />
+										</div>
+									</div>
+								</div>
+							</t>
+						</fieldset>
+
+						<!-- Start Family Details -->
+
+						<div style="width:100%;border:0px solid #ccc; padding:0px;">
+							<fieldset style="margin-top:10px; border:0px solid #ccc">
+								<div
+									style="background: #ccc none repeat scroll 0 0; border: 0px solid #000">
+									<h2
+										style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Family Details</h2>
+								</div>
+								<table class="topics"
+									style="width:100%;border:1px solid #cfcaca; padding:10px; table-layout: fixed;border-collapse:collapse;">
+
+									<tr style="border:1px solid #cfcaca;">
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Name
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Relation
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Occupation
+										</th>
+									</tr>
+									<t t-foreach="o.religious_family_ids" t-as="f">
+										<tr>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<t t-esc="f.name" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-field="f.relationship" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<t t-esc="f.occupation" />
+											</td>
+										</tr>
+									</t>
+								</table>
+							</fieldset>
+						</div>
+
+						<!-- Start Educatuin Qualification -->
+
+						<fieldset style="margin-top:10px; border:0px solid #ccc">
+
+							<div style="background: #ccc none repeat scroll 0 0;">
+								<h2
+									style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Education Qualifications</h2>
+							</div>
+							<div class="span4 data_lbl">
+								<label>Education Qualifications</label>
+							</div>
+							<div class="space-colon">:</div>
+
+							<label class="education">
+							<t t-esc="', '.join(o.member_education_ids.program_id.mapped('name'))"/>.
+							</label>
+						</fieldset>
+
+						<!-- Start Profession Details -->
+
+						<div style="width:100%;border:0px solid #ccc; padding:0px;">
+							<fieldset style="margin-top:10px; border:0px solid #ccc">
+								<div
+									style="background: #ccc none repeat scroll 0 0; border: 0px solid #000">
+									<h2
+										style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Profession</h2>
+								</div>
+								<table class="topics"
+									style="width:100%;border:1px solid #cfcaca; padding:10px; border-collapse:collapse;">
+
+									<tr style="border:1px solid #cfcaca;">
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Date
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Place
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Type
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Years
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Status
+										</th>
+									</tr>
+									<t t-foreach="o.profession_ids" t-as="p">
+										<tr>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-field="p.profession_date"
+													t-options="{'format':'dd/MM/yyyy'}" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-field="p.place" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;text-transform: capitalize;">
+												<t t-esc="p.type" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<t t-esc="p.years" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;text-transform: capitalize;">
+												<t t-esc="p.state" />
+											</td>
+										</tr>
+									</t>
+								</table>
+							</fieldset>
+						</div>
+
+						<!-- Start Formation Details -->
+
+						<div style="width:100%;border:0px solid #ccc; padding:0px;">
+							<fieldset style="margin-top:10px; border:0px solid #ccc">
+								<div
+									style="background: #ccc none repeat scroll 0 0; border: 0px solid #000">
+									<h2
+										style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Formation</h2>
+								</div>
+								<table class="topics"
+									style="width:100%;border:1px solid #cfcaca; padding:10px;border-collapse:collapse;">
+
+									<tr style="border:1px solid #cfcaca;">
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Stage
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											House Name
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Start Year
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											End Year
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Status
+										</th>
+									</tr>
+									<t t-foreach="o.formation_ids" t-as="f">
+										<tr style="width:100%;">
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<t t-esc="f.formation_stage_id.name" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-field="f.house_id.name" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<t t-esc="f.start_year" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<t t-esc="f.end_year" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;text-transform: capitalize;">
+												<t t-esc="f.state" />
+											</td>
+										</tr>
+									</t>
+								</table>
+							</fieldset>
+						</div>
+
+						<!-- Start Holy Order Details -->
+
+						<t t-if="not o.member_type == 'sister'">
+							<div style="width:100%;border:0px solid #ccc; padding:0px;">
+								<fieldset
+									style="margin-top:10px; border:0px solid #ccc">
+									<div
+										style="background: #ccc none repeat scroll 0 0; border: 0px solid #000">
+										<h2
+											style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Holy Order</h2>
+									</div>
+									<table class="topics"
+										style="width:100%;border:1px solid #cfcaca; padding:10px;border-collapse:collapse;">
+
+										<tr style="border:1px solid #cfcaca;">
+											<th
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												Date
+											</th>
+											<th
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												Place
+											</th>
+											<th
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												Order
+											</th>
+											<th
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												Minister
+											</th>
+											<th
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												Status
+											</th>
+										</tr>
+										<t t-foreach="o.holyorder_ids" t-as="h">
+											<tr>
+												<td
+													style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+													<span t-field="h.date"
+														t-options="{'format':'dd/MM/yyyy'}" />
+												</td>
+												<td
+													style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+													<span t-field="h.place" />
+												</td>
+												<td
+													style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;text-transform: capitalize;">
+													<t t-esc="h.order" />
+												</td>
+												<td
+													style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+													<t t-esc="h.minister" />
+												</td>
+												<td
+													style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;text-transform: capitalize;">
+													<t t-esc="h.state" />
+												</td>
+											</tr>
+										</t>
+									</table>
+								</fieldset>
+							</div>
+						</t>
+
+						<!-- Start Languages Known -->
+
+						<fieldset style="margin-top:10px; border:0px solid #ccc">
+
+							<div style="background: #ccc none repeat scroll 0 0;">
+								<h2
+									style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Languages Known</h2>
+							</div>
+							<div class="span4 data_lbl">
+								<label>Languages Known</label>
+							</div>
+							<div class="space-colon">:</div>
+
+							<label class="languages">
+							<t t-esc="', '.join(o.known_language_ids.mapped('name'))"/>.
+							</label>
+						</fieldset>
+
+						<!-- Start Health Status -->
+
+						<fieldset style="margin-top:10px; border:0px solid #ccc">
+
+							<div style="background: #ccc none repeat scroll 0 0;">
+								<h2
+									style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Health Status</h2>
+							</div>
+							<div class="span4 data_lbl">
+								<label>Mention Major Sickness/Operation if any</label>
+							</div>
+							<div class="space-colon">:</div>
+
+							<label class="languages">
+							<t t-esc="', '.join(o.member_health_ids.disease_disorder_id.mapped('name'))"/>.
+							</label>
+						</fieldset>
+						<fieldset style="margin-top:10px; border:0px solid #ccc">
+							<div style="background: #ccc none repeat scroll 0 0;">
+								<h2
+									style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Statutory Renewals</h2>
+							</div>
+							<table class="topics"
+								style="width:100%;border:1px solid #cfcaca; padding:10px; table-layout: fixed;border-collapse:collapse;">
+								<tr style="border:1px solid #cfcaca;">
+									<th
+										style="padding:10px; font-size:14px; border:1px solid #cfcaca;">Document</th>
+									<th
+										style="padding:10px; font-size:14px; border:1px solid #cfcaca;">Agency</th>
+									<th
+										style="padding:10px; font-size:14px; border:1px solid #cfcaca;">Valid From</th>
+									<th
+										style="padding:10px; font-size:14px; border:1px solid #cfcaca;">Valid To</th>
+									<th
+										style="padding:10px; font-size:14px; border:1px solid #cfcaca;">Next Renewal Date</th>
+								</tr>
+								<t t-if="o.statutory_renewal_ids">
+									<t t-foreach="o.statutory_renewal_ids" t-as="renewal">
+										<tr style="border:1px solid #cfcaca;">
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-esc="renewal.document_type_id.name" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-esc="renewal.agency" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-field="renewal.valid_from"
+													t-options="{'format':'dd/MM/yyyy'}" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-field="renewal.valid_to"
+													t-options="{'format':'dd/MM/yyyy'}" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+												<span t-field="renewal.next_renewal"
+													t-options="{'format':'dd/MM/yyyy'}" />
+											</td>
+										</tr>
+									</t>
+								</t>
+								<t t-else="">
+									<tr style="border:1px solid #cfcaca;">
+										<td colspan="5"
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;align:center;"
+											align="center">No Renewals Data Found</td>
+									</tr>
+								</t>
+							</table>
+						</fieldset>
+
+						<!--Member Ministry Details -->
+							<fieldset style="margin-top:10px; border:0px solid #ccc">
+								<div
+									style="background: #ccc none repeat scroll 0 0; border: 0px solid #000">
+									<h2
+										style="color: #600;font-size: 18px;padding:10px;margin:0;font-family:Open Sans">Member Ministry</h2>
+								</div>
+								<table class="topics"
+									style="width:100%;border:1px solid #cfcaca; padding:10px;border-collapse:collapse;">
+
+									<tr style="border:1px solid #cfcaca;">
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											House Name
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											From
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											To
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Roles
+										</th>
+										<th
+											style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+											Status
+										</th>
+									</tr>
+									<t t-set="ministry" t-value="o.house_member_ids"/>
+									<t t-if="data['form']['ministry_type'] == 'minimum'">
+										<t t-set="ministry" t-value="o.house_member_ids.filtered(lambda house:house.status == 'active')"/>
+									</t>
+									<t t-foreach="ministry" t-as="hs">
+										<tr style="height:20px;">
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												<span t-field="hs.sudo().house_id.name" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												<span t-field="hs.date_from" />
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												<span t-field="hs.date_to" />
+											</td>
+											<td style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												<t t-esc="', '.join(hs.role_ids.mapped('name'))"/>
+											</td>
+											<td
+												style="padding:10px; font-size:14px; border:1px solid #cfcaca;">
+												<span t-field="hs.status" />
+											</td>
+										</tr>
+									</t>
+								</table>
+							</fieldset>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Religious Members Profile -->
+
+		<record id="paperformat_member_profile" model="report.paperformat">
+			<field name="name">PaperFormat Member Profile</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">11</field>
+			<field name="dpi">90</field>
+		</record>
+		
+		<report id="report_member_profile_base" string="Profile"
+			model="res.member" 
+			report_type="qweb-pdf"
+			file="cristo.report_member_profile" 
+			name="cristo.report_member_profile"
+			paperformat="paperformat_member_profile"
+			menu="False" />
+			
+		<!-- Religious Province Profile -->
+
+		<record id="paperformat_province_profile" model="report.paperformat">
+			<field name="name">Report Format for Province Profile</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">4</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<report id="report_profile_of_province" string="Province Profile"
+			model="res.religious.province"  
+			report_type="qweb-pdf"
+			file="cristo.report_rel_province_profile" 
+			name="cristo.report_rel_province_profile" 
+			paperformat="paperformat_province_profile"
+			menu="True" print_report_name="' %s Profile' % (object.name)"/>
+			
+			<!-- Religious Community Profile -->
+
+		<record id="paperformat_community_profile" model="report.paperformat">
+			<field name="name">Report Format for Community Profile</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">4</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<report id="report_profile_of_community" string="Community Profile"
+			model="res.community"  
+			report_type="qweb-pdf"
+			file="cristo.report_rel_community_profile" 
+			name="cristo.report_rel_community_profile" 
+			paperformat="paperformat_community_profile"
+			menu="True" />
+			
+			<!-- Religious Institution Profile -->
+
+		<record id="paperformat_institution_profile" model="report.paperformat">
+			<field name="name">Report Format for Institution Profile</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">4</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<report id="report_profile_of_institution" string="Institution Profile"
+			model="res.institution"  
+			report_type="qweb-pdf"
+			file="cristo.report_rel_institution_profile" 
+			name="cristo.report_rel_institution_profile" 
+			paperformat="paperformat_institution_profile"
+			menu="True" />
+
+		<record id="paperformat_diocese_profile" model="report.paperformat">
+			<field name="name">Report Format for Diocese Profile</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">4</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<report id="report_profile_of_diocese" string="Diocese Profile"
+			model="res.ecclesia.diocese"
+			report_type="qweb-pdf"
+			file="cristo.report_ecc_diocese_profile"
+			name="cristo.report_ecc_diocese_profile"
+			paperformat="paperformat_diocese_profile"
+			menu="True" />
+			
+			
+			
+			<!-- Paperformat for  all Anniversary ecclesia-->
+		<record id="paperformat_all_anniversary_parish" model="report.paperformat">
+			<field name="name">Format for Anniversary</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">5</field>
+			<field name="margin_bottom">5</field>
+			<field name="margin_left">0</field>
+			<field name="margin_right">0</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">5</field>
+			<field name="dpi">90</field>
+		</record>
+		
+		
+		<report id="report_parish_all_anniversary" string="Anniversary"
+			model="all.anniversary.parish.reports" report_type="qweb-pdf"
+			file="cristo.report_parish_all_anniversary" 
+			name="cristo.report_parish_all_anniversary"
+			menu="False" 
+			paperformat="cristo.paperformat_all_anniversary_parish" />
+		
+			
+			   <!-- Ecclesia Parish Report -->
+			         
+		<record id="paperformat_parish_profile" model="report.paperformat">
+			<field name="name">Report Format for Parish Profile</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">4</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<report id="report_profile_of_parish" string="Parish Profile"
+			model="res.parish"
+			report_type="qweb-pdf"
+			file="cristo.report_ecc_parish_profiles"
+			name="cristo.report_ecc_parish_profiles"
+			paperformat="paperformat_parish_profile"
+			menu="True" />
+
+		<record id="paperformat_marriage" model="report.paperformat">
+			<field name="name">Report Format for Marriage</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">4</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<report id="report_marriage_action" string="Marriage Certificate"
+			model="res.marriage"
+			report_type="qweb-pdf"
+			file="cristo.report_marriage"
+			name="cristo.report_marriage"
+			paperformat="paperformat_marriage"
+			menu="False" />
+			
+		<template id="cristo_report_layout">
+        	<t t-if="not o" t-set="o" t-value="doc"/>
+	        <t t-if="not company">
+            <!-- Multicompany -->
+            	<t t-if="company_id">
+                	<t t-set="company" t-value="company_id"/>
+            	</t>
+            	<t t-elif="o and 'company_id' in o">
+                	<t t-set="company" t-value="o.company_id.sudo()"/>
+            	</t>
+            	<t t-else="else">
+                	<t t-set="company" t-value="res_company"/>
+            	</t>
+        	</t>
+	        <t t-esc="company.update_scss()"/>
+	        <t t-call="cristo.cristo_report_layout_standard"><t t-raw="0"/></t>
+    	</template>
+    
+    	<template id="cristo_report_layout_standard">
+        	<div class="header">
+            	<div class="row">
+                	<div class="col-3 mb4">
+                    	<img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;margin-top:0%" alt="Logo"/>
+                	</div>
+            	</div>
+            	<div t-if="company.logo or company.report_header" class="row zero_min_height">
+                	<div class="col-12">
+                    	<div style="border-bottom: 1px solid black;"/>
+                	</div>
+            	</div>
+        	</div>
+		
+        	<div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            	<t t-raw="0"/>
+        	</div>
+    	</template>
+    	
+	</data>
+</odoo>

@@ -1,0 +1,7 @@
+<odoo>
+    <template id="base_menu_update_assets" name="Base menu update assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/web_list_toolbar_print/static/src/js/menu_label_update.js"></script>
+        </xpath>
+    </template>
+</odoo>

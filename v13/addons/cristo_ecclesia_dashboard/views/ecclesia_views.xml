@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<!--Church Diocese -->
+	<record id="res_church_diocese_image_view" model="ir.ui.view">
+        <field name="name">res.ecclesia.diocese.form.inherit</field>
+        <field name="model">res.ecclesia.diocese</field>
+        <field name="inherit_id" ref="cristo.view_ecclesia_diocese_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//notebook/page[2]" position="after">
+        		<page string="Slider Images">
+        			<div class="alert alert-warning" role="alert">
+                        <p><b>Note: </b>These images will be used as Dashboard Slider images</p>
+                    </div>
+					<field name="org_image_ids" class="o_website_sale_image_list" context="{'warning':True}" mode="kanban" options="{'create_text':'Add a Media'}" nolabel="1"/>
+				</page>
+        	</xpath>
+        </field>
+    </record>
+
+	<!--Ecclesia Vicariate -->
+
+	<record id="res_ecclesia_vicariate_image_view" model="ir.ui.view">
+        <field name="name">res.vicariate.form.inherit</field>
+        <field name="model">res.vicariate</field>
+        <field name="inherit_id" ref="cristo.view_vicariate_form"/>
+        <field name="arch" type="xml">
+			<xpath expr="//group" position="after">
+				<notebook>
+					<page string="Slider Images" invisible="1">
+						<div class="alert alert-warning" role="alert">
+	                        <p><b>Note: </b>These images will be used as Dashboard Slider images</p>
+	                    </div>
+						<field name="org_image_ids" class="o_website_sale_image_list" context="{'warning':True}" mode="kanban" options="{'create_text':'Add a Media'}" nolabel="1"/>
+					</page>
+				</notebook>
+			</xpath>
+        </field>
+    </record>
+
+	<!--Ecclesia Parish -->
+
+	<record id="res_ecclesia_parish_image_view" model="ir.ui.view">
+        <field name="name">res.parish.form.inherit</field>
+        <field name="model">res.parish</field>
+        <field name="inherit_id" ref="cristo.view_parish_form"/>
+        <field name="arch" type="xml">
+			<xpath expr="//notebook/page[1]" position="after">
+				<page string="Slider Images">
+					<div class="alert alert-warning" role="alert">
+                        <p><b>Note: </b>These images will be used as Dashboard Slider images</p>
+                    </div>
+					<field name="org_image_ids" class="o_website_sale_image_list" context="{'warning':True}" mode="kanban" options="{'create_text':'Add a Media'}" nolabel="1"/>
+				</page>
+			</xpath>
+        </field>
+    </record>
+
+</odoo>

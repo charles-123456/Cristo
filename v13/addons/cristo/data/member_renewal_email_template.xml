@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+        <record id="email_template_member_renewal_notification" model="mail.template">
+			<field name="name">Member Renewal</field>
+			<field name="model_id" ref="cristo.model_member_statutory_renewals"/>
+			<field name="email_from">${ctx.get('email_from')|safe}</field>
+			<field name="email_to">${ctx.get('email_to')|safe}</field>
+			<field name="email_cc">${ctx.get('email_cc')| safe}</field>
+			<field name="auto_delete">False</field>
+			<field name="subject">Statutory Renewal: ${(object.document_type_id.name)} for ${ctx.get('member_name')}</field>
+			<field name="body_html"><![CDATA[
+				<div>Dear ${ctx.get('member_name')},</div>
+				<br />
+				<div>Your ${(object.document_type_id.name)} document expires within one month. So, Kindly do the needful for your document renewal.</div>
+				<div>Thank you.</div>
+				]]></field>
+		</record>
+		<record id="email_template_org_renewal_notification" model="mail.template">
+			<field name="name">Organization Renewal</field>
+			<field name="model_id" ref="cristo.model_res_renewals"/>
+			<field name="email_from">${ctx.get('email_from')|safe}</field>
+			<field name="email_to">${ctx.get('email_to')|safe}</field>
+			<field name="auto_delete">False</field>
+			<field name="subject">Renewal: ${ctx.get('name')|safe}</field>
+			<field name="body_html"><![CDATA[
+				<table style="border: 1px solid black;border-collapse: collapse;">
+					<thead>
+						<tr style="border: 1px solid black;border-collapse: collapse;">
+							<th style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="30%">Document No.</th>
+							<th style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="30%">Document Type</th>
+							<th style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="10%">Valid To</th>
+						</tr>
+					</thead>
+					% set renewals = ctx.get('renewals_ids')
+					% if renewals:
+						% for renewal in renewals:
+							<tr style="border: 1px solid black;border-collapse: collapse;">
+								<td style="border: 1px solid black;border-collapse: collapse;text-align:center;" width="30%">
+									% if renewal.no:
+										<span>${renewal.no}</span>
+									% endif
+								</td>
+								<td style="border: 1px solid black;border-collapse: collapse;text-align:center;" width="30%">
+									% if renewal.document_type_id:
+										<span>${renewal.document_type_id.name}</span>
+									% endif
+								</td>
+								<td style="border: 1px solid black;border-collapse: collapse;text-align:center;" width="10%">
+									% if renewal.valid_to:
+										<span>${format_date(renewal.valid_to)}</span>
+									% endif
+								</td>
+							</tr>
+						% endfor
+					% endif
+				</table>
+				<div>Your document expires within one month. So, Kindly do the needful for your document renewal.</div>
+				<div>Thank you.</div>
+				]]></field>
+		</record>
+    </data>
+</odoo>

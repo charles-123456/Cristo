@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- Project Plan Menus -->
+
+	<menuitem id="project_plan_main_menu" name="Planner" sequence="17" web_icon="planner,static/description/icon.png"/>
+	
+	<menuitem id="project_plan_menu" name="Planner" parent="project_plan_main_menu" action="action_project_plan" sequence="1"  />
+	
+<!-- Report Menus -->	
+	
+	<menuitem id="project_plan_reports_main_menu" name="Reports" parent="project_plan_main_menu" sequence="3" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,planner.group_planner_manager,group_planner_user"/>
+	
+	<menuitem id="plan_activity_menu" name="Plan Activity" parent="project_plan_reports_main_menu" action="action_view_activity" sequence="1" />
+	<menuitem id="plan_expenditure_menu" name="Plan Expenditure" parent="project_plan_reports_main_menu" action="action_view_expenditure" sequence="2" />
+	
+<!-- Configuration Menus -->
+
+	<menuitem id="project_plan_configuration_main_menu" name="Configuration" parent="project_plan_main_menu" sequence="4" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,planner.group_planner_manager"/>
+	
+	<menuitem id="plan_category_menu" name="Plan Category" parent="project_plan_configuration_main_menu" action="action_plan_category" sequence="1" />
+	<menuitem id="plan_main_activity_type_menu" name="Plan Main Activity Type" parent="project_plan_configuration_main_menu" sequence="3" action="action_plan_main_activity_type" />
+	<menuitem id="fund_source_type_menu" name="Fund Source Type" parent="project_plan_configuration_main_menu" sequence="4" action="action_fund_source_type" />
+	<menuitem id="plan_section_config_menu" name="Plan Section Config" parent="project_plan_configuration_main_menu" sequence="5" action="action_plan_section_config" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"/>	
+
+</odoo>

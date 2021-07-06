@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<report id="education_xlsx"
+			    model="res.member"
+			    string="Education"
+			    report_type="xlsx"
+			    name="cristo.report_education"
+			    file="member_education_details"
+			    attachment_use="False"
+				/>
+				
+		<report id="profession_xlsx"
+					groups="base.group_erp_manager,module_category_cristo_role,group_role_cristo_bsa_super_admin,group_role_cristo_religious_institute_admin,group_role_cristo_religious_province,group_role_cristo_religious_house,group_role_cristo_apostolic_institution,group_role_cristo_apostolic_association"
+			    model="res.member"
+			    string="Profession"
+			    report_type="xlsx"
+			    name="cristo.report_profession"
+			    file="member_profession_details"
+			    attachment_use="False"
+				/>
+				
+		<report id="formation_xlsx"
+					groups="base.group_erp_manager,module_category_cristo_role,group_role_cristo_bsa_super_admin,group_role_cristo_religious_institute_admin,group_role_cristo_religious_province,group_role_cristo_religious_house,group_role_cristo_apostolic_institution,group_role_cristo_apostolic_association"
+			    model="res.member"
+			    string="Formation"
+			    report_type="xlsx"
+			    name="cristo.report_formation"
+			    file="member_formation_details"
+			    attachment_use="False"
+				/>
+				
+		<report id="holyorder_xlsx"
+				groups="base.group_erp_manager,module_category_cristo_role,group_role_cristo_bsa_super_admin,group_role_cristo_religious_institute_admin,group_role_cristo_religious_province,group_role_cristo_religious_house,group_role_cristo_apostolic_institution,group_role_cristo_apostolic_association"
+			    model="res.member"
+			    string="Holy Order"
+			    report_type="xlsx"
+			    name="cristo.report_holyorder"
+			    file="member_holyorder_details"
+			    attachment_use="False"
+				/>
+				
+		<report id="memberhealth_xlsx"
+				groups="base.group_erp_manager,module_category_cristo_role,group_role_cristo_bsa_super_admin,group_role_cristo_religious_institute_admin,group_role_cristo_religious_province,group_role_cristo_religious_house,group_role_cristo_apostolic_institution,group_role_cristo_apostolic_association"
+			    model="res.member"
+			    string="Health"
+			    report_type="xlsx"
+			    name="cristo.report_memberhealth"
+			    file="member_memberhealth_details"
+			    attachment_use="False"
+				/>
+				
+		<report id="publication_xlsx"
+		groups="base.group_erp_manager,module_category_cristo_role,group_role_cristo_bsa_super_admin,group_role_cristo_religious_institute_admin,group_role_cristo_religious_province,group_role_cristo_religious_house,group_role_cristo_apostolic_institution,group_role_cristo_apostolic_association"
+			    model="res.member"
+			    string="Publication"
+			    report_type="xlsx"
+			    name="cristo.report_publication"
+			    file="member_publication_details"
+			    attachment_use="False"
+				/>
+				
+	</data>
+</odoo>

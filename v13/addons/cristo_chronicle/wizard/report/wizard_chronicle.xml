@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_cristo_chronicle" model="ir.ui.view">
+		<field name="name">wizard.cristo.chronicle.form</field>
+		<field name="model">wizard.cristo.chronicle</field>
+		<field name="arch" type="xml">
+			<form string="Chronicle">
+				<group>
+					<group>
+						<field name="date_from" required="1" />
+						<field name="chronicle_type" widget="radio" options="{'horizontal': true}" />
+					</group>
+					<group>
+						<field name="date_to" required="1" />
+						<field name="institute_id" required="1" options="{'no_open': True,'no_create': True}"
+							groups="base.group_erp_manager, cristo.group_role_cristo_bsa_super_admin" />
+						<field name="rel_province_id" options="{'no_open': True,'no_create': True}"
+							domain="[('institute_id', '=',institute_id)]" />
+							
+						<label for="community_all" string="Community" />
+						<div>
+							<field name="community_all" class="oe_inline" />
+							All
+							<field name="community_ids" widget="many2many_tags" class="oe_inline"
+								placeholder="Community"
+								attrs="{'invisible':[('community_all', '=', True)], 'required':[('community_all', '=', False)]}"
+								options="{'no_open': True,'no_create': True}" />
+						</div>
+						<label for="institution_all" string="Institution" />
+						<div>
+							<field name="institution_all" class="oe_inline" />
+							All
+							<field name="institution_ids" widget="many2many_tags"
+								class="oe_inline" placeholder="Institution"
+								attrs="{'invisible':[('institution_all', '=', True)], 'required':[('institution_all', '=', False)]}"
+								options="{'no_open': True,'no_create': True}" />
+						</div>
+					</group>
+				</group>
+				<footer>
+					<button name="print_pdf" string="EXPORT TO PDF" type="object"
+						class="oe_highlight" />
+					or
+					<button string="CANCEL" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_cristo_chronicle" model="ir.actions.act_window">
+		<field name="name">Chronicle</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.cristo.chronicle</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+</odoo>

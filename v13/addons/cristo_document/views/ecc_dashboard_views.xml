@@ -1,0 +1,7 @@
+<odoo>
+    <template id="document_assets_backend_ecc_dashboard" name="Ecclesia Dashboard assets inherit" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/cristo_document/static/src/js/ecc_dashboard.js"/>
+        </xpath>
+    </template>
+</odoo>

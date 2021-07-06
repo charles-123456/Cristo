@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-name="LoginMemberDetails" t-extend="LoginMemberDetails">
+		<t t-jquery='.custom_content' t-operation='inner'>
+			<t t-if="widget.login_member['rh'] and widget.login_member['is_frm_prov']">
+				<div class="row main-section" style="height:20px;">
+	            	<div class="col-xs-12 col-sm-12 col-lg-12">
+	            		<div id="breaking-news-container">
+							<div id="breaking-news-colour" class="slideup animated">
+							  
+							</div>
+                            <span class="breaking-news-title delay-animated slidein">
+							    // Province News //
+							</span>
+                            <span class="breaking-news-headline" style="width:89%;">
+
+								<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
+                                    <t t-foreach="widget.login_member['province_news']" t-as="o">
+										<a href="#" class="popup_news" t-att-data-title="o[1]"
+                                           t-att-data-description="o[2]" t-att-val="o[0]" style="color:#000000;">
+											<i class="fa fa-asterisk" style="padding-left:10px;"/>
+                                            <span t-esc="o[1]"/>
+										</a>
+									</t>
+								</marquee>
+							</span>
+						</div>
+	            	</div>
+	            </div>
+                <br/>
+	        </t>
+            <div class="row main-section" style="height:20px;">
+            	<div class="col-xs-12 col-sm-12 col-lg-12">
+            		<div id="breaking-news-container">
+						<div id="breaking-news-colour" class="slideup animated">
+						  
+						</div>
+                        <span class="breaking-title delay-animated slidein">
+						    // News //
+						</span>
+                        <!--Anchor tag trigger modal -->
+                        <span class="breaking-news-headline" style="width:89%;">
+
+								<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
+                                    <t t-foreach="widget.login_member['news_content']" t-as="o">
+										<a href="#" class="popup_news" t-att-data-title="o[1]"
+                                           t-att-data-description="o[2]" t-att-val="o[0]" style="color:#000000;">
+											<i class="fa fa-asterisk" style="padding-left:10px;"/>
+                                            <span t-esc="o[1]"/>
+										</a>
+									</t>
+								</marquee>
+						</span>
+                        <!-- <a class="breaking-news-headline delay-animated2 fadein marquee">
+                           <t t-esc="widget.login_member['news_content']" />
+                        </a>   -->
+					</div>
+            	</div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel" href="">
+						   <div class="row main-section" style="height:20px;">
+					<div class="col-xs-12 col-sm-12 col-lg-12">
+					</div>
+				</div>
+					</h5>
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true"></span>
+					</button>
+				  </div>
+					<div class="modal-body">
+						 <div class="row main-section" style="height:auto;marigin-top:18px;">
+							<div class="col-xs-12 col-sm-12 col-lg-12">
+					</div>
+				</div>
+				  </div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  </div>
+				</div>
+			  </div>
+		</div>
+        </t>
+    </t>
+
+	<t t-extend="LoginMemberDetails">
+        <t t-jquery=".sm_box_cont" t-operation="append">
+        	<t t-if="widget.login_member['chronicle']">
+        		<div class="col-md-4 col-sm-6 col-xs-12">
+		          <div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+		            <span class="info-box-icon bg-blue box_curve_st"><i class="fa fa-newspaper-o"></i></span>
+		             <div class="info-box-content">
+		              <span class="info-box-number box_title">News <br/><span style="font-size:25px;" t-esc="widget.login_member['total_news']" /></span>
+		              <span class="text cr_news cr_navigate" style="position:absolute;bottom:15px;right:20px;font-size:14px;">View &#160;<i class="fa fa-external-link-square"></i></span>
+		            </div>
+		          </div>
+		        </div>
+		    </t>
+        </t>
+    </t>
+</templates>

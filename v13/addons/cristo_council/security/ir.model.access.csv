@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_council,res.council,model_res_council,base.group_erp_manager,1,1,1,1
+access_res_council_member,res.council.member,model_res_council_member,base.group_erp_manager,1,1,1,1
+,,,,,,,
+access_res_council_read,res.council,model_res_council,group_role_cristo_council_read,1,0,0,0
+access_res_council_write,res.council,model_res_council,group_role_cristo_council_write,0,1,0,0
+access_res_council_create,res.council,model_res_council,group_role_cristo_council_create,0,0,1,0
+access_res_council_delete,res.council,model_res_council,group_role_cristo_council_delete,0,0,0,1
+,,,,,,,
+access_res_council_members_read,res.council.member,model_res_council_member,group_role_cristo_council_read,1,0,0,0
+access_res_council_members_write,res.council.member,model_res_council_member,group_role_cristo_council_write,1,1,1,1

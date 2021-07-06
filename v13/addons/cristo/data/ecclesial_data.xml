@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- Rite -->
+		<record id="res_rite1" model="res.rite">
+			<field name="name">Latin</field>
+		</record>
+		<record id="res_rite2" model="res.rite">
+			<field name="name">Syro-Malabar</field>
+		</record>
+		<record id="res_rite3" model="res.rite">
+			<field name="name">Syro-Malankara</field>
+		</record>
+	</data>
+</odoo>

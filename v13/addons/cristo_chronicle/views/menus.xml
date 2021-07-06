@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Chronicler Menus -->
+	<menuitem id="cristo_chronicler_main_menu" name="Chronicler" sequence="10"  web_icon="cristo_chronicle,static/description/icon.png" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo_chronicle.group_role_cristo_chronicle_read" />
+	
+	<menuitem id="chronicler_main_menu" name="Chronicle" parent="cristo_chronicler_main_menu" sequence="1" />
+	<menuitem id="my_chronicle_main_menu" name="My Chronicle" parent="chronicler_main_menu" action="action_my_chronicle" sequence="1" />
+	<menuitem id="other_chronicle_main_menu" name="Other Chronicle" parent="chronicler_main_menu" action="action_other_chronicle" sequence="2" />
+	
+<!-- Historical Menu -->
+	<menuitem id="historical_main_menu" name="Historical" parent="cristo_chronicler_main_menu" action="action_muk_dms_file" sequence="2"/>
+	
+<!-- Report Menus -->
+	<menuitem id="reports_main_menu" name="Reports" parent="cristo_chronicler_main_menu" sequence="3" />
+	
+	<menuitem id="wizard_chronicle_menu" name="Chronicle" action="action_cristo_chronicle" parent="reports_main_menu" sequence="1" />
+</odoo>

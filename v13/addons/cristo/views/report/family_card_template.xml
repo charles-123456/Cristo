@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="cristo.family_card_report_template">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+					<div class="page" style="border:1px solid black;color:black;font-family:Calibri;">
+						<style>
+							table,th,td{
+							text-align:left;
+							font-size:20px;
+							border-collapse: collapse; 
+							}
+							.table-bordered td, .table-bordered th {
+							 border: 1px solid black !important;
+							}
+						</style>
+						<div class="oe_structure"/>
+						<table style="width:100%;">
+							<tr>
+								<td style="font-size:30px;padding-left:10px"> 
+									<span t-field="o.parish_id.street" />
+										,
+									<span t-field="o.parish_id.name" />
+								</td>
+								<td style="font-size:30px;padding-right: 190px;">
+									<b>FAMILY CARD</b>
+								</td>
+								<th style="height: 30px">FAMILY NO</th>
+								<td>:
+									 <span t-esc="o.reference" />
+								</td>
+							</tr>
+							<tr>
+								<th>
+								</th>
+								<td>
+								</td>
+								<th style="height: 30px">ZONE</th>
+								<td>:
+									 <span t-esc="o.zone_id.name" />
+								</td>
+							</tr>
+							<tr>
+								<th>
+								</th>
+								<td>
+								</td>
+								<th style="height: 30px">BCC</th>
+								<td>:
+									 <span t-esc="o.parish_bcc_id.name" />
+								</td>
+							</tr>
+							
+						</table>
+						
+						<br/>
+						<table class="table table-bordered" style="margin-left:1%;width:98%;">
+							<tr>
+								<thead>
+									<th width="1%">S.No</th>
+									<th width="7%">UID</th>
+									<th width="10%">Name</th>
+									<th width="3%">Date of Birth </th>
+									<th width="6%">Relationship with Head</th>
+									<th width="3%">Date of Marriage</th>
+									<th width="8%">Occupation</th>
+									<th width="10%">Mobile</th>
+									<th width="15%">Email</th>
+								</thead>
+							</tr>
+							<tbody>
+								<t t-set="count" t-value="1" />
+								<t t-foreach="o.child_ids" t-as="member">
+									<tr>
+										<td>
+											<t t-esc="count" />
+										</td>
+										<td>
+											<t t-esc="member.unique_code" />
+										</td>
+										<td>
+											<t t-esc="member.name" />
+										</td>
+										<td>
+											<span t-field="member.dob" t-options="{'format':'dd/MM/yyyy'}" />
+										</td>
+										<td>
+											<t t-esc="member.relationship_id.name" />
+										</td>
+										<td>
+											<span t-field="member.mrg_date" t-options="{'format':'dd/MM/yyyy'}" />
+										</td>
+										<td>
+											<t t-esc="member.occupation_id.name" />
+										</td>
+										<td>
+											<t t-esc="member.mobile" />
+										</td>
+										<td>
+											<t t-esc="member.email" />
+										</td>
+									</tr>
+									<t t-set="count" t-value="count + 1" />
+								</t>
+								<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+								<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+							</tbody>
+						</table>
+						
+						<table style="width:100%;">
+							<tr>
+								<th style="height: 30px;padding-left:10px;">ADDRESS</th>
+								<td>: 
+									<span t-field="o.street" />
+									<t t-if="o.street">, </t>
+									<span t-field="o.street2" />
+									<t t-if="o.street2">, </t>
+									<span t-field="o.place" />
+									<t t-if="o.place">, </t>
+									<span t-field="o.city" />
+									<t t-if="o.city">, </t>
+									<span t-field="o.state_id" />
+									<t t-if="o.state_id">, </t>
+									<span t-field="o.country_id" />
+									<t t-if="o.country_id"/>
+									<t t-if="o.zip">-</t>
+									<span t-field="o.zip" />
+								</td>
+								<th style="height: 30px">MONTHLY INCOME</th>
+								<td>:
+									<t t-if="o.income_type == 'monthly'">
+									 	<span t-esc="o.family_income" />
+									</t> 
+								</td>
+							</tr>
+							<tr>
+								<th style="height: 30px;padding-left:10px;">Mobile No</th>
+								<td>: 
+									<span t-esc="o.mobile" />
+								</td>
+								<th style="height: 30px">HOUSE OWNERSHIP</th>
+								<td>:
+									 <span t-esc="o.house_ownership" />
+								</td>
+							</tr>
+							<tr>
+								<th>
+								</th>
+								<td>
+								</td>
+								<th style="height: 30px">HOUSE TYPE</th>
+								<td>:
+									 <span t-esc="o.house_type_id.name" />
+								</td>
+							</tr>
+						</table>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>
+
+
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_config_settings" model="ir.ui.view">
+            <field name="name">helpdesk settings</field>
+            <field name="model">helpdesk_lite.config.settings</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <form class="oe_form_configuration">
+                    <header>
+                        <button name="execute" string="Apply" type="object" class="oe_highlight"/>
+                        <button name="cancel" string="Cancel" type="object" class="oe_link"/>
+                    </header>
+                    <group name="helpdesk_management" string="Helpdesk Management">
+                        <field name="module_helpdesk_lite_website"/>
+                    </group>
+                    <div> 
+                        <span>(*) This configuration is related to the company you're logged into.</span>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+</odoo>

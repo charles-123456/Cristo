@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="paperformat_family_census" model="report.paperformat">
+			<field name="name">Family Census</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Landscape</field>
+			<field name="margin_top">5</field>
+			<field name="margin_bottom">7</field>
+			<field name="margin_left">3</field>
+			<field name="margin_right">3</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">5</field>
+			<field name="dpi">80</field>
+		</record>
+
+		<report id="family_census" string="Family Census"
+			model="res.family" report_type="qweb-html"
+			file="cristo.family_census_report" 
+			name="cristo.family_census_report"
+			menu="False" 
+			paperformat="cristo.paperformat_family_census" />
+		
+	</data>
+</odoo>

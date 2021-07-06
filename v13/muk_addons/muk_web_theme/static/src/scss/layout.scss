@@ -1,0 +1,119 @@
+/**********************************************************************************
+*
+*    Copyright (c) 2017-2019 MuK IT GmbH.
+*
+*    This file is part of MuK Backend Theme 
+*    (see https://mukit.at).
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Lesser General Public License as published by
+*    the Free Software Foundation, either version 3 of the License, or
+*    (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Lesser General Public License for more details.
+*
+*    You should have received a copy of the GNU Lesser General Public License
+*    along with this program. If not, see <http://www.gnu.org/licenses/>.
+*
+**********************************************************************************/
+
+//----------------------------------------------------------
+// Helper
+//----------------------------------------------------------
+
+$mk-brand-gradient: linear-gradient(to right bottom, $mk-brand-gradient-start, $mk-brand-gradient-end);
+
+//----------------------------------------------------------
+// Web Client
+//----------------------------------------------------------
+
+.o_web_client {
+	.o_main .o_main_content {
+	    @include media-breakpoint-down(sm) {
+	        overflow: auto;
+	        .o_content {
+	            overflow: initial;
+	        }
+	    }
+	}
+	.o_loading {
+	    position: fixed;
+	    right: 0;
+	    bottom: 0;
+	    color: white;
+	    padding: 5px;
+	    opacity: 0.8;
+	    z-index: 1052;
+	    border-radius: 0;
+	    background-color: $o-brand-odoo;
+	}
+}
+
+.oe_wait {
+ 	cursor: progress;
+}
+
+body {
+	font-size: 1.113333rem;
+}
+
+//----------------------------------------------------------
+// Views
+//----------------------------------------------------------
+
+.o_content, .modal-content {
+    max-width: 100%;
+}
+
+//----------------------------------------------------------
+// Tooltips
+//----------------------------------------------------------
+
+.o_tooltip {
+  &.o_animated {
+    display: none;
+  }
+}
+
+//General Font Style
+html .o_web_client {
+	font-family: 'MerriweatherSans','Roboto', 'Noto';
+}
+
+.o_main_navbar {
+	background: #136a8a;
+    background: -webkit-linear-gradient(to right, #267871, #136a8a);
+    background: linear-gradient(to right, #267871, #136a8a);
+}
+
+
+//Button Styles
+.o_list_button_add, .o_form_button_create, .o_form_button_create:active, .o_form_button_create:hover {
+	background-color: $mk-btn-create;
+	border-color: $mk-btn-create;
+	color: #FFFFFF;
+	border-radius: 4px;
+}
+.o_form_button_edit {
+	background-color: $mk-btn-edit;
+	border-color: $mk-btn-edit;
+	border-radius: 4px;
+}
+.o_form_button_save {
+	background-color: $mk-btn-save;
+	border-color: $mk-btn-save;
+	border-radius: 4px;
+}
+.btn-secondary {
+	border-radius: 4px;
+}
+.o_calendar_view .o_calendar_widget .fc-month-view .fc-event {
+	color: black !important;
+}
+.show .dropdown-menu .dropdown-header {
+    color: #cba004;
+    font-weight: bold;
+}

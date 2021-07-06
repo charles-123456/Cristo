@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record id="view_res_asset_form" model="ir.ui.view">
+			<field name="name">res.asset.form</field>
+			<field name="model">res.asset</field>
+			<field name="arch" type="xml">
+				<form string="Assets">
+					<sheet>
+						<div class="oe_title">
+							<label for="name" class="oe_edit_only" />
+							<h1>
+								<field name="name" placeholder="e.g. School Building Block" />
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="asset_code" string="Code" />
+								<field name="institute_id" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution"/>
+								<field name="rel_province_id" options="{'no_open': True, 'no_create':True}" domain="[('institute_id','=',institute_id)]" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution" />
+								<field name="community_id" options="{'no_open': True, 'no_create':True}" domain="[('rel_province_id','=',rel_province_id)]" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution"/>
+								<field name="asset_type" required="1"/>
+								<field name="asset_category_id" options="{'no_open': True, 'no_create': 
+									True}" string="Category" domain="[('parent_id','=', False), ('asset_type', '=', asset_type)]"/>
+								<field name="sub_asset_category_id" options="{'on_open': True, 'no_create': True}" 
+									domain="[('parent_id', '=', asset_category_id),('asset_type', '=', asset_type)]" />	
+							</group>
+							<group>
+								<field name="diocese_id" options="{'no_open': True, 'no_create':True}"  groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_ec_region,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms,cristo.group_role_cristo_bcc"/>
+								<field name="vicariate_id" options="{'no_open': True, 'no_create':True}"  groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_ec_region,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms,cristo.group_role_cristo_bcc"/>
+								<field name="parish_id" options="{'no_open': True, 'no_create':True}"  groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_ec_region,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms,cristo.group_role_cristo_bcc" />
+							</group>
+							
+							<group>
+								<field name="land_location" />
+								<field name="location_id" options="{'no_open': True, 'no_create': 
+									True}" />
+								<field name="currency_id" />
+								<field name="value" widget="monetary"
+									options="{'currency_field': 'currency_id'}" help="Value of asset" />
+							</group>
+						</group>
+						<group string="Land Details">
+							<group>
+								<field name="land_ref_no" />
+								<field name="land_village_name" />
+								<field name="land_survey_no" />
+								<field name="total_area" />
+								<field name="tax_payable" widget="monetary" options="{'currency_field': 'currency_id'}" />
+								<field name="land_classification_id" options="{'no_open': True, 'no_create': True}" />
+								<field name="purchase_date" />
+								<field name="purchase_price" widget="monetary" options="{'currency_field': 'currency_id'}" />
+								<field name="date_of_disposal" />
+								<field name="user_id" invisible="1"/>
+								<field name="sold_price" widget="monetary" options="{'currency_field': 'currency_id'}" />
+<!-- 								<field name="building_type_id" options="{'no_open': True, 'no_create': True}" /> -->							</group>
+							<group>
+								<field name="land_no" />
+								<field name="land_taluk_name" />
+								<field name="land_subdivision_no" />
+								<field name="plinth_area" />
+								<field name="date_of_commencement" />
+								<field name="construction_cost" />
+								<field name="species_id" />
+								<field name="number_species" />
+								<field name="where_situated" />
+								<field name="yiels" />
+								<field name="date_of_destruction" />
+								<field name="amount" />
+								<field name="machinery_id" options="{'no_open': True, 'no_create':True}" />
+								<field name="number_of_machinery" />
+								<field name="date_of_purchase" />
+								<field name="paid_amount" />
+								<field name="date_of_repair" />
+								<field name="repair_cost" />
+							</group>
+						</group>
+
+						<group string="Document Details">
+							<group>
+								<field name="land_doc_no" />
+								<field name="land_volume" />
+								<field name="land_patta_no" />
+							</group>
+							<group>
+								<field name="land_doc_date" />
+								<field name="land_doc_page" />
+							</group>
+						</group>
+						<group string="Total Area">
+							<div class="o_row">
+								<label for="ta_hectare" string="Hectare" />
+								<field name="ta_hectare" />
+								<label for="ta_are" string="Are" />
+								<field name="ta_are" />
+								<label for="ta_acre" string="Acre" />
+								<field name="ta_acre" />
+								<label for="ta_cent" string="Cent" />
+								<field name="ta_cent" />
+							</div>
+						</group>
+						<group string="Total Purchase Area">
+							<div class="o_row">
+								<label for="tpa_hectare" string="Hectare" />
+								<field name="tpa_hectare" />
+								<label for="tpa_are" string="Are" />
+								<field name="tpa_are" />
+								<label for="tpa_acre" string="Acre" />
+								<field name="tpa_acre" />
+								<label for="tpa_cent" string="Cent" />
+								<field name="tpa_cent" />
+							</div>
+						</group>
+						<group>
+							<group string="Seller Details">
+								<field name="seller_name" string="Name" required="1" />
+								<label for="seller_street" string="Address" />
+								<div class="o_address_format">
+									<field name="seller_street" placeholder="Address line 1"
+										required="1" class="o_address_street" />
+									<field name="seller_street2" placeholder="Area/Street"
+										class="o_address_street" />
+									<field name="seller_place" placeholder="Place" class="o_address_street" />
+									<field name="seller_city" placeholder="City/Town/Taluk"
+										required="1" class="o_address_street" />
+									<div class="address_format">
+										<field name="seller_district_id" class="oe_no_button"
+											placeholder="District" options='{"no_open": True, "no_create": True}'
+											required="1" />
+										<field name="seller_state_id" required="1" placeholder="State"
+											style="width: 60%" options="{'no_open': True, 'no_create': True}" />
+										<field name="seller_zip" placeholder="ZIP" style="width: 40%"
+											required="1" />
+									</div>
+									<field name="seller_country_id" placeholder="Country"
+										required="1" options="{'no_open': True, 'no_create': True}" />
+								</div>
+							</group>
+							<group string="Buyer Details">
+								<field name="buyer_name" string="Name" required="1" />
+								<label for="buyer_street" string="Address" />
+								<div class="o_address_format">
+									<field name="buyer_street" placeholder="Address line 1"
+										required="1" class="o_address_street" />
+									<field name="buyer_street2" placeholder="Area/Street"
+										class="o_address_street" />
+									<field name="buyer_place" placeholder="Place" class="o_address_street" />
+									<field name="buyer_city" placeholder="City/Town/Taluk"
+										required="1" class="o_address_street" />
+									<div class="address_format">
+										<field name="buyer_district_id" class="oe_no_button"
+											placeholder="District" options='{"no_open": True, "no_create": True}'
+											required="1" />
+										<field name="buyer_state_id" required="1" placeholder="State"
+											style="width: 60%" options="{'no_open': True, 'no_create': True}" />
+										<field name="buyer_zip" placeholder="ZIP" style="width: 40%"
+											required="1" />
+									</div>
+									<field name="buyer_country_id" placeholder="Country"
+										required="1" options="{'no_open': True, 'no_create': True}" />
+								</div>
+							</group>
+						</group>
+
+						<group string="Register Details">
+							<group>
+								<field name="land_register_at" />
+							</group>
+							<group>
+								<field name="name_of_the_priest" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Upload Files">
+								<div class="alert alert-warning" role="alert">
+                        			<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        		</div>
+								<field name="attachment_ids" widget="many2many_binary" nolabel="1" />
+							</page>
+							<page string="Remark">
+								<field name="remark" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_res_asset_tree" model="ir.ui.view">
+			<field name="name">res.asset.tree</field>
+			<field name="model">res.asset</field>
+			<field name="arch" type="xml">
+				<tree string="Assets">
+					<field name="name" />
+					<field name="asset_category_id" />
+					<field name="location_id" />
+					<field name="currency_id"  />
+					
+				</tree>
+			</field>
+		</record>
+		<record id="action_res_asset" model="ir.actions.act_window">
+			<field name="name">Assets</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.asset</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+	</data>
+</odoo>

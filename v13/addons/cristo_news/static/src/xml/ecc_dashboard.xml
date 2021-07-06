@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-name="DioceseParishDetails" t-extend="DioceseParishDetails">
+		<t t-jquery='.custom_content' t-operation='inner'>
+            <div class="row main-section" style="height:20px;">
+            	<div class="col-xs-12 col-sm-12 col-lg-12">
+            		<div id="breaking-news-container">
+						<div id="breaking-news-colour" class="slideup animated">
+
+						</div>
+						<span class="breaking-title delay-animated slidein">
+						    // News //
+						</span>
+						<span class="breaking-news-headline" style="width:89%;">
+							<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();"><i class="fa fa-asterisk" style="font-size:16px;padding-right: 10px;color:#aa2323;"/><t t-raw="widget.login_member['news_lines']" /></marquee>
+						</span>
+					</div>
+            	</div>
+            </div>
+        </t>
+    </t>
+
+</templates>

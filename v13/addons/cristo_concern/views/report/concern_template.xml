@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="concern_report_template">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <style type="text/css">
+                                label {
+                                font-size:14px;
+                                font-weight: bold;
+                                line-height: 15px;
+                                }
+                                .span4 {
+                                float:left;
+                                font-size:14px;
+                                margin-top: 5px;
+                                }
+                                .data_lbl {
+                                width:20%;
+                                }
+                                .data_val {
+                                width:29%;
+
+                                }
+                                .space-colon {
+                                width:1%;
+                                float:left;
+                                }
+                                .row_div {
+                                float:left;
+                                width:100%;
+                                }
+                    </style>
+                    <div class="oe_structure" />
+                        <fieldset style="margin-top:10px; border:0px solid #ccc">
+                            <table width="100%">
+                                <tr>
+                                    <h1 style="font-size: 27px;padding: 10px;width:30;text-align:center;padding:15px;margin:auto;font-family:Avenir LT Std,Helvetica,Arial,sans-serif">
+                                        <b><span t-field="o.name" /></b>
+                                    </h1>
+                                </tr>
+                            </table>
+                                      <div class="row_div">
+                                        <div class="span4 data_lbl">
+                                            <label>Assigned To</label>
+                                        </div>
+                                        <div class="space-colon">:</div>
+                                        <div class="span4 data_val">
+                                            <span t-if="o.assigned_id" t-field="o.assigned_id.full_name" />
+                                            <span t-if="not o.assigned_id" style="padding-left: 29%;" >-</span>
+                                        </div>
+                                        <div class="span4 data_lbl">
+                                            <label>Tags</label>
+                                        </div>
+                                        <div class="space-colon">:</div>
+                                        <div class="span4 data_val">
+                                            <t t-set="length" t-value="len(o.tag_ids)" />
+                                            <t t-set="record_count" t-value="0" />
+                                            <t t-foreach="o.tag_ids" t-as="tg">
+                                                <t t-set="record_count" t-value="record_count + 1" />
+                                                <span t-if="tg.name" t-field="tg.name" />
+                                                <t t-if="record_count != length">,</t>
+                                                <span t-if="not tg.name" style="padding-left: 29%;">-</span>
+                                            </t>
+                                        </div>
+                                    </div>
+                                    <div class="row_div">
+                                        <div class="span4 data_lbl">
+                                            <label>Province</label>
+                                        </div>
+                                        <div class="space-colon">:</div>
+                                        <div class="span4 data_val">
+                                            <span t-if="o.rel_province_id" t-field="o.rel_province_id" />
+                                            <span t-if="not o.rel_province_id" style="padding-left: 29%;" >-</span>
+                                        </div>
+                                          <div class="span4 data_lbl">
+                                            <label>Stage</label>
+                                        </div>
+                                        <div class="space-colon">:</div>
+                                        <div class="span4 data_val">
+                                          <span t-if="o.state" t-field="o.state" />
+                                          <span t-if="not o.state" style="padding-left: 29%;" />
+                                        </div>
+                                    </div>
+                                    <div class="row_div">
+                                        <t t-if="o.institution_id">
+                                        <div class="span4 data_lbl">
+                                            <label>Institution</label>
+                                        </div>
+                                        <div class="space-colon">:</div>
+                                        <div class="span4 data_val">
+                                            <span t-if="o.institution_id" t-field="o.institution_id.name" />
+                                            <span t-if="not o.institution_id" style="padding-left: 29%;" />
+                                        </div>
+                                        </t>
+                                        <t t-if="o.community_id">
+                                        <div class="span4 data_lbl">
+                                            <label>House/Community</label>
+                                        </div>
+                                        <div class="space-colon">:</div>
+                                        <div class="span4 data_val">
+                                            <span t-if="o.community_id" t-field="o.community_id.name" />
+                                            <span t-if="not o.community_id" style="padding-left: 29%;" />
+                                        </div>
+                                        </t>
+                                    </div>
+                        </fieldset>
+
+                        <fieldset style="margin-top:10px; border:0px solid #ccc" >
+                            <div >
+                                <h2
+                                    style="font-size: 20px;text-align:center;padding:15px;margin:0;font-family:Avenir LT Std,Helvetica,Arial,sans-serif">
+                                    <b>Person Involved</b>
+                                </h2>
+                            </div>
+                            <table class="topics"
+                                style="width:100%;border:1px solid #cfcaca; padding:10px; table-layout: fixed;border-collapse: collapse;">
+                                <tr style="border:1px solid #cfcaca;">
+                                    <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                    <strong>S.No</strong>
+                                    </th>
+                                    <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                    <strong>Name</strong>
+                                    </th>
+                                    <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                    <strong>Date From</strong>
+                                    </th>
+                                    <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                    <strong>Date To</strong>
+                                    </th>
+                                    <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                    <strong>Purpose</strong>
+                                    </th>
+                                </tr>
+                                 <t t-set="count" t-value="1"/>
+                                <t t-foreach="o.concern_team_ids" t-as="con">
+                                    <tr>
+                                        <td
+                                            style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                            <t t-esc="count" />
+                                        </td>
+                                        <td
+                                            style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                            <t t-esc="con.partner_id.name" />
+                                        </td>
+                                        <td
+                                            style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                            <span t-field="con.date_from" t-options='{"widget":"date","format": "dd/MM/yyyy"}' />
+                                        </td>
+                                        <td
+                                            style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                            <t t-esc="con.date_to" t-options='{"widget":"date","format": "dd/MM/yyyy"}'/>
+                                        </td>
+                                        <td
+                                            style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                            <t t-esc="con.purpose" />
+                                        </td>
+                                         <t t-set="count" t-value="count + 1" />
+                                    </tr>
+                                </t>
+                            </table>
+                        </fieldset>
+
+                    <fieldset style="margin-top:10px; border:0px solid #ccc" >
+                        <div >
+                            <h2
+                                style="font-size: 20px;text-align:center;padding:15px;margin:0;font-family:Avenir LT Std,Helvetica,Arial,sans-serif">
+                                <b>History</b>
+                            </h2>
+                        </div>
+                        <table class="topics"
+                            style="width:100%;border:1px solid #cfcaca; padding:10px; table-layout: fixed;border-collapse: collapse;">
+                            <tr style="border:1px solid #cfcaca;">
+                                <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                <strong>S.No</strong>
+                                </th>
+                                <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                <strong>Description</strong>
+                                </th>
+                                <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                <strong>Date</strong>
+                                </th>
+                                <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                <strong>Next Follow-Up Date</strong>
+                                </th>
+                                <th style="background-color:#3498DB !important; border-style: solid !important;padding:10px; border-color: #fff; color:#fff !important; font-size:14px; border:1px solid #cfcaca;">
+                                <strong>Reminder</strong>
+                                </th>
+                            </tr>
+                             <t t-set="count" t-value="1"/>
+                            <t t-foreach="o.concern_history_ids" t-as="ht">
+                                <tr>
+                                    <td
+                                        style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                        <t t-esc="count" />
+                                    </td>
+                                    <td
+                                        style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                        <t t-esc="ht.description" />
+                                    </td>
+                                    <td
+                                        style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                        <span t-field="ht.date" t-options='{"widget":"date","format": "dd/MM/yyyy"}' />
+                                    </td>
+                                    <td
+                                        style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                        <t t-esc="ht.follow_up_date" t-options='{"widget":"date","format": "dd/MM/yyyy"}'/>
+                                    </td>
+                                    <td
+                                        style="padding:10px; font-size:14px; border:1px solid #cfcaca; height:8px;">
+                                        <t t-esc="ht.reminder" />
+                                    </td>
+                                     <t t-set="count" t-value="count + 1" />
+                                </tr>
+                            </t>
+                        </table>
+                    </fieldset>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+

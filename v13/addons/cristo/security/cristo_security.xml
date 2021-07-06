@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<!-- Other Rights -->
+		
+		<record id="group_role_cristo_sisters_menu" model="res.groups">
+			<field name="name">Enable Sister Menu</field>
+		</record>
+		
+		<record id="group_role_cristo_priest_menu" model="res.groups">
+			<field name="name">Enable Priests &amp; Brothers Menu</field>
+		</record>
+		
+		<record id="group_role_cristo_lay_brother_menu" model="res.groups">
+			<field name="name">Enable Lay Brothers Menu</field>
+		</record>
+
+		<record id="group_role_cristo_enable_sacraments_menu" model="res.groups">
+			<field name="name">Enable Sacraments Menu</field>
+		</record>
+
+		<!-- Religious Institute -->
+
+		<record id="module_category_cristo_religious_institute" model="ir.module.category">
+			<field name="name">Religious Institute</field>
+			<field name="sequence">2</field>
+		</record>
+		
+		<record id="group_role_cristo_ri_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_religious_institute" />
+		</record>
+
+		<record id="group_role_cristo_ri_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_religious_institute" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read'))]" />
+		</record>
+		
+		<record id="group_role_cristo_ri_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_religious_institute" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_ri_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_religious_institute" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read'))]" />
+		</record>
+
+		<!-- Religious Province -->
+
+		<record id="module_category_cristo_religious_province" model="ir.module.category">
+			<field name="name">Religious Province</field>
+			<field name="sequence">3</field>
+		</record>
+		
+		<record id="group_role_cristo_rp_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_religious_province" />
+		</record>
+
+		<record id="group_role_cristo_rp_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_religious_province" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_rp_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_rp_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_religious_province" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_rp_write'))]" />
+		</record>
+
+		<record id="group_role_cristo_rp_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_religious_province" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_rp_read'))]" />
+		</record>
+
+		<!-- Religious House -->
+
+		<record id="module_category_cristo_religious_house" model="ir.module.category">
+			<field name="name">Religious House</field>
+			<field name="sequence">4</field>
+		</record>
+
+		<record id="group_role_cristo_rh_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_religious_house" />
+		</record>
+
+		<record id="group_role_cristo_rh_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_religious_house" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_rh_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_rh_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_religious_house" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_rh_write'))]" />
+		</record>
+
+		<record id="group_role_cristo_rh_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_religious_house" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_rh_read'))]" />
+		</record>
+
+		<!-- Apostolic Institution -->
+
+		<record id="module_category_cristo_apostolic_institution"
+			model="ir.module.category">
+			<field name="name">Apostolic Institution</field>
+			<field name="sequence">5</field>
+		</record>
+		
+		<record id="group_role_cristo_ai_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_apostolic_institution" />
+		</record>
+
+		<record id="group_role_cristo_ai_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_apostolic_institution" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ai_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_ai_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_apostolic_institution" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ai_write'))]" />
+		</record>
+
+		<record id="group_role_cristo_ai_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_apostolic_institution" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ai_read'))]" />
+		</record>
+
+		<!-- Association -->
+
+		<record id="module_category_cristo_association" model="ir.module.category">
+			<field name="name">Association</field>
+			<field name="sequence">6</field>
+		</record>
+		
+		<record id="group_role_cristo_association_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_association" />
+		</record>
+		
+		<record id="group_role_cristo_association_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_association" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_association_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_association_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_association" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_association_write'))]" />
+		</record>		
+
+		<record id="group_role_cristo_association_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_association" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_association_read'))]" />
+		</record>
+
+		<!-- Ecclesia Region -->
+
+		<record id="module_category_cristo_ecclesia_region" model="ir.module.category">
+			<field name="name">Ecclesia Region</field>
+			<field name="sequence">7</field>
+		</record>
+		
+		<record id="group_role_ecclesia_region_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_region" />
+		</record>
+		
+		<record id="group_role_cristo_ecclesia_region_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_region" />
+			<field name="implied_ids" eval="[(4, ref('group_role_ecclesia_region_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_ecclesia_region_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_region" />
+			<field name="implied_ids"
+				eval="[(4, ref('group_role_cristo_ecclesia_region_write'))]" />
+		</record>
+
+		<record id="group_role_cristo_ecclesia_region_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_region" />
+			<field name="implied_ids" eval="[(4, ref('group_role_ecclesia_region_read'))]" />
+		</record>
+
+		<!-- Ecclesia Province -->
+
+		<record id="module_category_cristo_ecclesia_province" model="ir.module.category">
+			<field name="name">Ecclesia Province</field>
+			<field name="sequence">8</field>
+		</record>
+
+		<record id="group_role_ecclesia_province_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_province" />
+		</record>
+
+		<record id="group_role_cristo_ecclesia_province_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_province" />
+			<field name="implied_ids" eval="[(4, ref('group_role_ecclesia_province_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_ecclesia_province_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_province" />
+			<field name="implied_ids"
+				eval="[(4, ref('group_role_cristo_ecclesia_province_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_ecclesia_province_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_province" />
+			<field name="implied_ids" eval="[(4, ref('group_role_ecclesia_province_read'))]" />
+		</record>
+
+		<!-- Ecclesia Diocese -->
+
+		<record id="module_category_cristo_ecclesia_diocese" model="ir.module.category">
+			<field name="name">Ecclesia Diocese</field>
+			<field name="sequence">9</field>
+		</record>
+
+		<record id="group_role_ecclesia_diocese_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_diocese" />
+		</record>
+
+		<record id="group_role_cristo_ecclesia_diocese_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_diocese" />
+			<field name="implied_ids" eval="[(4, ref('group_role_ecclesia_diocese_read'))]" />
+		</record>
+		
+		<record id="group_role_cristo_ecclesia_diocese_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_diocese" />
+			<field name="implied_ids"
+				eval="[(4, ref('group_role_cristo_ecclesia_diocese_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_ecclesia_diocese_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_ecclesia_diocese" />
+			<field name="implied_ids" eval="[(4, ref('group_role_ecclesia_diocese_read'))]" />
+		</record>
+
+		<!-- Vicariate -->
+
+		<record id="module_category_cristo_vicariate" model="ir.module.category">
+			<field name="name">Vicariate</field>
+			<field name="sequence">10</field>
+		</record>
+
+		<record id="group_role_cristo_vicariate_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_vicariate" />
+		</record>
+
+		<record id="group_role_cristo_vicariate_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_vicariate" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_vicariate_read'))]" />
+		</record>
+		
+		<record id="group_role_cristo_vicariate_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_vicariate" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_vicariate_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_vicariate_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_vicariate" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_vicariate_read'))]" />
+		</record>
+
+		<!-- Parish/Mission Station -->
+
+		<record id="module_category_cristo_parish" model="ir.module.category">
+			<field name="name">Parish/Mission Station</field>
+			<field name="sequence">11</field>
+		</record>
+
+		<record id="group_role_cristo_parish_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_parish" />
+		</record>
+
+		<record id="group_role_cristo_parish_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_parish" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_parish_read'))]" />
+		</record>
+		
+		<record id="group_role_cristo_parish_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_parish" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_parish_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_parish_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_parish" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_parish_read'))]" />
+		</record>
+
+		<!-- BCC -->
+
+		<record id="module_category_cristo_bcc" model="ir.module.category">
+			<field name="name">BCC</field>
+			<field name="sequence">12</field>
+		</record>
+
+		<record id="group_role_cristo_bcc_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_bcc" />
+		</record>
+
+		<record id="group_role_cristo_bcc_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_bcc" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_bcc_read'))]" />
+		</record>
+		
+		<record id="group_role_cristo_bcc_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_bcc" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_bcc_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_bcc_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_bcc" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_bcc_read'))]" />
+		</record>
+
+		<!-- Family -->
+
+		<record id="module_category_cristo_family" model="ir.module.category">
+			<field name="name">Family</field>
+			<field name="sequence">13</field>
+		</record>
+
+		<record id="group_role_cristo_family_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_family" />
+		</record>
+
+		<record id="group_role_cristo_family_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_family" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_family_read'))]" />
+		</record>
+		
+		<record id="group_role_cristo_family_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_family" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_family_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_family_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_family" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_family_read'))]" />
+		</record>
+
+		<!-- Individual -->
+
+		<record id="module_category_cristo_individual" model="ir.module.category">
+			<field name="name">Individual</field>
+			<field name="sequence">14</field>
+		</record>
+
+		<record id="group_role_cristo_individual_read" model="res.groups">
+			<field name="name">Can Read</field>
+			<field name="category_id" ref="module_category_cristo_individual" />
+		</record>
+
+		<record id="group_role_cristo_individual_write" model="res.groups">
+			<field name="name">Can Write</field>
+			<field name="category_id" ref="module_category_cristo_individual" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_individual_read'))]" />
+		</record>
+		
+		<record id="group_role_cristo_individual_create" model="res.groups">
+			<field name="name">Can Create</field>
+			<field name="category_id" ref="module_category_cristo_individual" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_individual_write'))]" />
+		</record>
+		
+		<record id="group_role_cristo_individual_delete" model="res.groups">
+			<field name="name">Can Delete</field>
+			<field name="category_id" ref="module_category_cristo_individual" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_individual_read'))]" />
+		</record>
+	</data>
+</odoo>

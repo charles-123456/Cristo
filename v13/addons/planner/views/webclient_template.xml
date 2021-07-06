@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_backend_project_planner" name="Planner assets inherit" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+			<!-- ChartJS -->
+			<script type="text/javascript" src="/planner/static/src/lib/chart.js/Chart.min.js"></script>
+			
+            <script type="text/javascript" src="/planner/static/src/js/project_planner.js"/>
+        </xpath>
+    </template>
+
+</odoo>

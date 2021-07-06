@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Member Education -->
+	<record id="member_education_view_pivot" model="ir.ui.view">
+		<field name="name">res.member.education.pivot</field>
+		<field name="model">res.member.education</field>
+		<field name="arch" type="xml">
+			<pivot string="Member Education Statistics">
+				<field name="study_level_id" type="row" />
+				<field name="state" type="col" />
+			</pivot>
+		</field>
+	</record>
+	
+	<record id="member_education_view_search" model="ir.ui.view">
+		<field name="name">res.member.education.search</field>
+		<field name="model">res.member.education</field>
+		<field name="arch" type="xml">
+			<search string="Member Education Statistics">
+				<field name="member_id" />
+				<field name="study_level_id" />
+				<field name="program_id" />
+				<field name="institution" />
+				<field name="year_of_passing" />
+				<field name="state" />
+				<filter string="Active Program" name="open_program" domain="[('state','=','open')]" />
+				<filter string="Active Study Level" name="open_study_level" domain="[('state','=','open')]" />
+				<group expand="1" string="Group By">
+					<filter string="Study Level" name="group_study_level_id" context="{'group_by':'study_level_id'}" />
+					<filter string="Program" name="group_program" context="{'group_by':'program_id'}" />
+					<filter string="State" name="group_state" context="{'group_by':'state'}" />
+					<filter string="Mode" name="group_mode" context="{'group_by':'mode'}" />
+					<filter string="Members" name="group_member_id" context="{'group_by':'member_id'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+	
+	<record id="action_member_education_report" model="ir.actions.act_window">
+		<field name="name">Member Education Statistics</field>
+		<field name="res_model">res.member.education</field>
+		<field name="view_mode">graph,pivot,search</field>
+		<field name="context">{'search_default_group_study_level_id':1,'search_default_group_state':1}</field>
+		<field name="domain">[]</field>
+	</record>
+	
+	<menuitem id="menu_member_education_report" name="Education" parent="cristo.statistics_main_menu" action="action_member_education_report" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms" />
+	
+	<!-- Member Profession -->
+	<record id="member_profession_view_pivot" model="ir.ui.view">
+		<field name="name">res.profession.pivot</field>
+		<field name="model">res.profession</field>
+		<field name="arch" type="xml">
+			<pivot string="Member Profession Statistics">
+				<field name="type" type="row" />
+				<field name="state" type="col" />
+			</pivot>
+		</field>
+	</record>
+	
+	<record id="member_profession_view_search" model="ir.ui.view">
+		<field name="name">res.profession.search</field>
+		<field name="model">res.profession</field>
+		<field name="arch" type="xml">
+			<search string="Member Profession Statistics">
+				<field name="member_id" />
+				<field name="profession_date" />
+				<field name="place" />
+				<field name="type" />
+				<field name="years" />
+				<field name="state" />
+				<filter string="Active Profession" name="open_profession" domain="[('state','=','open')]"/>
+				<group expand="1" string="Group By">
+					<filter string="Type" name="group_type" context="{'group_by':'type'}" />
+					<filter string="State" name="group_state" context="{'group_by':'state'}" />
+					<filter string="Members" name="group_member_id" context="{'group_by':'member_id'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+	
+	<record id="action_member_profession_report" model="ir.actions.act_window">
+		<field name="name">Member Profession Statistics</field>
+		<field name="res_model">res.profession</field>
+		<field name="view_mode">graph,pivot,search</field>
+		<field name="context">{'search_default_group_type':1,'search_default_group_state':1}</field>
+		<field name="domain">[]</field>
+	</record>
+	
+	<menuitem id="menu_member_profession_report" name="Profession" parent="cristo.statistics_main_menu" action="action_member_profession_report" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms" />
+	
+	<!-- Member Formation -->
+	<record id="member_formation_view_pivot" model="ir.ui.view">
+		<field name="name">res.formation.pivot</field>
+		<field name="model">res.formation</field>
+		<field name="arch" type="xml">
+			<pivot string="Member Formation Statistics">
+				<field name="formation_stage_id" type="row" />
+				<field name="state" type="col" />
+			</pivot>
+		</field>
+	</record>
+	
+	<record id="member_formation_view_search" model="ir.ui.view">
+		<field name="name">res.formation.search</field>
+		<field name="model">res.formation</field>
+		<field name="arch" type="xml">
+			<search string="Member Formation Statistics">
+				<field name="member_id" />
+				<field name="institute_id" />
+				<field name="house_id" />
+				<field name="start_year" />
+				<field name="end_year" />
+				<field name="formation_stage_id" />
+				<field name="state" />
+				<filter string="Active Formation" name="open_formation" domain="[('state','=','open')]"/>
+				<group expand="1" string="Group By">
+					<filter string="Stage" name="group_stage_id" context="{'group_by':'formation_stage_id'}" />
+					<filter string="State" name="group_state" context="{'group_by':'state'}" />
+					<filter string="Members" name="group_member_id" context="{'group_by':'member_id'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+	
+	<record id="action_member_formation_report" model="ir.actions.act_window">
+		<field name="name">Member formation Statistics</field>
+		<field name="res_model">res.formation</field>
+		<field name="view_mode">graph,pivot,search</field>
+		<field name="context">{'search_default_group_stage_id':1,'search_default_group_state':1}</field>
+		<field name="domain">[]</field>
+	</record>
+	
+	<menuitem id="menu_member_formation_report" name="Formation" parent="cristo.statistics_main_menu" action="action_member_formation_report" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms" />
+
+	<!-- Member Holy Order -->
+	<record id="member_holyorder_view_pivot" model="ir.ui.view">
+		<field name="name">res.holyorder.pivot</field>
+		<field name="model">res.holyorder</field>
+		<field name="arch" type="xml">
+			<pivot string="Member Holy Order Statistics">
+				<field name="order" type="row" />
+				<field name="state" type="col" />
+			</pivot>
+		</field>
+	</record>
+	
+	<record id="member_holyorder_view_search" model="ir.ui.view">
+		<field name="name">res.holyorder.search</field>
+		<field name="model">res.holyorder</field>
+		<field name="arch" type="xml">
+			<search string="Member Holy Order Statistics">
+				<field name="member_id" />
+				<field name="date" />
+				<field name="place" />
+				<field name="order" />
+				<field name="minister" />
+				<field name="state" />
+				<filter string="Active Holy Order" name="open_holyorder" domain="[('state','=','open')]"/>
+				<group expand="1" string="Group By">
+					<filter string="Order" name="group_order" context="{'group_by':'order'}" />
+					<filter string="State" name="group_state" context="{'group_by':'state'}" />
+					<filter string="Members" name="group_member_id" context="{'group_by':'member_id'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+	
+	<record id="action_member_holyorder_report" model="ir.actions.act_window">
+		<field name="name">Member Holy Order Statistics</field>
+		<field name="res_model">res.holyorder</field>
+		<field name="view_mode">graph,pivot,search</field>
+		<field name="context">{'search_default_group_order':1,'search_default_group_state':1}</field>
+		<field name="domain">[]</field>
+	</record>
+	
+	<menuitem id="menu_member_holyorder_report" name="Holy Order" parent="cristo.statistics_main_menu" action="action_member_holyorder_report" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_priest_menu,cristo.group_role_cristo_lay_brother_menu,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms"/>
+
+</odoo>

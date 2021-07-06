@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_update_education" model="ir.ui.view">
+		<field name="name">update.education.form</field>
+		<field name="model">update.education</field>
+		<field name="arch" type="xml">
+			<form string="Import Education" >
+				<group>
+					<field name="import_option" widget='radio'/>
+				</group>
+                <group>
+                    <field name="file" filename="name"/>
+                </group>	
+				<footer>
+					<button string="Import" name="imoport_file" type="object" class="oe_highlight" />
+					<button string="Cancel" class="oe_link" special="cancel" />
+					<button string="Template File with Headings only" type="object" name="education_template" icon="fa-download" class="oe_link" />
+				</footer>
+			</form>
+		</field>
+	</record>
+	
+	<record id="action_update_education" model="ir.actions.act_window">
+		<field name="name">Education</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">update.education</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+	
+	<menuitem id="update_education_menu" parent="cristo.res_members_updates_menu" name="Education" sequence="8"
+	 action="action_update_education" />
+	
+</odoo>	

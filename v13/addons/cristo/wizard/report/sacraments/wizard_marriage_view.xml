@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_marriage" model="ir.ui.view">
+		<field name="name">wizard.marriage.form</field>
+		<field name="model">wizard.marriage</field>
+		<field name="arch" type="xml">
+			<form string="Marriage">
+				<group>
+					<group>
+						<field name="parish_id" required="1" />
+					</group>
+					<group>
+						<field name="mrg_date_range" required="1" />
+						<field name="start_date" required="1" />
+						<field name="end_date" required="1" />
+					</group>
+				</group>
+				<footer>
+					<button name="print_pdf" string="EXPORT TO PDF" type="object" class="oe_highlight"  />
+					or
+					<button string="CANCEL" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_view_marriage_report" model="ir.actions.act_window">
+		<field name="name">Marriage</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.marriage</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

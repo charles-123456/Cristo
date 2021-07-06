@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="report_rel_province_profile">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+						<div class="page">
+							<style >
+								.page{
+									font-family: Calibri;
+								}
+								th,td{
+								padding: 7px;
+								}
+								thead
+								{
+								display:table-header-group;
+								vertical-align: middle;
+								}
+								tr {
+								page-break-inside: avoid;
+								}
+
+								thead {
+								display:table-header-group;
+								}
+								tfoot{ display:table-footer-group}
+								.count {
+								border-collapse:
+								separate;
+								border-spacing: 25px;
+								}
+								table,th,td{
+
+								vertical-align:middle;
+								border-collapse: collapse;
+
+								}
+								.align_center{
+								text-align:center;
+								}
+								.align_left{
+								text-align:left;
+								}
+								.img{
+								box-shadow: 7px 7px 3px
+								#D6D6D6;
+								border-radius: 50%;
+								}
+								th{
+								background-color:#4682B4;
+								color:white;
+								}
+								.hide_color{
+								background-color:white;
+								color:black;
+								}
+								tr:nth-child(even){
+								background-color: #efeff8;
+								}
+								.head th{
+									background-color:#008B8B;
+									color:white;
+									font-size:18px;
+								}
+								.light-border th{
+									border:1px solid #eee;
+								}
+								.light-border td{
+									border:1px solid #eee;
+								}
+							</style>
+							<div class="oe_structure"/>
+							<table width="100%">
+								<tr>
+									<td width="80%" style="vertical-align: middle;font-size:20px;">
+										<center>
+											<strong style="font-size:27px;">
+												<span t-field="o.name" />
+											</strong>
+										</center>
+									</td>
+								</tr>
+							</table>
+							<div width="100%">
+								<center>
+									<span t-field="o.house_id.street" />
+									<t t-if="o.house_id.street and o.house_id.street2">, </t>
+									<span t-field="o.house_id.street2" />
+									<span t-field="o.house_id.place" />
+									<t t-if="o.house_id.place and o.house_id.city">, </t>
+									<span t-field="o.house_id.city" />
+									<span t-field="o.house_id.state_id" />
+									<t t-if="o.state_id and o.house_id.country_id">, </t>
+									<span t-field="o.house_id.country_id" />
+									<t t-if="o.house_id.zip and o.house_id.country_id">-</t>
+									<span t-field="o.house_id.zip" />
+								</center>
+							</div>
+							<table class="count" width="100%">
+								<tr>
+									<td class="align_center" style="border:1px solid black;vertical-align: middle;">
+										<b>
+											Communities (<span t-esc="get_community_count(o.id)" />)
+										</b>
+									</td>
+									<td class="align_center" style="border:1px solid black;vertical-align: middle;">
+										<b>
+											Institutions (<span t-esc="get_institute_count(o.id)" />)
+										</b>
+									</td>
+								</tr>
+							</table>
+							
+							<table width="100%" class="light-border">
+								<tr>
+									<th width="50%" class="hide_color align_left"> Congregation
+									</th>
+									<td width="50%" class="hide_color align_left">
+										<span t-field="o.institute_id.name" />
+									</td>
+								</tr>
+								<tr>
+									<th class="hide_color align_left"> Code </th>
+									<td class="hide_color align_left">
+										<span t-field="o.code" />
+									</td>
+								</tr>
+								<tr>
+									<th class="hide_color align_left"> Superior</th>
+									<td class="hide_color align_left">
+										<span t-field="o.superior_id.full_name" />
+									</td>
+								</tr>
+								<tr>
+									<th class="hide_color align_left"> Year of Establishment </th>
+									<td class="hide_color align_left">
+										<span t-field="o.establishment_year" />
+									</td>
+								</tr>
+								<tr>
+									<th class="hide_color align_left">
+										Mobile
+									</th>
+									<td class="hide_color align_left">
+										<span t-field="o.mobile" />
+									</td>
+								</tr>
+								<tr>
+									<th class="hide_color align_left">
+										Phone
+									</th>
+									<td class="hide_color align_left">
+										<span t-field="o.phone" />
+									</td>
+								</tr>
+								<tr>
+									<th class="hide_color align_left">
+										Email
+									</th>
+									<td class="hide_color align_left">
+										<span t-field="o.email" />
+									</td>
+								</tr>
+								<tr>
+									<th class="hide_color align_left">
+										Website
+									</th>
+									<td class="hide_color align_left">
+										<span t-field="o.website" />
+									</td>
+								</tr>
+								<t t-if="o.data_source == 'static'">
+									<tr>
+										<th class="hide_color align_left"> 
+											Vision 
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.vision" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left"> 
+											Mission 
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.mission" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Field of Apostolate
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.apostolate" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Other Centers
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.other_centers" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Formation Houses
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.formation_house" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Members working in common house
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.common_house" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left"> 
+											Number of Communities 
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.no_of_communities" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Spread of the Province in different states
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.pro_diff_state_ids" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Spread of the Province in Different Dioceses in India
+										</th>
+										<td class="hide_color align_left">
+											<span t-field="o.diocese_ids" />
+										</td>
+									</tr>
+								</t>
+								<tr>
+										<th class="hide_color align_left">
+											No.of Home/Hostel
+										</th>
+										<td>
+											<span t-esc="get_boarding_institution_count(o.id)"/>
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Number of Parish/Mission
+										</th>
+										<td>
+											<span t-esc="get_parish_count(o)" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Members working outside
+										</th>
+										<td>
+											<span t-field="o.outside_country_members" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">
+											Number of School/College
+										</th>
+										<td>
+											<span t-esc="get_school_college_count(o.id)" />
+										</td>
+									</tr>
+							</table>
+							<br/>
+							<t t-if="o.high_lev_province_ids and o.data_source == 'static'">
+								<div class="row" width="100%">
+									<center>
+										<p style="font-size:20px;">
+											<b>Higher Level Province People Details</b>
+										</p>
+									</center>
+								</div>
+								<table border="1px" width="100%" style="border-collapse:collapse;">
+									<thead class="head">
+										<th>Name</th>
+										<th>Role</th>
+										<th>Birth Day</th>
+										<th>Feast Day</th>
+										<th>Phone No.</th>
+										<th>Email</th>
+									</thead>
+									<tbody>
+										<t t-foreach="o.high_lev_province_ids" t-as="high_level">
+											<tr>
+												<td><t t-esc="high_level.name" /></td>
+												<td><span t-field="high_level.role_id.name" /></td>
+												<td>
+													<t t-if="high_level.feast_day and high_level.feast_month">
+														<span t-field="high_level.feast_day"/>-<span t-field="high_level.feast_month"/>
+													</t>
+												</td>
+												<td>
+													<t t-if="high_level.birth_day and high_level.birth_month">
+														<span t-field="high_level.birth_day"/>-<span t-field="high_level.birth_month"/>
+													</t>
+												</td>
+												<td><span t-field="high_level.phone"/></td>
+												<td><span t-field="high_level.email"/></td>
+											</tr>
+										</t>
+									</tbody>
+								</table>
+							</t>
+							<br/>
+							<t t-if="o.no_of_member_ids and o.data_source == 'static'">
+								<div class="row" width="100%">
+									<center>
+										<p style="font-size:20px;">
+											<b>Number of Members</b>
+										</p>
+									</center>
+								</div>
+								<table border="1px" width="100%" style="border-collapse:collapse;">
+									<thead class="head">
+										<th width="50%">Type</th>
+										<th width="50%">Count</th>
+									</thead>
+									<tbody>
+										<t t-foreach="o.no_of_member_ids" t-as="no_members">
+											<tr>
+												<td width="50%"><t t-esc="no_members.type"/></td>
+												<td width="50%"><t t-esc="no_members.count"/></td>
+											</tr>
+										</t>
+									</tbody>
+								</table>
+							</t>
+							<br/>
+							<t t-if="o.no_of_institution_ids and o.data_source == 'static'">
+								<div class="row" width="100%">
+									<center>
+										<p style="font-size:20px;">
+											<b>Number of Institutions</b>
+										</p>
+									</center>
+								</div>
+								<table border="1px" width="100%" style="border-collapse:collapse;">
+									<thead class="head">
+										<th width="50%">Type</th>
+										<th width="50%">Count</th>
+									</thead>
+									<tbody>
+										<t t-foreach="o.no_of_institution_ids" t-as="no_institutions">
+											<tr>
+												<td width="50%"><t t-esc="no_institutions.type"/></td>
+												<td width="50%"><t t-esc="no_institutions.count"/></td>
+											</tr>
+										</t>
+									</tbody>
+								</table>
+							</t>
+							<br/>
+							<t t-if="o.head_role_ids">
+								<t t-set="provincial_details" t-value="get_provincial_detail(o)"/>
+								<t t-if="provincial_details">
+									<div class="row" width="100%">
+										<center>
+											<p style="font-size:20px;">
+												<b>Provincial Details</b>
+											</p>
+										</center>
+									</div>
+									<table border="1px" width="100%" style="border-collapse:collapse;">
+										<thead class="head">
+											<th>Role</th>
+											<th>Name</th>
+											<th>Phone No.</th>
+											<th>Email</th>
+											<th>Date of Birth</th>
+											<th>Feast Day</th>
+										</thead>
+										<tbody>
+											<t t-foreach="provincial_details" t-as="data">
+												<tr>
+													<td><t t-esc="data[0]"/></td>
+													<td><span t-field="data[1].full_name"/></td>
+													<td><span t-field="data[1].mobile"/></td>
+													<td><span t-field="data[1].email"/></td>
+													<td><span t-field="data[1].dob" t-options="{'widget':'date','format': 'dd-MMM-yyyy'}"/></td>
+													<td>
+														<t t-if="data[1].feast_day and data[1].feast_month">
+															<span t-field="data[1].feast_day"/>-<span t-field="data[1].feast_month"/>
+														</t>
+													</td>
+												</tr>
+											</t>
+										</tbody>
+									</table>
+								</t>
+							</t>
+							<br/>
+							<t t-if="get_council_members(o.id)">
+								<div class="row" width="100%">
+									<center>
+										<p style="font-size:20px;">
+											<b>Council Members</b>
+										</p>
+									</center>
+								</div>
+								<table border="1px" width="100%" style="border-collapse:collapse;">
+									<thead class="head">
+										<th width="50%">Name</th>
+										<th width="50%">Role</th>
+									</thead>
+									<tbody>
+										<t t-foreach="get_council_members(o.id)" t-as="member">
+											<t t-if="member.status == 'active'">
+											<tr>
+												<td width="50%"><t t-esc="member.member_id.full_name"/></td>
+												<td width="50%"><t t-esc="member.role_id.name"/></td>
+											</tr>
+											</t>
+										</t>
+									</tbody>
+								</table>
+							</t>
+							<br/>
+							<t t-set="mem_statistics" t-value="get_statistic_count(o)"/>
+							<t t-if="mem_statistics">
+								<div class="row" width="100%">
+									<center>
+										<p style="font-size:20px;">
+											<b>Statistics</b>
+										</p>
+									</center>
+								</div>
+								<table width="100%" border="1px" style="border-collapse:collapse;">
+									<thead class="head">
+									  <th width="50%">Particulars</th>
+									  <th width="50%">Count</th>
+									</thead>
+									<tbody>
+										<t t-foreach="mem_statistics" t-as="data">
+											<tr>
+												<td width="50%"><span t-esc="data[0]"/></td>
+												<td width="50%"><span t-esc="data[1]"/></td>
+											</tr>
+										</t>
+									</tbody>
+							  	</table>
+								<br/>
+							</t>
+							<t t-if="get_other_center_detail(o.id)">
+								<table width="100%" border="1px" style="border-collapse:collapse;">
+									<thead class="head">
+									  	<th width="100%">Other Centers</th>
+									</thead>
+									<tbody>
+										<t t-foreach="get_other_center_detail(o.id)" t-as="data">
+											<tr>
+												<td width="100%"><t t-esc="data.name"/></td>
+											</tr>
+										</t>
+									</tbody>
+							  	</table>
+								<br/>
+							</t>
+							<t t-if="o.data_source == 'extract'">
+								<t t-set="formation_house" t-value="get_formation_institution_details(o.id)"/>
+								<t t-if="formation_house">
+									<div class="row" width="100%">
+										<center>
+											<p style="font-size:20px;">
+												<b>Formation Houses</b>
+											</p>
+										</center>
+									</div>
+									<table width="100%" border="1px" style="border-collapse:collapse;">
+										<thead class="head">
+											<th width="50%">Institutions</th>
+											<th width="50%">Category</th>
+										</thead>
+										<tbody>
+											<t t-foreach="formation_house" t-as="data">
+												<tr>
+													<td width="50%"><t t-esc="data[1]"/></td>
+													<td width="50%"><t t-esc="data[0]"/></td>
+												</tr>
+											</t>
+										</tbody>
+								  	</table>
+									<br/>
+								</t>
+							</t>
+							<t t-if="o.important_date_ids">
+								<div class="row" width="100%">
+									<center>
+										<p style="font-size:20px;">
+											<b>Important Dates</b>
+										</p>
+									</center>
+								</div>
+								<table border="1px" width="100%" style="border-collapse:collapse;">
+									<thead class="head">
+										<th width="50%">Name</th>
+										<th width="20%">Day</th>
+                                        <th width="30%">Month</th>
+									</thead>
+									<tbody>
+										<t t-foreach="o.important_date_ids" t-as="imp">
+											<tr>
+												<td width="50%"><t t-esc="imp.name"/></td>
+												<td width="20%"><t t-esc="imp.day"/></td>
+												<td width="30%"><t t-esc="dict(imp.fields_get(allfields=['month'])['month']['selection'])[imp.month]"/></td>
+											</tr>
+										</t>
+									</tbody>
+								</table>
+								<br/>
+							</t>
+                            <t t-if="o.feast_date_ids">
+								<div class="row" width="100%">
+									<center>
+										<p style="font-size:20px;">
+											<b>Feast Dates</b>
+										</p>
+									</center>
+								</div>
+								<table border="1px" width="100%" style="border-collapse:collapse;">
+									<thead class="head">
+										<th width="50%">Name</th>
+										<th width="20%">Day</th>
+                                        <th width="30%">Month</th>
+									</thead>
+									<tbody>
+										<t t-foreach="o.feast_date_ids" t-as="fs">
+											<tr>
+												<td width="50%"><t t-esc="fs.name"/></td>
+												<td width="20%"><t t-esc="fs.day"/></td>
+												<td width="30%"><t t-esc="dict(fs.fields_get(allfields=['month'])['month']['selection'])[fs.month]"/></td>
+											</tr>
+										</t>
+									</tbody>
+								</table>
+							<br/>
+							</t>
+            				<br/>            
+							<t t-foreach="get_communities_institutions(o.id)" t-as="communities_institutons">
+								<center>
+									<table width="100%">
+										<tr>
+											<td width="50%" class="align_left"
+												style="background-color: #4682B4;color:#ffffff;font-size:20px;text-align:left;">
+												<b>Community</b>
+											</td>
+											<td width="50%"
+												style="background-color: #4682B4;color:#ffffff;font-size:20px;text-align:left;">
+												<b>
+													<span t-esc="communities_institutons['community'].name" /><t t-if="communities_institutons['community'].code"> (<span t-esc="communities_institutons['community'].code" />)</t>
+												</b>
+											</td>
+										</tr>
+										<tr>
+											<td class="align_left hide_color" style="background-color: #efeff8;">
+												<b>Patron</b>
+											</td>
+											<td class="align_left hide_color" style="background-color: #efeff8;">
+												<span t-esc="communities_institutons['community'].patron_id.name" />
+											</td>
+										</tr>
+										<!-- <tr>
+											<td class="align_left hide_color">
+												<b>Code</b>
+											</td>
+											<td class="align_left hide_color" >
+												<span t-esc="communities_institutons['community'].code" />
+											</td>
+										</tr> -->
+										<tr>
+											<td class="align_left hide_color">
+												<b>Superior</b>
+											</td>
+											<td class="align_left hide_color">
+												<span t-esc="communities_institutons['community'].superior_id.name" />
+											</td>
+										</tr>
+										<!-- <tr>
+											<td class="align_left">
+												<b>Year of Establishment</b>
+											</td>
+											<td class="align_left hide_color">
+												<span
+													t-esc="communities_institutons['community'].establishment_year" />
+											</td>
+										</tr> -->
+										<tr>
+											<td class="align_left" style="background-color: #efeff8;">
+												<b>Mobile</b>
+											</td>
+											<td class="align_left hide_color" style="background-color: #efeff8;">
+												<span
+													t-esc="communities_institutons['community'].mobile" />
+											</td>
+										</tr>
+										<tr>
+											<td class="align_left" >
+												<b>Email</b>
+											</td>
+											<td class="align_left hide_color">
+												<span
+													t-esc="communities_institutons['community'].email" />
+											</td>
+										</tr>
+										<tr>
+											<td width="50%" class="align_left hide_color" style="background-color: #efeff8;">
+												<b>
+													Address
+												</b>
+											</td>
+											<td width="50%" class="align_left hide_color" style="background-color: #efeff8;">
+												<span t-field="communities_institutons['community'].street" />
+												<t
+													t-if="communities_institutons['community'].street and communities_institutons['community'].street2">, </t>
+												<span t-field="communities_institutons['community'].street2" />
+
+												<span t-field="communities_institutons['community'].place" />
+												<t
+													t-if="communities_institutons['community'].place and communities_institutons['community'].city">, </t>
+												<span t-field="communities_institutons['community'].city" />
+												<br />
+												<span t-field="communities_institutons['community'].state_id" />
+												<t
+													t-if="communities_institutons['community'].country_id and communities_institutons['community'].state_id">
+													,
+												</t>
+												<span t-field="communities_institutons['community'].country_id" />
+												<t
+													t-if="communities_institutons['community'].zip and communities_institutons['community'].country_id">-</t>
+												<span t-field="communities_institutons['community'].zip" />
+
+											</td>
+										</tr>
+										<tr>
+											<td class="align_left" >
+												<b>Website</b>
+											</td>
+											<td class="align_left hide_color">
+												<span
+													t-esc="communities_institutons['community'].website" />
+											</td>
+										</tr>
+									</table>
+									
+									<t t-if="communities_institutons['institutions']">
+										<table width="95%">
+											
+											<tr>
+											<td width="50%" class="align_left"
+												style="background-color: #808080;color:#ffffff;font-size:20px;text-align:left;">
+												<b>Institutions</b>
+											</td>
+											<td width="50%"
+												style="background-color: #808080;color:#ffffff;font-size:20px;text-align:left;">
+												<b>
+													Service
+												</b>
+											</td>
+											</tr>
+												<t t-foreach="communities_institutons['institutions']" t-as="institute">
+												<tr>
+													<td>
+														<span t-esc="institute.name" />
+													</td>
+													<td>
+														<span t-esc="institute.ministry_category_id.name" />
+													</td>
+												</tr>
+											</t>
+										</table>
+									</t>
+									<hr />
+									<br />
+								</center>
+							</t>
+
+						</div>
+					</t>
+				</t>
+		</template>
+	</data>
+</odoo>

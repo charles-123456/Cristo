@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Ecclesia Diocese -->
+
+	<record id="res_ecclesia_diocese_calendar_meeting_view" model="ir.ui.view">
+        <field name="name">res.ecclesia.diocese.form.inherit</field>
+        <field name="model">res.ecclesia.diocese</field>
+        <field name="inherit_id" ref="cristo.view_ecclesia_diocese_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//sheet" position="inside">
+        		<field name="is_calendar_show" invisible="1"/>
+        		<field name="is_meeting_show" invisible="1"/>
+        	</xpath>
+        	<xpath expr="//div[@name='button_box']" position="inside">
+        		 <button name="open_calendar" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Calendar" attrs="{'invisible':[('is_calendar_show','=',False)]}"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo_calendar_meeting.group_role_enable_calendar">
+				</button>
+				<button name="open_meeting" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Meeting(s)" attrs="{'invisible':[('is_meeting_show','=',False)]}"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo_calendar_meeting.group_role_enable_meeting">
+				</button>
+        	</xpath>
+        </field>
+	 </record>
+
+	<!-- Ecclesia Vicariate -->
+
+	<record id="res_ecclesia_vicariate_calendar_meeting_view" model="ir.ui.view">
+        <field name="name">res.vicariate.form.inherit</field>
+        <field name="model">res.vicariate</field>
+        <field name="inherit_id" ref="cristo.view_vicariate_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//sheet" position="inside">
+        		<field name="is_calendar_show" invisible="1"/>
+        		<field name="is_meeting_show" invisible="1"/>
+        	</xpath>
+        	<xpath expr="//div[@name='button_box']" position="inside">
+        		<button name="open_calendar" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Calendar" attrs="{'invisible':[('is_calendar_show','=',False)]}"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo_calendar_meeting.group_role_enable_calendar">
+				</button>
+				<button name="open_meeting" type="object" class="oe_stat_button"
+						icon="fa-external-link" string="Meeting(s)" attrs="{'invisible':[('is_meeting_show','=',False)]}"
+						groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo_calendar_meeting.group_role_enable_meeting">
+				</button>
+        	</xpath>
+        </field>
+    </record>
+
+</odoo>

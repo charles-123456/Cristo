@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.module.category" id="module_concern_management">
+		<field name="name">CristO Concern</field>
+		<field name="description">Helps you manage your concerns</field>
+		<field name="sequence">14</field>
+	</record>
+
+	<record id="group_concern_user" model="res.groups">
+		<field name="name">User</field>
+		<field name="category_id" ref="module_concern_management" />
+		<field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+	</record>
+
+	<record id="group_concern_unit_head" model="res.groups">
+		<field name="name">OU Head/Secretary</field>
+		<field name="category_id" ref="module_concern_management" />
+		<field name="implied_ids" eval="[(4, ref('group_concern_user'))]" />
+	</record>
+	
+	<record id="group_concern_admin" model="res.groups">
+		<field name="name">Admin</field>
+		<field name="category_id" ref="module_concern_management" />
+		<field name="implied_ids" eval="[(4, ref('group_concern_unit_head'))]" />
+	</record>
+	
+<!-- **************************************** RECORD RULE BEGIN ************************************************** -->	
+	
+	<!-- Concern Admin -->
+	
+	<record id="concern_admin_rule" model="ir.rule">
+       	<field name="name">Concern Admin</field>
+       	<field name="model_id" ref="model_cristo_concern"/>
+       	<field name="domain_force">[(1, '=', 1)]</field>
+       	<field name="groups" eval="[(4,ref('base.group_erp_manager')),(4,ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+    </record>	
+	
+	<!-- Concern Congregation -->
+	<!-- <record id="concern_congregation_rule" model="ir.rule">
+       	<field name="name">Concern Congregation</field>
+       	<field name="model_id" ref="model_cristo_concern"/>
+       	<field name="domain_force">['|','|',('institute_id','=',user.institute_id.id),('assigned_id','=', user.partner_id.id),('concern_team_ids.partner_id.id','=', user.partner_id.id)]</field>
+       	<field name="groups" eval="[(4,ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+    </record> -->
+	
+	<!-- Concern Province -->
+	<!-- <record id="concern_province_rule" model="ir.rule">
+       	<field name="name">Concern Province</field>
+       	<field name="model_id" ref="model_cristo_concern"/>
+       	<field name="domain_force">['|','|',('rel_province_id','=',user.rel_province_id.id),('assigned_id','=', user.partner_id.id),('concern_team_ids.partner_id.id','=', user.partner_id.id)]</field>
+       	<field name="groups" eval="[(4,ref('cristo.group_role_cristo_religious_province'))]" />
+    </record> -->
+    
+    <!-- Concern House/Community -->
+    <!-- <record id="concern_community_rule" model="ir.rule">
+       	<field name="name">Concern Community</field>
+       	<field name="model_id" ref="model_cristo_concern"/>
+       	<field name="domain_force">['|','|',('community_id','=',user.community_id.id),('assigned_id','=', user.partner_id.id),('concern_team_ids.partner_id.id','=', user.partner_id.id)]</field>
+       	<field name="groups" eval="[(4,ref('cristo.group_role_cristo_religious_house'))]" />
+    </record> -->
+    
+    <!-- Concern Institution -->
+    <!-- <record id="concern_institution_rule" model="ir.rule">
+       	<field name="name">Concern Institution</field>
+       	<field name="model_id" ref="model_cristo_concern"/>
+       	<field name="domain_force">['|','|',('institution_id','=',user.institution_id.id),('assigned_id','=', user.partner_id.id),('concern_team_ids.partner_id.id','=', user.partner_id.id)]</field>
+       	<field name="groups" eval="[(4,ref('cristo.group_role_cristo_apostolic_institution'))]" />
+    </record> -->
+    
+    <!-- Concern Member -->
+    <!-- <record id="concern_member_rule" model="ir.rule">
+       	<field name="name">Concern Member</field>
+       	<field name="model_id" ref="model_cristo_concern"/>
+       	<field name="domain_force">['|',('assigned_id','=', user.partner_id.id),('concern_team_ids.partner_id.id','=', user.partner_id.id)]</field>
+       	<field name="groups" eval="[(4,ref('cristo.group_role_cristo_individual'))]" />
+    </record> -->
+    
+    <!-- Concerns User and Manager -->
+    <record id="concern_user_rule" model="ir.rule">
+       	<field name="name">Concern User</field>
+       	<field name="model_id" ref="model_cristo_concern"/>
+       	<field name="domain_force">['|',('assigned_id','=', user.partner_id.id),('concern_team_ids.partner_id.id','=', user.partner_id.id)]</field>
+       	<field name="groups" eval="[(4,ref('cristo_concern.group_concern_user'))]" />
+    </record>
+    
+    <record id="concern_manager_rule" model="ir.rule">
+       	<field name="name">Concern Manager</field>
+       	<field name="model_id" ref="model_cristo_concern"/>
+       	<field name="domain_force">['|','|',('assigned_id','=', user.partner_id.id),('concern_team_ids.partner_id.id','=', user.partner_id.id),('assigned_id','in',user.institute_id.member_ids.mapped('partner_id.id'))]</field>
+       	<field name="groups" eval="[(4,ref('cristo_concern.group_concern_unit_head'))]" />
+    </record>
+    
+</odoo>

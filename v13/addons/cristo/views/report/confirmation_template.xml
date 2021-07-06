@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="cristo.confirmation_report_template">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+					<div class="page">
+						<style type="text/css">
+							div.heading{
+							text-transform: uppercase;
+							line-height:0.5;
+							}
+							.head{
+							font-size:20px;
+							font-family:Calibri;
+							width:30%;
+							line-height:1.5;
+							padding-left: 30px;
+							}
+							td.colan{
+							width:10%;
+							float:left;
+							}
+
+							td.body{
+							width:10%;
+							float:left;
+							font-size:20px;
+							font-family:Calibri;
+							}
+						</style>
+						<div class="oe_structure" />
+						<div style="border:8px double;">
+							<table width="100%"
+								style="border:5px double;border-top-width: thick;border-bottom-width: thin;">
+								<div width="100%" class="heading">
+									<center>
+										<b>
+										<t t-if="o.parish_id.diocese_id.is_archdiocese == True">
+												<h2 style="font-size:20px;">
+													ARCHDIOCESE OF
+													<span t-field="o.parish_id.diocese_id.name" />
+												</h2>
+											</t>
+											<t t-if="o.parish_id.diocese_id.is_archdiocese == False">
+												<h2 style="font-size:20px;">
+													DIOCESE OF
+													<span t-field="o.parish_id.diocese_id.name" />
+												</h2>
+											</t>
+											<h2 style="font-size:20px;">
+												CONFIRMATION CERTIFICATE
+											</h2>
+											<h2 style="font-size:20px;">
+												EXTRACT FROM THE PAROCHIAL REGISTER OF
+											</h2>
+											<h2 style="font-size:20px;">
+												<span t-field="o.parish_id.street" />
+												<t t-if="o.parish_id.name">
+													,
+													<span t-field="o.parish_id.name" />
+												</t>
+											</h2>
+										</b>
+									</center>
+								</div>
+								<div style="border-bottom: 4px solid black; box-shadow: 0px 3px 0px 0px white, 0px 4px 0px 0px black"/>
+								<table style="width:100%;text-align: left;">
+									<tr style="padding-top: 25px;">
+										<th style="padding-top: 25px;" class="head">Register No</th>
+										<td style="padding-top: 25px;" class="colan">:</td>
+										<td style="padding-top: 25px;">
+											<span class="body" t-field="o.cnf_register_ref" />
+											<span class="body" t-if="not o.cnf_register_ref" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Name</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.name" />
+											<span class="body" t-if="not o.name" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Gender</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.gender" />
+											<span class="body" t-if="not o.gender" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Date of Birth</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.dob" />
+											<span class="body" t-if="not o.dob" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Place of Birth</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.cnf_place" /> <span class="body" 
+												t-if="not o.cnf_place" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Name of Father</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.father_name" />
+											<span class="body" t-if="not o.father_name" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Name of Mother</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.mother_name" /> <span class="body" 
+												t-if="not o.mother_name" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Residence of Parents</th>
+										<td class="colan">:</td>
+										<td>
+										<t t-if="o.bapt_register_id.father_domicile">
+												<span class="body" t-field="o.bapt_register_id.father_domicile" />
+											</t>
+											<t t-if="o.bapt_register_id.mother_domicile">
+												, <span class="body" t-field="o.bapt_register_id.mother_domicile" />
+											</t>
+										</td>
+									</tr>
+									<tr>
+										<th class="head">God Father</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.cnf_god_father" />
+											<span class="body" t-if="not o.cnf_god_father" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">God Mother</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.cnf_god_mother" />
+											<span class="body" t-if="not o.cnf_god_mother" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Date of Confirmation</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.cnf_date" />
+											<span class="body" t-if="not o.cnf_date" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									<tr>
+										<th class="head">Minister of Confirmation</th>
+										<td class="colan">:</td>
+										<td>
+											<span class="body" t-field="o.cnf_minister" />
+											<span class="body" t-if="not o.cnf_minister" style="padding-left: 29%;" />
+										</td>
+									</tr>
+									
+								</table>
+								<br />
+								<div
+									style="margin-top: 50px;font-size: 15px;text-align:center;padding:20px;margin:0;font-family:Calibri;">
+									Certified to be a true copy of Confirmation Register Kept at
+									<t>
+										<span t-field="o.parish_id.street" />
+										<t t-if="o.parish_id.name">
+											,
+											<span t-field="o.parish_id.name" />
+										</t>
+									</t>
+									
+								</div>
+								<br />
+								<br />
+								<table style="width:100%;text-align: left;">
+									<tr>
+										<th style="padding-left: 30px;font-size:20px;font-family:Calibri;width:8%;line-height:1.5;" >Place</th>
+										<td align="left" width="2%">&#160; :</td>
+										<td>
+										<t>
+											<span t-field="o.parish_id.street" />
+											<t t-if="o.parish_id.name">
+												,
+												<span t-field="o.parish_id.name" />
+											</t>
+										</t>
+										</td>
+									</tr>
+									<tr>
+										<th style="padding-left: 30px;font-size:20px;font-family:Calibri;width:8%;line-height:1.5;">Date &#160;</th>
+										<td align="left" width="2%">&#160; :</td>
+										<td style="text-align:left">
+											<span t-esc="time.strftime('%d-%m-%Y')" />
+										</td>
+										<td style="text-align:right;">
+											<span style="padding-right:39%;font-size:20px;font-family:Calibri;padding-left:15px;">
+												<b>Parish Preist</b>
+											</span>
+										</td>
+									</tr>
+								</table>
+								<br></br>
+								<br></br>
+							</table>
+						</div>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="rest_api_access_history_form" model="ir.ui.view">
+		<field name="name">rest.api.access.history.form</field>
+		<field name="model">rest.api.access.history</field>
+		<field name="arch" type="xml">
+			<form string="Rest API Access History">
+				<sheet>
+					<group>
+						<field name="user_id" />
+						<field name="origin" />
+						<field name="api_path" />
+						<field name="accessed_on" />
+						<field name="access_token" style="width: 100%; word-break:break-all;" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="rest_api_access_history_tree" model="ir.ui.view">
+		<field name="name">rest.api.access.history.tree</field>
+		<field name="model">rest.api.access.history</field>
+		<field name="arch" type="xml">
+			<tree string="Rest API Access History">
+				<field name="user_id" />
+				<field name="origin" />
+				<field name="api_path" />
+				<field name="accessed_on" />
+				<field name="access_token" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_rest_api_access_history" model="ir.actions.act_window">
+		<field name="name">Rest API Access History</field>
+		<field name="res_model">rest.api.access.history</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem action="action_rest_api_access_history" id="menu_rest_api_access_history"
+		parent="base.menu_users" groups="base.group_no_one" sequence="4" />
+
+</odoo>

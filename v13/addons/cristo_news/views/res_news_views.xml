@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_res_news_form" model="ir.ui.view">
+		<field name="name">res.news.view.form</field>
+		<field name="model">res.news</field>
+		<field name="arch" type="xml">
+			<form string="News" duplicate="0">
+				<sheet>
+					<group>
+						<label for="name" string="News Title"/>
+						<field name="name" />
+						<group>
+							<field name="state" widget="radio" options="{'horizontal': true}"/>
+							<field name="is_house" invisible="context.get('is_house',False)"/>
+							<field name="sequence" invisible="1" />
+							<field name="institute_id" invisible="1" />
+							<field name="rel_province_id" invisible="1" />
+							<field name="community_id" invisible="1" />
+						</group>
+					</group>
+				<label for="description" string="Description"/>
+				<field name="description"/>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_res_news_tree" model="ir.ui.view">
+		<field name="name">res.news.view.tree</field>
+		<field name="model">res.news</field>
+		<field name="arch" type="xml">
+			<tree string="News">
+				<field name="sequence" widget="handle" />
+				<field name="name" />
+				<field name="state" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_res_news_search" model="ir.ui.view">
+		<field name="name">res.news.view.search</field>
+		<field name="model">res.news</field>
+		<field name="arch" type="xml">
+			<search string="News">
+				<field name="name" />
+				<filter string="My News" name="my_news" domain="[]" />
+			</search>
+		</field>
+	</record>
+
+	<record id="action_news_report" model="ir.actions.act_window">
+		<field name="name">News</field>
+		<field name="res_model">res.news</field>
+		<field name="view_mode">tree,form,search</field>
+		<field name="context">{'search_default_my_news':1}</field>
+	</record>
+
+	<menuitem id="menu_news" name="News" action="action_news_report" parent="cristo.configuration_main_menu" sequence="20"/>
+
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<report id="directory_report_xlsx"
+			    model="res.directory"
+			    string="Directory Report"
+			    report_type="xlsx"
+			    name="cristo_directory.report_directory"
+			    file="report_directory"
+				menu="False"
+				/>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_commission,res.commission,model_res_commission,base.group_erp_manager,1,1,1,1
+access_res_commission_member,res.commission.member,model_res_commission_member,base.group_erp_manager,1,1,1,1
+,,,,,,,
+access_res_commission_read,res.commission,model_res_commission,group_role_cristo_commission_read,1,0,0,0
+access_res_commission_write,res.commission,model_res_commission,group_role_cristo_commission_write,0,1,0,0
+access_res_commission_create,res.commission,model_res_commission,group_role_cristo_commission_create,0,0,1,0
+access_res_commission_delete,res.commission,model_res_commission,group_role_cristo_commission_delete,0,0,0,1
+,,,,,,,
+access_res_commission_members_read,res.commission.member,model_res_commission_member,group_role_cristo_commission_read,1,0,0,0
+access_res_commission_members_write,res.commission.member,model_res_commission_member,group_role_cristo_commission_write,1,1,1,1

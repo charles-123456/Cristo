@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Congregation -->
+	
+	<record id="res_religious_institute_news_view" model="ir.ui.view">
+        <field name="name">res.religious.institute.form.inherit</field>
+        <field name="model">res.religious.institute</field>
+        <field name="inherit_id" ref="cristo.view_religious_institute_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//notebook/page[@name='history']" position="after">
+        		<page string="News">
+					<field name="news_ids" context="{'is_house':1}" />
+				</page>
+        	</xpath>
+        </field>
+    </record>
+	
+	<!-- Religious Province -->
+	
+	<record id="res_religious_province_news_view" model="ir.ui.view">
+        <field name="name">res.religious.province.form.inherit</field>
+        <field name="model">res.religious.province</field>
+        <field name="inherit_id" ref="cristo.view_religious_province_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//notebook/page[@name='history']" position="after">
+        		<page string="News" name="news">
+					<field name="news_ids" context="{'is_house':0}" />
+				</page>
+        	</xpath>
+        </field>
+    </record>
+    
+    <!-- Religious House/Community -->
+	
+	<record id="res_community_news_view" model="ir.ui.view">
+        <field name="name">res.community.form.inherit</field>
+        <field name="model">res.community</field>
+        <field name="inherit_id" ref="cristo.view_religious_community_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//notebook/page[@name='history']" position="after">
+        		<page string="News" name="news">
+					<field name="news_ids" context="{'is_house':1}" />
+				</page>
+        	</xpath>
+        </field>
+    </record>
+</odoo>

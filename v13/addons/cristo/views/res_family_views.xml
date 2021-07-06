@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Family -->
+        <record id="view_family_form" model="ir.ui.view">
+            <field name="name">res.family.form</field>
+            <field name="model">res.family</field>
+            <field name="arch" type="xml">
+                <form string="Family">
+                	<header>
+						<button name='print_family_card_report' string="Print Certificate" type='object' class="btn btn-info"/>
+					</header>
+                	<sheet>
+                		<div class="oe_button_box" name="button_box">
+                			<button name="open_members" type="object" class="oe_stat_button" icon="fa-user">
+								<field name="member_count" widget="statinfo" string="Members" />
+							</button>
+						</div>
+						<field name="image_1920" widget='image' class="oe_avatar"
+							options='{"preview_image": "image_medium", "size": [90, 90]}' />
+						<div class="oe_title">
+							<label for="name" />
+							<h1>
+								<field name="name" default_focus="1" placeholder="Husband &amp; Wife Name"
+									tabindex='1' required="1"/>
+							</h1>
+							<div class="o_row">
+								<field name="parish_bcc_id" tabindex='2'
+									options="{'no_create': True}" placeholder="Basic Christian Community"
+									help="Basic Christian Community" domain="[('parish_id','=',parish_id)]"/>
+							</div>
+							<div class="o_row">
+								<field name="zone_id" placeholder="Zone" help="Zone" domain="[('parish_id','=',parish_id)]"/>
+							</div>
+						</div>
+						
+						<group>
+							<group>
+								<field name="register_date" tabindex='3' />
+								<field name="family_head_id" tabindex='7'
+									context="{'form_view_ref':'base.view_partner_form'}" domain="[('membership_type','=', 'LT')]" />
+								<field name="lang_community_id" 
+									options="{'no_open': True, 'no_create': True}" tabindex='11' />
+								<field name="reference" class="oe_edit_only" />
+								<field name="settlement_status" tabindex='6' />
+							</group>
+							<group>
+								<field name="family_register_number" tabindex='4' />
+								<field name="diocese_id" options="{'no_open': True, 'no_create': True}" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin" required="1"/>
+								<field name="vicariate_id" domain="[('diocese_id','=',diocese_id)]" options="{'no_open': True, 'no_create': True}" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese" />
+								<field name="parish_id" domain="[('diocese_id','=',diocese_id)]" placeholder="Parish" 
+									options="{'no_open': True, 'no_create': True}" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate"/>
+								<field name="sub_station_id" placeholder="Sub Station" domain="[('parish_id','=',parish_id)]"
+									options="{'no_open': True, 'no_create': True}"
+									attrs="{'invisible': [('parish_id','=', False)]}" />
+								<field name="rite_id" tabindex='13'
+									options="{'no_open': True, 'no_create': True}" />
+								<label for="active_in_parish" />
+								<div>
+									<field name="active_in_parish" class="oe_inline" />
+									<field name="date_of_exit" class="oe_inline"
+										attrs="{'invisible': [('active_in_parish', '=', True)], 'required': [('active_in_parish', '=', False)]}"
+										placeholder="Exit Date" invisible="1" />
+								</div>
+								<field name="inactive_parish_reason"
+									attrs="{'invisible': [('active_in_parish', '=', True)], 'required': [('active_in_parish', '=', False)]}" />
+							</group>
+						</group>
+						<group>
+							<group>
+								<label for="is_civil_marriage" string="Civil Marriage?" />
+								<div>
+									<field name="is_civil_marriage" class="oe_inline" />
+									<field name="civil_marriage_date" class="oe_inline"
+										attrs="{'invisible': [('is_civil_marriage', '=', False)], 'required': [('is_civil_marriage', '=', True)]}" />
+								</div>
+							</group>
+							<group>
+								<label for="is_church_marriage" string="Church Marriage?" />
+								<div>
+									<field name="is_church_marriage" class="oe_inline" />
+									<field name="church_marriage_date" class="oe_inline"
+										attrs="{'invisible': [('is_church_marriage', '=', False)], 'required': [('is_church_marriage', '=', True)]}" />
+								</div>
+								<field name="marriage_type" />
+							</group>
+						</group>
+						<group>
+							<group>
+								<field name="house_type_id"
+									options="{'no_open': True, 'no_create': True}" tabindex='14' />
+								<label for="family_income" string="Income" />
+								<div>
+									<field name='family_income' placeholder="Family Income"
+										help="Family Income" />
+									<field name="income_type" class="oe_inline" tabindex='17' />
+								</div>
+							</group>
+							<group>
+								<field name="house_ownership" tabindex='15' />
+								<field name="rent_amt"
+									attrs="{'invisible': [('house_ownership','!=', 'rent')]}" />
+							</group>
+						</group>
+						<group name="address">
+							<group>
+								<label for="street" string="Residential Address" />
+								<div class="o_address_format">
+									<field name="street" placeholder="Address line 1" string="Address line 1"
+										required="1" tabindex='21' class="o_address_street" />
+									<field name="street2" placeholder="Area/Street" class="o_address_street"
+										string="Street 2" />
+									<field name="place" placeholder="Place" class="o_address_street"
+										string="Place" />
+									<field name="city" placeholder="City/Town/Taluk"
+										required="1" class="o_address_street" string="City" />
+									<div class="address_format">
+										<field name="district_id" required="1" placeholder="District"
+											style="width: 60%%" options="{'no_open': True, 'no_create': True}"
+											string="District" />
+										<field name="state_id" required="1" placeholder="State"
+											style="width: 40%%" options="{'no_open': True, 'no_create': True}"
+											string="State" />
+									</div>
+									<div class="address_format">
+										<field name="country_id" placeholder="Country" required="1"
+											options="{'no_open': True, 'no_create': True}" string="Country" style="width: 60%%" />
+										<field name="zip" placeholder="PIN Code" style="width: 40%%"
+												required="1" string="Zip" />
+									</div>				
+								</div>
+							</group>
+							<group>
+								<field name="mobile" string="Mobile" />
+								<field name="phone" placeholder="" string="Phone" />
+								<field name="email" widget="email" string="Email" />
+								<field name="website" widget="url" string="Website/Blog"
+									placeholder="e.g. www.lourdeschurchyelagiri.org" />
+							</group>
+						</group>
+						<group name="address">
+							<group>
+								<label for="permanent_street" string="Permanent Address" />
+								<div class="o_address_format">
+									<field name="same_as_above_address" />
+									<label for="same_as_above_address" string="Same as above" />
+									<field name="permanent_street" placeholder="Address line 1"
+										class="o_address_street" string="Street" />
+									<field name="permanent_street2" placeholder="Area/Street"
+										class="o_address_street" string="Street2" />
+									<field name="permanent_place" placeholder="Place"
+										class="o_address_street" string="Place" />
+									<field name="permanent_city" placeholder="City/Town/Taluk"
+										class="o_address_street" string="City" />
+									<div class="address_format">
+										<field name="permanent_district_id" placeholder="District"
+											style="width: 60%%" options="{'no_open': True, 'no_create': True}"
+											string="District" />
+										<field name="permanent_state_id" placeholder="State"
+											style="width: 40%%" options="{'no_open': True, 'no_create': True}"
+											string="State" />
+									</div>
+									<div class="address_format">
+										<field name="permanent_country_id" placeholder="Country"
+											options="{'no_open': True, 'no_create': True}" string="Country" style="width: 60%%" />
+										<field name="permanent_zip" placeholder="PIN Code" style="width: 40%%"
+												string="Zip" />
+									</div>				
+								</div>
+							</group>
+							<group>
+								<field name="permanent_mobile" string="Permanent Mobile" />
+								<field name="permanent_phone" placeholder="" string="Phone" />
+								<field name="permanent_email" widget="email" string="Email" />
+								<field name="permanent_website" widget="url" string="Website/Blog"
+									placeholder="e.g. www.lourdeschurchyelagiri.org" />
+							</group>
+						</group>
+						<notebook name="family_members">
+							<page string="Family Members">
+								<field name="child_ids" readonly="1">
+									<tree editable="bottom">
+										<field name="name" required="1"/>
+										<field name="unique_code" />
+										<field name="gender" required="1" />
+										<field name="relationship_id" options='{"no_open": True, "no_create": True}' />
+										<field name="is_family_head" width="0.4" />
+									</tree>
+								</field>
+							</page>
+							<page name='internal_notes' string="Remarks">
+								<field name="comment" placeholder="Input something as an internal note..." />
+							</page>
+						</notebook>
+                	</sheet>
+                	<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_family_tree" model="ir.ui.view">
+            <field name="name">res.family.tree</field>
+            <field name="model">res.family</field>
+            <field name="arch" type="xml">
+                <tree string="Family" default_order="name asc"  import="1" expand="1" >
+                	<field name="family_register_number" />
+                    <field name="name" />
+                    <field name="family_head_id" />
+                    <field name="parish_bcc_id" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_family_search" model="ir.ui.view">
+            <field name="name">res.family.search</field>
+            <field name="model">res.family</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="family_register_number" />
+                    <field name="parish_bcc_id" />
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_res_family" model="ir.actions.act_window">
+            <field name="name">Family</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.family</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>
+        
+    </data>
+</odoo>

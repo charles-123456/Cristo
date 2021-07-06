@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_organization_mail_form" model="ir.ui.view">
+		<field name="name">org.mail.form</field>
+		<field name="model">org.mail</field>
+		<field name="arch" type="xml">
+			<form string="Organization Mail">
+				<sheet>
+					<label for="mail_subject" class="oe_edit_only"/>
+					<h2><field name="mail_subject" required="1" placeholder="#Subject" /></h2>
+					<div class="alert alert-warning text-center" role="alert" attrs="{'invisible': [('mail_server_id','!=',False)]}">
+                    	<span name="hint_text">Note: You need to configure your email gateway (if nothing is available in the 'From' dropdown) to send emails. Go to Email->Mail Server and configure it.</span>
+                    </div>
+					<group>
+						<field name="send_by" required="1" />
+						<field name="mail_server_id" options="{'no_create_edit':true,'no_open':true}" required="1" string="From" />
+						<field name="from_mail" readonly="1" invisible="1" />
+						<field name="mail_from" string="Reply To" required="1" placeholder="frommail@gmail.com" />
+						<label for="recipient_ids" string="To"/>
+						<div>
+							<field name="recipient_ids">
+								<tree create="true" write="false" delete="true">	
+									<field name="full_name"/>
+									<field name="email"/>
+								</tree>
+							</field>
+							<field name="mail_to" style="word-break: break-all;" placeholder="Other To Mail Addresses (Ex: test@gmail.com,test1@gmail.com)" />	
+						</div>
+						<field name="mail_cc" style="word-break: break-all;" placeholder="Ex: test@gmail.com,test1@gmail.com" />
+						<field name="mail_bcc" style="word-break: break-all;" placeholder="Ex: test@gmail.com,test1@gmail.com" />
+						<field name="member_list" invisible="1" />
+					</group>
+					<notebook>
+						<page name="body_html" string="Body">
+							<field name="body_html" />
+						</page>
+						<page name="attachments" string="Attachments">
+							<div class="alert alert-warning" role="alert">
+                        		<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        	</div>
+							<field name="attachment_ids" widget="many2many_binary" domain="[('id','=',0)]" />
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record id="wizard_organization_mail_form" model="ir.ui.view">
+			<field name="name">org.mail.form</field>
+			<field name="model">org.mail</field>
+			<field name="arch" type="xml">
+				<form string="Organization Mail">
+					<sheet>
+						<label for="mail_subject" class="oe_edit_only"/>
+						<h2><field name="mail_subject" required="1" placeholder="#Subject" /></h2>
+						<div class="alert alert-warning text-center" role="alert" attrs="{'invisible': [('mail_server_id','!=',False)]}">
+	                    	<span name="hint_text">Hint: You need to configure your email gateway to send emails. Go to Email->Mail Server and configure it.</span>
+	                    </div>
+						<group>
+							<field name="send_by" required="1" />
+							<field name="mail_server_id" options="{'no_create_edit':true,'no_open':true}" required="1" string="From" />
+							<field name="from_mail" readonly="1" invisible="1"/>
+							<field name="mail_from" string="Reply To" required="1" placeholder="frommail@gmail.com" />
+							<label for="recipient_ids" string="To"/>
+							<div>
+								<field name="recipient_ids">
+									<tree create="false" write="false" delete="true">	
+										<field name="full_name" />
+										<field name="email" />
+									</tree>
+								</field>
+								<field name="mail_to" style="word-break: break-all;" placeholder="Other To Mail Addresses (Ex: test@gmail.com,test1@gmail.com)" />	
+							</div>
+							<field name="mail_cc" style="word-break: break-all;" placeholder="Ex: test@gmail.com,test1@gmail.com" />
+							<field name="mail_bcc" style="word-break: break-all;" placeholder="Ex: test@gmail.com,test1@gmail.com" />
+							<field name="member_list" invisible="1" />
+						</group>
+						<notebook>
+							<page name="body_html" string="Body">
+								<field name="body_html" />
+							</page>
+							
+							<page name="attachments" string="Attachments">
+								<field name="attachment_ids" widget="many2many_binary" domain="[('id','=',0)]" />
+							</page>
+						</notebook>
+					</sheet>
+					 <footer>
+					 	<button string="Send Now" class="oe_highlight" type="object" name="send"/>
+					 	or
+						<button string="Cancel" class="oe_highlight" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_organization_mail_tree" model="ir.ui.view">
+			<field name="name">org.mail.tree</field>
+			<field name="model">org.mail</field>
+			<field name="arch" type="xml">	
+				<tree string="Organization Mail">
+					<field name="create_date" string="Date"/>
+					<field name="from_mail"/>
+					<field name="mail_subject"/>
+				</tree>
+			</field>
+		</record>
+	
+		<record id="action_organization_mail" model="ir.actions.act_window">
+			<field name="name">Organization Email</field>
+			<field name="res_model">org.mail</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'wizard':0}</field>
+		</record>
+		
+		<record id="action_wizard_organization_mail" model="ir.actions.act_window">
+			<field name="name">Organization Mail</field>
+			<field name="res_model">org.mail</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_organization_mail_form"/>
+			<field name="target">new</field>
+			<field name="context">{'wizard':1}</field>
+		</record>
+		
+	<!-- Province  -->
+	
+	<act_window id="action_send_province_mail"
+	            name="Send Mail"
+	            res_model="org.mail"
+	            binding_model="res.religious.province" binding_views="list"
+	            view_mode="form" target="new"
+	            view_id="wizard_organization_mail_form"
+	            context="{'wizard':1,}" />
+	            
+	<!-- House/Community -->
+	
+	<act_window id="action_send_community_mail"
+	            name="Send Mail"
+	            res_model="org.mail"
+	            binding_model="res.community" binding_views="list"
+	            view_mode="form" target="new"
+	            view_id="wizard_organization_mail_form"
+	            context="{'wizard':1,}" />
+	
+	<!-- Institution -->
+	
+	<act_window id="action_send_institution_mail"
+	            name="Send Mail"
+	            res_model="org.mail"
+	            binding_model="res.institution" binding_views="list"
+	            view_mode="form" target="new"
+	            view_id="wizard_organization_mail_form"
+	            context="{'wizard':1,}" />
+	
+	         
+	</data>
+</odoo>

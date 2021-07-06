@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<!-- Project Planner -->
+	
+	<record id="project_plan_inherit_view" model="ir.ui.view">
+        <field name="name">project.plan.form.inherit</field>
+        <field name="model">project.plan</field>
+        <field name="inherit_id" ref="planner.view_project_plan_form" />
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='activity_type_ids']" position="before">
+				<field name="scope" attrs="{'readonly':[('state', '=', 'close')]}" groups="cristo.group_role_cristo_bsa_super_admin"/>
+        	</xpath>
+        	<xpath expr="//field[@name='responsible_id']" position="attributes">
+				<attribute name="domain">[('main_category_code','=','MR')]</attribute>
+			</xpath>
+        </field>
+    </record>
+    
+    
+    <!-- Plan Activity -->
+	
+	<record id="plan_activity_inherit_view" model="ir.ui.view">
+        <field name="name">plan.activity.form.inherit</field>
+        <field name="model">plan.activity</field>
+        <field name="inherit_id" ref="planner.view_plan_activity_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='responsible_id']" position="attributes">
+				<attribute name="domain">[('main_category_code','=','MR')]</attribute>
+			</xpath>
+        </field>
+    </record>
+	
+</odoo>

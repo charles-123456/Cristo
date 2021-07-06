@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="cr_view_ir_model_fields_tree" model="ir.ui.view">
+            <field name="model">ir.model.fields</field>
+            <field name="arch" type="xml">
+                <tree string="Fields" create="false" duplicate="false">
+                    <field name="field_description"/>
+                    <field name="model_id"/>
+                </tree>
+            </field>
+        </record>
+
+	</data>
+</odoo>

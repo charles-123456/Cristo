@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="report_circular">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+					<div class="page">
+						<style type="text/css">
+							<!-- .code {
+									position: absolute;
+									bottom: 0px;
+									top: 320px;
+									padding-right: 80%;
+									font-weight:bold;
+									font-size:15px;
+									}
+							.month {
+									position: absolute;
+									bottom: 0px;
+									top: 320px;
+									padding-left: 82%;
+									font-weight:bold;
+									font-size:15px;
+									text-transform: uppercase;
+									}
+							.year {
+									position: absolute;
+									bottom: 0px;
+									top: 320px;
+									padding-left: 90%;
+									font-weight:bold;
+									font-size:15px;
+									} -->
+							
+						</style>
+						<table width="100%" style="line-height: 20;">
+							<tr>
+								<td>
+									<center>
+										<img t-if="o.rel_province_id.cir_header_img" t-att-src="image_data_uri(o.rel_province_id.cir_header_img)"
+											style="height:300px;width:1300px;" />
+									</center>
+								</td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td style="font-weight:bold;font-size:15px;white-space: nowrap">
+									<t t-esc="o.cir_code" />
+								</td>
+								<t t-if="o.theme">
+									<td style="font-weight:bold;font-size:15px;text-transform: uppercase;white-space: nowrap;padding-left: 335px;">
+										<t t-esc="o.theme" />
+									</td>
+								</t>
+								<td style="padding-left: 450px;text-transform: uppercase;font-weight: bold;font-size: 15px;">
+									<span t-field="o.month" />
+								</td>
+								<td style="padding-left: 35px;font-weight: bold;font-size: 15px;">
+									<t t-esc="o.year" />
+								</td>
+							</tr>
+						
+						</table>
+						<!-- <div>
+							<div>
+								<span class="code" t-field="o.cir_code" />
+							</div>
+							<div>
+								<span class="date" t-field="o.day" />
+							</div>
+							<div>
+								<span class="month" t-field="o.month" />
+							</div>
+							<div>
+								<span class="year" t-field="o.year" />
+							</div>
+						</div> -->
+						<hr size="2" color="black" style="margin-top: 0rem;"/>
+						<table width="100%">
+							<tr>
+								<span t-field="o.content" />
+							</tr>	
+							<tr>
+								<td>
+									<p style="border-bottom: 3px dotted #028f9d; padding-bottom: 20px;padding-top: 20px;width: 40%;margin-left: 30%;" />
+								</td>
+							</tr>					
+						</table>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="report_rel_institution_profile">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+						<div class="page">
+							<style>
+								th,td{
+								padding: 7px;
+								}
+								thead
+								{
+								display:table-header-group;
+								vertical-align: middle;
+								}
+								tr {
+								page-break-inside: avoid;
+								}
+
+								thead {
+								display:table-header-group;
+								}
+								tfoot{ display:table-footer-group}
+								.count {
+								border-collapse:
+								separate;
+								border-spacing: 25px;
+								}
+								table,th,td{
+
+								vertical-align:middle;
+								border-collapse: collapse;
+
+								}
+								.align_center{
+								text-align:center;
+								}
+								.align_left{
+								text-align:left;
+								}
+								.img{
+								box-shadow: 7px 7px 3px
+								#D6D6D6;
+								border-radius: 50%;
+								}
+								th{
+								background-color:4682B4;
+								text-align:left;
+								
+								}
+								.hide_color{
+								background-color:white;
+								color:black;
+								}
+								tr:nth-child(even){
+								background-color: #efeff8;
+								}
+								.head th{
+									background-color:#008B8B;
+									color:white;
+									font-size:18px;
+								}
+							</style>
+							<div class="oe_structure"/>
+							<table width="100%">
+								<tr>
+					
+									<td width="80%" style="vertical-align: middle;font-size:20px;">
+										<center>
+											<strong style="font-size:27px;">
+												<span t-field="o.name"/>
+											</strong>
+										</center>
+									</td>
+								</tr>
+							</table>
+						 	<div width="100%">
+								<center>
+									<span t-field="o.street" />
+									<t t-if="o.street and o.street2">, </t>
+									<span t-field="o.street2" />
+									<span t-field="o.place" />
+									<t t-if="o.place and o.city">, </t>
+									<span t-field="o.city" />
+									<span t-field="o.state_id" />
+									<t t-if="o.state_id and o.country_id">, </t>
+									<span t-field="o.country_id" />
+									<t t-if="o.zip and o.country_id">-</t>
+									<span t-field="o.zip" />
+								</center>
+							</div>
+							<hr />
+							<br/>
+							<br/>
+							<table width="100%">
+							 	<tr>
+									<th class="hide_color align_left"> Code </th>
+									<td class="hide_color align_left">
+										<span t-field="o.code" />
+									</td>
+								</tr>
+								<t t-if="o.sudo().community_id.owned_by == 'religious'">
+									<tr>
+										<th width="50%" class="hide_color align_left"> Congregation
+										</th>
+										<td width="50%" class="hide_color align_left">
+											<span t-field="o.institute_id.name" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left">Province</th>
+										<td class="hide_color align_left">
+											<span t-field="o.rel_province_id.name" />
+										</td>
+									</tr>
+									<tr>
+										<th class="hide_color align_left"> Community </th>
+										<td class="hide_color align_left">
+											<span t-field="o.sudo().community_id.name" />
+										</td>
+									</tr>
+								</t>
+							</table>
+							<br/>
+							<br/> 
+								
+									<table width="100%">
+										<!-- <tr>
+											<td width="50%" class="align_left" style="background-color: #4682B4;color:#ffffff;font-size:20px;text-align:left;">
+												<b>Institution Name</b>
+											</td>
+											<td width="50%" style="background-color: #4682B4;color:#ffffff;font-size:20px;text-align:left;">
+												<b>
+													<span t-esc="o.name" />
+												</b>
+											</td>
+										</tr> -->
+										<tr>
+											<th width="50%"> Institution Head </th>
+											<td width="50%">
+												<span t-esc="o.superior_name" />
+											</td>
+										</tr>
+										<tr>
+											<th> Establishment Date </th>
+											<td>
+												<span t-esc="o.establishment_date" t-options="{'widget': 'date', 'format': 'dd-MM-yyyy'}" />
+											</td>
+										</tr>
+										<tr>
+											<th> Ministry </th>
+											<td>
+												<span t-esc="o.institution_category_id.name" />
+											</td>
+										</tr>
+										<tr>
+											<th> Category </th>
+											<td>
+												<span t-esc="o.ministry_category_id.name" />
+											</td>
+										</tr>
+										<tr>
+											<th> Type </th>
+											<td>
+												<span t-esc="o.category_type_id.name" />
+											</td>
+										</tr>
+										<t t-if="o.board">
+											<tr>
+												<th> Board </th>
+												<td>
+													<span t-esc="o.board.name" />
+												</td>
+											</tr>
+										</t>
+										<t t-if="o.medium">
+											<tr>
+											<th> Medium </th>
+											<td>
+												<span t-esc="o.medium.name"/>
+											</td>
+										</tr>
+										</t>
+										<tr>
+											<th> phone </th>
+											<td>
+												<span t-esc="o.phone" />
+											</td>
+										</tr>
+										<tr>
+											<th> Mobile </th>
+											<td>
+												<span t-esc="o.mobile" />
+											</td>
+										</tr>
+										<tr>
+											<th> Email </th>
+											<td>
+												<span t-esc="o.email" />
+											</td>
+										</tr>
+										<tr>
+											<th> Address </th>
+											<td>
+												<span t-field="o.street" />
+												<t
+													t-if="o.street and o.street2">, </t>
+												<span t-field="o.street2" />
+
+												<span t-field="o.place" />
+												<t
+													t-if="o.place and o.city">, </t>
+												<span t-field="o.city" />
+												<br />
+												<span t-field="o.state_id" />
+												<t
+													t-if="o.country_id and o.state_id">
+													,
+												</t>
+												<span t-field="o.country_id" />
+												<t
+													t-if="o.zip and o.country_id">-</t>
+												<span t-field="o.zip" />
+											</td>
+										</tr>
+									</table>
+									<t t-if="o.important_date_ids">
+										<div class="row" width="100%">
+											<center>
+												<p style="font-size:20px;">
+													<b>Important Dates</b>
+												</p>
+											</center>
+										</div>
+										<table border="1px" width="100%" style="border-collapse:collapse;">
+											<thead class="head">
+												<th width="50%">Name</th>
+												<th width="20%">Day</th>
+												<th width="30%">Month</th>
+											</thead>
+											<tbody>
+												<t t-foreach="o.important_date_ids" t-as="imp">
+													<tr>
+														<td width="50%"><t t-esc="imp.name"/></td>
+														<td width="20%"><t t-esc="imp.day"/></td>
+														<td width="30%"><t t-esc="dict(imp.fields_get(allfields=['month'])['month']['selection'])[imp.month]"/></td>
+													</tr>
+												</t>
+											</tbody>
+										</table>
+									</t>
+									<br/>
+
+									<hr />
+									<br/>
+								
+							
+						</div>
+					</t>
+				</t>
+		</template>
+	</data>
+</odoo>

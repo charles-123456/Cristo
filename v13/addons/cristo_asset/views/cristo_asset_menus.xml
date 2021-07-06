@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Facilities -->
+		<menuitem name="Property" id="menu_base_cristo_assets"  
+			sequence="19"  web_icon="cristo_asset,static/description/icon.png" />
+		<!-- Assets -->
+		<menuitem name="Assets" id="menu_base_asset"  parent="menu_base_cristo_assets"  sequence="3" />
+		<menuitem name="Assets" parent="menu_base_asset"
+			id="menu_base_asset_sub" action="action_res_asset" sequence="1" />
+
+		<menuitem name="Configuration"
+			parent="menu_base_cristo_assets" id="menu_cnf_asset" 
+			sequence="4" />
+		<menuitem name="Assets" parent="menu_cnf_asset"
+			id="menu_cnf_asset_sub" sequence="1" />
+		<menuitem name="Asset Category" parent="menu_cnf_asset_sub"
+			id="menu_cnf_asset_type_sub" action="action_asset_category"
+			sequence="1" />
+		<menuitem name="Land Classification"
+			parent="menu_cnf_asset_sub" id="menu_cnf_land_classification"
+			action="action_land_classification" sequence="2" />
+		<menuitem name="Building Type" parent="menu_cnf_asset_sub"
+			id="menu_cnf_building_type" action="action_building_type"
+			sequence="3" />
+		<menuitem name="Tree Species" parent="menu_cnf_asset_sub"
+			id="menu_cnf_tree_species" action="action_tree_species" sequence="4" />
+		<menuitem name="Machinery" parent="menu_cnf_asset_sub"
+			id="menu_cnf_machinery_type" action="action_machinery_type" sequence="5" />
+		<menuitem name="Location" parent="menu_cnf_asset_sub"
+			id="menu_cnf_location" action="action_location" sequence="10" />
+	</data>
+</odoo>

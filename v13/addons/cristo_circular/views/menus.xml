@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Circular Menus -->
+
+	<menuitem id="cristo_circular_main_menu" name="Circular" sequence="11"  web_icon="cristo_circular,static/description/icon.png" />
+	
+	<menuitem id="circular_menu" name="Circular" parent="cristo_circular_main_menu" action="action_circular" sequence="1" />
+	
+</odoo>

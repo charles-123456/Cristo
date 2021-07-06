@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<menuitem id="assignment_main_menu" name="Transfer" sequence="18" web_icon="cristo_assignment,static/description/icon.png"/>
+	
+	<menuitem id="assignment_menu" name="Transfer" parent="assignment_main_menu" sequence="1" action="action_assignment"/>
+
+	<menuitem id="assignment_request_menu" name="Request" parent="assignment_main_menu" sequence="1" action="action_assignment_request"/>
+
+	<menuitem id="configuration_menu" name="Configuration" parent="assignment_main_menu" sequence="10"/>
+	<menuitem id="assignment_role_menu" name="Member Transfer Role" parent="configuration_menu" sequence="1" action="action_member_assignment_role"/>
+	
+</odoo>

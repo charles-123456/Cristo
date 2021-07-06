@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.module.category" id="module_cristo_assignment">
+		<field name="name">Assignment</field>
+		<field name="sequence">15</field>
+	</record>
+
+	<record id="group_assignment_user" model="res.groups">
+		<field name="name">User</field>
+		<field name="category_id" ref="module_cristo_assignment" />
+		<field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+	</record>
+
+	<record id="group_assignment_manager" model="res.groups">
+		<field name="name">Manager</field>
+		<field name="category_id" ref="module_cristo_assignment" />
+		<field name="implied_ids" eval="[(4, ref('group_assignment_user'))]" />
+	</record>
+	
+	<record id="group_assignment_admin" model="res.groups">
+		<field name="name">Admin</field>
+		<field name="category_id" ref="module_cristo_assignment" />
+		<field name="implied_ids" eval="[(4, ref('group_assignment_manager'))]" />
+	</record>
+	
+	
+	<!-- Record Rules -->
+	
+	<record model="ir.rule" id="cristo_assignment_request_user_role">
+		<field name="name">User Request</field>
+		<field name="model_id" ref="model_member_assignment_request" />
+		<field name="domain_force">[('member_id','=',user.member_id.id)]</field>
+		<field name="groups" eval="[(4,ref('cristo_assignment.group_assignment_user'))]" />
+	</record>
+	
+	<record model="ir.rule" id="cristo_assignment_request_congregation_manager_role">
+		<field name="name">Congregation Request</field>
+		<field name="model_id" ref="model_member_assignment_request" />
+		<field name="domain_force">[('member_id.institute_id','=',user.institute_id.id)]</field>
+		<field name="groups" eval="[(4,ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+	</record>
+
+	<record model="ir.rule" id="cristo_assignment_request_province_manager_role">
+		<field name="name">Province Request</field>
+		<field name="model_id" ref="model_member_assignment_request" />
+		<field name="domain_force">[('member_id.rel_province_id','=',user.rel_province_id.id)]</field>
+		<field name="groups" eval="[(4,ref('cristo.group_role_cristo_religious_province'))]" />
+	</record>
+	
+	<record model="ir.rule" id="cristo_assignment_request_admin_role">
+		<field name="name">Admin Request</field>
+		<field name="model_id" ref="model_member_assignment_request" />
+		<field name="domain_force">[(1,'=',1)]</field>
+		<field name="groups" eval="[(4, ref('cristo_assignment.group_assignment_admin')),(4, ref('base.group_erp_manager')), (4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+	</record>
+	
+	
+	<record model="ir.rule" id="cristo_assignment_manager_role">
+		<field name="name">Manager</field>
+		<field name="model_id" ref="model_member_assignment" />
+		<field name="domain_force">[('user_id','=',user.id)]</field>
+		<field name="groups" eval="[(4,ref('cristo_assignment.group_assignment_manager'))]" />
+	</record>
+	
+	<record model="ir.rule" id="cristo_assignment_admin_role">
+		<field name="name">Admin</field>
+		<field name="model_id" ref="model_member_assignment" />
+		<field name="domain_force">[(1,'=',1)]</field>
+		<field name="groups" eval="[(4, ref('cristo_assignment.group_assignment_admin')),(4, ref('base.group_erp_manager')), (4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+	</record>
+
+	<!--Transfer Role Rule-->
+
+	<record model="ir.rule" id="member_transfer_role_admin">
+		<field name="name">Transfer Role : Admin</field>
+		<field name="model_id" ref="model_member_assignment_role" />
+		<field name="domain_force">[(1,'=',1)]</field>
+		<field name="groups" eval="[(4, ref('cristo_assignment.group_assignment_admin')),(4, ref('base.group_erp_manager')), (4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+	</record>
+
+	<record model="ir.rule" id="member_transfer_role_user">
+		<field name="name">Transfer Role : Users</field>
+		<field name="model_id" ref="model_member_assignment_role" />
+		<field name="domain_force">[('institute_id','=',user.institute_id.id)]</field>
+		<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin')),(4, ref('cristo.group_role_cristo_religious_province')),(4, ref('cristo.group_role_cristo_religious_house')),(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+	</record>
+</odoo>

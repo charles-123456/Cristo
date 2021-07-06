@@ -1,0 +1,25 @@
+<odoo>
+    <template id="cristo_directory_assets_backend" name="Cristo Directory assets inherit" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/cristo_directory/static/src/js/cristo_directory.js"/>
+
+
+            <!-- Datatable scripts -->
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/datatables.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/dataTables.buttons.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/buttons.flash.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/buttons.html5.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/buttons.print.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/pdfmake.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/vfs_fonts.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/jszip.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/buttons.bootstrap.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/buttons.bootstrap4.min.js"/>
+                <script type="text/javascript" src="/cristo_directory/static/lib/dataTables/buttons.colVis.min.js"/>
+
+                <link rel="stylesheet" href="/cristo_directory/static/lib/dataTables/datatables.min.css"/>
+                <link rel="stylesheet" href="/cristo_directory/static/lib/dataTables/buttons.dataTables.min.css"/>
+        </xpath>
+    </template>
+
+</odoo>

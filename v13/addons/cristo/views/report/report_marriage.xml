@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="report_marriage">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<div class="page" style=" border:6px double black;color:black;">
+						<style>
+							table.mra_table
+							{
+								width:100%;
+								border-collapse: collapse;
+							}
+							table.mra_table td,
+							table.mra_table th {
+								border: 1px solid black;
+								padding:11px;
+							}
+							table,th,td{
+								color: black;
+							}
+						</style>
+						<div class="oe_structure"/>
+						<div align="center" width="100%" style="line-height:1.5">
+							<p>
+								<span style="align:center;font-size:20px;text-transform:uppercase;">
+									<t t-if="not o.parish_id.diocese_id.is_archdiocese">
+										<b>
+											DIOCESE OF
+											<t t-esc="o.parish_id.diocese_id.name"/>
+										</b>
+									</t>
+									<t t-if="o.parish_id.diocese_id.is_archdiocese">
+										<b>
+											ARCHDIOCESE OF
+											<t t-esc="o.parish_id.diocese_id.name"/>
+										</b>
+									</t>
+  							  		<br/>
+  							  		<b>
+										Certified copy of an entry
+										<br/>
+										in the Register of Marriages
+										<br/>
+  							  		</b>
+  									Kept in
+  									<b>
+										<span t-field="o.parish_id.street"/>,
+										<span t-field="o.parish_id"/>
+  									</b>
+                				</span>
+							</p>
+						</div>
+						<table class="mra_table" width="100%">
+							<tr>
+								<td width="30%">Register No</td>
+								<td width="35%" colspan="2" align="center">
+									<t t-if="o.mrg_register_ref">
+										<span t-esc="o.mrg_register_ref"/>
+									</t>
+								</td>
+							</tr>
+							<tr>
+								<td width="30%">Date of Marriage</td>
+								<td width="35%" colspan="2" align="center">
+									<t t-if="o.mrg_date">
+										<span t-esc="o.mrg_date" t-options='{"widget":"date","format": "dd/MM/yyyy"}'/>
+									</t>
+								</td>
+							</tr>
+							<tr>
+								<td>Place of Marriage</td>
+								<td colspan="2" align="center">
+									<span t-esc="o.mrg_place"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<b>NAME OF THE PARTIES</b>
+								</td>
+								<td>
+									<center>
+										<b>BRIDEGROOM</b>
+									</center>
+								</td>
+								<td>
+									<center>
+										<b>BRIDE</b>
+									</center>
+								</td>
+							</tr>
+							<tr>
+								<td>Christian name</td>
+								<td>
+									<span t-esc="o.bridegroom_name"/>
+								</td>
+								<td>
+									<span t-esc="o.bride_name"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Age</td>
+								<td>
+									<span t-esc="o.bridegroom_age"/>
+								</td>
+								<td>
+									<span t-esc="o.bride_age"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Condition</td>
+								<td style="text-transform: capitalize;">
+									<span t-esc="o.bridegroom_status"/>
+								</td>
+								<td style="text-transform: capitalize;">
+									<span t-esc="o.bride_status"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Rank or Profession</td>
+								<td>
+									<span t-esc="o.bridegroom_occupation_id.name" />
+								</td>
+								<td>
+									<span t-esc="o.bride_occupation_id.name" />
+								</td>
+							</tr>
+							<tr>
+								<td>Residence at the time of marriage</td>
+								<td>
+									<span t-esc="o.bridegroom_domicile"/>
+								</td>
+								<td>
+									<span t-esc="o.bride_domicile"/>
+								</td>
+							</tr>
+							<tr>
+								<td> Name of Parent's of Parties
+								</td>
+								<td>
+									<span t-esc="o.bridegroom_father_name"/>
+									<t t-if="o.bridegroom_mother_name">
+										,
+										<span t-esc="o.bridegroom_mother_name"/>
+									</t>
+								</td>
+								<td>
+									<span t-esc="o.bride_father_name"/>
+									<t t-if="o.bride_mother_name">
+										,
+										<span t-esc="o.bride_mother_name"/>
+									</t>
+								</td>
+							</tr>
+							<tr>
+								<td>By Banns or License</td>
+								<td style="text-transform: capitalize;">
+									<span t-esc="o.banns"/>
+								</td>
+								<td style="text-transform: capitalize;">
+									<span t-esc="o.banns"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Signature of the Parties</td>
+								<td>
+									<span t-esc="o.bridegroom_name"/>
+								</td>
+								<td>
+									<span t-esc="o.bride_name"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Signature of the two Witness Present</td>
+								<td>
+									<span t-esc="o.witness1_name"/>
+								</td>
+								<td>
+									<span t-esc="o.witness2_name"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Signature of the Minister by whom the ceremony is performed
+								</td>
+								<td colspan="2">
+									<span t-esc="o.mrg_minister"/>
+								</td>
+							</tr>
+						</table>
+						<br/>
+						<div style="text-align:center;">
+							<span style="font-size:17px;">Certify to be the true copy of an entry in the
+								Register of Marriages
+							</span>
+							<br/>
+							<span style="font-size:17px;">
+								kept at
+								<b>
+									<span t-field="o.parish_id.street"/>
+									,
+									<span t-field="o.parish_id"/>
+									.
+								</b>
+							</span>
+						</div>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<table width="100%" style="font-size:15px;">
+							<tr>
+								<td width="100%" colspan="2" style="padding-left:12px;">
+									<b>Place :</b>
+									<span t-field="o.parish_id.street"/>
+									,
+									<span t-field="o.parish_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<br/>
+								</td>
+							</tr>
+							<tr>
+								<!-- <td> <div id="circle"/> </td> -->
+								<td width="37%" style="padding-left:12px;">
+									<b>Date :</b>
+									<span t-esc="time.strftime('%d/%m/%Y')"/>
+								</td>
+								<td width="33%" style="text-align:right;">
+									<span>
+										<b>Seal</b>
+									</span>
+								</td>
+								<td width="30%" style="text-align:center;">
+									<span>
+										<b>Parish Priest</b>
+									</span>
+								</td>
+							</tr>
+						</table>
+						<br/>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

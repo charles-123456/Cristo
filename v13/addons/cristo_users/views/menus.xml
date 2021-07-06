@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <menuitem id="main_menu_cristo_users" name="User Administration" web_icon="cristo_users,static/description/icon.png" sequence="19"/>
+    <menuitem id="menu_cristo_users" name="Users List" parent="main_menu_cristo_users" action="action_cristo_users" />
+    <menuitem id="menu_cristo_custom_user_role" name="Custom Roles" parent="main_menu_cristo_users" action="action_cristo_custom_user_role" groups="group_user_mgmt_admin,cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager"/>
+    <menuitem id="menu_license_expiry_config" name="License Configuration" parent="main_menu_cristo_users" action="action_user_license_expiry_role" groups="group_user_mgmt_admin,cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager"/>
+    
+</odoo>

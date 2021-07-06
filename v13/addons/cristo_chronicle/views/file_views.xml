@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_muk_dms_file_form" model="ir.ui.view">
+			<field name="name">muk_dms_file_form</field>
+			<field name="model">muk_dms.file</field>
+			<field name="arch" type="xml">
+				<form string="File">
+					<sheet>
+						<group>
+							<group>
+								<field name="content" filename="name"/>
+								<field name="document_name" />
+								<field name="directory"/>
+								<field name="is_chronicle" invisible="1"/>
+								<field name="name" invisible="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_muk_dms_file" model="ir.actions.act_window">
+			<field name="name">Historical Files</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">muk_dms.file</field>
+			<field name="view_mode">form</field>
+			 <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   		  (0, 0, {'view_mode': 'kanban', 'view_id': ref('muk_dms.view_dms_file_kanban')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('muk_dms.view_dms_file_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('cristo_chronicle.view_muk_dms_file_form')})]"/>
+			<field name="domain">[('is_chronicle','=',True)]</field>
+			<field name="context">{'default_is_chronicle':True}</field>	
+			<field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Chronicle
+              </p>
+            </field>
+		</record>
+
+
+	</data>
+</odoo>

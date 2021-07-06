@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- Study Level -->
+		<record id="res_study_level1" model="res.study.level">
+			<field name="name">Pre-Primary</field>
+			<field name="study_level_code">PP</field>
+			<field name="sequence">1</field>
+		</record>
+		<record id="res_study_level2" model="res.study.level">
+			<field name="name">Primary</field>
+			<field name="study_level_code">PRI</field>
+			<field name="sequence">2</field>
+		</record>
+		<record id="res_study_level3" model="res.study.level">
+			<field name="name">Middle</field>
+			<field name="study_level_code">MID</field>
+			<field name="sequence">3</field>
+		</record>
+		<record id="res_study_level4" model="res.study.level">
+			<field name="name">Secondary</field>
+			<field name="study_level_code">SEC</field>
+			<field name="sequence">4</field>
+		</record>
+		<record id="res_study_level5" model="res.study.level">
+			<field name="name">Higher Secondary</field>
+			<field name="study_level_code">HS</field>
+			<field name="sequence">5</field>
+		</record>
+		<record id="res_study_level6" model="res.study.level">
+			<field name="name">Under Graduation</field>
+			<field name="study_level_code">UG</field>
+			<field name="sequence">6</field>
+		</record>
+		<record id="res_study_level7" model="res.study.level">
+			<field name="name">Post Graduation</field>
+			<field name="study_level_code">PG</field>
+			<field name="sequence">7</field>
+		</record>
+		<record id="res_study_level8" model="res.study.level">
+			<field name="name">Doctorate</field>
+			<field name="study_level_code">DOC</field>
+			<field name="sequence">8</field>
+		</record>
+		<record id="res_study_level9" model="res.study.level">
+			<field name="name">Diploma</field>
+			<field name="study_level_code">DIP</field>
+			<field name="sequence">9</field>
+		</record>
+		
+		<!-- Program -->
+		<record id="res_member_program1" model="res.member.program">
+			<field name="name">Pre-KG</field>
+			<field name="study_level_id" ref="res_study_level1" />
+		</record>
+		<record id="res_member_program2" model="res.member.program">
+			<field name="name">LKG</field>
+			<field name="study_level_id" ref="res_study_level1" />
+		</record>
+		<record id="res_member_program3" model="res.member.program">
+			<field name="name">UKG</field>
+			<field name="study_level_id" ref="res_study_level1" />
+		</record>
+		<record id="res_member_program4" model="res.member.program">
+			<field name="name">I Standard</field>
+			<field name="study_level_id" ref="res_study_level2" />
+		</record>
+		<record id="res_member_program5" model="res.member.program">
+			<field name="name">II Standard</field>
+			<field name="study_level_id" ref="res_study_level2" />
+		</record>
+		<record id="res_member_program6" model="res.member.program">
+			<field name="name">III Standard</field>
+			<field name="study_level_id" ref="res_study_level2" />
+		</record>
+		<record id="res_member_program7" model="res.member.program">
+			<field name="name">IV Standard</field>
+			<field name="study_level_id" ref="res_study_level2" />
+		</record>
+		<record id="res_member_program8" model="res.member.program">
+			<field name="name">V Standard</field>
+			<field name="study_level_id" ref="res_study_level2" />
+		</record>
+		<record id="res_member_program9" model="res.member.program">
+			<field name="name">VI Standard</field>
+			<field name="study_level_id" ref="res_study_level3" />
+		</record>
+		<record id="res_member_program10" model="res.member.program">
+			<field name="name">VII Standard</field>
+			<field name="study_level_id" ref="res_study_level3" />
+		</record>
+		<record id="res_member_program11" model="res.member.program">
+			<field name="name">VIII Standard</field>
+			<field name="study_level_id" ref="res_study_level3" />
+		</record>
+		<record id="res_member_program12" model="res.member.program">
+			<field name="name">IX Standard</field>
+			<field name="study_level_id" ref="res_study_level4" />
+		</record>
+		<record id="res_member_program13" model="res.member.program">
+			<field name="name">SSLC</field>
+			<field name="study_level_id" ref="res_study_level4" />
+		</record>
+		<record id="res_member_program14" model="res.member.program">
+			<field name="name">XI Standard</field>
+			<field name="study_level_id" ref="res_study_level5" />
+		</record>
+		<record id="res_member_program15" model="res.member.program">
+			<field name="name">XII Standard</field>
+			<field name="study_level_id" ref="res_study_level5" />
+		</record>
+		<record id="res_member_program16" model="res.member.program">
+			<field name="name">BA</field>
+			<field name="study_level_id" ref="res_study_level6" />
+		</record>
+		<record id="res_member_program17" model="res.member.program">
+			<field name="name">BCom</field>
+			<field name="study_level_id" ref="res_study_level6" />
+		</record>
+		<record id="res_member_program18" model="res.member.program">
+			<field name="name">BBA</field>
+			<field name="study_level_id" ref="res_study_level6" />
+		</record>
+		<record id="res_member_program19" model="res.member.program">
+			<field name="name">BCA</field>
+			<field name="study_level_id" ref="res_study_level6" />
+		</record>
+		<record id="res_member_program20" model="res.member.program">
+			<field name="name">BSc</field>
+			<field name="study_level_id" ref="res_study_level6" />
+		</record>
+		<record id="res_member_program21" model="res.member.program">
+			<field name="name">BE</field>
+			<field name="study_level_id" ref="res_study_level6" />
+		</record>
+		<record id="res_member_program22" model="res.member.program">
+			<field name="name">BTech</field>
+			<field name="study_level_id" ref="res_study_level6" />
+		</record>
+		<record id="res_member_program23" model="res.member.program">
+			<field name="name">BEd</field>
+			<field name="study_level_id" ref="res_study_level6" />
+		</record>
+		<record id="res_member_program24" model="res.member.program">
+			<field name="name">MA</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program25" model="res.member.program">
+			<field name="name">MCom</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program26" model="res.member.program">
+			<field name="name">MBA</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program27" model="res.member.program">
+			<field name="name">MCA</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program28" model="res.member.program">
+			<field name="name">MSc</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program29" model="res.member.program">
+			<field name="name">ME</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program30" model="res.member.program">
+			<field name="name">MTech</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program31" model="res.member.program">
+			<field name="name">MEd</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program32" model="res.member.program">
+			<field name="name">MPhil</field>
+			<field name="study_level_id" ref="res_study_level7" />
+		</record>
+		<record id="res_member_program33" model="res.member.program">
+			<field name="name">BTE</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program34" model="res.member.program">
+			<field name="name">ITI</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program35" model="res.member.program">
+			<field name="name">DTC</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program36" model="res.member.program">
+			<field name="name">DTE</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program37" model="res.member.program">
+			<field name="name">Nursing</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program38" model="res.member.program">
+			<field name="name">DTEd</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program39" model="res.member.program">
+			<field name="name">GNM-AIDE</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program40" model="res.member.program">
+			<field name="name">DMLT</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program41" model="res.member.program">
+			<field name="name">DCTT</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program42" model="res.member.program">
+			<field name="name">DFNA</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program43" model="res.member.program">
+			<field name="name">DLipk</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program44" model="res.member.program">
+			<field name="name">DTh</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program45" model="res.member.program">
+			<field name="name">DECE</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program46" model="res.member.program">
+			<field name="name">DME</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program47" model="res.member.program">
+			<field name="name">Diploma Mech</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program48" model="res.member.program">
+			<field name="name">Dip Eng</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program49" model="res.member.program">
+			<field name="name">DPS</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program50" model="res.member.program">
+			<field name="name">HDCA</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		<record id="res_member_program51" model="res.member.program">
+			<field name="name">Co Operative</field>
+			<field name="study_level_id" ref="res_study_level9" />
+		</record>
+		
+	</data>
+</odoo>

@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Physical Status -->
+		<record id="view_physical_status_form" model="ir.ui.view">
+			<field name="name">res.member.physical.status.form</field>
+			<field name="model">res.member.physical.status</field>
+			<field name="arch" type="xml">
+				<form string="Physical Status">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_physical_status_tree" model="ir.ui.view">
+			<field name="name">res.member.physical.status.tree</field>
+			<field name="model">res.member.physical.status</field>
+			<field name="arch" type="xml">
+				<tree string="Physical Status">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_physical_status_search" model="ir.ui.view">
+			<field name="name">res.member.physical.status.search</field>
+			<field name="model">res.member.physical.status</field>
+			<field name="arch" type="xml">
+				<search string="Physical Status">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_physical_status" model="ir.actions.act_window">
+			<field name="name">Physical Status</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.member.physical.status</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+		<!-- Citizenship -->
+		<record id="view_citizenship_form" model="ir.ui.view">
+			<field name="name">res.member.citizenship.form</field>
+			<field name="model">res.member.citizenship</field>
+			<field name="arch" type="xml">
+				<form string="Citizenship">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_citizenship_tree" model="ir.ui.view">
+			<field name="name">res.member.citizenship.tree</field>
+			<field name="model">res.member.citizenship</field>
+			<field name="arch" type="xml">
+				<tree string="Citizenship">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_citizenship_search" model="ir.ui.view">
+			<field name="name">res.member.citizenship.search</field>
+			<field name="model">res.member.citizenship</field>
+			<field name="arch" type="xml">
+				<search string="Citizenship">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_citizenship_status" model="ir.actions.act_window">
+			<field name="name">Citizenship</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.member.citizenship</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+		<!-- Blood Group -->
+		<record id="view_blood_group_form" model="ir.ui.view">
+			<field name="name">res.blood.group.form</field>
+			<field name="model">res.blood.group</field>
+			<field name="arch" type="xml">
+				<form string="Blood Group">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_blood_group_tree" model="ir.ui.view">
+			<field name="name">res.blood.group.tree</field>
+			<field name="model">res.blood.group</field>
+			<field name="arch" type="xml">
+				<tree string="Blood Group">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_blood_group_search" model="ir.ui.view">
+			<field name="name">res.blood.group.search</field>
+			<field name="model">res.blood.group</field>
+			<field name="arch" type="xml">
+				<search string="Blood Group">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_blood_group" model="ir.actions.act_window">
+			<field name="name">Blood Group</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.blood.group</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+		<!-- Marital Status -->
+		<record id="view_marital_status_form" model="ir.ui.view">
+			<field name="name">res.member.marital.status.form</field>
+			<field name="model">res.member.marital.status</field>
+			<field name="arch" type="xml">
+				<form string="Marital Status">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="gender" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_marital_status_tree" model="ir.ui.view">
+			<field name="name">res.member.marital.status.tree</field>
+			<field name="model">res.member.marital.status</field>
+			<field name="arch" type="xml">
+				<tree string="Marital Status">
+					<field name="name" />
+					<field name="gender" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_marital_status_search" model="ir.ui.view">
+			<field name="name">res.member.marital.status.search</field>
+			<field name="model">res.member.marital.status</field>
+			<field name="arch" type="xml">
+				<search string="Marital Status">
+					<field name="name" />
+					<field name="gender" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_marital_status" model="ir.actions.act_window">
+			<field name="name">Marital Status</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.member.marital.status</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Relationship -->
+		<record id="view_relationship_form" model="ir.ui.view">
+			<field name="name">res.member.relationship.form</field>
+			<field name="model">res.member.relationship</field>
+			<field name="arch" type="xml">
+				<form string="Relationship">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="gender" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_relationship_tree" model="ir.ui.view">
+			<field name="name">res.member.relationship.tree</field>
+			<field name="model">res.member.relationship</field>
+			<field name="arch" type="xml">
+				<tree string="Relationship">
+					<field name="name" />
+					<field name="gender" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_relationship_search" model="ir.ui.view">
+			<field name="name">res.member.relationship.search</field>
+			<field name="model">res.member.relationship</field>
+			<field name="arch" type="xml">
+				<search string="Relatinship">
+					<field name="name" />
+					<field name="gender" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_relationship_status" model="ir.actions.act_window">
+			<field name="name">Relationship</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.member.relationship</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+	<!-- Occupation -->
+		<record id="view_occupation_form" model="ir.ui.view">
+			<field name="name">res.occupation.form</field>
+			<field name="model">res.occupation</field>
+			<field name="arch" type="xml">
+				<form string="Occupation">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_occupation_tree" model="ir.ui.view">
+			<field name="name">res.occupation.tree</field>
+			<field name="model">res.occupation</field>
+			<field name="arch" type="xml">
+				<tree string="Occupation">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_occupation_search" model="ir.ui.view">
+			<field name="name">res.occupation.search</field>
+			<field name="model">res.occupation</field>
+			<field name="arch" type="xml">
+				<search string="Occupation">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_occupation" model="ir.actions.act_window">
+			<field name="name">Occupation</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.occupation</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- House Type -->
+		<record id="view_house_type_form" model="ir.ui.view">
+			<field name="name">res.house.type.form</field>
+			<field name="model">res.house.type</field>
+			<field name="arch" type="xml">
+				<form string="House Type">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+							<group>
+								<field name="sequence"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_house_type_tree" model="ir.ui.view">
+			<field name="name">res.house.type.tree</field>
+			<field name="model">res.house.type</field>
+			<field name="arch" type="xml">
+				<tree string="House Type">
+					<field name="name" />
+					<field name="sequence"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_house_type_search" model="ir.ui.view">
+			<field name="name">res.house.type.search</field>
+			<field name="model">res.house.type</field>
+			<field name="arch" type="xml">
+				<search string="House Type">
+					<field name="name" />
+					<field name="sequence"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_house_type" model="ir.actions.act_window">
+			<field name="name">House Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.house.type</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+	<!-- 	Study Level -->
+		<record id="view_study_level_form" model="ir.ui.view">
+			<field name="name">res.study.level.form</field>
+			<field name="model">res.study.level</field>
+			<field name="arch" type="xml">
+				<form string="Study Level">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="study_level_code" />
+							</group>
+							<group>
+								<field name="study_level_ids" widget="many2many_tags" />
+								<field name="sequence" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_study_level_tree" model="ir.ui.view">
+			<field name="name">res.study.level.tree</field>
+			<field name="model">res.study.level</field>
+			<field name="arch" type="xml">
+				<tree string="Study Level">
+					<field name="name" />
+					<field name="study_level_code" />
+					<field name="sequence" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_study_level_search" model="ir.ui.view">
+			<field name="name">res.study.level.search</field>
+			<field name="model">res.study.level</field>
+			<field name="arch" type="xml">
+				<search string="Study Level">
+					<field name="name" />
+					<field name="study_level_code" />
+					<field name="sequence" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_study_level" model="ir.actions.act_window">
+			<field name="name">Study Level</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.study.level</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Program -->
+		<record id="view_program_form" model="ir.ui.view">
+			<field name="name">res.member.program.form</field>
+			<field name="model">res.member.program</field>
+			<field name="arch" type="xml">
+				<form string="Program">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="abbreviation" />
+							</group>
+							<group>
+								<field name="study_level_id" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_member_prorgam_tree" model="ir.ui.view">
+			<field name="name">res.member.program.tree</field>
+			<field name="model">res.member.program</field>
+			<field name="arch" type="xml">
+				<tree string="Program">
+					<field name="name" />
+					<field name="abbreviation" />
+					<field name="study_level_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_member_program_search" model="ir.ui.view">
+			<field name="name">res.member.program.search</field>
+			<field name="model">res.member.program</field>
+			<field name="arch" type="xml">
+				<search string="Program">
+					<field name="name" />
+					<field name="abbreviation" />
+					<field name="study_level_id" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_member_program" model="ir.actions.act_window">
+			<field name="name">Program</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.member.program</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Religion -->
+		<record id="view_member_religion_form" model="ir.ui.view">
+			<field name="name">res.member.religion.form</field>
+			<field name="model">res.member.religion</field>
+			<field name="arch" type="xml">
+				<form string="Religion">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_member_religion_tree" model="ir.ui.view">
+			<field name="name">res.member.religion.tree</field>
+			<field name="model">res.member.religion</field>
+			<field name="arch" type="xml">
+				<tree string="Religion">
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_member_religion_search" model="ir.ui.view">
+			<field name="name">res.member.religion.search</field>
+			<field name="model">res.member.religion</field>
+			<field name="arch" type="xml">
+				<search string="Religion">
+					<field name="name" />
+					<field name="code" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_member_religion_status" model="ir.actions.act_window">
+			<field name="name">Religion</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.member.religion</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Member Role -->
+		<record id="view_member_role_form" model="ir.ui.view">
+			<field name="name">res.member.role.form</field>
+			<field name="model">res.member.role</field>
+			<field name="arch" type="xml">
+				<form string="Member Role">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="gender" />
+							</group>
+							<group>
+								<field name="abbreviation" />
+								<field name="color"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_member_role_tree" model="ir.ui.view">
+			<field name="name">res.member.role.tree</field>
+			<field name="model">res.member.role</field>
+			<field name="arch" type="xml">
+				<tree string="Member Role">
+					<field name="name" />
+					<field name="abbreviation" />
+					<field name="gender" />
+                    <field name="color"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_member_role_search" model="ir.ui.view">
+			<field name="name">res.member.role.search</field>
+			<field name="model">res.member.role</field>
+			<field name="arch" type="xml">
+				<search string="Member Role">
+					<field name="name" />
+					<field name="gender" />
+					<field name="abbreviation" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_member_role" model="ir.actions.act_window">
+			<field name="name">Member Role</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.member.role</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Patron -->
+		<record id="view_patron_form" model="ir.ui.view">
+			<field name="name">res.patron.form</field>
+			<field name="model">res.patron</field>
+			<field name="arch" type="xml">
+				<form string="Patron">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="feast_date" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_patron_tree" model="ir.ui.view">
+			<field name="name">res.patron.tree</field>
+			<field name="model">res.patron</field>
+			<field name="arch" type="xml">
+				<tree string="Patron">
+					<field name="name" />
+					<field name="feast_date" width="0.8" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_patron_search" model="ir.ui.view">
+			<field name="name">res.patron.search</field>
+			<field name="model">res.patron</field>
+			<field name="arch" type="xml">
+				<search string="Patron">
+					<field name="name" />
+					<field name="feast_date" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_patron" model="ir.actions.act_window">
+			<field name="name">Patron</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.patron</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Rite -->
+		<record id="view_rite_form" model="ir.ui.view">
+			<field name="name">res.rite.form</field>
+			<field name="model">res.rite</field>
+			<field name="arch" type="xml">
+				<form string="Rite">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_rite_tree" model="ir.ui.view">
+			<field name="name">res.rite.tree</field>
+			<field name="model">res.rite</field>
+			<field name="arch" type="xml">
+				<tree string="Rite">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_rite_search" model="ir.ui.view">
+			<field name="name">res.rite.search</field>
+			<field name="model">res.rite</field>
+			<field name="arch" type="xml">
+				<search string="Rite">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_rite" model="ir.actions.act_window">
+			<field name="name">Rite</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.rite</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Institution Category -->
+		<record id="view_institution_category_form" model="ir.ui.view">
+			<field name="name">res.institution.category.form</field>
+			<field name="model">res.institution.category</field>
+			<field name="arch" type="xml">
+				<form string="Institution Category">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+							</group>
+							<group>
+								<field name="parent_id"/>
+								<field name="color"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_institution_category_tree" model="ir.ui.view">
+			<field name="name">res.institution.category.tree</field>
+			<field name="model">res.institution.category</field>
+			<field name="arch" type="xml">
+				<tree string="Institution Category">
+					<field name="name" />
+					<field name="code" />
+					<field name="parent_id"/>
+					<!-- <field name="color"/> -->
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_institution_category_search" model="ir.ui.view">
+			<field name="name">res.institution.category.search</field>
+			<field name="model">res.institution.category</field>
+			<field name="arch" type="xml">
+				<search string="Institution Category">
+					<field name="name" />
+					<field name="code" />
+					<field name="parent_id"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_institution_category" model="ir.actions.act_window">
+			<field name="name">Institution Category</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.institution.category</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Core Dicipline -->
+		<record id="view_core_disiplines_form" model="ir.ui.view">
+			<field name="name">res.core.disiplines.form</field>
+			<field name="model">res.core.disiplines</field>
+			<field name="arch" type="xml">
+				<form string="Core Disiplines">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_core_disiplines_tree" model="ir.ui.view">
+			<field name="name">res.core.disiplines.tree</field>
+			<field name="model">res.core.disiplines</field>
+			<field name="arch" type="xml">
+				<tree string="Core Disiplines">
+					<field name="name" />
+					<field name="code" />		
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_core_disiplines_search" model="ir.ui.view">
+			<field name="name">res.core.disiplines.search</field>
+			<field name="model">res.core.disiplines</field>
+			<field name="arch" type="xml">
+				<search string="Core Disiplines">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+		
+		<record id="action_core_disiplines" model="ir.actions.act_window">
+			<field name="name">Core Disiplines</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.core.disiplines</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- District -->
+		<record id="view_state_district_form" model="ir.ui.view">
+			<field name="name">res.state.district.form</field>
+			<field name="model">res.state.district</field>
+			<field name="arch" type="xml">
+				<form string="District">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+								<field name="state_id" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_state_district_tree" model="ir.ui.view">
+			<field name="name">res.state.district.tree</field>
+			<field name="model">res.state.district</field>
+			<field name="arch" type="xml">
+				<tree string="District">
+					<field name="name" />
+					<field name="code" />
+					<field name="state_id" />		
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_state_district__search" model="ir.ui.view">
+			<field name="name">res.state.district.search</field>
+			<field name="model">res.state.district</field>
+			<field name="arch" type="xml">
+				<search string="District">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+		
+		<record id="action_state_district" model="ir.actions.act_window">
+			<field name="name">District</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.state.district</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Disease Disorder -->
+		<record id="view_disease_disorder_form" model="ir.ui.view">
+			<field name="name">res.disease.disorder.form</field>
+			<field name="model">res.disease.disorder</field>
+			<field name="arch" type="xml">
+				<form string="Disease Disorder">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_disease_disorder_tree" model="ir.ui.view">
+			<field name="name">res.disease.disorder.tree</field>
+			<field name="model">res.disease.disorder</field>
+			<field name="arch" type="xml">
+				<tree string="Disease Disorder">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_disease_disorder_search" model="ir.ui.view">
+			<field name="name">res.disease.disorder.search</field>
+			<field name="model">res.disease.disorder</field>
+			<field name="arch" type="xml">
+				<search string="Disorder Disorder">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+		
+		<record id="action_disease_disorder" model="ir.actions.act_window">
+			<field name="name">Disease Disorder</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.disease.disorder</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Formation Stages  -->
+		<record id="view_formation_stages_form" model="ir.ui.view">
+			<field name="name">res.formation.stage.form</field>
+			<field name="model">res.formation.stage</field>
+			<field name="arch" type="xml">
+				<form string="Formation Stages">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+							<group>
+								<field name="institute_ids" widget="many2many_tags"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_formation_stages_tree" model="ir.ui.view">
+			<field name="name">res.formation.stage.tree</field>
+			<field name="model">res.formation.stage</field>
+			<field name="arch" type="xml">
+				<tree string="Formation Stages">
+					<field name="name" />
+					<field name="institute_ids"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_formation_stages_search" model="ir.ui.view">
+			<field name="name">res.formation.stage.search</field>
+			<field name="model">res.formation.stage</field>
+			<field name="arch" type="xml">
+				<search string="Formation Stages">
+					<field name="name" />
+					<field name="institute_ids"/>
+				</search>
+			</field>
+		</record>
+		
+		<record id="action_formation_stages" model="ir.actions.act_window">
+			<field name="name">Formation Stages</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.formation.stage</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Languages  -->
+		<record id="view_languages_form" model="ir.ui.view">
+			<field name="name">res.languages.form</field>
+			<field name="model">res.languages</field>
+			<field name="arch" type="xml">
+				<form string="Languages">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+							</group>
+							<group>
+								<field name="enable_medium" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_languages_tree" model="ir.ui.view">
+			<field name="name">res.languages.tree</field>
+			<field name="model">res.languages</field>
+			<field name="arch" type="xml">
+				<tree string="Languages">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_languages_search" model="ir.ui.view">
+			<field name="name">res.languages.search</field>
+			<field name="model">res.languages</field>
+			<field name="arch" type="xml">
+				<search string="Languages">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+		
+		<record id="action_languages" model="ir.actions.act_window">
+			<field name="name">Languages</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.languages</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Main Category  -->
+		<record id="view_main_category_form" model="ir.ui.view">
+			<field name="name">res.main.category.form</field>
+			<field name="model">res.main.category</field>
+			<field name="arch" type="xml">
+				<form string="Main Category">
+					<sheet>
+						<group>
+							<group>
+								<field name="sequence" />
+								<field name="name" />
+								<field name="code" required="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_main_category_tree" model="ir.ui.view">
+			<field name="name">res.main.category.tree</field>
+			<field name="model">res.main.category</field>
+			<field name="arch" type="xml">
+				<tree string="Main Category">
+					<field name="sequence" widget="handle" />
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_main_category_search" model="ir.ui.view">
+			<field name="name">res.main.category.search</field>
+			<field name="model">res.main.category</field>
+			<field name="arch" type="xml">
+				<search string="Main Category">
+					<field name="name" />
+					<field name="code" />
+				</search>
+			</field>
+		</record>
+		
+		<record id="action_main_category" model="ir.actions.act_window">
+			<field name="name">Main Category</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.main.category</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Title -->
+		<record id="view_partner_tittle_form_inherited" model="ir.ui.view">
+			<field name="name">res.partner.title.form</field>
+			<field name="model">res.partner.title</field>
+			<field name="inherit_id" ref="base.view_partner_title_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='shortcut']" position="after">
+					<field name="for_bishop" />
+					<field name="for_priest" />
+					<field name="for_brother" />
+					<field name="for_deacon" />
+					<field name="for_sister" />
+					<field name="for_novice" />
+					<field name="for_member" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_partner_title_tree_inherited" model="ir.ui.view">
+			<field name="name">res.partner.title.tree</field>
+			<field name="model">res.partner.title</field>
+			<field name="inherit_id" ref="base.view_partner_title_tree" />
+			<field name="arch" type="xml">
+                <xpath expr="/tree" position="attributes">
+                    <attribute name="editable"/>
+                </xpath>
+			</field>
+		</record>
+
+		<!-- Publication Type  -->
+		
+		<record id="view_publication_type_form" model="ir.ui.view">
+			<field name="name">publication.type.form</field>
+			<field name="model">publication.type</field>
+			<field name="arch" type="xml">
+				<form string="Publication Type">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" required="1" />
+							</group>
+							<group></group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_publication_type_tree" model="ir.ui.view">
+			<field name="name">publication.type.tree</field>
+			<field name="model">publication.type</field>
+			<field name="arch" type="xml">
+				<tree string="Publication Type">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_publication_type_search" model="ir.ui.view">
+			<field name="name">publication.type.search</field>
+			<field name="model">publication.type</field>
+			<field name="arch" type="xml">
+				<search string="Publication Type">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+		
+		<record id="action_publication_type" model="ir.actions.act_window">
+			<field name="name">Publication Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">publication.type</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Renewal Content Type  -->
+		
+		<record id="view_renewal_doc_type_form" model="ir.ui.view">
+			<field name="name">renewal.doc.type.form</field>
+			<field name="model">renewal.doc.type</field>
+			<field name="arch" type="xml">
+				<form string="Renewal Document Type">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" required="1" />
+								<field name="mail_template_id" />
+							</group>
+							<group>
+								<field name="is_member" />
+								<field name="is_org" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_renewal_doc_type_tree" model="ir.ui.view">
+			<field name="name">renewal.doc.type.tree</field>
+			<field name="model">renewal.doc.type</field>
+			<field name="arch" type="xml">
+				<tree string="Renewal Document Type">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_renewal_doc_type" model="ir.actions.act_window">
+			<field name="name">Renewal Document Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">renewal.doc.type</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+	
+		<!-- Entity Nature -->
+		<record id="view_entity_nature_tree" model="ir.ui.view">
+			<field name="name">entity.nature.tree</field>
+			<field name="model">entity.nature</field>
+			<field name="arch" type="xml">
+				<tree string="Entity Nature" editable="bottom">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_entity_nature" model="ir.actions.act_window">
+			<field name="name">Entity Nature</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">entity.nature</field>
+			<field name="view_mode">tree</field>
+		</record>
+		<!--	Fiscal Year	-->
+		<record id="view_fiscal_year_form" model="ir.ui.view">
+			<field name="name">fiscal.year.form</field>
+			<field name="model">fiscal.year</field>
+			<field name="arch" type="xml">
+				<form string="Fiscal Year">
+					<sheet>
+						<group>
+							<group>
+								<field name="name"  />
+								<field name="date_from" />
+								<field name="date_to" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_fiscal_year_tree" model="ir.ui.view">
+			<field name="name">fiscal.year.tree</field>
+			<field name="model">fiscal.year</field>
+			<field name="arch" type="xml">
+				<tree string="Fiscal Year">
+					<field name="name"  />
+					<field name="date_from" />
+					<field name="date_to" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_fiscal_year_search" model="ir.ui.view">
+			<field name="name">fiscal.year.search</field>
+			<field name="model">fiscal.year</field>
+			<field name="arch" type="xml">
+				<search string="Fiscal Year">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_fiscal_year" model="ir.actions.act_window">
+			<field name="name">Fiscal Year</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">fiscal.year</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Anniversary Type  -->
+		
+		<record id="view_anniversary_type_form" model="ir.ui.view">
+			<field name="name">anniversary.type.form</field>
+			<field name="model">anniversary.type</field>
+			<field name="arch" type="xml">
+				<form string="Anniversary Type">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" required="1" />
+							</group>
+							<group>
+							<field name="is_priest" />
+							<field name="is_sister"/>
+							<field name="is_layperson" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_anniversary_type_tree" model="ir.ui.view">
+			<field name="name">anniversary.type.tree</field>
+			<field name="model">anniversary.type</field>
+			<field name="arch" type="xml">
+				<tree string="Anniversary Type">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_anniversary_type" model="ir.actions.act_window">
+			<field name="name">Anniversary Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">anniversary.type</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!--Month-->
+		
+		<record id="view_month_form" model="ir.ui.view">
+			<field name="name">res.month.form</field>
+			<field name="model">res.month</field>
+			<field name="arch" type="xml">
+				<form string="Month">
+					<sheet>
+						<group>
+							<group>
+								<field name="sequence" />
+								<field name="name" />
+								<field name="code" required="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_month_tree" model="ir.ui.view">
+			<field name="name">res.month.tree</field>
+			<field name="model">res.month</field>
+			<field name="arch" type="xml">
+				<tree string="Month">
+					<field name="name"  />
+					<field name="sequence" widget="handle" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_month_search" model="ir.ui.view">
+			<field name="name">res.month.search</field>
+			<field name="model">res.month</field>
+			<field name="arch" type="xml">
+				<search string="Month">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_month" model="ir.actions.act_window">
+			<field name="name">Month</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.month</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Institution Board  -->
+		
+		<record id="view_board_type_form" model="ir.ui.view">
+			<field name="name">institution.board.form</field>
+			<field name="model">institution.board</field>
+			<field name="arch" type="xml">
+				<form string="Institution Board">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" required="1" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_board_type_tree" model="ir.ui.view">
+			<field name="name">institution.board.tree</field>
+			<field name="model">institution.board</field>
+			<field name="arch" type="xml">
+				<tree string="Institution Board">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_board_type" model="ir.actions.act_window">
+			<field name="name">Institution Board</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">institution.board</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+	</data>
+</odoo>

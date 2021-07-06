@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_statistics_confreres" model="ir.ui.view">
+		<field name="name">statistics.confreres.form</field>
+		<field name="model">statistics.confreres</field>
+		<field name="arch" type="xml">
+			<form string="Member List">
+				<group>
+					<group>
+						<field name="confreres_type" widget="radio" string="Type"/>
+						<field name="rel_province_id" required="1" options='{"no_open": True, "no_create": True}' />
+					</group>
+					<group>
+						<field name="living_status" widget="radio"/>
+						<field name="blood_group_id" options='{"no_open": True, "no_create": True}' attrs="{'invisible': [('confreres_type','=','summary')]}"/>
+						<field name="member_type" attrs="{'invisible': [('confreres_type','=','summary')]}"/>
+					</group>
+					<group>
+					    <label for="" string="Community"/>
+					    <div>
+					    	<label for="" string="All"></label>
+					        <field name="community_all" class="oe_inline"/>
+					        <field name="community_ids" attrs="{'invisible':[('community_all', '=',True)],'required':[('community_all', '=',False)]}" widget="many2many_tags" class="oe_inline" domain="[('rel_province_id','=',rel_province_id),('rel_province_id','!=',False)]"/>
+					    </div>
+					</group>
+					<group>
+						<field name="sortby_id" required="True" context="{'show_description':1,'tree_view_ref': 'cristo.cr_view_ir_model_fields_tree'}" attrs="{'invisible': [('confreres_type','=','summary')]}"  domain="[('model_id.model','=','res.member'),('name','in',['name','dob','current_holyorder','member_type','native_place',
+															'native_parish_id','native_diocese_id','physical_status_id','community_id','living_status','age',
+															'mother_tongue_id','blood_group_id','personal_mobile','personal_email','current_prof_type'])]" options='{"no_open": True, "no_create": True}'/>
+						<field name="sort_rule" widget="radio" attrs="{'invisible': [('confreres_type','=','summary')]}"/>
+					</group>
+				</group>
+				<footer>
+					<button name="print_pdf" string="EXPORT TO PDF" type="object" class="oe_highlight" />
+					<button name="print_xls" string="EXPORT TO EXCEL" type="object" class="oe_highlight" />
+					or
+					<button string="CANCEL" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_statistics_confreres" model="ir.actions.act_window">
+		<field name="name">Member List</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">statistics.confreres</field>
+		<field name="view_mode">form</field>
+		<field name="context">
+			{'show_description':1,'tree_view_ref': 'cristo.cr_view_ir_model_fields_tree'}
+		</field>
+		<field name="target">new</field>
+	</record>
+</odoo>

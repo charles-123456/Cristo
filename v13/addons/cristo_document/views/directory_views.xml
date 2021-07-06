@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+    
+    	<record id="view_cristo_dms_directory_form" model="ir.ui.view">
+			<field name="name">muk_dms_directory.form.inherit</field>
+			<field name="model">muk_dms.directory</field>
+			<field name="inherit_id" ref="muk_dms.view_dms_directory_form" />
+			<field name="arch" type="xml">
+				<field name="count_elements" position="after">
+					<field name="shared_ids" invisible="1"/>
+					<field name="check_province" invisible="1" />
+					<field name="check_community" invisible="1" />
+					<field name="check_congregation" invisible="1" />
+					<field name="check_institution" invisible="1" />
+					<field name="check_diocese" invisible="1"/>
+					<field name="check_vicariate" invisible="1"/>
+					<field name="check_parish" invisible="1"/>
+					<field name="institute_id" attrs="{'invisible':[('check_congregation', '=', False)]}" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"/>
+					<field name="rel_province_id" attrs="{'invisible':[('check_province', '=', False)]}" domain="[('institute_id', '=', institute_id)]" />
+					<field name="community_id" attrs="{'invisible':[('check_community', '=', False)]}" domain="[('rel_province_id', '=', rel_province_id)]" />
+					<field name="institution_id" attrs="{'invisible':[('check_institution', '=', False)]}" domain="[('community_id', '=', community_id)]" />
+					<field name="diocese_id" attrs="{'invisible':[('check_diocese', '=', False)]}"/>
+					<field name="vicariate_id" attrs="{'invisible':[('check_vicariate', '=', False)]}" domain="[('diocese_id', '=', diocese_id)]"/>
+					<field name="parish_id" attrs="{'invisible':[('check_parish', '=', False)]}" domain="[('vicariate_id', '=', vicariate_id)]"/>
+					<field name="view_cong_low_lev" invisible="1"/>
+					<field name="view_pro_low_lev" invisible="1"/>
+					<field name="view_house_low_lev" invisible="1"/>
+				</field>
+				<field name="tags" position="after">
+					<field name="is_main_directory" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,muk_dms.group_dms_manager" />
+					<field name="show_main_dir" />
+				</field>
+				<xpath expr="//page[@name='page_access']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,muk_dms.group_dms_manager</attribute>
+				</xpath>
+				<xpath expr="//field[@name='count_elements']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,muk_dms.group_dms_manager</attribute>
+				</xpath>
+				<xpath expr="//field[@name='show_main_dir']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,muk_dms.group_dms_manager</attribute>
+				</xpath>
+				<field name="parent_directory" position="attributes">
+					<attribute name="domain">[('is_root_directory','=',False)]</attribute>
+				</field>
+				<xpath expr="//page[@name='page_meta']/group/group[2]" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_cristo_dms_directory_tree" model="ir.ui.view">
+			<field name="name">muk_dms_directory.tree.inherit</field>
+			<field name="model">muk_dms.directory</field>
+			<field name="inherit_id" ref="muk_dms.view_dms_directory_tree" />
+			<field name="arch" type="xml">
+				<field name="write_date" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</field>
+			</field>
+		</record>
+		
+		<record id="view_cristo_dms_directory_search" model="ir.ui.view">
+			<field name="name">muk_dms_directory.search.inherit</field>
+			<field name="model">muk_dms.directory</field>
+			<field name="inherit_id" ref="muk_dms.search_dms_directory" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="after">
+					<field name="parent_directory" />
+					<field name="category" />
+					<field name="tags" />
+				</xpath>
+				<xpath expr="//filter[@name='filter_root']" position="after">
+					<filter name="Main_Directory" string="Main Directory" domain="[('show_main_dir', '=', True)]" />
+					<filter name="Sub_Directory" string="Sub Directory" domain="[('show_main_dir', '=', False)]" />
+				</xpath>
+				<xpath expr="//filter[@name='group_category']" position="after">
+					<filter name="group_parent_directory" string="Parent Directory" context="{'group_by':'parent_directory'}" />
+				</xpath>
+			</field>
+		</record>
+    	
+    	<record id="muk_dms.action_dms_directory" model="ir.actions.act_window">
+			<field name="name">Directories</field>
+			<field name="res_model">muk_dms.directory</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="domain">[("is_hidden", "=",  False),('is_main_directory','=',False),('is_root_directory','=',False)]</field>
+			<field name="context">{'search_default_Main_Directory':1}</field>
+			<field name="help" type="html">
+			    <p class="o_view_nocontent_smiling_face">
+			      	Add a new Directory.
+			    </p>
+			    <p>
+					Directories can be used to structure and organize
+					files directly in Here.
+			    </p>
+		    </field>
+		</record>
+    	
+    	<record id="action_dms_directory_admin" model="ir.actions.act_window">
+			<field name="name">Directory</field>
+			<field name="res_model">muk_dms.directory</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="domain">[("is_hidden", "=",  False)]</field>
+			<field name="help" type="html">
+			    <p class="o_view_nocontent_smiling_face">
+			      	Add a new Directory.
+			    </p>
+			    <p>
+					Directories can be used to structure and organize
+					files directly in Here.
+			    </p>
+		    </field>
+		</record>
+		
+    	<menuitem id="menu_dms_directory_main" name="Directory" sequence="31"
+	parent="muk_dms.main_menu_muk_dms" action="action_dms_directory_admin" groups="base.group_erp_manager"/>
+	
+	<menuitem id="muk_dms.main_menu_muk_dms" name="Documents" web_icon="cristo_document,static/description/icon.png" groups="muk_dms.group_dms_user" />
+	</data>
+</odoo>

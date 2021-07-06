@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Religious Province -->
+
+	<record id="res_religious_province_directory_view" model="ir.ui.view">
+        <field name="name">res.religious.province.form.directory.inherit</field>
+        <field name="model">res.religious.province</field>
+        <field name="inherit_id" ref="cristo.view_religious_province_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='province_renewals']" position="after">
+                <button name="open_directory_file" string="Directory Files" type="object" class="oe_highlight"
+                groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province" icon="fa-file-o" />
+            </xpath>
+        </field>
+    </record>
+
+    <!--Directory File-->
+
+    <record id="view_directory_file_form" model="ir.ui.view">
+        <field name="name">res.directory.file.form</field>
+        <field name="model">res.directory.file</field>
+        <field name="arch" type="xml">
+            <form string="Directory Files">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <label for="file" string="File"/>
+                            <div>
+                                <field name="file" filename="file_name" />
+                                <div class="alert alert-warning text-center" role="alert" style="width: fit-content;padding: 3px;">
+                                    <span name="hint_text">Note:You Can upload only .pdf file.</span>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_directory_file_tree" model="ir.ui.view">
+        <field name="name">res.directory.file.tree</field>
+        <field name="model">res.directory.file</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="status=='active'">
+                <field name="name"/>
+                <field name="file"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_directory_file" model="ir.actions.act_window">
+        <field name="name">Directory Files</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.directory.file</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

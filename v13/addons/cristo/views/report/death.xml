@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="paperformat_death" model="report.paperformat">
+			<field name="name">Report Format for Death</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Landscape</field>
+			<field name="margin_top">5</field>
+			<field name="margin_bottom">7</field>
+			<field name="margin_left">3</field>
+			<field name="margin_right">3</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">5</field>
+			<field name="dpi">100</field>
+		</record>
+
+		
+
+		<report id="report_death_action" string="Death Certificate"
+			model="res.death" report_type="qweb-pdf" file="cristo.report_death"
+			name="cristo.report_death" paperformat="paperformat_death"
+			menu="False" />
+
+
+	</data>
+</odoo>

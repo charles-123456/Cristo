@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Concern Tags -->
+
+		<record id="view_concern_tags_form" model="ir.ui.view">
+			<field name="name">concern.tags.form</field>
+			<field name="model">concern.tags</field>
+			<field name="arch" type="xml">
+				<form string="Concern Tags">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+							</group>
+							<group>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_concern_tags_tree" model="ir.ui.view">
+			<field name="name">concern.tags.tree</field>
+			<field name="model">concern.tags</field>
+			<field name="arch" type="xml">
+				<tree string="Concern Tags">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_concern_tags" model="ir.actions.act_window">
+			<field name="name">Concern Tags</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">concern.tags</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Calendar -->
+
+		<record id="view_calendar_form" model="ir.ui.view">
+			<field name="name">calendar.event.form</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<form string="Calendar" duplicate="0">
+					<sheet>
+						<group attrs="{'invisible': [('recurrency','==',False)]}" class="oe_edit_only ">
+                            <p class='alert alert-warning' role="status"> This event is linked to a recurrence...<br/>
+                                <button type="object" name="action_detach_recurring_event"  string="Update only this instance"  help="Click here to update only this instance and not all recurrences. " class="oe_link"/>
+                            </p>
+                        </group>
+						<div class="oe_title">
+							<div class="oe_edit_only">
+								<label for="name" string="Title"/>
+							</div>
+							<h1>
+								<field name="name" placeholder="e.g. Feast of the Blessed Mary" />
+							</h1>
+						</div>
+						<field name="state" invisible="1" />
+						<group>
+							<group>
+								<field name="start" attrs="{'invisible': True}" />
+								<field name="stop" attrs="{'invisible': True}" />
+								<field name="id" attrs="{'invisible': True}" />
+
+								<field name="start_date" string="Starting at"
+									attrs="{'required': [('allday','=',True)], 'invisible': [('allday','=',False)]}"
+									force_save="1" />
+								<field name="stop_date" string="Ending at"
+									attrs="{'required': [('allday','=',True)],'invisible': [('allday','=',False)]}"
+									force_save="1" />
+
+								<field name="start_datetime" string="Starting at"
+									attrs="{'required': [('allday','=',False)], 'invisible': [('allday','=',True)]}" />
+								<field name="stop_datetime" invisible="1" />
+
+								<label for="duration" attrs="{'invisible': [('allday','=',True)]}" />
+								<div attrs="{'invisible': [('allday','=',True)]}">
+									<field name="duration" widget="float_time" string="Duration"
+										class="oe_inline" attrs="{'readonly': [('id', '!=', False)]}" />
+									<span> hours</span>
+								</div>
+
+								<field name="allday" force_save="1" />
+								<field name="type" />
+								<field name="user_id" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"/>
+
+							</group>
+							<group>
+								<field name="categ_ids" widget="many2many_tags" options="{'no_create_edit': True}" invisible="1"/>
+								<!-- <field name="calendar_type_id"  /> -->
+								<field name="calendar_type" />
+								<field name="alarm_ids" widget="many2many_tags" />
+								<field name="location" />
+								<field name="event_tz" invisible="1" />
+							</group>
+							<group>
+								<field name="check_province" invisible="1" />
+								<field name="check_community" invisible="1" />
+								<field name="check_congregation" invisible="1" />
+								<field name="check_institution" invisible="1" />
+								<field name="check_diocese" invisible="1"/>
+								<field name="check_vicariate" invisible="1"/>
+								<field name="check_parish" invisible="1"/>
+							</group>
+							<group>
+								<field name="institute_id" attrs="{'invisible':[('check_congregation', '=', False)]}" />
+								<field name="rel_province_id" attrs="{'invisible':[('check_province', '=', False)]}" domain="[('institute_id', '=', institute_id)]" />
+								<field name="community_id" attrs="{'invisible':[('check_community', '=', False)]}" domain="[('rel_province_id', '=', rel_province_id)]" />
+								<field name="institution_id" attrs="{'invisible':[('check_institution', '=', False)]}" domain="[('community_id', '=', community_id)]" />
+								<field name="diocese_id" attrs="{'invisible':[('check_diocese', '=', False)]}" />
+								<field name="vicariate_id" attrs="{'invisible':[('check_vicariate', '=', False)]}"/>
+								<field name="parish_id" attrs="{'invisible':[('check_parish', '=', False)]}"/>
+							</group>
+						</group>
+						<label for="description" invisible="1" />
+						<field name="description"  invisible="1" />
+						
+						<notebook>
+							<page name="description" string="Description">
+								<field name="description_html" />
+							</page>
+							<page name="page_options" string="Options" invisible="0">
+								<group>
+									<div>
+										<group>
+											<field name="recurrency" />
+										</group>
+										<div attrs="{'invisible': [('recurrency', '=', False)]}">
+											<group>
+												<label for="interval" />
+												<div class="o_row">
+													<field name="interval"
+														attrs="{'required': [('recurrency', '=', True)]}" />
+													<field name="rrule_type"
+														attrs="{'required': [('recurrency', '=', True)]}" />
+												</div>
+												<label string="Until" for="end_type" />
+												<div class="o_row">
+													<field name="end_type"
+														attrs="{'required': [('recurrency', '=', True)]}" />
+													<field name="count"
+														attrs="{'invisible': [('end_type', '!=', 'count')], 'required': [('recurrency', '=', True)]}" />
+													<field name="final_date"
+														attrs="{'invisible': [('end_type', '!=', 'end_date')], 'required': [('end_type', '=', 'end_date'), ('recurrency', '=', True)]}" />
+												</div>
+											</group>
+											<group attrs="{'invisible': [('rrule_type', '!=', 'weekly')]}"
+												name="weekdays">
+												<field name="mo" />
+												<field name="tu" />
+												<field name="we" />
+												<field name="th" />
+												<field name="fr" />
+												<field name="sa" />
+												<field name="su" />
+											</group>
+											<group attrs="{'invisible': [('rrule_type', '!=', 'monthly')]}">
+												<label string="Day of Month" for="month_by" />
+												<div class="o_row">
+													<field name="month_by" />
+													<field name="day"
+														attrs="{'required': [('month_by', '=', 'date'), ('rrule_type', '=', 'monthly')],
+                                                            'invisible': [('month_by', '!=', 'date')]}" />
+													<field name="byday" string="The"
+														attrs="{'required': [('recurrency', '=', True), ('month_by', '=', 'day'), ('rrule_type', '=', 'monthly')],
+                                                            'invisible': [('month_by', '!=', 'day')]}" />
+													<field name="week_list" nolabel="1"
+														attrs="{'required': [('recurrency', '=', True), ('month_by', '=', 'day'), ('rrule_type', '=', 'monthly')],
+                                                            'invisible': [('month_by', '!=', 'day')]}" />
+												</div>
+											</group>
+										</div>
+									</div>
+									<group>
+										<field name="privacy" invisible="1" />
+										<field name="show_as" invisible="1" />
+										<field name="recurrent_id" invisible="1" />
+									</group>
+								</group>
+							</page>
+							<page string="Photos" >
+								<field name="org_image_ids" class="o_website_sale_image_list" mode="kanban" options="{'create_text':'Add a Photo'}" nolabel="1" />
+							</page>
+							<page string="Attachments">
+								<div class="alert alert-warning" role="alert">
+                        			<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        		</div>
+								<field name="attachment_ids" widget="many2many_binary" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_calendar_tree" model="ir.ui.view">
+			<field name="name">calendar.event.tree</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<tree string="Calendar" expand="0">
+					<field name="name" string="Title" />
+					<field name="state" invisible="1" />
+					<field name="start_datetime"/>
+					<field name="start_date" width="0.8" />
+					<field name="stop_date" />
+					<field name="duration" widget="float_time" optional="hide" />
+					<!-- <field name="calendar_type_id" optional="show" /> -->
+					<field name="calendar_type" />
+					<field name="location" optional="hide" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_calendar_search" model="ir.ui.view">
+			<field name="name">calendar.event.search</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<search string="Calendar">
+					<field name="state" invisible="1" />
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="view_calendar" model="ir.ui.view">
+			<field name="name">calendar.event.calendar</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<calendar string="Calendar" date_start="start" date_stop="stop"
+					date_delay="duration" all_day="allday" mode="month" color="calendar_type">
+					<field name="name" />
+				</calendar>
+			</field>
+		</record>
+
+		<record id="action_calendar" model="ir.actions.act_window">
+			<field name="name">Calendar</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">calendar.event</field>
+			<field name="view_mode">calendar,tree,form</field>
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                   		  (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_calendar')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_calendar_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_calendar_form')})]" />
+			<field name="search_view_id" ref="cristo_calendar_meeting.view_calendar_search" />
+			<field name="domain">[('category','=','calendar')]</field>
+			<field name="context">{'default_category':'calendar','detaching':True}</field>
+		</record>
+
+		<!-- Meeting -->
+
+		<record id="view_meeting_form" model="ir.ui.view">
+			<field name="name">calendar.event.form</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<form string="Meeting" duplicate="0">
+					<sheet>
+						<group attrs="{'invisible': [('recurrency','==',False)]}" class="oe_edit_only ">
+                            <p class='alert alert-warning' role="status"> This event is linked to a recurrence...<br/>
+                                <button type="object" name="action_detach_recurring_event"  string="Update only this instance"  help="Click here to update only this instance and not all recurrences. " class="oe_link"/>
+                            </p>
+                        </group>
+						<div class="oe_button_box" name="button_box">
+							<button name="generate_mom_report" type="object" string="MOM Report" class="oe_stat_button"
+								icon="fa-file-text">
+							</button>
+						</div>
+						<widget name="web_ribbon" text="Archived" bg_color="bg-danger"
+							attrs="{'invisible': [('active', '=', True)]}" />
+						<button string="Document" class="oe_stat_button float-right"
+							icon="fa-bars" type="object" name="action_open_calendar_event"
+							attrs="{'invisible': ['|', ('res_model', '=', False), ('res_id', '=', False)]}" />
+						<field name="res_model" invisible="1" />
+						<field name="res_id" invisible="1" />
+						<field name="state" invisible="1" />
+						<field name="is_attendee" invisible="1" />
+						<field name="attendee_status" invisible="1" />
+						<field name="active" invisible="1" />
+						<field name="main_category_id" invisible="1" />
+						<div class="oe_title">
+							<div class="oe_edit_only">
+								<label for="name" />
+							</div>
+							<h1>
+								<field name="name" placeholder="e.g. Council Meeting" />
+							</h1>
+							<div class="oe_title">
+								<field name="attendee_type" widget="radio"
+		                            class="oe_edit_only"
+		                    		options="{'horizontal': true}"/>
+		                    </div>		
+							<label for="partner_ids" string="Attendees" class="oe_edit_only"
+								attrs="{'invisible':[('attendee_type', '=', 'group')]}" />
+							<h2>
+								<field name="partner_ids" widget="many2manyattendee"
+									placeholder="Select attendees..."
+									class="oe_inline" options="{'no_create_edit':1}"
+									attrs="{'invisible':[('attendee_type', '=', 'group')], 'required':[('attendee_type', '!=', 'group')]}"
+									domain="[('main_category_code', 'in', ['RP','HC','RI','MR'])]"/>
+							</h2>
+							<label for="meeting_group_ids" string="Attendees Group" class="oe_edit_only"
+								attrs="{'invisible':[('attendee_type', '=', 'individual')]}" />
+							<h2>
+								<field name="meeting_group_ids" widget="many2many_tags"
+									placeholder="Select attendees..." class="oe_inline"
+									attrs="{'invisible':[('attendee_type', '=', 'individual')], 'required':[('attendee_type', '!=', 'individual')]}" />
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="start" attrs="{'invisible': True}" />
+								<field name="stop" attrs="{'invisible': True}" />
+								<field name="id" attrs="{'invisible': True}" />
+
+								<field name="start_date" string="Starting at"
+									attrs="{'required': [('allday','=',True)], 'invisible': [('allday','=',False)], 'readonly': [('id', '!=', False), ('recurrency','=',True)]}"
+									force_save="1" />
+								<field name="stop_date" string="Ending at"
+									attrs="{'required': [('allday','=',True)],'invisible': [('allday','=',False)], 'readonly': [('id', '!=', False), ('recurrency','=',True)]}"
+									force_save="1" />
+
+								<field name="start_datetime" string="Starting at"
+									attrs="{'required': [('allday','=',False)], 'invisible': [('allday','=',True)], 'readonly': [('id', '!=', False), ('recurrency','=',True)]}" />
+								<field name="stop_datetime" invisible="1" />
+								<label for="duration" attrs="{'invisible': [('allday','=',True)]}" />
+								<div attrs="{'invisible': [('allday','=',True)]}">
+									<field name="duration" widget="float_time" string="Duration"
+										class="oe_inline"
+										attrs="{'readonly': [('id', '!=', False), ('recurrency','=',True)]}" />
+									<span> hours</span>
+								</div>
+								<field name="allday"
+									attrs="{'readonly': [('id', '!=', False), ('recurrency','=',True)]}"
+									force_save="1" />
+								<field name="decision" />
+							</group>
+							<group>
+								<field name="categ_ids" widget="many2many_tags" />
+								<field name="alarm_ids" widget="many2many_tags" />
+								<field name="location" />
+								<field name="event_tz" attrs="{'invisible': [('recurrency', '=', False)]}" />
+								<field name="attachment_id" invisible="1"/>
+							</group>
+							<group>
+								<field name="check_province" invisible="1" />
+								<field name="check_community" invisible="1" />
+								<field name="check_congregation" invisible="1" />
+								<field name="check_institution" invisible="1" />
+								<field name="check_diocese" invisible="1"/>
+								<field name="check_vicariate" invisible="1"/>
+								<field name="check_parish" invisible="1"/>
+							</group>
+							<group>
+								<field name="institute_id" attrs="{'invisible':[('check_congregation', '=', False)]}" />
+								<field name="rel_province_id" attrs="{'invisible':[('check_province', '=', False)]}" domain="[('institute_id', '=', institute_id)]" />
+								<field name="community_id" attrs="{'invisible':[('check_community', '=', False)]}" domain="[('rel_province_id', '=', rel_province_id)]" />
+								<field name="institution_id" attrs="{'invisible':[('check_institution', '=', False)]}" domain="[('community_id', '=', community_id)]" />
+								<field name="diocese_id" attrs="{'invisible':[('check_diocese', '=', False)]}" />
+								<field name="vicariate_id" attrs="{'invisible':[('check_vicariate', '=', False)]}"/>
+								<field name="parish_id" attrs="{'invisible':[('check_parish', '=', False)]}"/>
+							</group>
+						</group>
+						<label for="description" invisible="1" />
+						<field name="description" invisible="1" />
+						
+						<notebook>
+							<page name="description" string="Description">
+								<field name="description_html" />
+							</page>
+							<page name="page_options" string="Options" invisible="0">
+								<group>
+									<div>
+										<group>
+											<field name="recurrency" />
+										</group>
+										<div attrs="{'invisible': [('recurrency', '=', False)]}">
+											<group>
+												<label for="interval" />
+												<div class="o_row">
+													<field name="interval"
+														attrs="{'required': [('recurrency', '=', True)]}" />
+													<field name="rrule_type"
+														attrs="{'required': [('recurrency', '=', True)]}" />
+												</div>
+												<label string="Until" for="end_type" />
+												<div class="o_row">
+													<field name="end_type"
+														attrs="{'required': [('recurrency', '=', True)]}" />
+													<field name="count"
+														attrs="{'invisible': [('end_type', '!=', 'count')], 'required': [('recurrency', '=', True)]}" />
+													<field name="final_date"
+														attrs="{'invisible': [('end_type', '!=', 'end_date')], 'required': [('end_type', '=', 'end_date'), ('recurrency', '=', True)]}" />
+												</div>
+											</group>
+											<group attrs="{'invisible': [('rrule_type', '!=', 'weekly')]}"
+												name="weekdays">
+												<field name="mo" />
+												<field name="tu" />
+												<field name="we" />
+												<field name="th" />
+												<field name="fr" />
+												<field name="sa" />
+												<field name="su" />
+											</group>
+											<group attrs="{'invisible': [('rrule_type', '!=', 'monthly')]}">
+												<label string="Day of Month" for="month_by" />
+												<div class="o_row">
+													<field name="month_by" />
+													<field name="day"
+														attrs="{'required': [('month_by', '=', 'date'), ('rrule_type', '=', 'monthly')],
+                                                            'invisible': [('month_by', '!=', 'date')]}" />
+													<field name="byday" string="The"
+														attrs="{'required': [('recurrency', '=', True), ('month_by', '=', 'day'), ('rrule_type', '=', 'monthly')],
+                                                            'invisible': [('month_by', '!=', 'day')]}" />
+													<field name="week_list" nolabel="1"
+														attrs="{'required': [('recurrency', '=', True), ('month_by', '=', 'day'), ('rrule_type', '=', 'monthly')],
+                                                            'invisible': [('month_by', '!=', 'day')]}" />
+												</div>
+											</group>
+										</div>
+									</div>
+									<group>
+										<field name="privacy" invisible="1" />
+										<field name="show_as" invisible="1" />
+										<field name="recurrent_id" invisible="1" />
+									</group>
+								</group>
+							</page>
+
+							<page name="page_invitations" string="Invitation Status">
+								<group>
+									<group>
+										<field name="email_to" string="Extra Email To" />
+									</group>
+									<group>
+										<field name="email_cc" />
+										<field name="send_email" invisible="1"/>
+									</group>
+								</group>
+								
+								<button name="action_meeting_wizard" string="Send mail" type='object' attrs="{'invisible':[('send_email','=',False)]}" icon="fa-envelope" class="oe_link" />
+									
+								<field name="attendee_ids" widget="one2many" mode="tree,kanban" readonly="1">
+									<tree string="Invitation details" editable="top" create="false"
+										delete="false">
+										<field name="partner_id" />
+										<field name="state" />
+										<field name="email" widget="email" />
+										
+										<button name="do_tentative" states="needsAction,declined,accepted" string="Uncertain" type="object" icon="fa-asterisk" />
+	                                    <button name="do_accept" string="Accept" states="needsAction,tentative,declined" type="object" icon="fa-check text-success"/>
+	                                    <button name="do_decline" string="Decline" states="needsAction,tentative,accepted" type="object" icon="fa-times-circle text-danger"/>
+									</tree>
+									<kanban class="o_kanban_mobile" create="false" delete="false">
+										<field name="partner_id" />
+										<field name="state" />
+										<field name="email" widget="email" />
+
+										<templates>
+	                                        <t t-name="kanban-box">
+	                                            <div class="d-flex flex-column justify-content-between">
+	                                                <field name="partner_id"/>
+	                                                <field name="email" widget="email"/>
+	                                                <span>Status: <field name="state" /></span>
+	
+	                                                <div class="text-right">
+	                                                    <button name="do_tentative" states="needsAction,declined,accepted" string="Uncertain" type="object" class="btn fa fa-asterisk"/>
+	                                                    <button name="do_accept" states="needsAction,tentative,declined" string="Accept" type="object" class="btn fa fa-check text-success"/>
+	                                                    <button name="do_decline" states="needsAction,tentative,accepted" string="Decline" type="object" class="btn fa fa-times-circle text-danger"/>
+	                                                </div>
+	                                            </div>
+	                                        </t>
+	                                    </templates>
+									</kanban>
+								</field>
+							</page>
+							<page string="Agenda">
+								<field name="agenda" />
+							</page>
+							<page string="Proceedings">
+								<field name="proceedings" />
+							</page>
+							<page string="Attachments">
+								<div class="alert alert-warning" role="alert">
+                        			<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        		</div>
+								<field name="attachment_ids" widget="many2many_binary" />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_meeting_tree" model="ir.ui.view">
+			<field name="name">calendar.event.tree</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<tree string="Meeting" expand="0">
+					<field name="name" />
+					<field name="state" invisible="1" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_meeting_search" model="ir.ui.view">
+			<field name="name">calendar.event.search</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<search string="Meeting">
+					<field name="state" invisible="1" />
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="view_meeting_calendar" model="ir.ui.view">
+			<field name="name">calendar.event.calendar</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<calendar string="Meeting" date_start="start" date_stop="stop"
+					date_delay="duration" all_day="allday" mode="month" color="name">
+					<field name="name" />
+				</calendar>
+			</field>
+		</record>
+
+		<record id="action_meeting" model="ir.actions.act_window">
+			<field name="name">Meeting</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">calendar.event</field>
+			<field name="view_mode">calendar,tree,form</field>
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                   		  (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_meeting_calendar')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_meeting_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_meeting_form')})]" />
+			<field name="search_view_id" ref="cristo_calendar_meeting.view_meeting_search" />
+			<field name="domain">[('category','=','meeting')]</field>
+			<field name="context">{'default_category':'meeting','detaching':True}</field>
+		</record>
+		
+		<!-- Meeting Groups -->
+		
+		<record id="view_meeting_group_form" model="ir.ui.view">
+			<field name="name">meeting.group.form</field>
+			<field name="model">meeting.group</field>
+			<field name="arch" type="xml">
+				<form string="Meeting Groups" duplicate="0">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="partner_ids" widget="many2many_tags_avatar"
+									placeholder="Select attendees..."
+									options="{'no_create_edit':1}"
+									domain="[('main_category_code', 'in', ['RP','HC','RI','MR'])]" />
+                                <field name="user_id" invisible="1" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_meeting_group_tree" model="ir.ui.view">
+			<field name="name">meeting.group.tree</field>
+			<field name="model">meeting.group</field>
+			<field name="arch" type="xml">
+				<tree string="Meeting Groups">
+					<field name="name" />
+					<field name="partner_ids" widget="many2many_tags" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_meeting_group" model="ir.actions.act_window">
+			<field name="name">Meeting Groups</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">meeting.group</field>
+			<field name="view_mode">tree,form</field>
+		</record>	
+		
+		<!-- Calendar Type -->
+		
+		<record id="view_calendar_type_tree" model="ir.ui.view">
+			<field name="name">calendar.type.tree</field>
+			<field name="model">calendar.type</field>
+			<field name="arch" type="xml">
+				<tree string="Calendar Type" default_order="id desc" editable="bottom">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_calendar_type" model="ir.actions.act_window">
+			<field name="name">Calendar Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">calendar.type</field>
+			<field name="view_mode">tree</field>
+		</record>	
+		
+		<!-- Meeting Tags -->
+		<record id="view_meeting_type_tree" model="ir.ui.view">
+			<field name="name">calendar.event.type.tree</field>
+			<field name="model">calendar.event</field>
+			<field name="arch" type="xml">
+				<tree string="Meeting Tag" default_order="name desc" editable="bottom">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_meeting_type" model="ir.actions.act_window">
+			<field name="name">Meeting Tags</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">calendar.event.type</field>
+			<field name="view_mode">tree</field>
+		</record>
+
+	</data>
+</odoo>
+

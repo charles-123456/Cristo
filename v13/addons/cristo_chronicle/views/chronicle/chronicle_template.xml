@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_chronicle">
+		<t t-call="web.basic_layout">
+			<div class="page">
+				<style>
+					table{
+					font-size:15px;
+					}
+					table tr {
+					page-break-inside: avoid;
+					}
+					.content {
+					position: absolute;
+					bottom: 0px;
+					top: 288px;
+					height:
+					max-content;
+					border-radius:10px;
+					text-align: center;
+					margin-left:
+					20px;
+					background: rgb(0, 0, 0); /* Fallback color */
+					background:
+					rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+					color:
+					#f1f1f1;
+					width: 212px;
+					padding: 5px;
+					white-space: nowrap;
+					overflow:
+					hidden;
+					text-overflow: ellipsis;
+					}
+				</style>
+				<t t-if="data['chronicle_type'] == 'summary'">
+					<div>
+						<table class="table table-sm table-header">
+							<center>
+								<h4>
+									CHRONICLE
+								</h4>
+								<h5>
+									<t t-esc="data['date_from']" t-options="{'widget': 'date', 'format': 'dd MMM yyyy'}" />
+									-
+									<t t-esc="data['date_to']" t-options="{'widget': 'date', 'format': 'dd MMM yyyy'}" />
+								</h5>
+							</center>
+						</table>
+					</div>
+					
+					<table width="100%">
+						<hr size="2" color="black" />
+						<t t-foreach="get_dates" t-as="dt">
+							<tr>
+								<td>
+									<span t-esc="dt" t-options="{'widget': 'date', 'format': 'dd MMM yyyy'}"
+										style="padding-right:10px;font-weight:bold;font-size:20px;" />
+								</td>
+							</tr>
+							<t t-foreach="docs(dt)" t-as="o">
+								<t t-if="o.type=='calendar'">
+									<tr>
+										<td>
+											<span t-esc="o.keywords" style="font-style:italic;font-size:20px;" />
+										</td>
+									</tr>
+								</t>
+								<t t-if="o.type=='meeting'">
+									<tr>
+										<td>
+											<span t-esc="o.keywords" style="font-style:italic;font-size:20px;" />
+										</td>
+									</tr>
+								</t>
+								<t t-if="o.type=='other'">
+									<tr>
+										<td>
+											<span t-esc="o.name" style="font-style:italic;font-size:20px;" />
+										</td>
+									</tr>
+								</t>
+								<t t-if="o.community_id">
+									<tr>
+										<td style="padding-left: 10px;">
+											<span t-field="o.community_id" />
+										</td>
+									</tr>
+								</t>
+								<t t-if="o.institution_id">
+									<tr>
+										<td style="padding-left: 10px;">
+											<span t-field="o.institution_id" />
+										</td>
+									</tr>
+								</t>
+								<tr>
+									<td style="padding-left: 10px;vertical-align: initial;">
+										<span t-field="o.description" />
+									</td>
+								</tr>
+							</t>
+							<tr>
+								<td style="border-bottom: 1px solid black; padding-bottom: 20px;padding-top: 20px;"></td>
+							</tr>
+						</t>
+					</table>
+				</t>
+				
+				<!-- For Chronicle Album Report -->
+				
+				<table>
+					<t t-if="data['chronicle_type'] == 'album'">
+						<tr>
+							<center>
+								<h2>
+									<strong>
+										CHRONICLE ALBUM
+									</strong>
+								</h2>
+							</center>
+						</tr>
+						<t t-foreach="get_dates" t-as="dt">
+						<t t-foreach="docs(dt)" t-as="o">
+							<t t-foreach="o.org_image_ids" t-as="image">
+								<div
+									style="position: relative;width: 250px;display: -webkit-inline-box;padding:35px;">
+									<span class="content" t-field="image.name" />
+									<img t-if="image.image_1920" t-att-src="image_data_uri(image.image_1920)"
+										style="vertical-align: middle;height:250px;width:250px;border-radius: 30px; padding:8px;" />
+									<span
+										style="position: absolute;bottom: 0px;top: 20px; margin-left: 20px; font-weight:bold;"
+										t-field="o.date" />
+								</div>
+							</t>
+						</t>
+						</t>
+					</t>
+				</table>
+			</div>
+		</t>
+	</template>
+</odoo>

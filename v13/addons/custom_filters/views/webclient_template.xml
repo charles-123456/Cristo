@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="test_js_assets_backend" name="Dashboard assets inherit" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/custom_filters/static/src/js/filter_menu.js"/>
+            <script type="text/javascript" src="/custom_filters/static/src/js/groupby_menu.js"/>
+        </xpath>
+    </template>
+</odoo>

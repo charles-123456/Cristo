@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<report id="education_template_xlsx"
+			    model="res.member"
+			    string="Education"
+			    report_type="xlsx"
+			    name="member_import_data.education_template"
+			    file="member_education_template"
+			    attachment_use="False" menu="False"
+				/>
+		<report id="formation_template_xlsx"
+			    model="res.member"
+			    string="Formation"
+			    report_type="xlsx"
+			    name="member_import_data.formation_template"
+			    file="member_formation_template"
+			    attachment_use="False" menu="False"
+				/>
+		<report id="holyorder_template_xlsx"
+			    model="res.member"
+			    string="Holy Order"
+			    report_type="xlsx"
+			    name="member_import_data.holyorder_template"
+			    file="member_holyorder_template"
+			    attachment_use="False" menu="False"
+				/>
+		<report id="profession_template_xlsx"
+			    model="res.member"
+			    string="Profession"
+			    report_type="xlsx"
+			    name="member_import_data.profession_template"
+			    file="member_profession_template"
+			    attachment_use="False" menu="False"
+				/>
+		<report id="memberhealth_template_xlsx"
+			    model="res.member"
+			    string="Member Health"
+			    report_type="xlsx"
+			    name="member_import_data.memberhealth_template"
+			    file="member_health_template"
+			    attachment_use="False" menu="False"
+				/>
+		<report id="publication_template_xlsx"
+			    model="res.member"
+			    string="Publication"
+			    report_type="xlsx"
+			    name="member_import_data.publication_template"
+			    file="member_publication_template"
+			    attachment_use="False" menu="False"
+				/>
+    </data>
+</odoo>

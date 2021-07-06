@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_wizard_meeting" model="ir.ui.view">
+		<field name="name">wizard.meeting.form</field>
+		<field name="model">wizard.meeting</field>
+		<field name="arch" type="xml">
+			<form string="Meeting">
+				<div class="alert alert-warning text-center" role="alert" attrs="{'invisible': [('mail_server_id','!=',False)]}">
+                   	<span name="hint_text">Note: You need to configure your email gateway (if nothing is available in the 'From' dropdown) to send emails. Go to Email->Mail Server and configure it.</span>
+                   </div>
+				<group>
+					<field name="subject" required="1"/>
+					<field name="mail_server_id" string="From" required="1" options="{'no_create_edit':true,'no_open':true}"/>
+				</group>
+				<div class="alert alert-warning text-center" role="alert">
+                   		<span name="hint_text">Note: You can enter additional body of the mail in the below area.</span>
+                   </div>
+				<group>
+					<field name="body" />
+				</group>
+				<group col="4">
+                    <field name="attachment_ids" widget="many2many_binary" 
+                    	string="Attach a file" nolabel="1" colspan="2"/>
+                </group>    
+				<footer>
+					<button name="action_meeting_send_email" string="SEND EMAIL" type="object"
+						class="oe_highlight" />
+					or
+					<button string="CANCEL" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_wizard_meeting" model="ir.actions.act_window">
+		<field name="name">Meeting</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.meeting</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+</odoo>

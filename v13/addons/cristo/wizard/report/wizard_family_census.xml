@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_family_census" model="ir.ui.view">
+		<field name="name">family.census.form</field>
+		<field name="model">family.census</field>
+		<field name="arch" type="xml">
+			<form string="Family Census">
+				<group>
+					<group>
+						<label for="all_category" string="Group" />
+						<div>
+							<field name="all_category" class="oe_inline" />
+							All
+							<field name="category_ids"  placeholder="Group" widget="many2many_tags"
+								attrs="{'invisible':[('all_category', '=', True)],'required':[('all_category', '=', False)]}"
+								options="{'no_open': True,'no_create': True}" />
+						</div>
+						
+						<label for="all_zone" string="Zone" />
+						<div>
+							<field name="all_zone" class="oe_inline" />
+							All
+							<field name="zone_ids" widget="many2many_tags" placeholder="Zone" domain="[('category_id','in',category_ids)]"
+								attrs="{'invisible':[('all_zone', '=', True)],'required':[('all_zone', '=', False)]}"
+								options="{'no_open': True,'no_create': True}" />
+						</div>
+						
+						<label for="all_bcc" string="BCC" />
+						<div>
+							<field name="all_bcc" class="oe_inline" />
+							All
+							<field name="bcc_ids" widget="many2many_tags" placeholder="BCC" domain="[('zone_id','in',zone_ids)]"
+								attrs="{'invisible':[('all_bcc', '=', True)],'required':[('all_bcc', '=', False)]}"
+								options="{'no_open': True,'no_create': True}" />
+						</div>
+					</group>
+					<group>
+						
+					</group>
+				</group>
+				<footer>
+					<button name="print_pdf" string="EXPORT TO PDF" type="object"
+						class="oe_highlight" />
+					or
+					<button string="CANCEL" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_family_census" model="ir.actions.act_window">
+		<field name="name">Family Census</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">family.census</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cristo_chronicle,cristo.chronicle,model_cristo_chronicle,base.group_erp_manager,1,1,1,1
+,,,,,,,
+access_cristo_chronicle_read,cristo.chronicle,model_cristo_chronicle,group_role_cristo_chronicle_read,1,0,0,0
+access_cristo_chronicle_write,cristo.chronicle,model_cristo_chronicle,group_role_cristo_chronicle_write,0,1,0,0
+access_cristo_chronicle_create,cristo.chronicle,model_cristo_chronicle,group_role_cristo_chronicle_create,0,0,1,0
+access_cristo_chronicle_delete,cristo.chronicle,model_cristo_chronicle,group_role_cristo_chronicle_delete,0,0,0,1

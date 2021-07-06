@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="province_statistic_form_view" model="ir.ui.view">
+		<field name="name">province.statistic.form</field>
+		<field name="model">province.statistic.update</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="generalate"/>
+						<field name="provincialate"/>
+					</group>
+                    <group>
+						<field name="regionalate"/>
+                        <field name="diocese_id" invisible="1"/>
+                    </group>
+				</group>
+				<footer>
+					<button name="update_province_statistics" string="Update" type="object" class="oe_highlight" />
+					<button string="Cancel" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_province_statistics" model="ir.actions.act_window">
+		<field name="name">Province Statistics</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">province.statistic.update</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

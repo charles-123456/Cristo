@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="cristo.baptism_report_template">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+					<div class="page" style="border:6px double black;color:black;font-family:Calibri;">
+						<style>
+							table,th,td{
+							text-align:left;
+							font-size:20px;
+							}
+							th,td{
+							padding: 9px;
+							}
+							.alignth{
+								padding-left: 10px;
+								width:30%;
+							}
+							.aligntd{
+								padding-left: 10px;
+								width:70%;
+							}
+						</style>
+						<div class="oe_structure"/>
+						<div width="100%" style="text-transform: uppercase;line-height:0.1;">
+							<center>
+								<strong>
+									<t t-if="o.parish_id.diocese_id.is_archdiocese == True">
+										<h2>
+											ARCHDIOCESE OF
+											<span t-field="o.parish_id.diocese_id.name"/>
+										</h2>
+									</t>
+									<t t-if="o.parish_id.diocese_id.is_archdiocese == False">
+										<h2>
+											DIOCESE OF
+											<span t-field="o.parish_id.diocese_id.name"/>
+										</h2>
+									</t>
+									<h2>
+										CERTIFIED COPY OF AN ENTRY IN THE
+									</h2>
+									<h2>REGISTER OF BAPTISM</h2>
+									<h2>
+										KEPT AT
+										<span t-field="o.parish_id.street"/>
+										<t t-if="o.parish_id.name">
+											,
+											<span t-field="o.parish_id.name"/>
+										</t>
+									</h2>
+								</strong>
+							</center>
+						</div>
+						<div style="border-bottom: 4px solid black; box-shadow: 0px 3px 0px 0px white, 0px 4px 0px 0px black"/>
+						<br/>
+						<table style="width:100%;">
+							<tr>
+								<th class="alignth">
+									Register No
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.bapt_register_ref"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="alignth">
+									Name
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.name"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="alignth">
+									Gender
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.gender"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="alignth">
+									Date of Birth
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.dob" t-options="{'format':'dd/MM/yyyy'}"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="alignth">
+									Place of Birth
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.bapt_place"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="alignth">
+									Father's Name
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.father_name"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="alignth">
+									Mother's Name
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.mother_name"/>
+								</td>
+							</tr>
+
+							<tr>
+								<th class="alignth">
+									Father's Occupation
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.father_occupation_id.name"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="alignth">
+									Residences of Parent's
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.father_domicile"/>
+								</td>
+							</tr>
+
+							<tr>
+								<th class="alignth">
+									God Father
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.bapt_god_father"/>
+								</td>
+							</tr>
+
+							<tr>
+								<th class="alignth">
+									God Mother
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.bapt_god_mother"/>
+								</td>
+							</tr>
+
+							<tr>
+								<th class="alignth">
+									Place of Baptism
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.bapt_place"/>
+								</td>
+							</tr>
+
+							<tr>
+								<th class="alignth">
+									Date of Baptism
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.bapt_date" t-options="{'format':'dd/MM/yyyy'}"/>
+								</td>
+							</tr>
+
+							<tr>
+								<th class="alignth">
+									Minister
+								</th>
+								<td class="aligntd">:
+									<span t-field="o.bapt_minister"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="alignth">
+									Remarks
+								</th>
+								<td class="aligntd">
+									:
+									<t t-if="o.note">
+										<span t-field="o.note"/>
+									</t>
+								</td>
+							</tr>
+						</table>
+
+						<div style="margin-top: 30px;font-size: 20px;text-align:center">
+							I certify that the above extract is a true copy of an entry in
+							the register of Baptism.
+						</div>
+						<br/>
+						<br/>
+						<br/>
+						<table style="width:100%;">
+							<tr>
+								<td width="50%" colspan="3">
+									<b>Place :</b>
+									<span t-field="o.parish_id.street"/>,
+									<span t-field="o.parish_id"/>
+								</td>
+							</tr>
+							<tr>
+								<td width="40%">
+									<b>Date :</b>
+									<span t-esc="time.strftime('%d/%m/%Y')"/>
+								</td>
+								<td width="30%" style="text-align:right;"><b>Seal</b></td>
+								<td width="30%" style="text-align:center;"><b>Parish Priest</b></td>
+							</tr>
+						</table>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>
+
+
+

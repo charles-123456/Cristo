@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<template id="member_list_filter_criteria">
+		<hr style="border-color:#DBDBDB; width:100%;"/>
+			<t>
+				<p><b>Filter Criteria</b></p>
+				<table style="float:left;border-style:none;font-size:14px;width:100%;">
+					<tr>
+						<td style="padding-right: 10px">
+							<b>Province</b>
+						</td>
+						<td style="padding-right: 10px"> : </td>
+						<td><t t-if="data['rel_province_id']"><t t-esc="data['rel_province_id'][1]" /></t></td>
+						<td style="padding-right: 10px">
+							<b>Living Status</b>
+						</td>
+						<td style="padding-right: 10px"> : </td>
+						<td>
+							<t t-if="data['living_status'] == 'yes'">Yes</t>
+							<t t-if="data['living_status'] == 'no'">No</t>
+						</td>
+						<td style="padding-right: 10px">
+							<b>Sort By</b>
+						</td>
+						<td style="padding-right: 10px"> : </td>
+						<td>
+							<t t-if="data['sortby_id']"><t t-esc="data['sortby_id'][1]" /></t>
+						</td>
+					</tr>
+					<div style="clear: both;"/>
+					<tr>
+						<td style="padding-right: 10px">
+							<b>Blood Group</b>
+						</td>
+						<td style="padding-right: 10px"> : </td>
+						<td>
+							<t t-if="data['blood_group_id']"><t t-esc="data['blood_group_id'][1]" /></t>
+							<t t-else="">All</t>
+						</td>
+						<td style="padding-right: 10px">
+							<b>Member Type</b>
+						</td>
+						<td style="padding-right: 10px"> : </td>
+						<td>
+							<t t-if="data['member_type']">
+								<t t-if="data['member_type'] == 'member'">Member</t>
+								<t t-if="data['member_type'] == 'bishop'">Bishop</t>
+								<t t-if="data['member_type'] == 'priest'">Priest</t>
+								<t t-if="data['member_type'] == 'deacon'">Deacon</t>
+								<t t-if="data['member_type'] == 'lay_brother'">Lay Brother</t>
+								<t t-if="data['member_type'] == 'brother'">Brother</t>
+								<t t-if="data['member_type'] == 'sister'">Sister</t>
+								<t t-if="data['member_type'] == 'junior_sister'">Sister</t>
+								<t t-if="data['member_type'] == 'novice'">Novice</t>
+							</t>
+							<t t-else="">All</t>
+						</td>
+						<td style="padding-right: 1px">
+							<b>Sort Rule</b>
+						</td>
+						<td style="padding-right: 10px"> : </td>
+						<td>
+							<t t-if="data['sort_rule'] == 'asc'">Ascending</t>
+							<t t-if="data['sort_rule'] == 'desc'">Descending</t>
+						</td>
+					</tr>
+					<div style="clear: both;"/>
+					<tr>
+						<td style="padding-right: 10px">
+							<b>Community</b>
+						</td>
+						<td style="padding-right: 10px"> : </td>
+						<td>
+							<t t-if="data['community_all'] == True">All</t>
+								  <t t-esc="community"/>
+						</td>
+					</tr>
+					<div style="clear: both;"/>
+				</table>
+			</t>
+	</template>
+
+	<template id="statistics_confreres_report">
+		<t t-call="web.basic_layout">
+			<div class="page">
+				<style>
+					table tr {
+					page-break-inside: avoid;
+					}
+					table td {
+					padding:
+					0.25rem !important;
+					}
+				</style>
+				<t t-if="data['confreres_type'] == 'detail'">
+					<center>
+						<strong style="font-size:23px;">
+						List of Confreres
+						<br/>
+						<t t-if="data['rel_province_id']"><t t-esc="data['rel_province_id'][1]"/></t>
+						</strong>
+					</center>
+					<t t-call="cristo.member_list_filter_criteria" />
+					<table class="table table-striped" style="font-size:14px;">
+						<thead style="color: #00a09d;">
+							<th>S.No</th>
+							<th style="white-space: nowrap;">Name</th>
+							<th>Member Type</th>
+							<!-- <th>Village</th> -->
+							<!-- <th>Parish </th> -->
+							<!-- <th>Arch/Diocese</th> -->
+							<th>DOB</th>
+							<th>First Profession</th>
+							<th>Priestly Ordination</th>
+							<!-- <th>Physical Status</th> -->
+							<th>House</th>
+							<th>Mother Tongue</th>
+							<th>Blood Group</th>
+							<th>Mobile</th>
+							<th>Email</th>
+							<th>Member Roles</th>
+						</thead>
+						<tbody>
+							<t t-set="count" t-value="1" />
+							<t t-foreach="docs" t-as="o">
+								<tr>
+									<td>
+										<t t-esc="count" />
+									</td>
+									<td style="white-space: nowrap;">
+										<t t-esc="o.partner_id.full_name" />
+									</td>
+									<td>
+										<span t-field="o.member_type" />
+									</td>
+							<!-- 		<td>
+										<t t-esc="o.native_place" />
+									</td>
+									<td>
+										<t t-esc="o.native_parish_id.sudo().name" />
+									</td>
+									<td>
+										<t t-esc="o.native_diocese_id.sudo().name" />
+									</td> -->
+									<td>
+										<span t-field="o.dob" t-options='{"format": "dd/MM/yyyy"}' />
+									</td>
+									<t t-set="prof_date"></t>
+									<t t-foreach='o.profession_ids' t-as='pro'>
+										<t t-if="pro.type == 'first'">
+											<span t-set="prof_date" t-value="pro.profession_date" />
+										</t>
+									</t>
+									<td>
+										<span t-esc='prof_date' t-options='{"widget":"date","format": "dd/MM/yyyy"}'></span>
+									</td>
+									<t t-set="holy_date"></t>
+									<t t-foreach='o.holyorder_ids' t-as='holy'>
+										<t t-if="holy.order.lower() == 'priest'.lower()">
+											<span t-set="holy_date" t-value="holy.date" />
+										</t>
+									</t>
+									<td>
+										<span t-esc='holy_date' t-options='{"widget":"date","format": "dd/MM/yyyy"}'></span>
+									</td>
+<!-- 									<td>
+										<span t-esc="o.physical_status_id.name"/>
+									</td> -->
+									<td style="white-space: nowrap;">
+										<span t-esc="o.community_id.sudo().name"/>
+									</td>
+									<td>
+										<span t-esc="o.mother_tongue_id.name"/>
+									</td>
+									<td>
+										<span t-esc="o.blood_group_id.name"/>
+									</td>
+									<td>
+										<span t-esc="o.personal_mobile"/>
+									</td>
+									<td>
+										<span t-esc="o.personal_email"/>
+									</td>
+									<td style="width:150px">
+										<t t-if="o.role_ids">
+											<t t-esc="', '.join(o.role_ids.mapped('name'))"/>
+										</t>
+									</td>
+								</tr>
+								<t t-set="count" t-value="count + 1" />
+							</t>
+						</tbody>
+					</table>
+				</t>
+				<t t-if="data['confreres_type'] == 'summary'">
+					<center>
+						<strong style="font-size:25px">
+							<span>
+								Summary
+							</span>
+							<br/>
+							<t t-if="data['rel_province_id']"><t t-esc="data['rel_province_id'][1]"/></t>
+						</strong>
+					</center>
+					
+					<hr style="border-color:#DBDBDB; width:100%;"/>
+					<t>
+						<p><b>Filter Criteria</b></p>
+						<table style="float:left;border-style:none;margin-left:40px;">
+							<tr>
+								<td style="padding-right: 10px">
+									<b>Province</b>
+								</td>
+								<td style="padding-right: 10px"> : </td>
+								<td><t t-if="data['rel_province_id']"><t t-esc="data['rel_province_id'][1]" /></t></td>
+							</tr>
+							<div style="clear: both;"/>
+							<tr>
+								<td style="padding-right: 10px">
+									<b>Community</b>
+								</td>
+								<td style="padding-right: 10px"> : </td>
+								<td>
+									<t t-if="data['community_all'] == True">All</t>
+										  <t t-esc="community"/>.
+								</td>
+							</tr>
+							<div style="clear: both;"/>
+						</table>
+						
+						<table style="float:right;border-style:none;margin-right:40px;">
+							<tr>
+								<td style="padding-right: 10px">
+									<b>Living Status</b>
+								</td>
+								<td style="padding-right: 10px"> : </td>
+								<td>
+									<t t-if="data['living_status'] == 'yes'">Yes</t>
+									<t t-if="data['living_status'] == 'no'">No</t>
+								</td>
+							</tr>
+	
+						</table>
+					</t>
+					
+					<table class="table table-striped">
+						<thead style="color: #00a09d;">
+							<th>S.N.</th>
+							<th>DESIGNATION</th>
+							<th>TOTAL</th>
+						</thead>
+						<tbody>
+							<t t-set="count" t-value="1" />
+							<t t-set="grand_total" t-value="0" />
+							<tr>
+								<td>
+									<t t-esc="count" />
+								</td>
+								<td>
+									Priests
+								</td>
+								<td>
+									<t t-esc="priests" />
+								</td>
+							</tr>
+							<t t-set="count" t-value="count + 1" />
+							<tr>
+								<td>
+									<t t-esc="count" />
+								</td>
+								<td>
+									Deacons
+								</td>
+								<td>
+									<t t-esc="deacons" />
+								</td>
+							</tr>
+							<t t-set="count" t-value="count + 1" />
+							<tr>
+								<td>
+									<t t-esc="count" />
+								</td>
+								<td>
+									Perpetual Brothers
+								</td>
+								<td>
+									<t t-esc="brothers" />
+								</td>
+							</tr>
+							<t t-set="count" t-value="count + 1" />
+							<tr>
+								<td>
+									<t t-esc="count" />
+								</td>
+								<td>
+									Lay Brothers
+								</td>
+								<td>
+									<t t-esc="lay_brothers" />
+								</td>
+							</tr>
+							<t t-set="count" t-value="count + 1" />
+							<tr>
+								<td>
+									<t t-esc="count" />
+								</td>
+								<td>
+									Novices
+								</td>
+								<td>
+									<t t-esc="novices" />
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<strong>
+										GRAND TOTAL
+									</strong>
+								</td>
+								<t t-set="grand_total" t-value="grand_total + priests + deacons + brothers + lay_brothers + novices" />
+								<td>
+									<strong>
+										<t t-esc="grand_total" />
+									</strong>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</t>
+				<t t-if="data['confreres_type'] == 'mobile_email'">
+					<center>
+						<strong style="font-size:25px;">List of Confrers with Mobile Number &amp; Email Address</strong>
+					</center>
+					<br />
+					<t t-call="cristo.member_list_filter_criteria" />
+					<table class="table table-striped">
+						<thead style="color: #00a09d;">
+							<th>S.N.</th>
+							<th>CONFRERES</th>
+							<th>MEMBER TYPE</th>
+							<th>MOBILE NO.</th>
+							<th>EMAIL ADDRESS</th>
+						</thead>
+						<tbody>
+							<t t-set="count" t-value="1" />
+							<t t-foreach="docs" t-as="o">
+								<tr>
+									<td>
+										<t t-esc="count" />
+									</td>
+									<td>
+										<t t-esc="o.partner_id.full_name" />
+									</td>
+									<td>
+										<span t-field="o.member_type" />
+									</td>
+									<td>
+										<t t-esc="o.mobile" />
+									</td>
+									<td>
+										<t t-esc="o.email" />
+									</td>
+								</tr>
+								<t t-set="count" t-value="count + 1" />
+							</t>
+						</tbody>
+					</table>
+				</t>
+			</div>
+		</t>
+	</template>
+</odoo>

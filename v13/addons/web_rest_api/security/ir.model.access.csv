@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_user_token,res.user.token,model_res_user_token,base.group_erp_manager,1,1,1,1
+access_rest_api_access_history,rest.api.access.history,model_rest_api_access_history,base.group_erp_manager,1,1,1,1

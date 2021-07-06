@@ -1,0 +1,9 @@
+<odoo>
+    <template id="assets_backend_dashboard1" name="Cristo Dashboard assets inherit1" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="cristo_dashboard/static/src/css/stylesheet.css" />
+            <link rel="stylesheet" href="/cristo_news/static/src/css/stylesheet.css" />
+            <script type="text/javascript" src="/cristo_news/static/src/js/cristo_dashboard.js"/>
+        </xpath>
+    </template>
+</odoo>

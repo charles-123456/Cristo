@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		
+		<record id="ir_mail_server_inherited_form" model="ir.ui.view">
+			<field name="name">ir.mail_server.inherit.form</field>
+			<field name="model">ir.mail_server</field>
+			<field name="inherit_id" ref="base.ir_mail_server_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='smtp_pass']" position="after">
+					<field name="partner_id" options="{'no_create':1,'no_edit':1}" />
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="view_gateway_inherited_form" model="ir.ui.view">
+			<field name="name">ir.mail_server.gateway.form</field>
+			<field name="model">ir.mail_server</field>
+			<field name="mode">primary</field>
+	        <field name="priority">20</field>
+			<field name="inherit_id" ref="base.ir_mail_server_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//sheet/group" position="before">
+					<div class="alert alert-warning text-center" role="alert">
+                    	<span name="hint_text">Note: To Authenticate your Mail to Cristo Application, Go to your email account settings->Security-> then find "Less secure app access" -> Turn on the Access.<br/>
+                    		After doing the above step wait for few minutes and Check the "Test Connection". If still doesn't work, Login to your email account, click on the below mentioned link (if the email is google account) and a page will be opened with the title "Allow access to your Google account". And click on the "Continue" button. After doing the above step, Check the "Test Connection".<br/>
+                    		<a href="https://accounts.google.com/DisplayUnlockCaptcha" target="_blank">https://accounts.google.com/DisplayUnlockCaptcha</a>
+                    	</span>
+                    </div>
+				</xpath>
+				<xpath expr="//field[@name='sequence']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='smtp_encryption']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='smtp_port']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='partner_id']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="view_gateway_inherited_tree" model="ir.ui.view">
+			<field name="name">ir.mail_server.gateway.tree</field>
+			<field name="model">ir.mail_server</field>
+			<field name="mode">primary</field>
+	        <field name="priority">20</field>
+			<field name="inherit_id" ref="base.ir_mail_server_list" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='sequence']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='smtp_encryption']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="action_email_gateway" model="ir.actions.act_window">
+			<field name="name">Email Gateway</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">ir.mail_server</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_ids"
+            	eval="[(5, 0, 0),
+            		(0, 0, {'view_mode': 'tree', 'view_id': ref('cristo_email.view_gateway_inherited_tree')}),
+            		(0, 0, {'view_mode': 'form', 'view_id': ref('cristo_email.view_gateway_inherited_form')})]"/>
+		</record>
+				
+	</data>
+</odoo>

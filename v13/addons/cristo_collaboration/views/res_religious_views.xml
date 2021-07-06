@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+    
+     <!-- Province -->
+     
+	<record id="res_province_collaboration_view" model="ir.ui.view">
+        <field name="name">res.religious.province.form.inherit</field>
+        <field name="model">res.religious.province</field>
+        <field name="inherit_id" ref="cristo.view_religious_province_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//notebook/page[@name='important_dates']" position="after">
+        		<page string="Collaboration" attrs="{'invisible':[('is_authorize','=',False)]}"
+        			groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_institute_admin">
+					<field name="collaboration_ids">
+						<tree>
+							<field name="name" />
+							<field name="associated_with_id" />
+							<field name="start_date" width="0.8" />
+							<field name="end_date" width="0.8" />
+							<field name="state" />
+						</tree>
+					</field>
+				</page>
+        	</xpath>
+        </field>
+    </record>
+    
+	</data>
+</odoo>

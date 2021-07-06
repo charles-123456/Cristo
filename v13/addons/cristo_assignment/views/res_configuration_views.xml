@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_member_role_form" model="ir.ui.view">
+			<field name="name">res.member.role.form.transfer</field>
+			<field name="model">res.member.role</field>
+			<field name="inherit_id" ref="cristo.view_member_role_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//group/group" position="after">
+					<group>
+						<field name="term" />
+						<field name="term_value" />
+					</group>
+				</xpath>
+			</field>
+		</record>
+
+</odoo>

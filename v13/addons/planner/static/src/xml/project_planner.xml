@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="ProjectPlanMain">
+    	<div class="oh_dashboards" style="background-color:white;">
+    		<br/>
+        	<div class="container-fluid">
+        		<h3 class="alert alert-info text-center"><t t-esc="widget.name"/> Analysis</h3>
+        		<t t-if="widget.category_id">
+        			<h5 class="text-center"><t t-esc="widget.category_id[1]"/></h5>
+        		</t>
+			 </div>
+			 <div>
+			 	<span t-esc="widget.chart_data"/>
+			 	
+			 	<div class="container-fluid row">
+					<style>
+						.tbl_head {
+							font-size: 20px;
+		    				font-weight: bold;
+						}
+						td {
+							color: black;
+		    				font-size: 15px;
+						}
+						.tbl_foot{
+						background-color: lightgray;
+		    			font-weight: 700;
+		    			}
+		    			.header{
+			    			background-color: darkcyan;
+			    			color: white;
+			    		}
+					</style>
+						<div class=" row">
+							<div class="container">
+							<span style="display: block;padding-right: 20px;float:left;font-weight: 700;">Overall Status</span>
+							<div class="progress" style="height:24px;font-size:small;background-color: #9bb297;">
+								<div class="progress-bar" role="progressbar" t-attf-style="width: #{widget.yts};background-color: #f0ad4e;" data-toggle="tooltip" data-placement="top" t-att-title="widget.yts_lbl">
+							      <span t-esc="widget.yts_lbl"/>
+							    </div>
+							    <div class="progress-bar" role="progressbar" t-attf-style="width: #{widget.inp};background-color: #5bc0de;" data-toggle="tooltip" data-placement="top" t-att-title="widget.inp_lbl">
+							      <span t-esc="widget.inp_lbl"/>												
+							    </div>
+							    <div class="progress-bar" role="progressbar" t-attf-style="width: #{widget.cmp};background-color:#5cb85c;" data-toggle="tooltip" data-placement="top" t-att-title="widget.cmp_lbl">
+							      <span t-esc="widget.cmp_lbl"/>
+							    </div>
+							  </div>
+							</div>
+							<t t-if="widget.section1 == 'yes'">
+							<div class="col-md-6" style="padding-top:30px;">
+								<div class="text-center"><span class="tbl_head text-info"><t t-esc="widget.sec1_name"/> Level</span></div>
+								<div class="chart-responsive">
+			                  		<canvas id="sec1Chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+			               		</div>
+							</div>
+							</t>
+							
+							<div class="col-md-6" style="padding-top:30px;">
+								<div class="text-center"><span class="tbl_head text-info">Activity Level</span></div>
+								<div class="chart-responsive">
+			                  		<canvas id="activityChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+			               		</div>
+							</div>
+						</div>
+					
+				</div>
+					
+			 </div>
+        </div>
+    </t>
+	
+</templates>

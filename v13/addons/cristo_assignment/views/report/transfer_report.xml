@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<report id="transfer_report"
+			    model="member.assignment"
+			    string="Transfer Details"
+			    report_type="qweb-pdf"
+			    name="cristo_assignment.report_transfer"
+			    file="report_transfer"
+			    attachment_use="False"
+                menu="True"
+				/>
+
+    </data>
+</odoo>

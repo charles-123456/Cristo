@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Baptism -->
+		
+		<record id="view_baptism_form" model="ir.ui.view">
+			<field name="name">res.baptism.form</field>
+			<field name="model">res.baptism</field>
+			<field name="arch" type="xml">
+				<form string="Baptism">
+				<header>
+						<button name='print_baptism_certificate_report' string="Print Certificate" type='object' class="btn btn-info"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="First Name"
+									required="1" />
+							</h2>
+							<label for="last_name" />
+							<h2>
+								<field name="last_name" placeholder="Last Name" />
+							</h2>
+						</div>
+						
+						<group>
+							<group>
+								<field name="bapt_register_ref" />
+								<field name="bapt_date" required="1" />
+								<field name="bapt_minister" />
+							</group>
+							<group>
+								<field name="bapt_place" required="1" />
+								<field name="bapt_country_id" required="1" options='{"no_open": True, "no_create": True}' />
+								<field name="parish_priest" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="diocese_id" options='{"no_open": True, "no_create": True}' groups="cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager"/>
+								<field name="vicariate_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,base.group_erp_manager" />
+								<field name="parish_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,base.group_erp_manager" />
+								<field name="gender" required="1" options="{'horizontal': true}" widget="radio" />
+								<field name="is_dob_or_age" widget="radio" options="{'horizontal': true}" />
+								<field name="dob" attrs="{'invisible': [('is_dob_or_age','=','age')], 'required':[('is_dob_or_age','=','dob')]}" />
+								<field name="birth_place" />
+							</group>
+							<group>
+								<field name="age" attrs="{'readonly': [('is_dob_or_age','!=','age')]}" force_save = "1" />
+								<field name="chronological_order" />
+							</group>
+						</group>
+						
+						<group string="Parents">
+							<group>
+								<field name="father_name" />
+								<field name="father_domicile" />
+								<field name="father_religion_id" options='{"no_open": True, "no_create": True}' />
+								<field name="father_occupation_id" options='{"no_open": True, "no_create": True}' />
+							</group>
+							<group>
+								<field name="mother_name" />
+								<field name="mother_domicile" />
+								<field name="mother_religion_id" options='{"no_open": True, "no_create": True}' />
+								<field name="mother_occupation_id" options='{"no_open": True, "no_create": True}' />
+							</group>
+						</group>
+
+						<group string="God Parents">
+							<group>
+								<field name="bapt_god_father" />
+								<field name="bapt_god_mother" />
+							</group>
+							<group>
+								<field name="bapt_god_parents_place" />
+								<field name="bapt_god_partent_place2" />
+							</group>
+						</group>
+						<group string="Grand Parents">
+							<group string="Paternal">
+								<field name="paternal_grandfather" />
+								<field name="paternal_grandmother" />
+							</group>
+							<group string="Maternal">
+								<field name="maternal_grandfather" />
+								<field name="maternal_grandmother" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="family_id" options='{"no_open": True, "no_create": True}' />
+							</group>
+							<group>
+								<field name="member_id" options='{"no_open": True, "no_create": True}' />
+							</group>
+						</group>
+						
+						<notebook>
+							<page string="Note">
+								<field name="note" placeholder="write something...."/>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_baptism_tree" model="ir.ui.view">
+			<field name="name">res.baptism.tree</field>
+			<field name="model">res.baptism</field>
+			<field name="arch" type="xml">
+				<tree string="Baptism" default_order="id desc" import="1" expand="1">
+					<field name="name" />
+					<field name="last_name"/>
+					<field name="bapt_date" width="0.8" />
+					<field name="bapt_place" />
+					<field name="dob" width="0.8" />
+					<field name="parish_id" optional="show" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate"/>
+					<field name="gender" />
+					<field name="father_name" optional="hide" />
+					<field name="mother_name" optional="hide" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_baptism_search" model="ir.ui.view">
+			<field name="name">res.baptism.search</field>
+			<field name="model">res.baptism</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="last_name" />
+					<field name="birth_place" />
+					<field name="father_name" />
+					<field name="mother_name" />
+					<field name="bapt_register_ref" />
+					<field name="bapt_place" />
+					<field name="bapt_minister" />
+					<field name="bapt_country_id" />
+					<field name="bapt_god_father" />
+					<field name="bapt_god_mother" />
+					<group expand="0" string="Group BY">
+						<filter string="Parish" name="parish_id" context="{'group_by':'parish_id'}" />
+						<filter string="Country of Baptism" name="bapt_country_id" context="{'group_by':'bapt_country_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_baptism" model="ir.actions.act_window">
+			<field name="name">Baptism</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.baptism</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- First Holy Communion -->
+		
+		<record id="view_first_holy_communion_form" model="ir.ui.view">
+			<field name="name">res.communion.form</field>
+			<field name="model">res.communion</field>
+			<field name="arch" type="xml">
+				<form string="First Holy Communion">
+				<header>
+						<button name='print_fhc_certificate_report' string="Print Certificate" type='object' class="btn btn-info"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="First Name"
+									required="1" />
+							</h2>
+							<label for="last_name" />
+							<h2>
+								<field name="last_name" placeholder="Last Name" />
+							</h2>
+						</div>
+						
+						<group>
+							<group>
+								<field name="fhc_register_ref" />
+								<field name="fhc_date" required="1" />
+								<field name="fhc_minister" />
+								<field name="fhc_church" />
+							</group>
+							<group>
+								<field name="fhc_place" required="1" />
+								<field name="fhc_country_id" required="1" options='{"no_open": True, "no_create": True}' />
+								<field name="diocese_id" options='{"no_open": True, "no_create": True}' groups="cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager" />
+								<field name="vicariate_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,base.group_erp_manager" />
+								<field name="parish_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,base.group_erp_manager" />
+								<field name="parish_priest" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="is_dob_or_age" widget="radio" options="{'horizontal': true}" />
+								<field name="dob" attrs="{'invisible': [('is_dob_or_age','=','age')], 'required':[('is_dob_or_age','=','dob')]}" />
+								<field name="age" attrs="{'readonly': [('is_dob_or_age','!=','age')]}" force_save = "1" />
+								<field name="bapt_date" />
+								<field name="father_name" />
+							</group>
+							<group>
+								<field name="gender" required="1" options="{'horizontal': true}" widget="radio" />
+								<field name="bapt_parish_id" options='{"no_open": True, "no_create": True}' />
+								<field name="bapt_register_id" options='{"no_open": True, "no_create": True}' />
+								<field name="bapt_diocese_id" options='{"no_open": True, "no_create": True}' />
+								<field name="mother_name" />
+							</group>
+						</group>
+						
+						<notebook>
+							<page string="Note">
+								<field name="note" placeholder="write something...."/>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_first_holy_communion_tree" model="ir.ui.view">
+			<field name="name">res.communion.tree</field>
+			<field name="model">res.communion</field>
+			<field name="arch" type="xml">
+				<tree string="First Holy Communion" default_order="id desc" import="1" expand="1">
+					<field name="name" />
+					<field name="last_name"/>
+					<field name="fhc_date" width="0.8" />
+					<field name="fhc_place" />
+					<field name="parish_id" optional="show" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate"/>
+					<field name="father_name" optional="hide" />
+					<field name="mother_name" optional="hide" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_first_holy_communion_search" model="ir.ui.view">
+			<field name="name">res.communion.search</field>
+			<field name="model">res.communion</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="last_name" />
+					<field name="father_name" />
+					<field name="mother_name" />
+					<field name="fhc_register_ref" />
+					<field name="fhc_date" />
+					<field name="fhc_minister" />
+					<field name="fhc_place" />
+					<field name="fhc_church" />
+					<field name="fhc_country_id" />
+					<group expand="0" string="Group By">
+						<filter string="Parish" name="parish_id" context="{'group_by':'parish_id'}" />
+						<filter string="Country of FHC" name="fhc_country_id" context="{'group_by':'fhc_country_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_first_holy_communion" model="ir.actions.act_window">
+			<field name="name">First Holy Communion</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.communion</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Confirmation -->
+		
+		<record id="view_confirmation_form" model="ir.ui.view">
+			<field name="name">res.confirmation.form</field>
+			<field name="model">res.confirmation</field>
+			<field name="arch" type="xml">
+				<form string="Confirmation">
+				<header>
+						<button name='print_confirmation_certificate_report' string="Print Certificate" type='object' class="btn btn-info"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="First Name"
+									required="1" />
+							</h2>
+							<label for="last_name" />
+							<h2>
+								<field name="last_name" placeholder="Last Name" />
+							</h2>
+						</div>
+						
+						<group>
+							<group>
+								<field name="cnf_register_ref" />
+								<field name="cnf_date" required="1" />
+								<field name="cnf_minister" />
+							</group>
+							<group>
+								<field name="cnf_place" required="1" />
+								<field name="cnf_country_id" required="1" options='{"no_open": True, "no_create": True}' />
+								<field name="diocese_id" options='{"no_open": True, "no_create": True}' groups="cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager" />
+								<field name="vicariate_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,base.group_erp_manager" />
+								<field name="parish_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,base.group_erp_manager" />
+								<field name="parish_priest" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="is_dob_or_age" widget="radio" options="{'horizontal': true}" />
+								<field name="dob" attrs="{'invisible': [('is_dob_or_age','=','age')], 'required':[('is_dob_or_age','=','dob')]}" />
+								<field name="age" attrs="{'readonly': [('is_dob_or_age','!=','age')]}" force_save = "1" />
+								<field name="bapt_date" />
+							</group>
+							<group>
+								<field name="gender" required="1" options="{'horizontal': true}" widget="radio" />
+								<field name="bapt_parish_id" options='{"no_open": True, "no_create": True}' />
+								<field name="bapt_register_id" options='{"no_open": True, "no_create": True}' />
+								<field name="bapt_diocese_id" options='{"no_open": True, "no_create": True}' />
+								<field name="sponser" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="father_name" />
+								<field name="cnf_god_father" />
+							</group>
+							<group>
+								<field name="mother_name" />
+								<field name="cnf_god_mother" />
+							</group>
+						</group>
+						
+						<notebook>
+							<page string="Note">
+								<field name="note" placeholder="write something...."/>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_confirmation_tree" model="ir.ui.view">
+			<field name="name">res.confirmation.tree</field>
+			<field name="model">res.confirmation</field>
+			<field name="arch" type="xml">
+				<tree string="Confirmation" default_order="id desc" import="1" expand="1">
+					<field name="name" />
+					<field name="last_name"/>
+					<field name="cnf_date" width="0.8" />
+					<field name="cnf_place" />
+					<field name="parish_id" optional="show" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate"/>
+					<field name="father_name" optional="hide" />
+					<field name="mother_name" optional="hide" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_confirmation_search" model="ir.ui.view">
+			<field name="name">res.confirmation.search</field>
+			<field name="model">res.confirmation</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="last_name" />
+					<field name="father_name" />
+					<field name="mother_name" />
+					<field name="cnf_register_ref" />
+					<field name="cnf_date" />
+					<field name="cnf_place" />
+					<field name="cnf_minister" />
+					<field name="cnf_country_id" />
+					<field name="bapt_parish_id" />
+					<group expand="0" string="Group By">
+						<filter string="Parish" name="parish_id" context="{'group_by':'parish_id'}" />
+						<filter string="Parish of Baptism" name="bapt_parish_id" context="{'group_by':'bapt_parish_id'}" />
+						<filter string="Country of Confirmation" name="cnf_country_id" context="{'group_by':'cnf_country_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_confirmation" model="ir.actions.act_window">
+			<field name="name">Confirmation</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.confirmation</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Marriage -->
+		
+		<record id="view_marriage_form" model="ir.ui.view">
+			<field name="name">res.marriage.form</field>
+			<field name="model">res.marriage</field>
+			<field name="arch" type="xml">
+				<form string="Marriage">
+				<header>
+						<button name='print_marriage_certificate_report' string="Print Certificate" type='object' class="btn btn-info"/>
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="mrg_register_ref" />
+								<field name="mrg_date" required="1" />
+								<field name="mrg_minister" />
+								<field name="diocese_id" options='{"no_open": True, "no_create": True}' groups="cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager" />
+								<field name="vicariate_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,base.group_erp_manager" />
+								<field name="parish_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,base.group_erp_manager" />
+								<field name="parish_priest" />
+							</group>
+							<group>
+								<field name="mrg_place" required="1" />
+								<field name="mrg_church" />
+								<field name="civil_reg_office" />
+								<field name="civil_reg_date" />
+							</group>
+						</group>
+						
+						<group>
+							<group string="Bride">
+								<field name="bride_parish_id" options='{"no_open": True, "no_create": True}' string="Parish of Baptism" />
+								<field name="bride_name" string="Name" />
+								<field name="bride_last_name" string="Surname" />
+								<field name="is_dob_or_age_bride" widget="radio" options="{'horizontal': true}" string="Is DOB/Age?" />
+								<field name="bride_dob" attrs="{'invisible': [('is_dob_or_age_bride','=','age')], 'required':[('is_dob_or_age_bride','=','dob')]}" string="Date of birth" />
+								<field name="bride_age" attrs="{'readonly': [('is_dob_or_age_bride','!=','age')]}" force_save = "1" string="Age" />
+								<field name="bride_birth_parish_id" options='{"no_open": True, "no_create": True}' string="Parish of Birth" />
+								<field name="bride_status"  string="Status" />
+								<field name="bride_diocese_id" options='{"no_open": True, "no_create": True}' string="Diocese" />
+								<field name="bride_religion_id" options='{"no_open": True, "no_create": True}' string="Religion" />
+								<field name="bride_bapt_date" string="Date of Baptism" />
+								<field name="bride_bapt_church" string="Church of Baptism" />
+								<field name="bride_domicile" string="Domicile" />
+								<field name="bride_occupation_id" options='{"no_open": True, "no_create": True}' string="Occupation" />
+								<field name="bride_taluk" string="Taluk" />
+								<field name="bride_residential_address" string="Residential Address" />
+								<field name="bride_country_id" options='{"no_open": True, "no_create": True}' string="Country" />
+								<field name="bride_father_name" string="Father's Name" />
+								<field name="bride_mother_name" string="Mother's Name" />
+								<field name="is_bride_course_attended" widget="radio" options="{'horizontal': true}" string="Attended Course?" />
+							</group>
+							<group string="Bridegroom">
+								<field name="bridegroom_parish_id" options='{"no_open": True, "no_create": True}' string="Parish of Baptism" />
+								<field name="bridegroom_name" string="Name" />
+								<field name="bridegroom_last_name" string="Surname" />
+								<field name="is_dob_or_age_bridegroom" widget="radio" options="{'horizontal': true}" string="Is DOB/Age?" />
+								<field name="bridegroom_dob" attrs="{'invisible': [('is_dob_or_age_bridegroom','=','age')], 'required':[('is_dob_or_age_bridegroom','=','dob')]}" string="Date of birth" />
+								<field name="bridegroom_age" attrs="{'readonly': [('is_dob_or_age_bridegroom','!=','age')]}" force_save = "1" string="Age" />
+								<field name="bridegroom_birth_parish_id" options='{"no_open": True, "no_create": True}' string="Parish of Birth" />
+								<field name="bridegroom_status" string="Status" />
+								<field name="bridegroom_diocese_id" options='{"no_open": True, "no_create": True}' string="Diocese" />
+								<field name="bridegroom_religion_id" options='{"no_open": True, "no_create": True}' string="Religion" />
+								<field name="bridegroom_bapt_date" string="Date of Baptism" />
+								<field name="bridegroom_bapt_church" string="Church of Baptism" />
+								<field name="bridegroom_domicile" string="Domicile" />
+								<field name="bridegroom_occupation_id" options='{"no_open": True, "no_create": True}' string="Occupation" />
+								<field name="bridegroom_taluk" string="Taluk" />
+								<field name="bridegroom_residential_address" string="Residential Address" />
+								<field name="bridegroom_country_id" options='{"no_open": True, "no_create": True}' string="Country" />
+								<field name="bridegroom_father_name" string="Father's Name" />
+								<field name="bridegroom_mother_name" string="Mother's Name" />
+								<field name="is_bridegroom_course_attended" widget="radio" options="{'horizontal': true}" string="Attended Course?" />
+							</group>
+						</group>
+						
+						<group>
+							<group string="Witness 1">
+								<field name="witness1_name" string="Name" />
+								<field name="witness1_age" string="Age" />
+								<field name="witness1_profession" string="Profession" />
+								<field name="witness1_address" string="Address" />
+								<field name="witness1_domicile" string="Domicile" />
+							</group>
+							<group string="Witness 2">
+								<field name="witness2_name" string="Name" />
+								<field name="witness2_age" string="Age" />
+								<field name="witness2_profession" string="Profession" />
+								<field name="witness2_address" string="Address" />
+								<field name="witness2_domicile" string="Domicile" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="banns" widget="radio" options="{'horizontal': true}" />
+								<field name="bann_date1" attrs="{'invisible':[('banns','!=','banns')]}" />
+								<field name="bann_date2" attrs="{'invisible':[('banns','!=','banns')]}" />
+								<field name="bann_date3" attrs="{'invisible':[('banns','!=','banns')]}" />
+								<field name="rectification" attrs="{'invisible':[('banns','!=','licence')]}" />
+							</group>
+							<group>
+								<field name="impediments" />
+							</group>
+						</group>
+						
+						<notebook>
+							<page string="Note">
+								<field name="note" placeholder="write something...."/>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_marriage_tree" model="ir.ui.view">
+			<field name="name">res.marriage.tree</field>
+			<field name="model">res.marriage</field>
+			<field name="arch" type="xml">
+				<tree string="Marriage" default_order="id desc"  import="1" expand="1">
+					<field name="mrg_date" width="0.8"  />
+					<field name="mrg_place" />
+					<field name="mrg_minister" />
+					<field name="parish_id" optional="show" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_marriage_search" model="ir.ui.view">
+			<field name="name">res.marriage.search</field>
+			<field name="model">res.marriage</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="mrg_register_ref" />
+					<field name="mrg_place" />
+					<field name="mrg_date" />
+					<field name="mrg_church" />
+					<field name="mrg_minister" />
+					<field name="bride_name" />
+					<field name="bride_last_name" />
+					<field name="bride_dob" />
+					<field name="bride_birth_parish_id" />
+					<field name="bride_diocese_id" />
+					<field name="bride_religion_id" />
+					<field name="bride_father_name" />
+					<field name="bride_mother_name" />
+					<field name="bridegroom_name" />
+					<field name="bridegroom_last_name" />
+					<field name="bridegroom_dob" />
+					<field name="bridegroom_birth_parish_id" />
+					<field name="bridegroom_diocese_id" />
+					<field name="bridegroom_religion_id" />
+					<field name="bridegroom_father_name" />
+					<field name="bridegroom_mother_name" />
+					<group expand="0" string="Group By">
+						<filter string="" name="bride_birth_parish_id" context="{'group_by':'bride_birth_parish_id'}" />
+						<filter string="" name="bride_diocese_id" context="{'group_by':'bride_diocese_id'}" />
+						<filter string="" name="" context="{'group_by':''}" />
+						<filter string="" name="" context="{'group_by':''}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_marriage" model="ir.actions.act_window">
+			<field name="name">Marriage</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.marriage</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+		<!-- Death -->
+		
+		<record id="view_death_form" model="ir.ui.view">
+			<field name="name">res.death.form</field>
+			<field name="model">res.death</field>
+			<field name="arch" type="xml">
+				<form string="Death">
+				<header>
+						<button name='print_death_certificate_report' string="Print Certificate" type='object' class="btn btn-info"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="First Name"
+									required="1" />
+							</h2>
+							<label for="last_name" />
+							<h2>
+								<field name="last_name" placeholder="Last Name" />
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="death_register_ref" />
+								<field name="death_date" required="1" />
+								<field name="death_cause" />
+							</group>
+							<group>
+								<field name="death_place" required="1" />
+								<field name="death_country_id" required="1" options='{"no_open": True, "no_create": True}' />
+								<field name="bapt_register_id" options='{"no_open": True, "no_create": True}' />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="is_dob_or_age" widget="radio" options="{'horizontal': true}" />
+								<field name="dob" attrs="{'invisible': [('is_dob_or_age','=','age')], 'required':[('is_dob_or_age','=','dob')]}" />
+								<field name="age" attrs="{'readonly': [('is_dob_or_age','!=','age')]}" force_save = "1" />
+								<field name="marital_status_id" domain="[('gender', '=', gender)]" options='{"no_open": True, "no_create": True}' />
+								<field name="marital_status" invisible="1" />
+							</group>
+							<group>
+								<field name="birth_place" />
+								<field name="gender" required="1" options="{'horizontal': true}" widget="radio" />
+								<field name="occupation_id" options='{"no_open": True, "no_create": True}' />
+								<field name="spouse" attrs="{'invisible': [('marital_status','=','Bachelor')]}" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="father_name" />
+							</group>
+							<group>
+								<field name="mother_name" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="burial_date" />
+								<field name="burial_minister"  />
+								<field name="burial_place" />
+							</group>
+							<group>
+								<field name="burial_parish" />
+								<field name="cemetery_code" />
+								<field name="diocese_id" options='{"no_open": True, "no_create": True}' groups="cristo.group_role_cristo_bsa_super_admin,base.group_erp_manager" />
+								<field name="vicariate_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,base.group_erp_manager" />
+								<field name="parish_id" options='{"no_open": True, "no_create": True}' domain="[('diocese_id','=',diocese_id)]" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,base.group_erp_manager" />
+								<field name="parish_priest" />
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="relation_name" />
+							</group>
+							<group>
+								<field name="relationship_id" options='{"no_open": True, "no_create": True}' />
+							</group>
+						</group>
+						
+						<group string="Received Sacraments">
+							<group>
+								<field name="received_baptism" />
+								<field name="received_communion" />
+							</group>
+							<group>
+								<field name="received_confirmation" />
+								<field name="received_marriage" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Note">
+								<field name="note" placeholder="write something...."/>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_death_tree" model="ir.ui.view">
+			<field name="name">res.death.tree</field>
+			<field name="model">res.death</field>
+			<field name="arch" type="xml">
+				<tree string="Death" default_order="id desc" import="1" expand="1">
+					<field name="name" />
+					<field name="last_name"/>
+					<field name="death_date" width="0.8" />
+					<field name="parish_id" optional="show" groups="cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate"/>
+					<field name="death_place" />
+					<field name="father_name" optional="hide" />
+					<field name="mother_name" optional="hide" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_death_search" model="ir.ui.view">
+			<field name="name">res.death.search</field>
+			<field name="model">res.death</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="last_name" />
+					<field name="death_register_ref" />
+					<field name="death_date" />
+					<field name="death_place" />
+					<field name="burial_date" />
+					<field name="burial_place" />
+					<field name="death_country_id" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_death" model="ir.actions.act_window">
+			<field name="name">Death</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.death</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+		
+	</data>
+</odoo>

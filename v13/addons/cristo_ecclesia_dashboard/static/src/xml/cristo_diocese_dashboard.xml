@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="CristoDioceseDashboardMain">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_dashboard" style="background-color: gainsboro;">
+            </div>
+        </div>
+    </t>
+
+       <t t-name="DioceseParishDetails">
+
+		<link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/lib/bower_components/font-awesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/lib/bower_components/Ionicons/css/ionicons.min.css"/>
+		<link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/lib/dist/css/AdminLTE.min.css"/>
+		<link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/lib/dist/css/skins/_all-skins.min.css"/>
+		  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+		  <!-- Theme style -->
+		  <link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/lib/dist/css/adminlte.min.css"/>
+		  <link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/lib/dist/css/alt/adminlte.components.css"/>
+		     <div class="row main-section">
+        	<div class="col-xs-12 col-sm-12 col-lg-12" style="border: 1px dotted lightseagreen;background: lightcyan;">
+        		<h1 style="padding-top: 4px;">Welcome to <t t-esc="widget.login_member['sl_msg']"/></h1>
+        	</div>
+            <div class="col-xs-12 col-sm-12 col-lg-12">
+            	<script type="text/javascript">
+			        window.jssor_1_slider_init = function() {
+			            var jssor_1_SlideoTransitions = [
+			              [{b:500,d:1000,x:0,e:{x:6}}],
+			              [{b:-1,d:1,x:100,p:{x:{d:1,dO:9}}},{b:0,d:2000,x:0,e:{x:6},p:{x:{dl:0.1}}}],
+			              [{b:-1,d:1,x:200,p:{x:{d:1,dO:9}}},{b:0,d:2000,x:0,e:{x:6},p:{x:{dl:0.1}}}],
+			              [{b:-1,d:1,rX:20,rY:90},{b:0,d:4000,rX:0,e:{rX:1}}],
+			              [{b:-1,d:1,rY:-20},{b:0,d:4000,rY:-90,e:{rY:7}}],
+			              [{b:-1,d:1,sX:2,sY:2},{b:1000,d:3000,sX:1,sY:1,e:{sX:1,sY:1}}],
+			              [{b:-1,d:1,sX:2,sY:2},{b:1000,d:5000,sX:1,sY:1,e:{sX:3,sY:3}}],
+			              [{b:-1,d:1,tZ:300},{b:0,d:2000,o:1},{b:3500,d:3500,tZ:0,e:{tZ:1}}],
+			              [{b:-1,d:1,x:20,p:{x:{o:33,r:0.5}}},{b:0,d:1000,x:0,o:0.5,e:{x:3,o:1},p:{x:{dl:0.05,o:33},o:{dl:0.02,o:68,rd:2}}},{b:1000,d:1000,o:1,e:{o:1},p:{o:{dl:0.05,o:68,rd:2}}}],
+			              [{b:-1,d:1,da:[0,700]},{b:0,d:600,da:[700,700],e:{da:1}}],
+			              [{b:600,d:1000,o:0.4}],
+			              [{b:-1,d:1,da:[0,400]},{b:200,d:600,da:[400,400],e:{da:1}}],
+			              [{b:800,d:1000,o:0.4}],
+			              [{b:-1,d:1,sX:1.1,sY:1.1},{b:0,d:1600,o:1},{b:1600,d:5000,sX:0.9,sY:0.9,e:{sX:1,sY:1}}],
+			              [{b:0,d:1000,o:1,p:{o:{o:4}}}],
+			              [{b:1000,d:1000,o:1,p:{o:{o:4}}}]
+			            ];
+
+			            var jssor_1_options = {
+			              $AutoPlay: 1,
+			              $SlideDuration:3000,
+			              $CaptionSliderOptions: {
+			                $Class: $JssorCaptionSlideo$,
+			                $Transitions: jssor_1_SlideoTransitions
+			              },
+			              $ArrowNavigatorOptions: {
+			                $Class: $JssorArrowNavigator$
+			              },
+			              $BulletNavigatorOptions: {
+			                $Class: $JssorBulletNavigator$
+			              }
+			            };
+
+			            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+			            <!-- #region responsive code begin -->
+
+			            var MAX_WIDTH = 0;
+
+			            function ScaleSlider() {
+			                var containerElement = jssor_1_slider.$Elmt.parentNode;
+			                var containerWidth = containerElement.clientWidth;
+
+			                if (containerWidth) {
+			                    var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+			                    jssor_1_slider.$ScaleWidth(expectedWidth);
+			                }
+			                else {
+			                    window.setTimeout(ScaleSlider, 30);
+			                }
+			            }
+
+			            ScaleSlider();
+
+			            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+			            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+			            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+			            <!-- #endregion responsive code end -->
+			        };
+			    </script>
+			    <style>
+			        <!-- jssor slider loading skin double-tail-spin css -->
+			        .jssorl-004-double-tail-spin img {
+			            animation-name: jssorl-004-double-tail-spin;
+			            animation-duration: 1.6s;
+			            animation-iteration-count: infinite;
+			            animation-timing-function: linear;
+			        }
+
+			        @keyframes jssorl-004-double-tail-spin {
+			            from { transform: rotate(0deg); }
+			            to { transform: rotate(360deg); }
+			        }
+
+			        <!-- jssor slider bullet skin 031 css -->
+			        .jssorb031 {position:absolute;}
+			        .jssorb031 .i {position:absolute;cursor:pointer;}
+			        .jssorb031 .i .b {fill:#000;fill-opacity:0.5;stroke:#fff;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.3;}
+			        .jssorb031 .i:hover .b {fill:#fff;fill-opacity:.7;stroke:#000;stroke-opacity:.5;}
+			        .jssorb031 .iav .b {fill:#fff;stroke:#000;fill-opacity:1;}
+			        .jssorb031 .i.idn {opacity:.3;}
+
+			        <!-- jssor slider arrow skin 051 css -->
+			        .jssora051 {display:block;position:absolute;cursor:pointer;}
+			        .jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
+			        .jssora051:hover {opacity:.8;}
+			        .jssora051.jssora051dn {opacity:.5;}
+			        .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
+			    </style>
+			    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:-10px;width:980px;height:230px;overflow:hidden;visibility:hidden;">
+			        <!-- Loading Screen -->
+			        <div data-u="loading" class="jssorl-004-double-tail-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+			            <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="/cristo_ecclesia_dashboard/static/src/img/double-tail-spin.svg" />
+			        </div>
+			        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:240px;overflow:hidden;">
+		        		<t t-if="!widget.login_member['default_img']">
+		        			<!-- <div>
+		        				<img data-u="image" src="/cristo_ecclesia_dashboard/static/src/img/italy_florence_cattedrale.png" />
+		        				<div data-ts="flat" data-p="320" style="border-radius: 10px;left:80px;top:15px;width:800px;height:150px;position:absolute;overflow:hidden;">
+				                    <div data-to="50% 50%" data-ts="preserve-3d" data-t="0" style="left:550px;top:0px;width:800px;height:150px;position:absolute;overflow:hidden;">
+				                        <div data-to="50% 50%" data-arr="1" style="left:20px;top:18px;width:200px;height:100px;position:absolute;color:#25c8ba;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:0.1em;">Welcome to</div>
+				                        <div data-to="50% 50%" data-arr="2" style="left:60px;top:45px;width:700px;height:100px;position:absolute;color:#edf1f2;font-size:28px;line-height:1.2;letter-spacing:0.02em;"><span style="font-weight:900;color:white;word-wrap: break-word;"><t t-esc="widget.login_member['sl_msg']"/></span></div>
+				                    </div>
+				                </div>
+		        			</div> -->
+							<t t-foreach="widget.login_member['slider_ids']" t-as="id">
+								<div>
+									<img data-u="image" t-att-src="widget.get_slider_image_url(id)" />
+								</div>
+							</t>
+			        	</t>
+		        		<t t-if="widget.login_member['default_img']">
+		        			<div>
+		        				<img data-u="image" src="cristo_ecclesia_dashboard/static/src/img/main_banner.png" />
+		        				<div data-ts="flat" data-p="320" style="border-radius: 10px;left:80px;top:15px;width:800px;height:150px;position:absolute;overflow:hidden;">
+				                    <div data-to="50% 50%" data-ts="preserve-3d" data-t="0" style="left:550px;top:0px;width:800px;height:150px;position:absolute;overflow:hidden;">
+				                        <!-- <div data-to="50% 50%" data-arr="1" style="left:20px;top:18px;width:200px;height:100px;position:absolute;color:#25c8ba;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:0.1em;">Welcome to</div>
+				                        <div data-to="50% 50%" data-arr="2" style="left:60px;top:45px;width:700px;height:100px;position:absolute;color:#edf1f2;font-size:28px;line-height:1.2;letter-spacing:0.02em;"><span style="font-weight:900;color:white;overflow-wrap: break-word !important;word-wrap: break-word;" t-esc="widget.login_member['sl_msg']"></span></div> -->
+				                    </div>
+				                </div>
+		        			</div>
+		        		</t>
+			        </div>
+			        <!-- Bullet Navigator -->
+			        <div data-u="navigator" class="jssorb031" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+			            <div data-u="prototype" class="i" style="width:16px;height:16px;">
+			                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+			                    <circle class="b" cx="8000" cy="8000" r="5800"></circle>
+			                </svg>
+			            </div>
+			        </div>
+			        <!-- Arrow Navigator -->
+			        <div data-u="arrowleft" class="jssora051" style="width:55px;height:55px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+			            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+			                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+			            </svg>
+			        </div>
+			        <div data-u="arrowright" class="jssora051" style="width:55px;height:55px;top:0px;right:25px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+			            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+			                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+			            </svg>
+			        </div>
+			    </div>
+			    <script type="text/javascript">jssor_1_slider_init();
+    			</script>
+            </div>
+            </div>
+             <div class="container-fluid custom_content">
+            	<div class="row main-section">
+            		<div class="col-xs-12 col-sm-12 col-lg-12">
+            			<div id="breaking-news-container">
+							<div id="breaking-news-colour" class="slideup animated">
+
+							</div>
+							<span class="breaking-news-title delay-animated slidein">
+								// Latest News //
+							</span>
+							<a class="breaking-news-headline delay-animated2 fadein marquee">
+								No Breaking News
+							</a>
+						</div>
+					</div>
+            	</div>
+            </div>
+            <br/>
+            <div class="row" style="margin-top: 20px;">
+            	<style>
+            		.scroll_style-1::-webkit-scrollbar-track
+					{
+						border-radius: 10px;
+						background-color: #F5F5F5;
+					}
+					.scroll_style-1::-webkit-scrollbar
+					{
+						width: 6px;
+					}
+					.scroll_style-1::-webkit-scrollbar-thumb
+					{
+						border-radius: 10px;
+						-webkit-box-shadow: solid 0 0 6px rgba(0,0,0,.3);
+						background-color: #B5B5B5;
+					}
+					.ref-icon{
+					    position: absolute;
+					    right: 19px;
+					    top: 65px;
+					    font-size: 18px;
+					}
+					.box_value{
+						font-size:18px;
+						position:absolute;
+						font-weight: bold;
+					}
+            	</style>
+            	<section class="col-lg-9 connectedSortable ui-sortable">
+            		<div class="stat_box_cont" style="display: flex;flex-wrap: wrap;">
+            		<t t-if="widget.login_member['all']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+		            			<span class="info-box-icon box_curve_st" style="background-color:#493240 !important;color:white;">
+		            				<i class="fa fa-institution"></i>
+		            			</span>
+				            	<div class="info-box-content">
+		              				<span class="box_title">No of Diocese</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_diocese']"/></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+            		<!-- <t t-if="widget.login_member['all']">
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<div class="info-box">
+								<span class="info-box-icon bg-green">
+									<i class="ion ion-ios-people-outline"></i>
+									<i class="fa fa-institution"></i>
+								</span>
+							 <div class="info-box-content">
+              					<p class="info-box-title">No of Diocese </p>
+              					<p class="info-box-number"><t t-esc="widget.login_member['total_diocese']"/></p>
+           				 		</div>
+           					 </div>
+           				</div>
+            		</t> -->
+            		<t t-if="widget.login_member['all'] or widget.login_member['diocese']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+		            			<span class="info-box-icon bg-navy box_curve_st">
+		            				<i class="fa fa-institution"></i>
+		            			</span>
+				            	<div class="info-box-content">
+		              				<span class="box_title">No of Vicariate</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_vicariate']"/></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+            		<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+		            			<span class="info-box-icon bg-teal box_curve_st">
+		            				<i class="fa fa-institution"></i>
+		            			</span>
+				            	<div class="info-box-content">
+		              				<span class="box_title">No of Parish</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_parish']"/></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+					<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate'] or widget.login_member['parish']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey"  >
+		            			<span class="info-box-icon bg-fuchsia box_curve_st">
+		            				<i class="fa fa-institution"></i>
+		            			</span>
+				            	<div class="info-box-content">
+		              				<span class="box_title">No of Substation</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_station']"/></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+					<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate'] or widget.login_member['parish']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+		            			<span class="info-box-icon bg-yellow box_curve_st">
+		            				<i class="fa  fa-users"></i>
+		            			</span>
+				            	<div class="info-box-content">
+		              				<span class="box_title">No of Family</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_family']"/></span>
+		              				<span class="text open_family cr_navigate" style="position: absolute;right: 19px;top: 65px;font-size: 18px;"><i class="fa fa-info-circle"></i></span>
+		              			</div>
+							</div>
+		        		</div>
+            		</t>
+					<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate'] or widget.login_member['parish']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+		            			<span class="info-box-icon bg-purple box_curve_st">
+		            				<i class="fa fa-user"></i>
+		            			</span>
+				            	<div class="info-box-content">
+		              				<span class="box_title">No of Family Members</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_member']"/></span>
+		              				<span class="text open_family_members cr_navigate ref-icon" style="position: absolute;right: 19px;top: 65px;font-size: 18px;"><i class="fa fa-info-circle"></i></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+            		<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate'] or widget.login_member['parish']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+<!--		            			<span class="info-box-icon box_curve_st">-->
+		            				<img data-u="image" class="info-box-icon box_curve_st" src="/cristo_ecclesia_dashboard/static/src/img/baptism.png" />
+<!--		            			</span>-->
+				            	<div class="info-box-content">
+		              				<span class="box_title">Baptism</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_baptism']"/></span>
+		              				<span class="text open_baptism cr_navigate ref-icon" style="position: absolute;right: 19px;top: 65px;font-size: 18px;"><i class="fa fa-info-circle"></i></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+            		<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate'] or widget.login_member['parish']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+<!--		            			<span class="info-box-icon bg-blue box_curve_st">-->
+		            				<img data-u="image" class="info-box-icon box_curve_st" src="/cristo_ecclesia_dashboard/static/src/img/communion.png" />
+<!--		            			</span>-->
+				            	<div class="info-box-content">
+		              				<span class="box_title">First Holy Communion</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_fhc']"/></span>
+		              				<span class="text open_first_holy_communion cr_navigate ref-icon" style="position: absolute;right: 19px;top: 65px;font-size: 18px;"><i class="fa fa-info-circle"></i></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+            		<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate'] or widget.login_member['parish']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+<!--		            			<span class="info-box-icon bg-maroon box_curve_st">-->
+		            				<img data-u="image" class="info-box-icon box_curve_st" src="/cristo_ecclesia_dashboard/static/src/img/confirmation.png" />
+<!--		            			</span>-->
+				            	<div class="info-box-content">
+		              				<span class="box_title">Confirmation</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_confirmation']"/></span>
+		              				<span class="text open_confirmation cr_navigate ref-icon" style="position: absolute;right: 19px;top: 65px;font-size: 18px;"><i class="fa fa-info-circle"></i></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+            		<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate'] or widget.login_member['parish']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+<!--		            			<span class="info-box-icon bg-olive box_curve_st">-->
+		            				<img data-u="image" class="info-box-icon box_curve_st" src="/cristo_ecclesia_dashboard/static/src/img/marriage.png" />
+<!--		            			</span>-->
+				            	<div class="info-box-content">
+		              				<span class="box_title">Marriage</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_marriage']"/></span>
+		              				<span class="text open_marriage cr_navigate ref-icon" style="position: absolute;right: 19px;top: 65px;font-size: 18px;"><i class="fa fa-info-circle"></i></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+            		<t t-if="widget.login_member['all'] or widget.login_member['diocese'] or widget.login_member['vicariate'] or widget.login_member['parish']">
+            			<div class="col-md-4 col-sm-6 col-xs-12">
+		          			<div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+<!--		            			<span class="info-box-icon bg-red box_curve_st">-->
+		            				<img data-u="image" class="info-box-icon box_curve_st" src="/cristo_ecclesia_dashboard/static/src/img/death.png" />
+<!--		            			</span>-->
+				            	<div class="info-box-content">
+		              				<span class="box_title">Death</span><br/>
+		              				<span class="box_value"><t t-esc="widget.login_member['total_death']"/></span>
+		              				<span class="text open_death cr_navigate ref-icon" style="position: absolute;right: 19px;top: 65px;font-size: 18px;"><i class="fa fa-info-circle"></i></span>
+		              			</div>
+		          			</div>
+		        		</div>
+            		</t>
+            		</div>
+            		<div class="sm_box_cont" style="display: flex;flex-wrap: wrap;">
+
+			     	</div>
+			     <!-- <t t-if="!widget.login_member['member']">
+			     <div class="renewal_box_cont" style="display: flex;flex-wrap: wrap;">
+			     	<div class="col-md-6">
+			     		<div class="card card-olive">
+			              <div class="card-header">
+			                <h3 class="card-title" style="font-weight: 600;">Member Statutory Renewals</h3>
+			                <div class="card-tools">
+			                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+			                    <i class="fa fa-minus"></i>
+			                  </button>
+			                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+			                    <i class="fa fa-times"></i>
+			                  </button>
+			                </div>
+			              </div>
+			              <div class="card-body p-0" style="height: 280px;overflow-y:auto;">
+                				<t t-if="widget.login_member['renewals']">
+                				<table class="table m-0 table-condensed">
+				                    <thead>
+				                    <tr>
+				                    	<th style="width: 50px;">S.No.</th>
+				                      	<th>Member Name</th>
+				                      	<th>Document Type</th>
+				                      	<th>Renewal Date</th>
+				                    </tr>
+				                    </thead>
+				                    <tbody>
+				                    	<t t-foreach="widget.login_member['renewals']" t-as="ren">
+				                    		<tr>
+				                    			<td><t t-esc="ren['sno']"/></td>
+				                    			<td><t t-esc="ren['member']"/></td>
+				                    			<td><t t-esc="ren['doc_type']"/></td>
+				                    			<td><t t-esc="ren['next_renewal']"/></td>
+				                    		</tr>
+				                    	</t>
+				                    </tbody>
+				                 </table>
+				                 </t>
+				                 <t t-if="!widget.login_member['renewals']">
+				                 	<div class="p-3">
+				                 		<b><span>No data found.</span></b>
+				                 	</div>
+				                 </t>
+                		  </div>
+			            </div>
+			     	</div>
+			     	<div class="col-md-6">
+			     		<div class="card card-info">
+		              <div class="card-header">
+		                <h3 class="card-title" style="font-weight: 600;">Member Statistics</h3>
+		
+		                <div class="card-tools">
+		                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i>
+		                  </button>
+		                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fa fa-times"></i>
+		                  </button>
+		                </div>
+		              </div>
+	             	 /.card-header
+		              <div class="card-body">
+		                <div class="row">
+		                  <div class="col-md-12">
+		                    <div class="chart-responsive">
+		                       <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
+			  	 </div>
+			     </div>
+			     </div>
+			     </t> -->
+            	</section>
+		    
+		   	<section class="col-lg-3 connectedSortable ui-sortable">
+            		<div class="hr_notification">
+		        	<script type="text/javascript">
+        	    		function myFunction() {
+							 if (window.pageYOffset > sticky) {
+							   header.classList.add("sticky");
+							 } else {
+							   header.classList.remove("sticky");
+							 }
+						}
+        	    	</script>
+		            <div class="box-header with-border sticky bg-blue">
+		              <div class="box-title hr_notification_head" style="font-size:17px;">Upcoming Birthdays</div>
+		            </div>
+		            <div class="birthday_data scroll_style-1">
+		                <t t-foreach="widget.login_member['birthdays']" t-as="bir">
+		                	<div class="birth_style" t-if="bir['birthday'] == widget.login_member['today']">
+								<img src="/cristo_ecclesia_dashboard/static/src/img/happy-birthday.gif" alt="B'day" style="width: 65px !important;height:50px;"/>
+							</div>
+			                <div class="media">
+			                	<img t-if="bir['img_data']" class="align-self-center rounded-circle mr-3" alt="IMG" t-att-src="bir['img_data']"/>
+			                    <img t-if="!bir['img_data']" class="align-self-center rounded-circle mr-3" alt="IMG" src="/web/static/src/img/placeholder.png"/>
+			                     <div class="media-body">
+			                      <h2 class="text-color display-6" style="font-size: 14px;font-family: inherit;"><t t-esc="bir['name']"/></h2>
+			                      <p class="dob"><t t-esc="bir['birthday']"/></p>
+			                     </div>
+			                </div>
+			            </t>
+			            <t t-if="!widget.login_member['birthdays']">
+			            	<h4 style="font-family: inherit;padding: 20px;text-align: center;color: palevioletred;">No Birthday for next 30 days</h4>
+			            </t>
+			        </div>
+			       <!--  Ordination Anniversary -->
+			        <div class="box-header with-border sticky bg-orange">
+		              <div class="box-title hr_notification_head" style="font-size:17px;">Ordination Anniversary</div>
+		            </div>
+		            <div class="birthday_data scroll_style-1">
+		                <t t-foreach="widget.login_member['anniversary']" t-as="ann">
+			                <div class="media">
+			                	<img t-if="ann['img_data']" class="align-self-center rounded-circle mr-3" alt="IMG" t-att-src="ann['img_data']"/>
+			                    <img t-if="!ann['img_data']" class="align-self-center rounded-circle mr-3" alt="IMG" src="/web/static/src/img/placeholder.png"/>
+			                     <div class="media-body">
+			                      <h2 class="text-color display-6" style="font-size: 14px;font-family: inherit;"><t t-esc="ann['name']"/></h2>
+			                      <p class="dob"><t t-esc="ann['od']"/><span style="color:#0073b7;padding-left: 10px; padding-right: 10px;"></span><!-- <span style="color:green"><t t-esc="ann['order']"/></span> --></p>
+			                     </div>
+			                </div>
+			            </t>
+			            <t t-if="!widget.login_member['anniversary']">
+			            	<h4 style="font-family: inherit;padding: 20px;text-align: center;color: palevioletred;">No Ordination Anniversary for next 30 days</h4>
+			            </t>
+			        </div>
+		        </div>
+            	</section>
+		    </div>
+			<!-- Bootstrap 4 -->
+<!-- 			<script src="/cristo_ecclesia_dashboard/static/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+ -->			<!-- AdminLTE App -->
+			<script src="/cristo_ecclesia_dashboard/static/lib/dist/js/adminlte.js"></script>
+			
+    </t>
+
+    <t t-name="DiocesParishWarning">
+        <div style="margin-top: 150px;text-align: center;">
+        	<h3>
+	            <p>Sorry!!! Could not find member linked to user or Main Role not assigned to user</p>
+	            <p>Please contact system admin for the setup</p>
+            </h3>
+        </div>
+    </t>
+</templates>
+
+

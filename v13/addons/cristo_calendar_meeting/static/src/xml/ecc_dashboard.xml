@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-extend="DioceseParishDetails">
+        <t t-jquery=".sm_box_cont" t-operation="append">
+        	<t t-if="widget.login_member['calendar']">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                   <div class="info-box l-bg-blue-dark">
+                      <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+                      <div class="info-box-content">
+                          <span class="text open_calendar cr_navigate" style="position:absolute;right:18px;top:-3px;color:white;font-size:18px;"><i class="fa fa-info-circle"></i></span>
+                          <span class="info-box-text" style="font-size:18px;">Calendar</span>
+                          <span class="info-box-number" style="font-size:24px;"><t t-esc="widget.login_member['total_cal']" /></span>
+                          <div class="progress">
+                             <div class="progress-bar" style="width: 0%"></div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </t>
+            <t t-if="widget.login_member['meeting']">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                   <div class="info-box l-bg-green-dark">
+                      <span class="info-box-icon"><i class="fa fa-group"></i></span>
+                      <div class="info-box-content">
+                          <span class="text open_meeting cr_navigate" style="position:absolute;right:18px;top:-3px;color:white;font-size:18px;"><i class="fa fa-info-circle"></i></span>
+                          <span class="info-box-text" style="font-size:18px;">Meeting</span>
+                          <span class="info-box-number" style="font-size:24px;"><t t-esc="widget.login_member['total_meet']" /></span>
+                          <div class="progress">
+                             <div class="progress-bar" style="width: 0%"></div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </t>
+        </t>
+    </t>
+</templates>

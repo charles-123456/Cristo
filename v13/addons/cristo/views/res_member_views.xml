@@ -1,0 +1,1861 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	
+    	<!-- Member Base Form view -->
+    	
+    	<record id="view_res_member_base_form" model="ir.ui.view">
+			<field name="name">res.member.base.form</field>
+			<field name="model">res.member</field>
+			<field name="arch" type="xml">
+				<form string="Members" duplicate="0">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+						</div>
+						<field name="image_1920" widget='image' class="oe_avatar"
+							options='{"zoom": true, "preview_image": "image_128"}' />
+						<div class="oe_title">
+							<label for="name" string="First Name"/>
+							<h1>
+								<field name="name" required="1" placeholder="First Name" />
+							</h1>
+							<label for="last_name" />
+							<h1>
+								<field name="last_name" placeholder="Last Name" />
+							</h1>
+							<div class="o_row">
+								<label for="name_in_regional_language" style="margin-top: 20px;" />
+								<field name="name_in_regional_language" placeholder="Name in Regional Language" />
+							</div>
+						</div>
+						<field name="can_edit" invisible="1"/>
+						<field name="diocese_id" invisible="1" />
+						<field name="vicariate_id" invisible="1" domain="[('diocese_id','=',diocese_id)]"/>
+						<field name="parish_id" invisible="1" placeholder="Parish" domain="[('diocese_id','=',diocese_id)]"/>
+						<field name="sub_station_id" placeholder="Sub Station" invisible="1" />
+						<field name="code" groups="base.group_erp_manager" invisible="1" />	
+						<field name="active" invisible="1" />
+						<group>
+							<group>
+								<field name="title" options='{"no_open": True, "no_create": True}' />
+								<field name="known_popularly_as" />
+								<field name="alias_name" />
+								<field name="member_type" invisible="0" attrs="{'readonly':[('can_edit','=',False)]}"/>
+							</group>
+							<group>
+								<field name="unique_code" />
+								<field name="store_name" invisible="1" />
+								<field name="aadhar_proof" filename="store_name" />
+								<field name="is_dob_or_age" widget="radio" options="{'horizontal': true}" />
+								<field name="dob" attrs="{'invisible': [('is_dob_or_age','=','age')]}" />
+								<field name="age" attrs="{'readonly': [('is_dob_or_age','!=','age')]}" force_save = "1"/>
+								<field name="membership_type" invisible="1"/>
+							</group>
+						</group>
+						
+						<group>
+							<group>
+								<field name="blood_group_id" options='{"no_open": True, "no_create": True}' />
+								<field name="living_status" widget="radio"
+									options='{"horizontal": true}' />
+								<field name="physical_status_id" options='{"no_open": True, "no_create": True}' />
+							</group>
+							
+							<group>
+								<field name="mother_tongue_id"
+									options='{"no_open": True, "no_create": True}' />
+								<field name="citizenship_id" options='{"no_open": True, "no_create": True}' />
+							</group>
+						</group>
+						<group string="Death Info." name="death" attrs="{'invisible':[('living_status','!=','no')]}">
+								<group>
+										<field name="death_date" string="Date" attrs="{'required':[('living_status','=','no')]}"/>
+										<field name="death_parish_id" string="Parish"
+											options='{"no_open": True, "no_create": True}' />
+										<field name="place_of_death" />
+										<field name="cause_of_death" />
+								</group>
+								<group>
+										<field name="burial_place" />
+										<field name="burial_date" />
+										<field name="death_certificate_name" invisible="1"/>
+										<field name="death_certificate" filename="death_certificate_name"/>
+								</group>
+							</group>
+						
+						<group>
+							<group>
+								<field name="native_place" />
+								<field name="native_district_id" options='{"no_open": True, "no_create": True}' />
+								<field name="native_diocese_id" options='{"no_open": True, "no_create": True}' context="{'bypass_rule':True}"/>
+								<field name="native_parish_id" domain="[('diocese_id','=',native_diocese_id)]" context="{'bypass_rule':True}" options='{"no_open": True, "no_create": True}' />
+								<field name="driving_license_no" invisible="1" />
+								<field name="license_exp_date" invisible="1" />
+								<field name="pancard_no" />
+								<field name="pan_proof_name" invisible="1"/>
+								<field name="pan_proof" filename="pan_proof_name"/>
+								<field name="known_language_ids" widget="many2many_tags" options='{"no_open": True, "no_create": True}' />
+							</group>
+							<group>
+								<field name="personal_mobile" />
+								<field name="personal_email" />
+								<field name="twitter_account" />
+								<field name="fb_account" />
+								<field name="linkedin_account" />
+								<field name="whatsapp_no" />
+								<field name="passport_country_id" options='{"no_open": True, "no_create": True}' invisible="1" />
+								<field name="passport_no" />
+								<field name="passport_exp_date" invisible="1" />
+								<field name="passport_proof_name" invisible="1"/>
+								<field name="passport_proof" filename="passport_proof_name"/>
+								<field name="voter_id" />
+								<field name="voter_proof_name" invisible="1"/>
+								<field name="voter_proof" filename="voter_proof_name"/>
+							</group>
+						</group>
+						<group string="Emergency contact">
+							<group>
+								<field name="emer_name" string="Person Name"/>
+								<field name="emer_phone" string="Person Phone"/>
+							</group>
+							<group>
+								<field name="emer_relationship_id" string="Relationship" options="{'no_open': True, 'no_create': True}" />
+							</group>
+						</group>
+							<group>
+								<group>
+									<label for="street" string="Residential Address" />
+									<div class="o_address_format">
+										<field name="street" placeholder="Address line 1" help="Address line 1"
+											class="o_address_street" string="Street" />
+										<field name="street2" string="Street 2" placeholder="Area/Street"
+											help="Area/Street" class="o_address_street" />
+										<field name="place" string="Place" placeholder="Street 2"
+											help="Place" class="o_address_street" />
+										<field name="city" string="City" placeholder="City/Town/Taluk"
+											help="City/Town/Taluk" class="o_address_street" />
+										<div class="address_format">
+											<field name="district_id" string="District" placeholder="District" help="District"
+												style="width: 60%%" options="{'no_open': True, 'no_create': True}" />
+											<field name="state_id" string="State" placeholder="State"
+												help="State" style="width: 40%%" options="{'no_open': True, 'no_create': True}" />
+										</div>
+										<div class="address_format">
+											<field name="country_id" string="Country" placeholder="Country"
+												style="width: 60%%" help="Country" options='{"no_open": True, "no_create": True}' />
+											<field name="zip" string="PIN Code" placeholder="PIN Code" help="PIN Code"
+												style="width: 40%%" />
+										</div>
+									</div>
+								</group>
+								<group>
+									<field name="mobile" string="Mobile" />
+									<field name="fax" />
+									<field name="user_ids" invisible="1" />
+									<field name="email" widget="email" string="Email"
+										attrs="{'required': [('user_ids','!=', [])]}" />
+									<field name="website" widget="url" string="Website/Blog"
+										placeholder="e.g. www.lourdeschurchyelagiri.org" />
+									<field name="current_edu_prgm" invisible="1" />
+									<field name="current_prof_type" invisible="1" />
+									<field name="current_form_stage" invisible="1" />
+									<field name="current_holyorder" invisible="1" />
+								</group>
+						</group>
+						
+						<notebook name="member">
+							<page string="Sacraments" name="sacraments">
+								<group>
+									<group string="Baptism" name="baptism">
+										<field name="bapt_date" string="Date" />
+										<field name="baptism_parish_id" options='{"no_open": True, "no_create": True}'
+											string="Parish" />
+										<field name="baptism_diocese_id" string="Diocese"/>
+<!-- 										<field name="place_of_baptism" string="Place" /> -->
+										<field name="minister_of_baptism"/>
+									</group>
+									<group string="Confirmation" name="confirmation">
+										<field name="cnf_date" string="Date" />
+										<field name="cnf_parish_id" string="Parish"
+											options='{"no_open": True, "no_create": True}'/>
+										<field name="cnf_diocese_id" string="Diocese"/>
+<!-- 										<field name="place_of_cnf" string="Place" /> -->
+										<field name="minister_of_cnf"/>
+									</group>
+									<group string="First Holy Communion" name="fhc">
+										<field name="fhc_date" string="Date" />
+										<field name="fhc_parish_id" string="Parish"
+											options='{"no_open": True, "no_create": True}' />
+										<field name="fhc_diocese_id" string="Diocese"/>
+<!-- 										<field name="place_of_fhc" string="Place" />	 -->
+										<field name="minister_of_fhc"/>
+									</group>
+								</group>
+							</page>
+							<page string="Education" name="education">
+								<field name="member_education_ids" context="{'default_member_type':member_type}" >
+									<form>
+										<group>
+											<group>
+												<field name="study_level_id" string="Level" domain="[('study_level_ids', '!=', member_type)]" />
+												<!-- <field name="study_level_code_id" invisible="1"/>
+												<field name="board_id" attrs="{'invisible': [('study_level_code_id','in',['DIP', 'DOC', 'PG', 'UG'])]}"/> -->
+												
+												<field name="program_id" string="Program of Study" required="1"/>
+												<field name="core_disiplines_ids" widget="many2many_tags" />
+												<field name="particulars" />
+												<field name="state" />
+												<field name="store_name" invisible="1" />
+												<field name="attachment" filename="store_name" />
+											</group>
+											<group>
+												<field name="institution" string="Place and Institute" />
+												<field name="board_or_university" />
+												<field name="year_of_passing" />
+												<field name="duration" />
+												<field name="mode" required="1"/>
+												<field name="result" />
+												<field name="member_type" invisible="1"/>
+											</group>
+										</group>
+										<notebook>
+											<page name="notes" string="Remarks">
+												<field name="note" placeholder="write something...."/>
+											</page>
+										</notebook>
+									</form>
+									<tree>
+										<field name="study_level_id" />
+										<field name="program_id" />
+										<field name="institution" placeholder="Place/City/Institution" />
+										<field name="year_of_passing" />
+										<field name="state" />
+									</tree>
+								</field>
+							</page>
+							<page string="Anniversary Remembrance" name="anniversary_remembrance">
+								<field name="remembrance_ids" context="{'default_member_id':active_id}">
+									<tree editable="bottom">
+										<field name="anniversary_day" width="0.8" />
+										<field name="anniversary_month" width="0.8" />
+										<field name="name" width="2.0" />
+										<field name="member_id" invisible="1"/>
+										<field name="anniversary_type_id"  domain="[('id','in',anniversary_type_ids)]" />
+										<field name="anniversary_type_ids" widget="many2many_tags" invisible="1"/>
+										<field name="is_mine" width="0.8" />
+									</tree>
+								</field>
+							</page>
+							<page string="Member Health" name="member_health">
+								<field name="member_health_ids">
+									<form>
+										<group>
+											<group>
+												<field name="disease_disorder_id" required="1"/>
+												<field name="start_date" />
+												<field name="end_date" />
+											</group>
+											<group>
+												<field name="particulars" />
+												<field name="referred_physician" />
+												<field name="disease_description"/>
+											</group>
+										</group>
+										<notebook>
+											<page string="Insurance Details" >
+												<field name="insurance_details" />
+											</page>
+											<page string="Attachments">
+												<div class="alert alert-warning" role="alert">
+                        							<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        						</div>
+												<field name="attachment_ids" widget="many2many_binary" />
+											</page>
+										</notebook>
+									</form>
+									<tree>
+										<field name="disease_disorder_id" required="1"/>
+										<field name="start_date" width="0.8" />
+										<field name="end_date" width="0.8" />
+									</tree>
+								</field>
+							</page>
+							<page string="Statutory Renewals">
+								<field name="statutory_renewal_ids">
+									<form>
+										<group>
+											<group>
+												<field name="no" required="1" />
+												<!-- <field name="document" required="0"/> -->
+												<field name="document_type_id" required="1" options='{"no_open": True, "no_create": True}'
+													domain="[('is_member', '=', True)]" />
+												<field name="agency" />
+											</group>
+											<group>
+												<field name="store_name" invisible="1" />
+												<field name="proof" filename="store_name" />
+												<field name="valid_from" />
+												<field name="valid_to" />
+												<field name="next_renewal" />
+											</group>
+										</group>
+									</form>
+									<tree>
+										<field name="document_type_id" />
+										<field name="agency" />
+										<field name="valid_from" width="0.8" />
+										<field name="valid_to" width="0.8" />
+									</tree>
+								</field>
+							</page>
+							<page string="Attachments" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province">
+								<div class="alert alert-warning" role="alert">
+                        			<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        		</div>
+								<field name="attachment_ids" widget="many2many_binary" />
+							</page>
+							<page name='internal_notes' string="Remarks" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province">
+								<field name="comment" placeholder="Input an internal note in here..." />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>			
+		
+		<!-- Member Base Tree view -->
+		
+		<record id="view_res_member_base_tree" model="ir.ui.view">
+			<field name="name">res.member.base.tree</field>
+			<field name="model">res.member</field>
+			<field name="arch" type="xml">
+				<tree string="Member" default_order="name asc"  import="1" expand="0" >
+					<field name="name" />
+					<field name="dob" width="0.8" optional="hide" />
+					<field name="native_parish_id" />
+					<field name="native_diocese_id" optional="hide" />
+                    <field name="mobile" optional="show"/>
+                    <field name="place" />
+                    <field name="personal_mobile" optional="hide"/>
+                    <field name="personal_email" optional="hide"/>
+                    <field name="city" string="City/Town/Taluk" />
+                    <field name="current_edu_prgm" optional="hide" />
+					<field name="current_prof_type" optional="hide" />
+					<field name="current_form_stage" optional="hide" />
+					<field name="current_holyorder" optional="hide" />
+				</tree>
+			</field>
+		</record>			
+    	
+    	<!-- Member Base Search view -->
+    	
+	    <record id="view_res_member_base_search" model="ir.ui.view">
+            <field name="name">res.member.base.search</field>
+            <field name="model">res.member</field>
+            <field name="arch" type="xml">
+                <search>
+                	<field name="name" />
+                    <field name="unique_code" />
+                    <field name="dob" />
+                    <field name="mobile" />
+                    <field name="place" />
+                    <field name="city" />
+                    <field name="parish_id" />
+					<field name="role_ids" />
+                    <field name="current_edu_prgm" />
+					<field name="current_prof_type" />
+					<field name="current_form_stage" />
+					<field name="current_holyorder" />
+					<filter string="Archived" name="inactive" domain="[('active', '=', False)]" />
+                    <group expand="0" string="Group By">
+                        <filter string="Blood Group" name="blood_group_id" context="{'group_by':'blood_group_id'}"/>
+                        <filter string="Physical Status" name="physical_status_id" context="{'group_by':'physical_status_id'}"/>
+                        <filter string="Native Parish" name="native_parish_id" context="{'group_by':'native_parish_id'}"/>
+                        <filter string="District" name="district_id" context="{'group_by':'district_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <!-- All Members View -->
+        
+        <record id="view_res_member_all_form" model="ir.ui.view">
+        	<field name="name">res.member.all.form</field>
+			<field name="model">res.member</field>
+			<field name="arch" type="xml">
+				<form string="Members" duplicate="0">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="open_house_members" type="object" class="oe_stat_button" icon="fa-external-link" string="Member Ministry" attrs="{'invisible': [('member_type','=','member')]}" context="{'member':0}" />
+							<button name="open_life_membership" type="object" class="oe_stat_button" icon="fa-external-link" string="Lifelog" attrs="{'invisible': [('member_type','=','member')]}"
+										groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province" />
+						</div>
+						<field name="image_1920" widget='image' class="oe_avatar"
+							options='{"zoom": true, "preview_image": "image_128"}' />
+						<div class="oe_title">
+							<label for="name" string="First Name"/>
+							<h1>
+								<field name="name" required="1" placeholder="First Name" />
+							</h1>
+							<label for="last_name" />
+							<h1>
+								<field name="last_name" placeholder="Last Name" />
+							</h1>
+							<div class="o_row">
+								<label for="name_in_regional_language" style="margin-top: 20px;" />
+								<field name="name_in_regional_language" placeholder="Name in Regional Language" />
+							</div>
+						</div>
+						<field name="sub_station_id" placeholder="Sub Station"
+							invisible="1" />
+						<field name="code" invisible="1" />
+						<field name="active" invisible="1" />
+						<field name="can_edit" invisible="1"/>
+						<group>
+							<group>
+								<field name="membership_type" required="1" attrs="{'readonly':[('can_edit','=',False)]}"/>
+								<field name="member_type" required="1" attrs="{'readonly':[('can_edit','=',False)]}"/>
+								<field name="title" options='{"no_open": True, "no_create": True}' />
+								<field name="certificate_name" attrs="{'invisible': [('member_type','=','member')]}" />
+								<field name="known_popularly_as" />
+								<field name="family_id" options="{'no_open': True, 'no_create': True}"
+									placeholder="Family" attrs="{'invisible': [('member_type','!=','member')],'required':[('membership_type','=','LT')]}" />
+								<field name="bcc_family" attrs="{'invisible': [('member_type','!=','member')],'required':[('membership_type','=','LT')]}"/>
+								<field name="alias_name" />
+								<field name="place_of_birth" attrs="{'invisible': [('member_type','=','member')]}" />
+								<field name="is_family_head" attrs="{'invisible': ['|',('age','&lt;','18'),('member_type','!=','member')]}" />
+							</group>
+							<group>
+								<field name="unique_code" />
+								<field name="store_name" invisible="1" />
+								<field name="aadhar_proof" filename="store_name" />
+								<field name="gender" required="1" options="{'horizontal': true}"
+						    		widget="radio" />
+								<field name="is_dob_or_age" widget="radio" options="{'horizontal': true}" />
+								<field name="dob" attrs="{'invisible': [('is_dob_or_age','=','age')]}" />
+								<field name="age" attrs="{'readonly': [('is_dob_or_age','!=','age')]}" force_save = "1"/>
+								<!-- <label for="feast_month" string="Feast Day" attrs="{'invisible': [('member_type','=','member')]}" />
+								<div class="o_row">
+									<field name="feast_day" placeholder="Day" style="width: 50%%" attrs="{'invisible': [('member_type','=','member')]}"/>
+									<field name="feast_month" placeholder="Month" style="width: 50%%" attrs="{'invisible': [('member_type','=','member')]}"/>
+								</div> -->
+							</group>
+						</group>
+						
+						<group>
+							<group>
+	        					<field name="relationship_id" options='{"no_open": True, "no_create": True}'
+									domain="[('gender', '=', gender)]" attrs="{'invisible': [('member_type','!=','member')]}" />
+								<field name="blood_group_id" options='{"no_open": True, "no_create": True}' />
+								<field name="living_status" widget="radio"
+									options='{"horizontal": true}' />
+								<field name="physical_status_id" options='{"no_open": True, "no_create": True}' />
+								<field name="occupation_id" options='{"no_open": True, "no_create": True}'
+									attrs="{'invisible': ['|',('age','&lt;','18'),('member_type','!=','member')]}" />
+								<field name="monthly_income"
+									attrs="{'invisible': ['|',('age','&lt;','18'),('member_type','!=','member')]}" />
+								<field name="institute_id" options='{"no_open": True, "no_create": True}'
+									attrs="{'required': [('membership_type','=','RE')], 'invisible': [('membership_type','!=','RE')]}" />
+								<field name="rel_province_id" string="Province" options='{"no_open": True, "no_create": True}' 
+									attrs="{'required': [('membership_type','=','RE')], 'invisible': [('membership_type','!=','RE')]}"
+									domain="[('institute_id', '=', institute_id)]" />
+								<field name="rel_zone_id" options='{"no_open": True, "no_create": True}' 
+									attrs="{'invisible': [('membership_type','!=','RE')]}" domain="[('rel_province_id', '=', rel_province_id)]" />
+								<field name="community_id" options='{"no_open": True, "no_create": True}' 
+									attrs="{'invisible': [('membership_type','!=','RE')]}" domain="[('rel_province_id', '=', rel_province_id)]" />
+								<field name="province_id" attrs="{'invisible': [('membership_type','!=','SE')]}" />	
+								<field name="ecc_community_id" domain="[('owned_by','=','diocese')]" attrs="{'invisible': [('membership_type','!=','SE')]}" />
+							</group>
+							<group>
+								<field name="mother_tongue_id"
+									options='{"no_open": True, "no_create": True}' />
+								<field name="citizenship_id" options='{"no_open": True, "no_create": True}' />
+								<field name="diocese_id" options='{"no_open": True, "no_create": True}'/>
+								<field name="vicariate_id" domain="[('diocese_id','=',diocese_id)]" options='{"no_open": True, "no_create": True}'/>
+								<field name="parish_id" domain="[('diocese_id','=',diocese_id)]" options='{"no_open": True, "no_create": True}'/>
+								<field name="member_tag_ids" widget="many2many_tags" options='{"color_field": "color"}'/>
+								<field name="is_parish_member" widget="radio"
+									options="{'horizontal': true}" attrs="{'invisible': [('member_type','!=','member')]}"/>
+								<field name="marital_status_id" domain="[('gender', '=', gender)]"
+									options='{"no_open": True, "no_create": True}'
+									attrs="{'invisible': ['|',('age','&lt;','18'),('member_type','!=','member')]}" />
+								<field name="marital_status" invisible="1" />
+								<field name="occupation_type"
+									attrs="{'invisible': ['|',('age','&lt;','18'),('member_type','!=','member')]}" />
+								<field name="inactive_reason"
+									attrs="{'required': [('is_parish_member','=','no')], 'invisible': ['|',('is_parish_member','!=','no'),('member_type','!=','member')]}" />
+								<field name="marriage_parish_id" attrs="{'invisible': ['|',('member_type','!=','member'),('marital_status','=','Bachelor')]}" />
+								<field name="financial_support" attrs="{'invisible': [('member_type','!=','member')]}" />
+							</group>
+						</group>
+						<group string="Death Info." name="death" attrs="{'invisible':[('living_status','!=','no')]}">
+								<group>
+										<field name="death_date" string="Date" attrs="{'required':[('living_status','=','no')]}"/>
+										<field name="death_parish_id" string="Parish"
+											options='{"no_open": True, "no_create": True}' />
+										<field name="place_of_death" />
+										<field name="cause_of_death" />
+								</group>
+								<group>
+										<field name="burial_place" />
+										<field name="burial_date" />
+										<field name="death_certificate_name" invisible="1"/>
+										<field name="death_certificate" filename="death_certificate_name"/>
+								</group>
+						</group>
+						<group>
+							<group>
+								<field name="native_place" />
+								<field name="native_district_id" options='{"no_open": True, "no_create": True}' />
+								<field name="native_diocese_id" options='{"no_open": True, "no_create": True}' context="{'bypass_rule':True}"/>
+								<field name="native_parish_id" domain="[('diocese_id','=',native_diocese_id)]" context="{'bypass_rule':True}" options='{"no_open": True, "no_create": True}' />
+								<field name="driving_license_no" invisible="1" />
+								<field name="license_exp_date" invisible="1" />
+								<field name="pancard_no" />
+								<field name="pan_proof_name" invisible="1"/>
+								<field name="pan_proof" filename="pan_proof_name"/>
+								<field name="known_language_ids" widget="many2many_tags" options='{"no_open": True, "no_create": True}' />
+							</group>
+							<group>
+								<field name="personal_mobile" />
+								<field name="personal_email" widget="email" />
+								<field name="twitter_account" />
+								<field name="fb_account" />
+								<field name="linkedin_account" />
+								<field name="whatsapp_no" />
+								<field name="passport_country_id" options='{"no_open": True, "no_create": True}' invisible="1"  />
+								<field name="passport_no" />
+								<field name="passport_exp_date" invisible="1" />
+								<field name="passport_proof_name" invisible="1"/>
+								<field name="passport_proof" filename="passport_proof_name"/>
+								<field name="voter_id" />
+								<field name="voter_proof_name" invisible="1"/>
+								<field name="voter_proof" filename="voter_proof_name"/>
+							</group>
+						</group>
+						<group string="Emergency contact">
+							<group>
+								<field name="emer_name" string="Person Name"/>
+								<field name="emer_phone" string="Person Phone"/>
+							</group>
+							<group>
+								<field name="emer_relationship_id" string="Relationship" options="{'no_open': True, 'no_create': True}" />
+							</group>
+						</group>
+							<group>
+								<group attrs="{'invisible': [('member_type','!=','member')]}">
+									<label for="street" string="Residential Address"/>
+									<div class="o_address_format">
+										<field name="use_parent_address" class="oe_inline" />
+										<label for="use_parent_address" string="Use Family Address" />
+										<field name="street" placeholder="Address line 1" help="Address line 1"
+											class="o_address_street" string="Street" />
+										<field name="street2" string="Street 2" placeholder="Area/Street"
+											help="Area/Street" class="o_address_street" />
+										<field name="place" string="Place" placeholder="Street 2"
+											help="Place" class="o_address_street" />
+										<field name="city" string="City" placeholder="City/Town/Taluk"
+											help="City/Town/Taluk" class="o_address_street" />
+										<div class="address_format">
+											<field name="district_id" string="District" placeholder="District" help="District"
+												style="width: 60%%" options="{'no_open': True, 'no_create': True}" />
+											<field name="state_id" string="State" placeholder="State"
+												help="State" style="width: 40%%" options="{'no_open': True, 'no_create': True}" />
+										</div>
+										<div class="address_format">
+											<field name="country_id" string="Country" placeholder="Country"
+												style="width: 60%%" help="Country" options='{"no_open": True, "no_create": True}' />
+											<field name="zip" string="PIN Code" placeholder="PIN Code" help="PIN Code"
+												style="width: 40%%" />
+										</div>
+									</div>
+								</group>
+								<group attrs="{'invisible': [('member_type','=','member')]}">
+									<label for="street" string="Home Address"/>
+									<div class="o_address_format">
+										<field name="street" placeholder="Address line 1" help="Address line 1"
+											class="o_address_street" string="Street" />
+										<field name="street2" string="Street 2" placeholder="Area/Street"
+											help="Area/Street" class="o_address_street" />
+										<field name="place" string="Place" placeholder="Street 2"
+											help="Place" class="o_address_street" />
+										<field name="city" string="City" placeholder="City/Town/Taluk"
+											help="City/Town/Taluk" class="o_address_street" />
+										<div class="address_format">
+											<field name="district_id" string="District" placeholder="District" help="District"
+												style="width: 60%%" options="{'no_open': True, 'no_create': True}" />
+											<field name="state_id" string="State" placeholder="State"
+												help="State" style="width: 40%%" options="{'no_open': True, 'no_create': True}" />
+										</div>
+										<div class="address_format">
+											<field name="country_id" string="Country" placeholder="Country"
+												style="width: 60%%" help="Country" options='{"no_open": True, "no_create": True}' />
+											<field name="zip" string="PIN Code" placeholder="PIN Code" help="PIN Code"
+												style="width: 40%%" />
+										</div>
+									</div>
+								</group>
+								<group>
+									<field name="mobile" string="Mobile" />
+									<field name="fax" />
+									<field name="user_ids" invisible="1" />
+									<field name="email" widget="email" string="Email"
+										attrs="{'required': [('user_ids','!=', [])]}" />
+									<field name="website" widget="url" string="Website/Blog"
+										placeholder="e.g. www.lourdeschurchyelagiri.org" />
+								</group>
+									<group attrs="{'invisible': [('member_type', 'not in', ['priest','lay_brother','brother','sister','junior_sister','novice'])]}">
+									<label for="rel_parish_id" string="Home Parish Name" />
+									<div class="o_address_format">
+										<field name="rel_parish_id" />
+										<field name="parish_country_id" placeholder="Home Parish Country"
+											options='{"no_open": True, "no_create": True}' />
+										
+									</div>
+									<field name="rel_address" placeholder="Home Parish Address" />
+								</group>
+								<group attrs="{'invisible': [('member_type', 'not in', ['bishop','priest','deacon'])]}">
+									<label for="parish_street" string="Parish Address" />
+									<div class="o_address_format">
+										<field name="parish_street" placeholder="Address line 1" help="Address line 1"
+											class="o_address_street" string="Street" />
+										<field name="parish_street2" string="Street 2" placeholder="Area/Street"
+											help="Area/Street" class="o_address_street" />
+										<field name="parish_place" string="Place" placeholder="Street 2"
+											help="Place" class="o_address_street" />
+										<field name="parish_city" string="City" placeholder="City/Town/Taluk"
+											help="City/Town/Taluk" class="o_address_street" />
+										<div class="address_format">
+											<field name="parish_district_id" string="District" placeholder="District" help="District"
+												style="width: 60%%" options="{'no_open': True, 'no_create': True}" />
+											<field name="parish_state_id" string="State" placeholder="State"
+												help="State" style="width: 40%%" options="{'no_open': True, 'no_create': True}" />
+										</div>
+										<div class="address_format">
+											<field name="parish_country_id" string="Country" placeholder="Country"
+												style="width: 60%%" help="Country" options='{"no_open": True, "no_create": True}' />
+											<field name="parish_zip" string="PIN Code" placeholder="PIN Code" help="PIN Code"
+													style="width: 40%%" />
+										</div>				
+									</div>
+									<field name="parish_mobile" string="Parish Mobile" attrs="{'invisible': [('member_type', '=', 'member')]}" />
+									<field name="parish_email" widget="email" string="Parish Email" attrs="{'invisible': [('member_type', '=', 'member')]}" />
+									<field name="current_edu_prgm" invisible="1" />
+									<field name="current_prof_type" invisible="1" />
+									<field name="current_form_stage" invisible="1" />
+									<field name="current_holyorder" invisible="1" />
+								</group>
+								<group>
+									<!-- <field name="role_ids" widget="many2many_tags"/> -->
+								</group>
+						</group>
+						
+						<notebook name="member">
+							<page string="Sacraments" name="sacraments">
+								<group>
+									<group string="Baptism" name="baptism">
+										<field name="bapt_date" string="Date" />
+										<field name="baptism_parish_id" options='{"no_open": True, "no_create": True}'
+											string="Parish" />
+										<field name="baptism_diocese_id" string="Diocese"/>
+<!-- 										<field name="place_of_baptism" string="Place" /> -->
+										<field name="minister_of_baptism"/>
+									</group>
+									<group string="Confirmation" name="confirmation">
+										<field name="cnf_date" string="Date" />
+										<field name="cnf_parish_id" string="Parish"
+											options='{"no_open": True, "no_create": True}'/>
+										<field name="cnf_diocese_id" string="Diocese"/>
+<!-- 										<field name="place_of_cnf" string="Place" /> -->
+										<field name="minister_of_cnf"/>
+									</group>
+									<group string="First Holy Communion" name="fhc">
+										<field name="fhc_date" string="Date" />
+										<field name="fhc_parish_id" string="Parish"
+											options='{"no_open": True, "no_create": True}' />
+										<field name="fhc_diocese_id" string="Diocese"/>
+<!-- 										<field name="place_of_fhc" string="Place" />	 -->
+										<field name="minister_of_fhc"/>
+									</group>
+									<group string="Marriage" name="marriage" attrs="{'invisible': [('member_type','!=','member')]}">
+										<field name="mrg_date" string="Date" />
+										<field name="mrg_parish_id" string="Parish"
+											options='{"no_open": True, "no_create": True}' />
+										<field name="mrg_diocese_id" string="Diocese"/>
+<!-- 										<field name="place_of_marriage" string="Place" />	 -->
+										<field name="minister_of_marriage"/>
+									</group>
+								</group>
+							</page>
+							<page string="Education" name="education">
+								<field name="member_education_ids" context="{'default_member_type':member_type}">
+									<form>
+										<group>
+											<group>
+												<field name="study_level_id" string="Level" domain="[('study_level_ids', '!=', member_type)]" />
+												<!-- <field name="study_level_code_id" invisible="True"/>
+												<field name="board_id" attrs="{'invisible': [('study_level_code_id','in',['DIP', 'DOC', 'PG', 'UG'])]}"/> -->
+												<field name="program_id" string="Program of Study" required="1"/>
+												<field name="core_disiplines_ids" widget="many2many_tags" />
+												<field name="particulars" />
+												<field name="state" />
+												<field name="store_name" invisible="1"/>
+												<field name="attachment" filename="store_name" />
+											</group>
+											<group>
+												<field name="institution" string="Place and Institute" />
+												<field name="board_or_university" />
+												<field name="year_of_passing" />
+												<field name="duration" />
+												<field name="mode" required="1"/>
+												<field name="result" />
+												<field name="member_type" invisible="1"/>
+											</group>
+										</group>
+										<notebook>
+											<page name="notes" string="Remarks">
+												<field name="note" placeholder="write something...."/>
+											</page>
+										</notebook>
+									</form>
+									<tree>
+										<field name="study_level_id" />
+										<field name="program_id" />
+										<field name="institution" placeholder="Place/City/Institution" />
+										<field name="year_of_passing" />
+										<field name="state" />
+									</tree>
+								</field>
+							</page>
+							
+							<page string="Profession" name="profession" attrs="{'invisible': [('member_type', '=', 'member')]}">
+								<field name="profession_ids">
+									<tree editable="bottom">
+										<field name="type" />
+										<field name="profession_date" />
+										<field name="place" />
+										<field name="years" />
+										<field name="state" />
+									</tree>
+								</field>
+							</page>
+							<page string="Formation" name="formation" attrs="{'invisible': [('member_type', '=', 'member')]}">
+								<field name="formation_ids" attrs="{'readonly':[('can_edit','=',False)]}">
+									<tree editable="bottom">
+										<field name="institute_id" invisible="1" />
+										<field name="formation_stage_id" domain="[('institute_ids','=', parent.institute_id)]" required="1" options='{"no_open": True, "no_create": True}'/>
+										<field name="house_id" required="1" options='{"no_open": True, "no_create": True}'/>
+										<field name="start_year" required="1" />
+										<field name="end_year" />
+										<field name="study_info" />
+										<field name="state" />
+									</tree>
+								</field>
+							</page>
+							<page string="Holy Order" name="holyorder" attrs="{'invisible': [('member_type', 'in', ['member','sister','junior_sister','novice',False])]}">
+								<field name="holyorder_ids" attrs="{'readonly':[('can_edit','=',False)]}">
+									<tree editable="bottom">
+										<field name="order" />
+										<field name="date" />
+										<field name="place" />
+										<field name="minister" />
+										<field name="state" />
+									</tree>
+								</field>
+							</page>
+							<page string="Family Info" name="religious_family_info" attrs="{'invisible': [('member_type', '=', 'member')]}">
+								<field name="religious_family_ids">
+									<form>
+										<group>
+											<group>
+												<field name="name" />
+												<field name="gender" required="1" />
+												<field name="relationship" required="1" />
+												<field name="birth_date" />
+											</group>
+											<group>
+												<field name="death_info" />
+												<!-- <field name="occupation_id" invisible="1" /> -->
+												<field name="occupation" />
+												<field name="contact_number" />
+											</group>
+										</group>
+									</form>
+									<tree>
+										<field name="name" />
+										<field name="gender" />
+										<field name="relationship" />
+										<field name="contact_number" />
+									</tree>
+								</field>
+							</page>
+							<page string="Anniversary Remembrance" name="anniversary_remembrance">
+								<field name="remembrance_ids" context="{'default_member_id':active_id}">
+									<tree editable="bottom">
+										<field name="anniversary_day" width="0.8" />
+										<field name="anniversary_month" width="0.8" />
+										<field name="name" width="2.0" />
+										<field name="member_id" invisible="1"/>
+										<field name="anniversary_type_id" domain="[('id','in',anniversary_type_ids)]" />
+										<field name="anniversary_type_ids" widget="many2many_tags" invisible="1"/>
+										<field name="is_mine" width="0.8" />
+									</tree>
+								</field>
+							</page>
+							<page string="Member Health" name="member_health">
+								<field name="member_health_ids">
+									<form>
+										<group>
+											<group>
+												<field name="disease_disorder_id" required="1"/>
+												<field name="start_date" />
+												<field name="end_date" />
+											</group>
+											<group>
+												<field name="particulars" />
+												<field name="referred_physician" />
+												<field name="disease_description"/>
+											</group>
+										</group>
+										<notebook>
+											<page string="Insurance Details" >
+												<field name="insurance_details" />
+											</page>
+											<page string="Attachments">
+												<div class="alert alert-warning" role="alert">
+                        							<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        						</div>
+												<field name="attachment_ids" widget="many2many_binary" />
+											</page>
+										</notebook>
+									</form>
+									<tree>
+										<field name="disease_disorder_id" required="1"/>
+										<field name="start_date" width="0.8" />
+										<field name="end_date" width="0.8" />
+									</tree>
+								</field>
+							</page>
+							<page string="Publication" name="publication" attrs="{'invisible': [('member_type', '=', 'member')]}">
+								<field name="publication_ids">
+									<form>
+										<group>
+												<field name="title" />
+										</group>
+										<group>
+											<group>
+												<field name="publication_date" required="1"/>
+												<field name="publication_type_id" options='{"no_open": True, "no_create": True}' />
+											</group>
+											<group>
+												<field name="publisher" />
+												<field name="royalty" />
+											</group>
+										</group>
+									</form>
+									<tree>
+										<field name="publication_date" width="0.8" required="1"/>
+										<field name="title" width="0.8" />
+										<field name="publication_type_id" />
+										<field name="publisher" width="0.8" />
+										<field name="royalty" width="0.8" />
+									</tree>
+								</field>
+							</page>
+							<page string="Award and Recognition" name="award_recognition" attrs="{'invisible': [('member_type', '=', 'member')]}">
+								<field name="award_recognition_ids">
+									<form>
+										<group>
+											<field name="title" />
+											<group>
+												<field name="date" required="1"/>
+												<field name="agency" />
+											</group>
+											<group>
+												<field name="level" />
+												<field name="details" />
+											</group>
+										</group>
+									</form>
+									<tree>
+										<field name="date" width="0.8" required="1"/>
+										<field name="agency" width="0.8" />
+										<field name="level" width="0.8" />
+										<field name="details" width="0.8" />
+									</tree>
+								</field>
+							</page>
+							<page string="Member Ministry" name="house_ministry">
+								<field name="house_member_ids" context="{'default_member_id':active_id}">
+									<tree create="0" delete="0">
+										<field name="house_id" />
+										<field name="date_from" width="0.8" />
+										<field name="date_to" width="0.8" />
+										<field name="role_ids" widget="many2many_tags" />
+										<field name="status"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Statutory Renewals">
+								<field name="statutory_renewal_ids">
+									<form>
+										<group>
+											<group>
+												<field name="no" required="1" />
+												<!-- <field name="document" required="0" /> -->
+												<field name="document_type_id" required="1" options='{"no_open": True, "no_create": True}'/>
+												<field name="agency" />
+											</group>
+											<group>
+												<field name="store_name" invisible="1" />
+												<field name="proof" filename="store_name" />
+												<field name="valid_from" />
+												<field name="valid_to" />
+												<field name="next_renewal" />
+											</group>
+										</group>
+									</form>
+									<tree>
+										<field name="document_type_id" />
+										<field name="agency" />
+										<field name="valid_from" width="0.8" />
+										<field name="valid_to" width="0.8" />
+									</tree>
+								</field>
+							</page>
+							<page string="Attachments" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province">
+								<div class="alert alert-warning" role="alert">
+                        			<p><b>Note: </b>The maximum upload file size is <field name="attachment_max_size" /> MB </p>
+                        		</div>
+								<field name="attachment_ids" widget="many2many_binary" />
+							</page>
+							<page name='internal_notes' string="Remarks" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_province">
+								<field name="comment" placeholder="Input an internal note in here..." />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>
+        
+        <record id="view_res_member_all_tree" model="ir.ui.view">
+        	<field name="name">res.member.all.tree</field>
+			<field name="model">res.member</field>
+			<field name="arch" type="xml">
+				<tree string="Member" default_order="name asc" import="1" expand="0" >
+					<field name="full_name" string="Name" />
+					<field name="community_id" optional="show"/>
+					<field name="mobile" optional="show"/>
+					<field name="email" optional="show"/>
+					<field name="dob" width="0.8" optional="hide" />
+					<field name="role_ids" widget="many2many_tags" options='{"color_field": "color"}' optional="show"/>
+					<field name="personal_mobile" optional="hide"/>
+                    <field name="personal_email" optional="hide"/>
+                    <field name="place" optional="hide" />
+                    <field name="city" string="City/Town/Taluk" optional="hide" />
+                    <field name="native_parish_id" optional="hide" />
+                    <field name="profession_date" width="0.8" optional="hide" />
+                    <field name="current_edu_prgm" optional="hide" />
+					<field name="current_prof_type" optional="hide" />
+					<field name="current_form_stage" optional="hide" />
+					<field name="current_holyorder" optional="hide" />
+				</tree>
+			</field>
+		</record>
+		
+		<!-- All Members Kanban View  -->
+		
+		<record id="view_res_member_all_kanban" model="ir.ui.view">
+        <field name="name">res.member.all.kanban</field>
+        <field name="model">res.member</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="image_1920"/>
+                <field name="member_name"/>
+                <field name="unique_code"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="member_type" />
+                <templates>
+					<t t-name="kanban-box">
+						<t t-set="cr_bdg_color" t-value="'#999900'" />
+						<t t-if="record.member_type.raw_value == 'priest'">
+							<t t-set="cr_bdg_color" t-value="'#43d179'" />
+						</t>
+						<t t-elif="record.member_type.raw_value == 'member'">
+							<t t-set="cr_bdg_color" t-value="'#404561'" />
+						</t>
+						<t t-elif="record.member_type.raw_value == 'bishop'">
+							<t t-set="cr_bdg_color" t-value="'#9370DB'" />
+						</t>
+						<t t-elif="record.member_type.raw_value == 'deacon'">
+							<t t-set="cr_bdg_color" t-value="'#F08080'" />
+						</t>
+						<t t-elif="record.member_type.raw_value == 'lay_brother'">
+							<t t-set="cr_bdg_color" t-value="'#FF6347'" />
+						</t>
+						<t t-elif="record.member_type.raw_value == 'brother'">
+							<t t-set="cr_bdg_color" t-value="'#41b5a8'" />
+						</t>
+						<t t-elif="record.member_type.raw_value == 'sister'">
+							<t t-set="cr_bdg_color" t-value="'#6767c2'" />
+						</t>
+						<t t-elif="record.member_type.raw_value == 'junior_sister'">
+							<t t-set="cr_bdg_color" t-value="'#5F9EA0'" />
+						</t>
+						<t t-elif="record.member_type.raw_value == 'novice'">
+							<t t-set="cr_bdg_color" t-value="'#708090'" />
+						</t>
+						<div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_member_kanban">
+							<t t-if="record.image_1920.raw_value">
+                               	<div class="o_kanban_image_fill_left d-none d-md-block"
+                                    t-attf-style="background-image:url('#{kanban_image('res.member', 'image_1920', record.id.raw_value)}')"/>
+                           	</t>
+                            <t t-else="">
+                                <img class="o_kanban_image" alt="Avatar" t-att-src='_s + "/base/static/img/avatar_grey.png"'/>
+                           	</t>
+							<div class="oe_kanban_details">
+								<div class="o_kanban_record_top">
+									<div class="o_kanban_record_title oe_partner_heading">
+										<strong>
+											<field name="member_name" />
+										</strong>
+									</div>
+								</div>
+								<ul>
+									<li t-if="record.mobile.raw_value">
+										<i class="fa fa-mobile fa-lg"></i> <field name="mobile" />
+									</li>
+									<li t-if="record.email.raw_value" class="o_text_overflow">
+										<i class="fa fa-envelope"></i> <field name="email" />
+									</li>
+									<li t-if="record.community_id.raw_value">
+										<t>
+											<i class="fa fa-home"></i> <field name="community_id" />
+										</t>
+									</li>
+								</ul>
+								<t t-if="record.member_type.raw_value">
+									<div t-attf-style="position: absolute;bottom: 3px;right: 3px;padding: 0.25em 0.4em;color: #fff;border-radius: 5px;line-height: 1;background-color: {{cr_bdg_color}}">
+										<field name="member_type" />
+									</div>
+								</t>
+							</div>
+						</div>
+					</t>
+				</templates>
+            </kanban>
+        </field>
+    </record>
+		
+		<record id="view_res_member_all_search" model="ir.ui.view">
+            <field name="name">res.member.base.search</field>
+            <field name="model">res.member</field>
+            <field name="arch" type="xml">
+                <search>
+                	<!-- <field name="name" /> -->
+                	<field name="member_name" string="Name" />
+                    <field name="unique_code" />
+                    <field name="dob" />
+                    <field name="mobile" />
+                    <field name="place" />
+                    <field name="city" />
+                    <field name="parish_id" />
+                    <field name="role_ids"/>
+                    <field name="current_edu_prgm" />
+					<field name="current_prof_type" />
+					<field name="current_form_stage" />
+					<field name="current_holyorder" />
+					<filter string="Archived" name="inactive" domain="[('active', '=', False)]" />
+                    <filter string="Bishop" name="bishop" domain="[('member_type','=','bishop')]" />
+                    <filter string="Priest" name="priest" domain="[('member_type','=','priest')]" groups="cristo.group_role_cristo_priest_menu, cristo.group_role_cristo_lay_brother_menu" />
+                    <filter string="Deacon" name="deacon" domain="[('member_type','=','deacon')]" groups="cristo.group_role_cristo_priest_menu" />
+                    <filter string="Lay Brother" name="lay_brother" domain="[('member_type','=','lay_brother')]" groups="cristo.group_role_cristo_lay_brother_menu" />
+                    <filter string="Brother" name="brother" domain="[('member_type','=','brother')]" groups="cristo.group_role_cristo_priest_menu" />
+                    <filter string="Sister" name="sister" domain="[('member_type','=','sister')]" groups="cristo.group_role_cristo_sisters_menu" />
+                    <filter string="Junior Sister" name="junior_sister" domain="[('member_type','=','junior_sister')]" groups="cristo.group_role_cristo_sisters_menu" />
+                    <filter string="Novice" name="novice" domain="[('member_type','=','novice')]" groups="cristo.group_role_cristo_priest_menu,cristo.group_role_cristo_lay_brother_menu,cristo.group_role_cristo_sisters_menu" />
+                    <separator/>
+                    <filter string="Male" name="male" domain="[('gender','=','male')]" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin" />
+                    <filter string="Female" name="female" domain="[('gender','=','female')]" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin"  />
+                    <group expand="0" string="Group By">
+                        <filter string="Member Type" name="member_type" context="{'group_by':'member_type'}"/>
+                        <filter string="Gender" name="gender" context="{'group_by':'gender'}" />
+                        <filter string="Blood Group" name="blood_group_id" context="{'group_by':'blood_group_id'}"/>
+                        <filter string="Physical Status" name="physical_status_id" context="{'group_by':'physical_status_id'}"/>
+                        <filter string="Native Parish" name="native_parish_id" context="{'group_by':'native_parish_id'}"/>
+                        <filter string="District" name="district_id" context="{'group_by':'district_id'}"/>
+                        <filter string="Diocese" name="diocese_id" context="{'group_by':'diocese_id'}" />
+                    	<filter string="Parish" name="parish_id" context="{'group_by':'parish_id'}" />
+                    	<filter string="Congregation" name="institute_id" context="{'group_by':'institute_id'}" />
+                    	<filter string="Province" name="rel_province_id" context="{'group_by':'rel_province_id'}" />
+                    	<filter string="House" name="community_id" context="{'group_by':'community_id'}" />      		
+                    </group>    
+                </search>
+            </field>
+       </record>       
+       
+       <record id="view_res_member_all_graph" model="ir.ui.view">
+       		<field name="name">res.member.all.graph</field>
+       		<field name="model">res.member</field>
+       		<field name="arch" type="xml">
+       			<graph string="Member" type="bar" stacked="0">
+       				<field name="member_type" />
+       				<field name="membership_type" type="col"/>
+       			</graph>
+       		</field>
+       	</record> 
+       	
+       	<record id="view_res_member_all_pivot" model="ir.ui.view">
+       		<field name="name">res.member.all.pivot</field>
+       		<field name="model">res.member</field>
+       		<field name="arch" type="xml">
+       			<pivot string="Member">
+       				<field name="membership_type" type="col"/>
+       				<field name="member_type" type="row"/>
+       			</pivot>
+       		</field>
+       	</record>  
+		
+		<record id="action_all_member" model="ir.actions.act_window">
+            <field name="name">All Members</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_all_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_member_all_search" />
+            <field name="context">{'male':True}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Member
+              </p>
+            </field>
+        </record>
+        
+        <!-- Members -->
+        
+        <record id="view_res_member_form" model="ir.ui.view">
+	        <field name="name">res.member.form</field>
+	        <field name="model">res.member</field>
+	        <field name="mode">primary</field>
+	        <field name="priority">10</field>
+	        <field name="inherit_id" ref="cristo.view_res_member_base_form"/>
+	        <field name="arch" type="xml">
+	        	<xpath expr="//field[@name='known_popularly_as']" position="after">
+	        		<field name="family_id" attrs="{'required':[('membership_type','=','LT')]}" options="{'no_open': True, 'no_create': True}"
+							placeholder="Family" />
+	        	</xpath>
+	        	<xpath expr="//field[@name='alias_name']" position="after">
+					<field name="diocese_id" required="1"/>
+					<field name="vicariate_id" domain="[('diocese_id','=',diocese_id)]" options='{"no_open": True, "no_create": True}' />
+					<field name="parish_id" domain="[('diocese_id','=',diocese_id)]" options='{"no_open": True, "no_create": True}' required="1"/>
+	        		<field name="is_family_head" attrs="{'invisible': [('age','&lt;','18')]}" />
+	        	</xpath>
+	        	<xpath expr="//field[@name='unique_code']" position="after">
+	        		<field name="gender" required="1" options="{'horizontal': true}"
+						    widget="radio" />
+	        	</xpath>
+	        	<xpath expr="//field[@name='blood_group_id']" position="before">
+	        		<field name="membership_type" invisible="1"/>
+	        		<field name="relationship_id" options='{"no_open": True, "no_create": True}'
+							domain="[('gender', '=', gender)]" />
+	        	</xpath>
+	        	<xpath expr="//field[@name='physical_status_id']" position="after">
+	        		<field name="occupation_id" options='{"no_open": True, "no_create": True}'
+						attrs="{'invisible': [('age','&lt;','18')]}" />
+					<field name="monthly_income"
+						attrs="{'invisible': [('age','&lt;','18')]}" />
+	        	</xpath>
+	        	<xpath expr="//field[@name='citizenship_id']" position="after">
+	        		<field name="is_parish_member" widget="radio"
+						options="{'horizontal': true}" />
+					<field name="marital_status_id" domain="[('gender', '=', gender)]"
+						options='{"no_open": True, "no_create": True}'
+						attrs="{'invisible': [('age','&lt;','18')]}" />
+					<field name="occupation_type"
+						attrs="{'invisible': [('age','&lt;','18')]}" />
+					<field name="inactive_reason"
+						attrs="{'required': [('is_parish_member','=','no')], 'invisible': [('is_parish_member','!=','no')]}" />
+					<field name="marriage_parish_id" attrs="{'invisible': ['|',('member_type','!=','member'),('marital_status','=','Bachelor')]}" />
+					<field name="financial_support" />
+					<field name="marital_status" invisible="1" />
+	        	</xpath>
+	        	<xpath expr="//field[@name='street']" position="before">
+	        		<div class="o_address_format">
+						<field name="use_parent_address" class="oe_inline" />
+						<label for="use_parent_address" string="Use Family Address" />
+					</div>
+	        	</xpath>
+	        	<xpath expr="//group[@name='fhc']" position="after">
+	        		<group string="Marriage" name="marriage">
+						<field name="mrg_date" string="Date" />
+						<field name="mrg_parish_id" string="Parish"
+							options='{"no_open": True, "no_create": True}' />
+						<field name="mrg_diocese_id" string="Diocese"/>
+						<!-- <field name="place_of_marriage" string="Place" /> -->	
+						<field name="minister_of_marriage"/>
+					</group>
+	        	</xpath>
+	        </field>
+        </record>
+        
+        <record id="view_res_member_tree" model="ir.ui.view">
+	        <field name="name">res.member.tree</field>
+	        <field name="model">res.member</field>
+	        <field name="mode">primary</field>
+	        <field name="priority">20</field>
+	        <field name="inherit_id" ref="cristo.view_res_member_base_tree"/>
+	        <field name="arch" type="xml">
+	        	<xpath expr="//field[@name='name']" position="after">
+	        		<field name="family_id" />
+	        		<field name="relationship_id" />
+	        	</xpath>
+	        </field>
+        </record>
+        
+        <record id="view_res_member_search" model="ir.ui.view">
+        	<field name="name">res.member.search</field>
+        	<field name="model">res.member</field>
+        	<field name="mode">primary</field>
+	        <field name="priority">30</field>
+        	<field name="inherit_id" ref="cristo.view_res_member_base_search" />
+        	<field name="arch" type="xml">
+        		<xpath expr="//field[@name='place']" position="after">
+        			<filter string="Male" name="male" domain="[('gender','=','male')]" />
+                    <filter string="Female" name="female" domain="[('gender','=','female')]" />
+        		</xpath>
+        		<!-- <xpath expr="//field[@name='place']" position="before">
+					<filter string="Archived" name="inactive" domain="[('active', '=', False)]" />
+				</xpath> -->	
+        		<xpath expr="//filter[@name='blood_group_id']" position="before">
+					<filter string="Gender" name="gender" context="{'group_by':'gender'}"/>        		
+        		</xpath>
+        		<xpath expr="//filter[@name='gender']" position="before">
+					<filter string="Family" name="family_id" context="{'group_by':'family_id'}"/>        		
+        		</xpath>
+        		
+        		<xpath expr="//field[@name='current_edu_prgm']" position="replace"></xpath>
+        		<xpath expr="//field[@name='current_prof_type']" position="replace"></xpath>
+        		<xpath expr="//field[@name='current_form_stage']" position="replace"></xpath>
+        		<xpath expr="//field[@name='current_holyorder']" position="replace"></xpath>
+        	</field>
+        </record>
+        
+        <record id="action_res_member" model="ir.actions.act_window">
+            <field name="name">Member</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+            <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   		  (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_member_search" />
+            <field name="domain">[('member_type','=','member')]</field>
+            <field name="context">{'default_member_type':'member','membership_type':'LT'}</field>
+        </record>
+        
+        <!-- Common Religious Members View -->
+        
+        	<record id="view_res_member_common_form" model="ir.ui.view">
+			<field name="name">res.member.common.form</field>
+			<field name="model">res.member</field>
+			<field name="mode">primary</field>
+	        <field name="priority">40</field>
+			<field name="inherit_id" ref="cristo.view_res_member_base_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//div[@name='button_box']" position="inside">
+					<button name="open_house_members" type="object" class="oe_stat_button" icon="fa-external-link" string="House/ Ministry" context="{'member':0}" />
+					<button name="open_life_membership" type="object" class="oe_stat_button" icon="fa-external-link" string="Lifelog" 
+								groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province"/>
+				</xpath>
+				<xpath expr="//field[@name='title']" position="after">
+					<field name="certificate_name" />
+				</xpath>
+				<xpath expr="//field[@name='alias_name']" position="after">
+					<field name="place_of_birth" />
+				</xpath>
+				<xpath expr="//field[@name='unique_code']" position="after">
+	        		<field name="gender" required="1" options="{'horizontal': true}"
+						    widget="radio" invisible="not context.get('is_gender',False)" />
+	        	</xpath>
+<!-- 				<xpath expr="//field[@name='age']" position="after">
+					<label for="feast_month" string="Feast Day"/>
+					<div class="o_row">
+						<field name="feast_day" placeholder="Day" style="width: 50%%" />
+						<field name="feast_month" placeholder="Month" style="width: 50%%" />
+					</div>
+				</xpath> -->
+				<xpath expr="//field[@name='physical_status_id']" position="after">
+					<field name="institute_id" options='{"no_open": True, "no_create": True}'
+						invisible="not context.get('is_rgs',False)" required="context.get('is_rgs',False)" />
+					<field name="rel_province_id" string="Province" options='{"no_open": True, "no_create": True}' 
+						invisible="not context.get('is_rgs',False)" domain="[('institute_id', '=', institute_id)]" required="context.get('is_rgs',False)"/>
+					<field name="rel_zone_id" options='{"no_open": True, "no_create": True}' 
+						invisible="not context.get('is_rgs',False)" domain="[('rel_province_id', '=', rel_province_id)]" />
+					<field name="community_id" options='{"no_open": True, "no_create": True}' 
+						invisible="not context.get('is_rgs',False)" domain="[('rel_province_id', '=', rel_province_id)]" />
+					<field name="province_id" invisible="not context.get('province',False)" />
+					<field name="ecc_community_id" domain="[('owned_by','=','diocese')]" />
+				</xpath>
+				<xpath expr="//field[@name='citizenship_id']" position="after">
+					<field name="diocese_id" />
+					<field name="vicariate_id" domain="[('diocese_id','=',diocese_id)]"/>
+					<field name="parish_id" domain="[('diocese_id','=',diocese_id)]" />
+					<field name="member_tag_ids" widget="many2many_tags" />
+				</xpath>
+				<xpath expr="//label[@for='street']" position="attributes">
+					<attribute name="string">Home Address</attribute>
+				</xpath>
+				<xpath expr="//group[5]/group[2]" position="after">
+					<group invisible="context.get('home_parish',False)">
+						<label for="rel_parish_id" string="Home Parish Name" />
+						<div class="o_address_format">
+							<field name="rel_parish_id" />
+							<field name="parish_country_id" placeholder="Home Parish Country"
+								options='{"no_open": True, "no_create": True}' />
+							
+						</div>
+						<field name="rel_address" placeholder="Home Parish Address" />
+					</group>
+					<group invisible="context.get('parish_address',False)">
+						<label for="parish_street" string="Parish Address" />
+						<div class="o_address_format">
+							<field name="parish_street" placeholder="Address line 1" help="Address line 1"
+								class="o_address_street" string="Street" />
+							<field name="parish_street2" string="Street 2" placeholder="Area/Street"
+								help="Area/Street" class="o_address_street" />
+							<field name="parish_place" string="Place" placeholder="Street 2"
+								help="Place" class="o_address_street" />
+							<field name="parish_city" string="City" placeholder="City/Town/Taluk"
+								help="City/Town/Taluk" class="o_address_street" />
+							<div class="address_format">
+								<field name="parish_district_id" string="District" placeholder="District" help="District"
+									style="width: 60%%" options="{'no_open': True, 'no_create': True}" />
+								<field name="parish_state_id" string="State" placeholder="State"
+									help="State" style="width: 40%%" options="{'no_open': True, 'no_create': True}" />
+							</div>
+							<div class="address_format">
+								<field name="parish_country_id" string="Country" placeholder="Country"
+									style="width: 60%%" help="Country" options='{"no_open": True, "no_create": True}' />
+								<field name="parish_zip" string="PIN Code" placeholder="PIN Code" help="PIN Code"
+										style="width: 40%%" />
+							</div>				
+						</div>
+						<field name="parish_mobile" string="Parish Mobile" />
+						<field name="parish_email" widget="email" string="Parish Email" />
+					</group>
+						
+				</xpath>
+				
+				<xpath expr="//page[@name='education']" position="after">
+					<page string="Profession" name="profession">
+						<field name="profession_ids">
+							<tree editable="bottom">
+								<field name="type" />
+								<field name="profession_date" />
+								<field name="place" />
+								<field name="years" />
+								<field name="state" />
+							</tree>
+						</field>
+					</page>
+					<page string="Formation" name="formation">
+						<field name="formation_ids" attrs="{'readonly':[('can_edit','=',False)]}">
+							<tree editable="bottom">
+								<field name="institute_id" invisible="1" />
+								<field name="formation_stage_id" domain="[('institute_ids','=', institute_id)]" required="1" options='{"no_open": True, "no_create": True}'/>
+								<field name="house_id" required="1" options='{"no_open": True, "no_create": True}'/>
+								<field name="start_year" required="1" />
+								<field name="end_year" />
+								<field name="study_info" />
+								<field name="state" />
+							</tree>
+						</field>
+					</page>
+					<page string="Holy Order" name="holyorder" attrs="{'invisible': [('member_type', 'in', ['member','sister','junior_sister','novice',False])]}">
+						<field name="holyorder_ids" attrs="{'readonly':[('can_edit','=',False)]}">
+							<tree editable="bottom">
+								<field name="order" />
+								<field name="date" />
+								<field name="place" />
+								<field name="minister" />
+								<field name="state" />
+							</tree>
+						</field>
+					</page>
+					<page string="Family Info" name="religious_family_info">
+						<field name="religious_family_ids">
+							<form>
+								<group>
+									<group>
+										<field name="name" />
+										<field name="gender" required="1" />
+										<field name="relationship" required="1" />
+										<field name="birth_date" />
+									</group>
+									<group>
+										<field name="death_info" />
+										<!-- <field name="occupation_id" invisible="1" /> -->
+										<field name="occupation" />
+										<field name="contact_number" />
+									</group>
+								</group>
+							</form>
+							<tree>
+								<field name="name" />
+								<field name="gender" />
+								<field name="relationship" />
+								<field name="contact_number" />
+							</tree>
+						</field>
+					</page>
+				</xpath>
+				<xpath expr="//page[@name='member_health']" position="after">
+					<page string="Publication" name="publication">
+						<field name="publication_ids">
+							<form>
+								<group>
+									<field name="title" />
+								</group>
+								<group>
+									<group>
+										<field name="publication_date" required="1"/>
+										<field name="publication_type_id" options='{"no_open": True, "no_create": True}'  />
+									</group>
+									<group>
+										<field name="publisher" />
+										<field name="royalty" />
+									</group>
+								</group>
+							</form>
+							<tree>
+								<field name="publication_date" width="0.8" required="1"/>
+								<field name="title" width="0.8" />
+								<field name="publication_type_id" />
+								<field name="publisher" width="0.8" />
+								<field name="royalty" width="0.8" />
+							</tree>
+						</field>
+					</page>
+					<page string="Award and Recognition" name="award_recognition">
+						<field name="award_recognition_ids">
+							<form>
+								<group>
+									<field name="title" />
+									<group>
+										<field name="date" />
+										<field name="agency" />
+									</group>
+									<group>
+										<field name="level" />
+										<field name="details" />
+									</group>
+								</group>
+							</form>
+							<tree>
+								<field name="date" width="0.8" required="1"/>
+								<field name="agency" width="0.8" />
+								<field name="level" width="0.8" />
+								<field name="details" width="0.8" />
+							</tree>
+						</field>
+					</page>
+					<page string="House/Ministry" name="house_ministry">
+						<field name="house_member_ids" context="{'default_member_id':active_id}">
+							<tree create="0" delete="0">
+								<field name="house_id" />
+								<field name="date_from" width="0.8" />
+								<field name="date_to" width="0.8" />
+								<field name="role_ids" widget="many2many_tags" />
+							</tree>
+						</field>
+					</page>
+				</xpath>
+			</field>
+		</record>
+		
+        <record id="view_res_member_common_tree" model="ir.ui.view">
+        	<field name="name">res.member.common.tree</field>
+			<field name="model">res.member</field>
+			<field name="mode">primary</field>
+			<field name="priority">50</field>
+			<field name="inherit_id" ref="cristo.view_res_member_base_tree" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="before">
+					<field name="title" />
+				</xpath>
+				<xpath expr="//field[@name='name']" position="after">
+					<field name="last_name" />
+				</xpath>
+				<xpath expr="//field[@name='dob']" position="after">
+					<field name="unique_code" optional="hide" />
+				</xpath>
+				<xpath expr="//field[@name='city']" position="after">
+					<field name="role_ids" widget="many2many_tags" optional="hide"/>
+					<field name="profession_date" width="0.8" optional="hide" />
+				</xpath>
+			</field>
+        </record>
+        
+        <record id="view_res_member_common_search" model="ir.ui.view">
+			<field name="name">res.member.common.search</field>
+			<field name="model">res.member</field>
+			<field name="mode">primary</field>
+			<field name="priority">60</field>
+			<field name="inherit_id" ref="cristo.view_res_member_base_search" />
+			<field name="arch" type="xml">
+				<xpath expr="//filter[@name='district_id']" position="after">
+					<filter string="Diocese" name="diocese_id" context="{'group_by':'diocese_id'}" />
+                    <filter string="Parish" name="parish_id" context="{'group_by':'parish_id'}" />				
+				</xpath>
+			</field>
+		</record>
+        
+        <!-- Secular Members Views -->
+        
+        <!-- Secular Bishops -->
+        
+        <record id="action_res_bishop" model="ir.actions.act_window">
+            <field name="name">Bishops</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   		  (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_common_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_member_common_search" />
+            <field name="domain">[('member_type','=','bishop')]</field>
+            <field name="context">{'default_code':'E','default_member_type':'bishop','default_gender':'male',
+            	'membership_type':'SE','home_parish':1, 'province':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Bishop
+              </p>
+            </field>
+        </record>
+ 		
+ 		<!-- Secular Priest -->
+ 		
+ 		<record id="action_res_secular_priest" model="ir.actions.act_window">
+            <field name="name">Priest</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_common_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_member_common_search" />
+            <field name="domain">[('member_type','=','priest'),('membership_type','=','SE')]</field>
+            <field name="context">{'default_member_type':'priest','default_gender':'male',
+            	'membership_type':'SE','home_parish':1,'province':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Priest
+              </p>
+            </field>
+        </record>
+ 		
+ 		<!-- Secular Deacons -->
+ 		
+ 		<record id="action_res_deacon" model="ir.actions.act_window">
+            <field name="name">Deacons</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_common_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_member_common_search" />
+            <field name="domain">[('member_type','=','deacon'),('membership_type','=','SE')]</field>
+            <field name="context">{'default_member_type':'deacon','default_gender':'male',
+            	'membership_type':'SE','home_parish':1,'province':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Deacon
+              </p>
+            </field>
+        </record>
+        
+        <!-- Secular Brothers or Seminarians -->
+        
+        <record id="action_res_secular_brother" model="ir.actions.act_window">
+            <field name="name">Seminarians</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_common_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_member_common_search" />
+            <field name="domain">[('member_type','=','brother'),('membership_type','=','SE')]</field>
+            <field name="context">{'default_member_type':'brother','default_gender':'male',
+            	'membership_type':'SE','parish_address':1,'province':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Seminarian
+              </p>
+            </field>
+        </record>     
+ 		
+ 		<!-- Religious Bishops -->
+ 		
+ 		<record id="view_res_religious_bishop_search" model="ir.ui.view">
+        	<field name="name">res.member.inherited.search</field>
+        	<field name="model">res.member</field>
+        	<field name="mode">primary</field>
+        	<field name="priority">70</field>
+        	<field name="inherit_id" ref="cristo.view_res_member_common_search" />
+        	<field name="arch" type="xml">
+        		<xpath expr="//filter[@name='parish_id']" position="after">
+					<filter string="Congregation" name="institute_id" context="{'group_by':'institute_id'}" />
+                    <filter string="Province" name="rel_province_id" context="{'group_by':'rel_province_id'}" />
+                    <filter string="House" name="community_id" context="{'group_by':'community_id'}" />      		
+        		</xpath>
+        	</field>
+        </record>
+ 		
+ 		<record id="action_res_religious_bishop" model="ir.actions.act_window">
+            <field name="name">Bishops</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_religious_bishop_search" />
+            <field name="domain">[('member_type','=','bishop')]</field>
+            <field name="context">{'default_code':'E','default_member_type':'bishop','default_gender':'male',
+            	'membership_type':'RE','home_parish':1,'is_rgs':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Bishop
+              </p>
+            </field>
+        </record>
+ 		
+ 		<!-- Religious Priest -->
+ 		
+ 		<record id="action_res_religious_priest" model="ir.actions.act_window">
+            <field name="name">Priest</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_religious_bishop_search" />
+            <field name="domain">[('member_type','=','priest'),('membership_type','=','RE')]</field>
+            <field name="context">{'default_code':'P','default_member_type':'priest','default_gender':'male',
+            	'membership_type':'RE','parish_address':1,'is_rgs':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Priest
+              </p>
+            </field>
+        </record>
+ 		
+ 		<!-- Religious Lay Brothers -->
+ 		
+ 		<record id="action_res_laybrother" model="ir.actions.act_window">
+            <field name="name">Lay Brothers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_religious_bishop_search" />
+            <field name="domain">[('member_type','=','lay_brother'),('membership_type','=','RE')]</field>
+            <field name="context">{'default_code':'L','default_member_type':'lay_brother','default_gender':'male',
+            	'membership_type':'RE','parish_address':1,'is_rgs':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Lay Brother
+              </p>
+            </field>
+        </record>
+ 		
+ 		<!-- Religious Deacons -->
+ 		
+        <record id="action_res_religious_deacon" model="ir.actions.act_window">
+            <field name="name">Deacons</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_religious_bishop_search" />
+            <field name="domain">[('member_type','=','deacon'),('membership_type','=','RE')]</field>
+            <field name="context">{'default_code':'D','default_member_type':'deacon','default_gender':'male',
+            	'membership_type':'RE','home_parish':1,'is_rgs':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Deacon
+              </p>
+            </field>
+        </record>
+ 		
+ 		<!-- Religious Brothers -->
+ 		
+ 		<record id="action_res_brother" model="ir.actions.act_window">
+            <field name="name">Brothers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_religious_bishop_search" />
+            <field name="domain">[('member_type','=','brother'),('membership_type','=','RE')]</field>
+            <field name="context">{'default_code':'B','default_member_type':'brother','default_gender':'male',
+            	'membership_type':'RE','parish_address':1,'is_rgs':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Brother
+              </p>
+            </field>
+        </record>
+ 		
+ 		<!-- Sisters -->
+ 		
+ 		<record id="action_res_sister" model="ir.actions.act_window">
+            <field name="name">Sisters</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_religious_bishop_search" />
+            <field name="domain">[('member_type','=','sister'),('membership_type','=','RE')]</field>
+            <field name="context">{'default_code':'S','default_member_type':'sister','default_gender':'female',
+            	'membership_type':'RE','parish_address':1,'is_rgs':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Sister
+              </p>
+            </field>
+        </record>
+        
+        <!-- Religious Junior Sisters -->
+        
+        <record id="action_res_junior_sister" model="ir.actions.act_window">
+            <field name="name">Sisters</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_religious_bishop_search" />
+            <field name="domain">[('member_type','=','junior_sister'),('membership_type','=','RE')]</field>
+            <field name="context">{'default_member_type':'junior_sister','default_gender':'female',
+            	'membership_type':'RE','parish_address':1,'is_rgs':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Junior Sister
+              </p>
+            </field>
+        </record>
+        
+        <!-- Novice -->
+        
+        <record id="action_novice" model="ir.actions.act_window">
+            <field name="name">Novices</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.member</field>
+             <field name="view_mode">tree,form,search,graph,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_member_all_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_member_common_form')})]"/>
+            <field name="search_view_id" ref="cristo.view_res_religious_bishop_search" />
+            <field name="domain">[('member_type','=','novice')]</field>
+            <field name="context">{'default_code':'N','default_member_type':'novice',
+            	'membership_type':'RE','parish_address':1,'is_rgs':1,'is_gender':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Novice
+              </p>
+            </field>
+        </record>
+        
+		<!-- Member Tags  -->
+		
+		<record id="view_member_tags_form" model="ir.ui.view">
+			<field name="name">member.tags.form</field>
+			<field name="model">member.tags</field>
+			<field name="arch" type="xml">
+				<form string="Member Tags">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" required="1" />
+							</group>
+							<group>
+								<field name="color"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_member_tags_tree" model="ir.ui.view">
+			<field name="name">member.tags.tree</field>
+			<field name="model">member.tags</field>
+			<field name="arch" type="xml">
+				<tree string="Member Tags">
+					<field name="name" />
+					<field name="color"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_member_tags_search" model="ir.ui.view">
+			<field name="name">member.tags.search</field>
+			<field name="model">member.tags</field>
+			<field name="arch" type="xml">
+				<search string="Member Tags">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+		
+		<record id="action_member_tags" model="ir.actions.act_window">
+			<field name="name">Member Tags</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">member.tags</field>
+			<field name="view_mode">tree,form,search</field>
+			<field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Member Tag
+              </p>
+            </field>
+		</record>
+		
+    </data>
+</odoo>

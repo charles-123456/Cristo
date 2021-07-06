@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="report_rel_province_profile_inherit" inherit_id="cristo.report_rel_province_profile">
+		<xpath expr="//table[3]/tr[8]" position="after">
+			<tr>
+				<th class="hide_color align_left"> 
+					CRI Code 
+				</th>
+				<td class="hide_color align_left">
+					<span t-field="o.cri_code" />
+				</td>
+			</tr>
+			<tr>
+				<th class="hide_color align_left"> 
+					Main forms of Ministry 
+				</th>
+				<td class="hide_color align_left">
+					<span t-field="o.institute_category_ids" />
+				</td>
+			</tr>
+			<t t-if="o.data_source == 'extract'">
+				<tr>
+					<th class="hide_color align_left"> 
+						Spread of the Province in Different States 
+					</th>
+					<td class="hide_color align_left">
+						<span t-esc="get_province_spread_states(o)" />
+					</td>
+				</tr>
+			</t>
+			<tr>
+				<th class="hide_color align_left"> 
+					Spread of the Province in Different Countries 
+				</th>
+				<td class="hide_color align_left">
+					<span t-esc="get_province_spread_countries(o)"></span>
+				</td>
+			</tr>
+		</xpath>
+	</template>
+</odoo>

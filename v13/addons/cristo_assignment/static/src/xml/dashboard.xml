@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-extend="LoginMemberDetails">
+        <t t-jquery=".sm_box_cont" t-operation="append">
+        	<t t-if="widget.login_member['assignment']">
+        		<div class="col-md-4 col-sm-6 col-xs-12">
+		          <div class="info-box box_curve_st" style="box-shadow: 0 3px 8px grey">
+		            <span class="info-box-icon bg-purple box_curve_st"><i class='fa fa-exchange'></i></span>
+		
+		            <div class="info-box-content">
+		              <span class="info-box-number box_title">Transfer</span>
+		              <span class="text cr_transfer cr_navigate">Transfer(<t t-esc="widget.login_member['total_transfer']"/>) &#160;<i class="fa fa-external-link-square" style="font-size:15px;"></i></span><br/>
+		              <span class="text cr_request cr_navigate">Request (<t t-esc="widget.login_member['total_request']"/>) &#160;<i class="fa fa-external-link-square" style="font-size:15px;"></i></span><br/>
+		            </div>
+		          </div>
+		        </div>
+		    </t>
+		    <t t-if="widget.login_member['request']">
+        		<div class="col-md-4 col-sm-6 col-xs-12">
+		          <div class="info-box box_curve_st">
+		            <span class="info-box-icon bg-purple box_curve_st"><i class="fa fa-exchange"></i></span>
+		
+		            <div class="info-box-content">
+		              <span class="info-box-number box_title">Transfer</span>
+		              <span class="text text-bold cr_request cr_navigate">Open Request(<t t-esc="widget.login_member['total_request']" />)<i class="fa fa-external-link"></i></span><br/>
+		            </div>
+		          </div>
+		        </div>
+		    </t>
+        </t>
+    </t>
+
+</templates>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_anniversary_report" model="ir.ui.view">
+		<field name="name">anniversary.report.form</field>
+		<field name="model">anniversary.report</field>
+		<field name="arch" type="xml">
+			<form string="Anniversary Report">
+				<group>
+					<group>
+						<!-- <field name="all" /> -->
+						<!-- <field name="anniversary" attrs="{'invisible':[('all', '=', True)]}"/> -->
+						<field name="birth_day" />
+						<!-- <field name="feast_day" /> -->
+						<field name="ordination_day" />
+					</group>
+					<group>
+						<field name="month_ids" widget="many2many_tags"/>
+					</group>
+				</group>
+				<footer>
+					<button name="print_pdf" string="EXPORT TO PDF" type="object" class="oe_highlight" />
+					or
+					<button string="CANCEL" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+	
+	<record id="action_anniversary_report" model="ir.actions.act_window">
+		<field name="name">Anniversary Report</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">anniversary.report</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+	
+</odoo>	

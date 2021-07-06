@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<record id="view_users_form_inherit" model="ir.ui.view">
+			<field name="name">res.users.form</field>
+			<field name="model">res.users</field>
+			<field name="inherit_id" ref="base.view_users_form" />
+			<field name="arch" type="xml">
+				<xpath expr='//div/group/field[@name="partner_id"]' position="replace">
+					<field name="partner_id" required="1" />
+					<field name="member_id" required="0" domain="[('partner_id','=',partner_id)]"/>
+				</xpath>
+				<xpath expr='//notebook/page[2]/group' position="before">
+					<group>
+						<group>
+							<field name="ecc_reg_id" />
+							<field name="ecc_province_id" domain="[('ecc_reg_id','=',ecc_reg_id)]" />
+							<field name="diocese_id" domain="[('ecc_province_id','=',ecc_province_id)]" />
+							<field name="vicariate_id" domain="[('diocese_id','=',diocese_id)]" />
+							<field name="parish_id" domain="[('diocese_id','=',diocese_id)]" />
+							<field name="sub_station_id" />
+							<field name="zone_id" />
+							<field name="parish_bcc_id" domain="[('parish_id','=',parish_id)]" />
+							<field name="family_id" domain="[('parish_id','=',parish_id)]" />
+						</group>
+						<group>
+							<field name="institute_id" />
+							<field name="rel_region_id" />
+							<field name="rel_province_id" domain="[('institute_id','=',institute_id)]" />
+							<field name="rel_zone_id" />
+							<field name="community_id" domain="[('rel_province_id','=',rel_province_id)]" />
+							<field name="institution_id" domain="[('community_id','=',community_id)]" />
+							<field name="legal_entity_id" />
+							<field name="association_id" />
+						</group>
+					</group>
+				</xpath>
+			</field>
+		</record>
+			
+	</data>
+</odoo>

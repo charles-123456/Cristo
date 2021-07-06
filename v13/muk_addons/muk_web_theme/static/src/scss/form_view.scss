@@ -1,0 +1,255 @@
+/**********************************************************************************
+*
+*    Copyright (c) 2017-2019 MuK IT GmbH.
+*
+*    This file is part of MuK Backend Theme 
+*    (see https://mukit.at).
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Lesser General Public License as published by
+*    the Free Software Foundation, either version 3 of the License, or
+*    (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Lesser General Public License for more details.
+*
+*    You should have received a copy of the GNU Lesser General Public License
+*    along with this program. If not, see <http://www.gnu.org/licenses/>.
+*
+**********************************************************************************/
+
+.o_form_view {
+    .o_form_sheet_bg {
+        background: $o-webclient-background-color;
+        border-bottom: 1px solid gray('300');
+        > .o_form_sheet {
+        	@include mk-container-widths();
+         	background-color: $o-view-background-color;
+            border: 1px solid gray('400');
+            box-shadow: 0 5px 20px -15px black;
+            max-width: calc(100% - #{$o-horizontal-padding*2});
+        }
+        .o_form_statusbar {
+            position: sticky;
+            z-index: 1;
+            top: 0;
+        }
+        .oe_button_box {
+        	.btn.oe_stat_button > .o_button_icon {
+        		color: $o-brand-odoo; 
+        		margin-left: 0px;
+        		width: 27%;
+        	}
+       	}
+        .oe_title {
+            width: initial;
+            span.o_field_widget {
+                max-width: 100%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                width: initial;
+            }
+        }
+        .o_notebook {
+            .nav-tabs {
+                overflow-x : auto;
+    			overflow-y: hidden;
+                flex-flow: wrap;
+                .nav-item {
+                    white-space: nowrap;
+                    border-right: 1px solid #dee2e6;
+                    a {
+                    	color: #495057;
+    					background-color: #FFFFFF;
+                    }
+                }
+                .nav-link.active {
+                	border-top: 3px solid #17a2b8;
+                	font-weight: bold;
+                	border-top-left-radius: 7px;
+    				border-top-right-radius: 7px;
+    				box-shadow: inset 0 0 38px -20px #29e2ff;
+                }
+            }
+        }
+    }
+   	@include media-breakpoint-down(sm) {			
+	    .o_form_sheet, .oe_chatter {
+	        min-width: 100% !important;
+    		max-width: 100% !important;
+			margin-top: 15px !important;
+	    }
+		.o_group {
+			@for $i from 1 through $o-form-group-cols {
+				.o_group_col_#{$i} {
+					width: 100% !important;
+				}
+			}
+			.o_field_widget.o_text_overflow {
+				width: auto !important;
+			}
+		}
+	    .o_statusbar_buttons_dropdown {
+	        border: {
+	            bottom: 0;
+	            radius: 0;
+	            top: 0;
+	        }
+	        height: 100%;
+	    }
+	    .o_statusbar_buttons > .btn {
+	        border-radius: 0;
+	        border: 0;
+	        width: 100%;
+	        margin-bottom: 0.2rem;
+	        &:last-child {
+	            margin-bottom: 0;
+	        }
+	    }
+	    .o_statusbar_status {
+	        .o_arrow_button:first-child::before {
+	            content: none;
+	            display: none;
+	        }
+	    }
+	    .app_settings_block {
+	        .row {
+	            margin: 0;
+	        }
+	    }
+	    .o_notebook .nav-tabs {
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+        .o_cp_buttons {
+            width: 100%;
+            div, .o-kanban-button-new {
+                width: 100%;
+            }
+        }
+	}
+	@include media-breakpoint-down(xs) {
+    	.oe_title {
+           	width: 100% !important;
+            max-width: 100% !important;
+        }
+	}
+}
+
+.mk_chatter_position_sided {
+	@include media-breakpoint-up(xxl, $o-extra-grid-breakpoints) {
+        .o_form_view:not(.o_form_nosheet) {
+            display: flex;
+            flex-flow: row nowrap;
+            height: 100%;
+            .o_form_sheet_bg {
+			    min-width: $mk-form-min-width;
+                flex: 1 1 auto;
+                overflow: auto;
+            }
+            > .o_chatter {
+				flex: 1 1 auto;
+				overflow: auto;
+				min-width: $mk-chatter-min-width;
+				max-width: $mk-chatter-max-width;
+				border-left: 1px solid gray('400');
+            }
+        }
+    }
+}
+
+.o_form_view .o_field_widget {
+	margin-bottom: 7px;
+}
+.o_input {
+	padding: 4px;
+	border-radius: 4px;
+}
+.o_field_widget:focus, .o_field_widget input.o_input:focus {
+	outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
+.o_field_widget .o_input_dropdown .o_dropdown_button {
+	top: 4px;
+}
+.o_field_widget .o_field_many2manytags .o_dropdown_button {
+	top: 2px;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+	color: white;
+	background-color: $o-brand-odoo;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after {
+	border-left-color: $o-brand-odoo;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):before {
+	border-left-color: $o-brand-odoo;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.disabled {
+	color: $o-brand-odoo;
+}
+
+.ui-autocomplete .ui-menu-item {
+    > a.ui-state-active {
+        background-color: lighten($o-list-footer-bg-color, 15%);
+        color: white;
+    }
+    &.o_m2o_dropdown_option > a {
+        color: $o-brand-odoo;
+        &.ui-state-active {
+            color: white;
+        }
+    }
+}
+
+.o_form_view .o_form_sheet_bg .oe_title span.o_field_widget {
+	white-space: normal;
+}
+.o_form_view .o_horizontal_separator, .o_form_view .o_form_sheet_bg .oe_button_box .btn.oe_stat_button > .o_button_icon {
+	color: #0db6ae;
+}
+.o_form_view .o_form_uri,.o_form_view .o_form_uri > span:first-child {
+	color: #007bff !important;
+}
+.o_form_view .o_form_uri:hover,.o_form_view .o_form_uri > span:first-child:hover {
+	color: #0056b3 !important;
+}
+.ui-widget {
+	font-family: $font-family-sans-serif;
+}
+.o_form_view .o_group.o_inner_group > tbody > tr > td.o_td_label {
+	padding: 11px 15px 0 0;
+}
+.o_form_view .o_group .o_td_label + td {
+	padding: 10px 36px 0px 8px;
+}
+.o_form_view .o_group .o_td_label {
+	border-right: none;
+}
+.o_horizontal_separator {
+	color: darkgoldenrod !important;
+}
+.o_control_panel .breadcrumb > li > a {
+	color: royalblue;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_buttons > .btn {
+	border-radius: 4px;
+}
+.btn-primary {
+	border-radius: 4px !important;
+}
+.o_button_icon {
+	color: orange;
+}
+.o_form_view .o_group.o_inner_group > tbody > tr > td.o_td_label {
+	 min-width: 170px;
+}
+.o_statusbar_buttons .o_button_icon {
+	color: white !important;
+}

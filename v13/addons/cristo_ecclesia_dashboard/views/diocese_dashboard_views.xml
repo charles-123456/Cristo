@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="cristo_diocese_action_dashboard" model="ir.actions.client">
+            <field name="name">Diocese Home</field>
+            <field name="tag">cristo_ecclesia_dashboard</field>
+        </record>
+
+        <menuitem id="menu_cristo_diocese_dashboard"
+                  name="Diocese Home"
+                  action="cristo_diocese_action_dashboard"
+                  web_icon="cristo_ecclesia_dashboard,static/description/icon.png"
+                  groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms"/>
+    </data>
+
+    <template id="assets_backend_dashboard" name="Cristo Dashboard assets inherit" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+			<!-- ChartJS -->
+			<script type="text/javascript" src="/cristo_ecclesia_dashboard/static/lib/plugins/chart.js/Chart.min.js"></script>
+			
+        	<script type="text/javascript" src="/cristo_ecclesia_dashboard/static/src/js/lib/jssor.slider-28.0.0.min.js"/>
+<!--         	<script type="text/javascript" src="/cristo_ecclesia_dashboard/static/src/js/org_video_field_preview.js"></script>
+ -->      	<script type="text/javascript" src="/cristo_ecclesia_dashboard/static/src/js/cristo_diocese_dashboard.js"/>
+            <script type="text/javascript" src="/cristo_ecclesia_dashboard/static/src/js/lib/d3.min.js"/>
+            <link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/src/css/lib/nv.d3.css"/>
+            <link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/src/scss/style.scss"/>
+            <link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/src/css/stylesheet.css"/>
+            <link rel="stylesheet" href="/cristo_ecclesia_dashboard/static/src/css/colors.css"/>
+        </xpath>
+    </template>
+</odoo>

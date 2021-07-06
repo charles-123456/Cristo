@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cristo_users,cristo.users,model_cristo_users,group_user_mgmt_user,1,1,1,1
+access_custom_user_role_user,custom.user.role,model_custom_user_role,group_user_mgmt_user,1,0,0,0
+access_custom_user_role,custom.user.role,model_custom_user_role,group_user_mgmt_admin,1,1,1,1
+access_user_license_expiry,user.license.expiry,model_user_license_expiry,group_user_mgmt_admin,1,1,1,1

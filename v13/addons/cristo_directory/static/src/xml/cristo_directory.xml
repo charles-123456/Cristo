@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="DirectoryReportsView">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_dr_dashboard">
+            </div>
+            <div class="container-fluid sheetview">
+            </div>
+        </div>
+
+    </t>
+    <t t-name="DirectoryReportDetails">
+        <style>
+            .boxed {
+                width: 500px;
+                height: 30px;
+                border: 2px solid #330c29a1;
+                font-size: 14px;
+                color: black;
+                border-radius: 5px;
+              }
+            .boxed option{
+                background-color: white;
+                color:black;
+            }
+
+        </style>
+        <h1 class="sticky" style="background: linear-gradient(to right, #9e465f, #c06c84);color: white; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 10px;font-family: monospace;">
+                           <marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();"> <t t-esc="widget.result['name']"/> (As on today)</marquee>
+                        </h1><br/>
+        <t t-if="widget.result['dir']">
+            <div class="row">
+                <t t-if="widget.result['sheets']">
+                    <div class="col-md-8" style="text-align:center;">
+                        <div class="box box-success box-solid">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:50% !important;">
+                                    Select an Option
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="sheet_name">
+                                    <t t-foreach="widget.result['sheets']" t-as="val">
+                                        <li t-att-value="val['id']" class="dropdown-item sheet_one"><t t-esc="val['name']"/></li>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="font-family:inherit;">
+                        <button name="button" class="btn btn-primary active_file" style="border-radius:5px;border:1px solid white;margin-left:0px;background-color:#6c5b7b;"><i class="fa fa-download"></i> Current Directory (PDF)</button>
+<!--                        <div class="dropdown">-->
+                            <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius:5px;border:1px solid white;margin-left:0px;background-color:#355c7d;">Available Directories
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <t t-if="widget.result['directory_files']">
+                                    <t t-foreach="widget.result['directory_files']" t-as="file">
+                                        <li t-att-value="file['id']" class="dropdown-item file_download" style="cursor:pointer;"><t t-esc="file['name']"/><i class="fa fa-download" style="margin-left:5px;"></i></li>
+                                    </t>
+                                </t>
+                                <t t-if="!widget.result['directory_files']">
+                                    <li class="dropdown-item">--No Directories Found--</li>
+                                </t>
+                            </ul>
+<!--                          </div>-->
+                    </div>
+                </t>
+            </div>
+            <br/>
+        </t>
+</t>
+    <t t-name="SheetData">
+        <div class="container-fluid sheet-row">
+			<style type="text/css">
+                .sheet-row{
+                    align:center;
+                    width: 100%;
+                }
+                .st_width{
+                    min-width: 125px;
+                }
+                .table{
+                    border-collapse: collapse;
+                    margin: 25px 0;
+                    font-size: 0.9em;
+                    font-family: sans-serif;
+                    min-width: 400px;
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                    font-family: inherit;
+                }
+                .table thead tr {
+<!--                    background-color: #613054b3;-->
+                    background: linear-gradient(to left, #9e465f, #c06c84);
+                    color: #ffffff;
+                    text-align: left;
+                }
+                .table thead td {
+                    border:1px solid #774b6b;
+                }
+                .table tbody td {
+                    border:1px solid #0000005c;
+                }
+                .table th,
+                .table td {
+                    padding: 12px 15px;
+                }
+                .table tbody tr {
+                    border-bottom: 1px solid #dddddd;
+                    color:black;
+                }
+
+                .table tbody tr:nth-of-type(even) {
+                    background-color: #f5eef3;
+                }
+			</style>
+            <br/>
+            <div class="row">
+                <t t-if="!widget['no_rec']">
+                    <div class="col-md-12">
+                        <div>
+                            <p style="font-family:inherit;font-size: 20px;width:400%;margin-left:30px;">
+                                <b>Report Name : </b><t t-esc="widget['name']"/>
+                            </p><br/>
+                        </div>
+                        <t t-if="widget['head_table']">
+                            <table id="header_details" class="table">
+                                <thead class="table_head">
+                                    <t t-foreach="widget['ri_string']" t-as="ri_str">
+                                        <td>
+                                            <b><t t-esc="ri_str"/></b>
+                                        </td>
+                                    </t>
+                                </thead>
+                                <tbody class="table_body">
+                                    <tr>
+                                        <t t-foreach="widget['ri_fields']" t-as="ri_fie">
+                                            <td class="st_width">
+                                                <t t-esc="widget['ri_value'][ri_fie]"></t>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/><br/>
+                        </t>
+                        <table id="sheet_details" class="table" style="border-collapse:collapse;">
+                            <t t-if="widget['filter']">
+                                <thead class="table_head">
+                                    <t t-foreach="widget['field_name']" t-as="name">
+                                        <td>
+                                            <b><t t-esc="name"/></b>
+                                        </td>
+                                    </t>
+                                </thead>
+                                <tbody class="table_body">
+                                    <t t-foreach="widget.datas" t-as="data">
+                                        <tr>
+                                            <t t-foreach="widget.fields" t-as="field">
+                                                <td class="st_width">
+                                                    <t t-esc="data[field]"></t>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                     </t>
+                                </tbody>
+                            </t>
+                            <t t-if="widget.statistic">
+								<t t-if="!widget.cus_stat">                           	
+	                                <thead class="table_head">
+	                                    <td>
+	                                        <span><b>S No</b></span>
+	                                    </td>
+	                                     <td>
+	                                        <span><b>Description</b></span>
+	                                    </td>
+	                                     <td>
+	                                        <span><b>Total</b></span>
+	                                    </td>
+	                                </thead>
+	                                <tbody class="table_body">
+                                    	<t t-set="s_no" t-value="1"></t>
+                                    	<t t-foreach="widget.datas" t-as="data">
+	                                        <tr>
+	                                            <td>
+	                                                <t t-esc="s_no"></t>
+	                                            </td>
+	                                             <td>
+	                                                <t t-esc="data['name']"></t>
+	                                            </td>
+	                                             <td>
+	                                                <t t-esc="data['count']"></t>
+	                                            </td>
+	                                        </tr>
+	                                        <t t-set="s_no" t-value="s_no + 1"></t>
+	                                     </t>
+                                </tbody>
+                            	</t>
+                            	<t t-if="widget.cus_stat">
+                            		<thead class="table_head">
+                            			<t t-foreach="widget.fields" t-as="title">
+		                                    <td>
+		                                        <span><b><t t-esc="title"/></b></span>
+		                                    </td>
+	                                     </t>
+	                                </thead>
+	                                <tbody class="table_body">
+	                                	<t t-foreach="widget.datas" t-as="data">
+	                                		<tr>
+		                                		<t t-foreach="data" t-as="row">
+		                                			<td>
+	                                                	<t t-esc="row"/>
+	                                            	</td>
+		                                		</t>
+		                                	</tr>
+	                                	</t>
+	                                </tbody>
+                            	</t>
+                            </t>
+                            <t t-if="widget.date_filter">
+                                    <thead class="table_head">
+                                        <td>
+                                            <span><b>#</b></span>
+                                        </td>
+                                        <td>
+                                            <span><b>Month</b></span>
+                                        </td>
+                                        <td>
+                                            <span><b>Day</b></span>
+                                        </td>
+                                        <t t-foreach="widget.date_string" t-as="date_str">
+                                             <td>
+                                                 <span><b><t t-esc="date_str"/></b></span>
+                                             </td>
+                                        </t>
+                                    </thead>
+                                    <tbody class="table_body">
+                                        <t t-set="s_no" t-value="1"></t>
+                                        <t t-foreach="widget.datas" t-as="data">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="s_no"></t>
+                                                </td>
+                                                 <td>
+                                                    <t t-esc="data['month']"></t>
+                                                </td>
+                                                 <td>
+                                                    <t t-esc="data['day']"></t>
+                                                </td>
+                                                <t t-foreach="widget.date_name" t-as="dt_name">
+                                                    <t t-foreach="widget.fields" t-as="field">
+                                                         <td class="st_width">
+                                                            <t t-esc="data[dt_name][field]"></t>
+                                                        </td>
+                                                    </t>
+                                                </t>
+                                                <t t-set="s_no" t-value="s_no + 1"></t>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </t>
+                        </table>
+                    </div>
+                 </t>
+                <t t-if="widget['no_rec']">
+                    <div class="col-md-12">
+                        <br/><br/><br/><br/>
+                        <p style="font-size:25px;margin-left:550px;">No Records Found</p>
+                    </div>
+                </t>
+            </div>
+         </div>
+    </t>
+</templates>

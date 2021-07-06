@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Calendar Menus -->
+	<menuitem
+        id="calendar.mail_menu_calendar"
+        name="Main Calendar"
+        sequence="7"
+        action="calendar.action_calendar_event"
+        web_icon="cristo_calendar_meeting,static/description/calendar.png"
+        groups="base.group_erp_manager"/>
+	
+	<menuitem 
+		id="calendar_main_menu" 
+		name="Calendar" action="action_calendar"
+	 	web_icon="cristo_calendar_meeting,static/description/calendar.png" 
+	 	groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,group_role_enable_calendar"
+	 	sequence="8" />
+	 	
+	<!-- <menuitem id="calendar_config"
+	 	name="Configuration" parent="calendar_main_menu" sequence="5" />
+	 
+	<menuitem id="calendar_type"
+		name="Calendar Type" action="action_calendar_type" parent="calendar_config"
+	 	groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,group_role_enable_calendar"
+	 	sequence="1" /> -->
+	 	
+	<menuitem id="meeting_main_menu"
+		name="Meeting" action="action_meeting"
+	 	web_icon="cristo_calendar_meeting,static/description/meeting.png"
+	 	groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,group_role_enable_meeting"
+	 	sequence="9" />
+	 	
+	<menuitem id="meeting_config"
+	 	name="Configuration" parent="meeting_main_menu" sequence="10"/>
+	 	
+	<menuitem id="meeting_group"
+		name="Meeting Groups" action="action_meeting_group" parent="meeting_config"
+	 	groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,group_role_enable_meeting"
+	 	sequence="1" />
+
+	<menuitem id="meeting_type"
+		name="Meeting Tags" action="action_meeting_type" parent="meeting_config"
+	 	groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,group_role_enable_meeting"
+	 	sequence="2" />
+</odoo>

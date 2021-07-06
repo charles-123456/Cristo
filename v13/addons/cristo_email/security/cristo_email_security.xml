@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record model="ir.rule" id="email_gateway_admin_rule">
+		<field name="name">Email Gateway Admin</field>
+		<field name="model_id" ref="base.model_ir_mail_server" />
+		<field name="domain_force">[(1,'=',1)]</field>
+		<field name="groups" eval="[(4, ref('base.group_erp_manager')), (4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+	</record>
+	
+	<record model="ir.rule" id="email_gateway_user_rule">
+		<field name="name">Email Gateway User</field>
+		<field name="model_id" ref="base.model_ir_mail_server" />
+		<field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
+		<field name="groups" eval="[(4, ref('base.group_user'))]" />
+	</record>
+	
+	<!-- Member Mail -->
+	
+	<record model="ir.rule" id="member_mail_admin_rule">
+		<field name="name">Member Mail Admin</field>
+		<field name="model_id" ref="model_member_mail" />
+		<field name="domain_force">[(1,'=',1)]</field>
+		<field name="groups" eval="[(4, ref('base.group_erp_manager')), (4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+	</record>
+	
+	<record model="ir.rule" id="member_mail_user_rule">
+		<field name="name">Member Mail User</field>
+		<field name="model_id" ref="model_member_mail" />
+		<field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
+		<field name="groups" eval="[(4, ref('base.group_user'))]" />
+	</record>
+	
+	<!-- Organization Mail -->
+	
+	<record model="ir.rule" id="org_mail_admin_rule">
+		<field name="name">Organization Mail Admin</field>
+		<field name="model_id" ref="model_mail_mail" />
+		<field name="domain_force">[(1,'=',1)]</field>
+		<field name="groups" eval="[(4, ref('base.group_erp_manager')), (4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+	</record>
+	
+	<record model="ir.rule" id="org_mail_user_rule">
+		<field name="name">Organization Mail User</field>
+		<field name="model_id" ref="model_mail_mail" />
+		<field name="domain_force">[('author_id','=',user.partner_id.id)]</field>
+		<field name="groups" eval="[(4, ref('base.group_user'))]" />
+	</record>
+	
+</odoo>

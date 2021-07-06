@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem id="email_main_menu" parent="cristo.members_main_menu" name="Email" sequence="15" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution" />
+	<menuitem id="email_menu" parent="email_main_menu" name="Member Email" action="action_member_mail" sequence="1" />
+	<menuitem id="email_gateway_menu" parent="email_main_menu" name="Mail Server" action="action_email_gateway" sequence="2" />
+	
+	<!-- Organization Email -->
+	
+	<menuitem id="org_email_menu" parent="email_main_menu" name="Email History" action="action_org_mail" sequence="5" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution" />
+	
+</odoo>

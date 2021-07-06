@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="member_renewal_scheduler" model="ir.cron">
+            <field name="name">Member Renewal Scheduler</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 16:00:00')" />
+            <field name="model_id" ref="model_member_statutory_renewals" />
+            <field name="state">code</field>
+            <field name="code">model.member_renewal_notification_send()</field>
+        </record>
+        <record id="org_renewal_scheduler" model="ir.cron">
+            <field name="name">Organization Renewal Scheduler</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 16:00:00')" />
+            <field name="model_id" ref="model_res_renewals" />
+            <field name="state">code</field>
+            <field name="code">model.org_renewal_notification_send()</field>
+        </record>
+    </data>
+</odoo>

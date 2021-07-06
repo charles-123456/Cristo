@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cristo_users_assets_backend" name="Backend Assets (used in backend interface)" inherit_id="web.assets_backend">
+    	<xpath expr="." position="inside">
+        	<script type="text/javascript" src="/cristo_users/static/src/js/notification.js"/>
+		</xpath>
+    </template>
+
+</odoo>

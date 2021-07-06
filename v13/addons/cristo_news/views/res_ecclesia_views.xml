@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Diocese -->
+
+	<record id="res_ecclesia_diocese_news_view" model="ir.ui.view">
+        <field name="name">res.ecclesia.diocese.form.inherit</field>
+        <field name="model">res.ecclesia.diocese</field>
+        <field name="inherit_id" ref="cristo.view_ecclesia_diocese_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//notebook/page[1]" position="before">
+        		<page string="News">
+					<field name="news_ids" context="{'is_house':1}" />
+				</page>
+        	</xpath>
+        </field>
+    </record>
+    
+    <!-- Parish -->
+
+	<record id="res_ecclesia_parish_news_view" model="ir.ui.view">
+        <field name="name">res.parish.form.inherit</field>
+        <field name="model">res.parish</field>
+        <field name="inherit_id" ref="cristo.view_parish_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//notebook/page[1]" position="before">
+        		<page string="News">
+					<field name="news_ids" context="{'is_house':1}" />
+				</page>
+        	</xpath>
+        </field>
+    </record>
+
+</odoo>

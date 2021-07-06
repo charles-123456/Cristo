@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+
+		<!-- Form View :Asset Category -->
+		<record id="view_asset_category_form" model="ir.ui.view">
+			<field name="name">asset.category.form</field>
+			<field name="model">asset.category</field>
+			<field name="arch" type="xml">
+				<form string="Asset Category">
+					<sheet>
+						<group>
+							<group>
+								<field name="asset_type" />
+								<field name="name" required="1" />
+								<field name="parent_id" />
+								<field name="code" required="1"/>
+							</group>
+							<group />
+						</group>
+						<group>
+							<group>
+								<field name="attribute1" />
+								<field name="attribute3" />
+								<field name="attribute5" />
+								<field name="attribute7" />
+								<field name="attribute9" />
+								<field name="attribute11" />
+								<field name="attribute13" />
+								<field name="attribute15" />
+							</group>
+							<group>
+								<field name="attribute2" />
+								<field name="attribute4" />
+								<field name="attribute6" />
+								<field name="attribute8" />
+								<field name="attribute10" />
+								<field name="attribute12" />
+								<field name="attribute14" />
+								<field name="attribute16" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- Tree View : Asset Category -->
+		<record id="view_asset_category_tree" model="ir.ui.view">
+			<field name="name">asset.category.tree</field>
+			<field name="model">asset.category</field>
+			<field name="arch" type="xml">
+				<tree string="Asset Category">
+					<field name="asset_type" />
+					<field name="name" />
+					<field name="code" />
+					<field name="parent_id" />
+					<field name="attribute1" />
+					<field name="attribute2" />
+					<field name="attribute3" />
+					<field name="attribute4" />
+					<field name="attribute5" />
+					<field name="attribute6" />
+					<field name="attribute7" />
+					<field name="attribute8" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Action View : Asset Category -->
+		<record id="action_asset_category" model="ir.actions.act_window">
+			<field name="name">Asset Category</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">asset.category</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Form View :Location -->
+		<record id="view_location_form" model="ir.ui.view">
+			<field name="name">asset.location.form</field>
+			<field name="model">asset.location</field>
+			<field name="arch" type="xml">
+				<form string="Location">
+					<sheet>
+						<div class="oe_title">
+							<label for="name" class="oe_edit_only" />
+							<h1>
+								<field name="name" placeholder="e.g. Location" required="1" />
+							</h1>
+						</div>
+						<group>
+							<group name="address">
+								<label for="street" string="Address" />
+								<div class="o_address_format">
+									<field name="street" placeholder="Address line 1"
+										required="1" class="o_address_street" />
+									<field name="street2" placeholder="Area/Street" class="o_address_street" />
+									<field name="place" placeholder="Place" class="o_address_street" />
+									<field name="city" placeholder="City/Town/Taluk"
+										required="1" class="o_address_street" />
+									<div class="address_format">
+										<field name="district_id" class="oe_no_button" placeholder="District" 
+											options='{"no_open": True, "no_create": True}' required="1" />
+										<field name="state_id" required="1" placeholder="State"
+											style="width: 60%" options="{'no_open': True, 'no_create': True}" />
+										<field name="zip" placeholder="ZIP" style="width: 40%"
+											required="1" />
+									</div>
+									<field name="country_id" placeholder="Country" required="1"
+										options="{'no_open': True, 'no_create': True}" />
+								</div>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- Tree View : Location -->
+		<record id="view_location_tree" model="ir.ui.view">
+			<field name="name">asset.location.tree</field>
+			<field name="model">asset.location</field>
+			<field name="arch" type="xml">
+				<tree string="Location">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Action View : Location -->
+		
+		<record id="action_location" model="ir.actions.act_window">
+			<field name="name">Asset Location</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">asset.location</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<!-- Form View : Land Classification -->
+		<record id="view_land_classification_form" model="ir.ui.view">
+			<field name="name">land.classification.form</field>
+			<field name="model">land.classification</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Tree View : Land Classification -->
+		<record id="view_land_classification_tree" model="ir.ui.view">
+			<field name="name">land.classification.tree</field>
+			<field name="model">land.classification</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Action : Land Classification -->
+		<record id="action_land_classification" model="ir.actions.act_window">
+			<field name="name">Land Classification</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">land.classification</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		
+		<!-- Form View : Building Types -->
+		<record id="view_building_type_form" model="ir.ui.view">
+			<field name="name">building.type.form</field>
+			<field name="model">building.type</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Tree View : Building Types -->
+		<record id="view_building_type_tree" model="ir.ui.view">
+			<field name="name">building.type.tree</field>
+			<field name="model">building.type</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Action : Buiilding Type -->
+		
+		<record id="action_building_type" model="ir.actions.act_window">
+			<field name="name">Building Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">building.type</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+				<!-- Form View : Tree Species -->
+		<record id="view_tree_species_form" model="ir.ui.view">
+			<field name="name">tree.species.form</field>
+			<field name="model">tree.species</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Tree View : Tree Species -->
+		<record id="view_tree_species_tree" model="ir.ui.view">
+			<field name="name">tree.species.tree</field>
+			<field name="model">tree.species</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Action : Tree Species -->
+	
+		<record id="action_tree_species" model="ir.actions.act_window">
+			<field name="name">Tree Species</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">tree.species</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<!-- Form View : Machinery Type -->
+		<record id="view_machinery_type_form" model="ir.ui.view">
+			<field name="name">machinery.type.form</field>
+			<field name="model">machinery.type</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="code" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Tree View : Machinery Type -->
+		<record id="view_machinery_type_tree" model="ir.ui.view">
+			<field name="name">machinery.type.tree</field>
+			<field name="model">machinery.type</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Action : Machinery Type -->
+		
+		<record id="action_machinery_type" model="ir.actions.act_window">
+			<field name="name">Machinery Type</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">machinery.type</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+	</data>
+</odoo>

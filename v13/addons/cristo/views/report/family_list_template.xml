@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="family_list_report">
+		<t t-call="web.basic_layout">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<style>
+						table tr {
+						page-break-inside: avoid;
+						}
+						table td {
+						padding:
+						0.25rem !important;
+						}
+					</style>
+					<center>
+						<strong style="font-size:25px;">FAMILIES LIST - BY BCC</strong>
+					</center>
+					<br />
+					<table class="table table-striped">
+						<thead style="color: #00a09d;">
+							<th>#</th>
+							<th>Family Name</th>
+							<th>Members</th>
+						</thead>
+						<t t-set="count" t-value="1" />
+						<t t-foreach="get_family_list" t-as="family">
+							<tbody>
+								<tr>
+									<td>
+										<t t-esc="count" />
+									</td>
+									<td>
+										<span t-field="family.name" />
+									</td>
+									<td>
+										<t t-esc="len(family.child_ids)" />
+									</td>
+								</tr>
+								<t t-set="count" t-value="count + 1" />
+							</tbody>
+						</t>
+					</table>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

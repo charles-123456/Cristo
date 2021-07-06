@@ -1,0 +1,1597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Cristo Roles -->
+
+		<record id="module_category_cristo_role" model="ir.module.category">
+			<field name="name">CristO Main Roles</field>
+			<field name="sequence">0</field>
+		</record>
+
+		<record id="group_role_cristo_bsa_super_admin" model="res.groups">
+			<field name="name">Admin(BSA)</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids"
+				eval="[(4, ref('group_role_cristo_ri_create')),(4, ref('group_role_cristo_ri_delete')),(4, ref('group_role_cristo_rp_create')),(4, ref('group_role_cristo_rp_delete')),(4, ref('group_role_cristo_rh_create')),(4, ref('group_role_cristo_rh_delete')),(4, ref('group_role_cristo_ai_create')),(4, ref('group_role_cristo_ai_delete')),(4, ref('group_role_cristo_association_create')),(4, ref('group_role_cristo_association_delete')),(4, ref('group_role_cristo_ecclesia_region_create')),(4, ref('group_role_cristo_ecclesia_region_delete')),(4, ref('group_role_cristo_ecclesia_province_create')),(4, ref('group_role_cristo_ecclesia_province_delete')),(4, ref('group_role_cristo_ecclesia_diocese_create')),(4, ref('group_role_cristo_ecclesia_diocese_delete')),(4, ref('group_role_cristo_vicariate_create')),(4, ref('group_role_cristo_vicariate_delete')),(4, ref('group_role_cristo_parish_create')),(4, ref('group_role_cristo_parish_delete')),(4, ref('group_role_cristo_bcc_create')),(4, ref('group_role_cristo_bcc_delete')),(4, ref('group_role_cristo_family_create')),(4, ref('group_role_cristo_family_delete')),(4, ref('group_role_cristo_individual_create')),(4, ref('group_role_cristo_individual_delete')),(4, ref('group_role_cristo_enable_sacraments_menu'))]" />
+		</record>
+
+		<record id="group_role_cristo_religious_institute_admin" model="res.groups">
+			<field name="name">Congregation</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids"
+				eval="[(4, ref('group_role_cristo_ri_write')),(4, ref('group_role_cristo_rp_create')),(4, ref('group_role_cristo_rp_delete')),(4, ref('group_role_cristo_rh_create')),(4, ref('group_role_cristo_rh_delete')),(4, ref('group_role_cristo_ai_create')),(4, ref('group_role_cristo_ai_delete')),(4, ref('group_role_cristo_association_create')),(4, ref('group_role_cristo_association_delete')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4,ref('group_role_cristo_ecclesia_diocese_write')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_individual_create')),(4, ref('group_role_cristo_individual_delete'))]" />
+		</record>
+
+		<record id="group_role_cristo_religious_province" model="res.groups">
+			<field name="name">Religious Province</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids"
+				eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_write')),(4, ref('group_role_cristo_rh_create')),(4, ref('group_role_cristo_rh_delete')),(4, ref('group_role_cristo_ai_create')),(4, ref('group_role_cristo_ai_delete')),(4, ref('group_role_cristo_association_create')),(4, ref('group_role_cristo_association_delete')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4,ref('group_role_cristo_ecclesia_diocese_write')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_individual_create')),(4, ref('group_role_cristo_individual_delete'))]" />
+		</record>
+
+		<record id="group_role_cristo_religious_house" model="res.groups">
+			<field name="name">House/Community</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_rh_write')),(4, ref('group_role_cristo_ai_write')),(4, ref('group_role_cristo_association_read')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_individual_write'))]" />
+		</record>
+
+		<record id="group_role_cristo_apostolic_institution" model="res.groups">
+			<field name="name">Institution</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_rh_read')),(4, ref('group_role_cristo_ai_write')),(4, ref('group_role_cristo_association_read')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_individual_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_apostolic_association" model="res.groups">
+			<field name="name">Association</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_rh_read')),(4, ref('group_role_cristo_ai_read')),(4, ref('group_role_cristo_association_write')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_individual_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_ec_region" model="res.groups">
+			<field name="name">Ecclesia Region</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_ecclesia_region_write')),(4, ref('group_role_cristo_ecclesia_province_write')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_bcc_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_ec_province" model="res.groups">
+			<field name="name">Ecclesia Province </field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_cristo_ecclesia_province_write')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_bcc_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_diocese" model="res.groups">
+			<field name="name">Diocese</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_rh_create')),(4, ref('group_role_cristo_rh_delete')),(4, ref('group_role_cristo_ai_create')),(4, ref('group_role_cristo_ai_delete')),(4, ref('group_role_cristo_association_create')),(4, ref('group_role_cristo_association_delete')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_cristo_ecclesia_diocese_write')),(4, ref('group_role_cristo_vicariate_create')),(4, ref('group_role_cristo_vicariate_delete')),(4, ref('group_role_cristo_parish_create')),(4, ref('group_role_cristo_parish_delete')),(4, ref('group_role_cristo_bcc_create')),(4, ref('group_role_cristo_bcc_delete')),(4, ref('group_role_cristo_family_create')),(4, ref('group_role_cristo_family_delete')),(4, ref('group_role_cristo_individual_create')),(4, ref('group_role_cristo_individual_delete')),(4,ref('group_role_cristo_enable_sacraments_menu'))]" />
+		</record>
+
+		<record id="group_role_cristo_vicarate" model="res.groups">
+			<field name="name">Vicarate</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_rh_read')),(4, ref('group_role_cristo_ai_read')),(4, ref('group_role_cristo_association_read')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_write')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_bcc_read')),(4, ref('group_role_cristo_family_read')),(4, ref('group_role_cristo_individual_read')),(4,ref('group_role_cristo_enable_sacraments_menu'))]" />
+		</record>
+
+		<record id="group_role_cristo_parish_ms" model="res.groups">
+			<field name="name">Parish/Mission</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_rh_read')),(4, ref('group_role_cristo_ai_read')),(4, ref('group_role_cristo_association_read')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_write')),(4, ref('group_role_cristo_bcc_create')),(4, ref('group_role_cristo_bcc_delete')),(4, ref('group_role_cristo_family_create')),(4, ref('group_role_cristo_family_delete')),(4, ref('group_role_cristo_individual_create')),(4, ref('group_role_cristo_individual_delete')),(4,ref('group_role_cristo_enable_sacraments_menu'))]" />
+		</record>
+
+		<record id="group_role_cristo_bcc" model="res.groups">
+			<field name="name">BCC</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_ai_read')),(4, ref('group_role_cristo_association_read')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_bcc_write')),(4, ref('group_role_cristo_family_read')),(4, ref('group_role_cristo_individual_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_family" model="res.groups">
+			<field name="name">Family</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_association_read')),(4, ref('group_role_ecclesia_region_read')),(4, ref('group_role_ecclesia_province_read')),(4, ref('group_role_ecclesia_diocese_read')),(4, ref('group_role_cristo_vicariate_read')),(4, ref('group_role_cristo_parish_read')),(4, ref('group_role_cristo_bcc_read')),(4, ref('group_role_cristo_family_read')),(4, ref('group_role_cristo_individual_read'))]" />
+		</record>
+
+		<record id="group_role_cristo_individual" model="res.groups">
+			<field name="name">Member</field>
+			<field name="category_id" ref="module_category_cristo_role" />
+			<field name="implied_ids" eval="[(4, ref('group_role_cristo_individual_write')),(4, ref('group_role_cristo_ri_read')),(4, ref('group_role_cristo_rp_read')),(4, ref('group_role_cristo_rh_read')),(4, ref('group_role_cristo_ai_read'))]" />
+		</record>
+		
+		<record id="module_category_cristo_module_role" model="ir.module.category">
+			<field name="name">Module Roles</field>
+			<field name="sequence">0</field>
+		</record>
+		
+<!-- **************************************** RECORD RULE BEGIN **************************************** -->
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_read_rule">
+			<field name="name">Province Diocese - Read</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False" />
+			<field name="perm_write" eval="False" />
+			<field name="perm_read" eval="True" />
+			<field name="perm_create" eval="False" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_read_rule">
+			<field name="name">Province Vicariate - Read</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False" />
+			<field name="perm_write" eval="False" />
+			<field name="perm_read" eval="True" />
+			<field name="perm_create" eval="False" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_read_rule">
+			<field name="name">Province Parish - Read</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False" />
+			<field name="perm_write" eval="False" />
+			<field name="perm_read" eval="True" />
+			<field name="perm_create" eval="False" />
+		</record>
+		
+		
+		<!-- BSA Admin -->
+		
+		<record model="ir.rule" id="res_ecclesia_region_admin_rule">
+			<field name="name">Ecclesia Region Admin</field>
+			<field name="model_id" ref="model_res_ecclesia_region" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_province_admin_rule">
+			<field name="name">Ecclesia Province Admin</field>
+			<field name="model_id" ref="model_res_ecclesia_province" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_admin_rule">
+			<field name="name">Ecclesia Diocese Admin</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_admin_rule">
+			<field name="name">Ecclesia Vicariate Admin</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_admin_rule">
+			<field name="name">Ecclesia Parish Admin</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_sub_station_admin_rule">
+			<field name="name">Ecclesia Sub Station Admin</field>
+			<field name="model_id" ref="model_res_parish_sub_station" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_zone_admin_rule">
+			<field name="name">Ecclesia Zone Admin</field>
+			<field name="model_id" ref="model_res_ecclesia_zone" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_bcc_admin_rule">
+			<field name="name">Ecclesia BCC Admin</field>
+			<field name="model_id" ref="model_res_parish_bcc" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institute_admin_rule">
+			<field name="name">Religious Institute Admin</field>
+			<field name="model_id" ref="model_res_religious_institute" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_region_admin_rule">
+			<field name="name">Religious Region Admin</field>
+			<field name="model_id" ref="model_res_religious_region" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_province_admin_rule">
+			<field name="name">Religious Province Admin</field>
+			<field name="model_id" ref="model_res_religious_province" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_zone_admin_rule">
+			<field name="name">Religious Zone Admin</field>
+			<field name="model_id" ref="model_res_religious_zone" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_community_admin_rule">
+			<field name="name">Religious Community Admin</field>
+			<field name="model_id" ref="model_res_community" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institution_admin_rule">
+			<field name="name">Religious Institution Admin</field>
+			<field name="model_id" ref="model_res_institution" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_association_admin_rule">
+			<field name="name">Association Admin</field>
+			<field name="model_id" ref="model_res_association" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_legal_entity_admin_rule">
+			<field name="name">Legal Entity Admin</field>
+			<field name="model_id" ref="model_res_legal_entity" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_members_admin_rule">
+			<field name="name">Members Admin</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_families_admin_rule">
+			<field name="name">Families Admin</field>
+			<field name="model_id" ref="model_res_family" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_baptism_admin_rule">
+			<field name="name">Baptism Admin</field>
+			<field name="model_id" ref="model_res_baptism" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_communion_admin_rule">
+			<field name="name">Communion Admin</field>
+			<field name="model_id" ref="model_res_communion" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_confirmation_admin_rule">
+			<field name="name">Confirmation Admin</field>
+			<field name="model_id" ref="model_res_confirmation" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_marriage_admin_rule">
+			<field name="name">Marriage Admin</field>
+			<field name="model_id" ref="model_res_marriage" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_death_admin_rule">
+			<field name="name">Death Admin</field>
+			<field name="model_id" ref="model_res_death" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_membership_admin_rule">
+			<field name="name">Membership Admin</field>
+			<field name="model_id" ref="model_res_membership" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bsa_super_admin'))]" />
+		</record>
+		
+		<!-- Override the Base parter table record rule for Cristo Contacts -->
+		
+		<function name="write" model="ir.model.data">
+		    <function name="search" model="ir.model.data">
+		        <value eval="[('module', '=', 'base'), ('name', '=', 'res_partner_rule_private_employee')]"/>
+		    </function>
+		    <value eval="{'noupdate': False}"/>
+		</function>
+		
+        <record id="base.res_partner_rule_private_employee" model="ir.rule">
+            <field name="name">res.partner.rule.private.employee</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="active" eval="False"/>
+        </record>
+		
+		<function name="write" model="ir.model.data">
+		    <function name="search" model="ir.model.data">
+		        <value eval="[('module', '=', 'base'), ('name', '=', 'res_partner_rule_private_employee')]"/>
+		    </function>
+		    <value eval="{'noupdate': True}"/>
+		</function>
+		
+		<!-- Religious Institute -->
+		
+		<record model="ir.rule" id="res_partner_ri_rule">
+			<field name="name">Institute Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">['|','|','|','|','|','|','|','|','|','|',('id','=',user.institute_id.partner_id.id),('id','in',user.institute_id.rel_region_ids.mapped('partner_id.id')),('id','in',user.institute_id.rel_province_ids.mapped('partner_id.id')),('id','in',user.institute_id.rel_zone_ids.mapped('partner_id.id')),('id','in',user.institute_id.house_ids.mapped('partner_id.id')),('id','in',user.institute_id.institution_ids.mapped('partner_id.id')),('id','in',user.institute_id.member_ids.mapped('partner_id.id')),('id','=',user.partner_id.id),('id','in',user.institute_id.rel_province_ids.member_ids.filtered(lambda m: m.member_type == 'bishop').mapped('partner_id.id')),('active','!=',True),('institute_id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_partner_ri_restricted_rule">
+			<field name="name">Institute User Edit Restricted Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">[('main_category_code','in',['DI','VI','PA','AS','LE','ER','EP'])]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institute_ri_rule">
+			<field name="name">Own Religious Institute</field>
+			<field name="model_id" ref="model_res_religious_institute" />
+			<field name="domain_force">[('id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_region_ri_rule">
+			<field name="name">Institute Region</field>
+			<field name="model_id" ref="model_res_religious_region" />
+			<field name="domain_force">['|',('institute_id','=',user.institute_id.id),('id','=',user.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_province_ri_rule">
+			<field name="name">Institute Province</field>
+			<field name="model_id" ref="model_res_religious_province" />
+			<field name="domain_force">['|',('institute_id','=',user.institute_id.id),('id','=',user.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_zone_ri_rule">
+			<field name="name">Institute Zone</field>
+			<field name="model_id" ref="model_res_religious_zone" />
+			<field name="domain_force">['|',('institute_id','=',user.institute_id.id),('id','=',user.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_community_ri_rule">
+			<field name="name">Institute Community</field>
+			<field name="model_id" ref="model_res_community" />
+			<field name="domain_force">['|',('institute_id','=',user.institute_id.id),('id','=',user.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institution_ri_rule">
+			<field name="name">Institute Institution</field>
+			<field name="model_id" ref="model_res_institution" />
+			<field name="domain_force">['|',('institute_id','=',user.institute_id.id),('id','=',user.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_members_ri_rule">
+			<field name="name">Institute Members</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">[('institute_id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_bishop_ri_rule">
+			<field name="name">Institute Bishops</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">[('member_type','=','bishop'),('diocese_id','in',user.institute_id.rel_province_ids.diocese_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_life_membership_ri_rule">
+			<field name="name">Institute Life Membership</field>
+			<field name="model_id" ref="model_res_membership" />
+			<field name="domain_force">[('member_id.institute_id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_house_member_ri_rule">
+			<field name="name">Institute House Member</field>
+			<field name="model_id" ref="model_house_member" />
+			<field name="domain_force">[('member_id','in',user.institute_id.member_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_ri_rule">
+			<field name="name">Institute Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_ri_rule">
+			<field name="name">Institute Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_ri_rule">
+			<field name="name">Institute Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_education_ri_rule">
+			<field name="name">Institute Member Education</field>
+			<field name="model_id" ref="model_res_member_education" />
+			<field name="domain_force">[('member_id.institute_id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_profession_ri_rule">
+			<field name="name">Institute Member Profession</field>
+			<field name="model_id" ref="model_res_profession" />
+			<field name="domain_force">[('member_id.institute_id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_formation_ri_rule">
+			<field name="name">Institute Member Formation</field>
+			<field name="model_id" ref="model_res_formation" />
+			<field name="domain_force">[('member_id.institute_id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_holyorder_ri_rule">
+			<field name="name">Institute Member HolyOrder</field>
+			<field name="model_id" ref="model_res_holyorder" />
+			<field name="domain_force">[('member_id.institute_id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_institute_admin'))]" />
+		</record>
+		
+		<!-- Religious Province -->
+		
+		<record model="ir.rule" id="res_partner_rp_rule">
+			<field name="name">Province Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">['|','|','|','|','|','|','|','|',('id','in',user.institute_id.rel_province_ids.mapped('partner_id.id')),('id','in',user.rel_province_id.rel_zone_ids.mapped('partner_id.id')),('id','in',user.institute_id.house_ids.mapped('partner_id.id')),('id','in',user.institute_id.institution_ids.mapped('partner_id.id')),('id','in',user.rel_province_id.member_ids.mapped('partner_id.id')),('id','=',user.partner_id.id),('id','in',user.rel_province_id.member_ids.filtered(lambda m: m.member_type=='bishop').mapped('partner_id.id')),('active','!=',True),('rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_partner_rp_restricted_rule">
+			<field name="name">Province User Edit Restricted Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">['|','|',('main_category_code','in',['DI','VI','PA','AS','LE','ER','EP']),('id','=',user.rel_province_id.institute_id.partner_id.id),('id','=',user.rel_province_id.rel_region_id.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+
+		<record model="ir.rule" id="res_religious_province_rp_rule">
+			<field name="name">Own Religious Province Edit</field>
+			<field name="model_id" ref="model_res_religious_province" />
+			<field name="domain_force">[('id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_province_rp_rule_1">
+			<field name="name">Other Religious Province Readonly</field>
+			<field name="model_id" ref="model_res_religious_province" />
+			<field name="domain_force">[('id','!=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institute_rp_rule">
+			<field name="name">Province Institute</field>
+			<field name="model_id" ref="model_res_religious_institute" />
+			<field name="domain_force">[('id','=',user.rel_province_id.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_region_rp_rule">
+			<field name="name">Province Region</field>
+			<field name="model_id" ref="model_res_religious_region" />
+			<field name="domain_force">[('id','=',user.rel_province_id.rel_region_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_zone_rp_rule">
+			<field name="name">Province Zone</field>
+			<field name="model_id" ref="model_res_religious_zone" />
+			<field name="domain_force">[('rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_community_rp_rule">
+			<field name="name">Own Province Community - Edit</field>
+			<field name="model_id" ref="model_res_community" />
+			<field name="domain_force">[('rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_community_rp_rule_1">
+			<field name="name">All Province Community - Readonly</field>
+			<field name="model_id" ref="model_res_community" />
+			<field name="domain_force">[('rel_province_id','!=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institution_rp_rule">
+			<field name="name">Own Province Institution - Edit</field>
+			<field name="model_id" ref="model_res_institution" />
+			<field name="domain_force">[('rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institution_rp_rule_1">
+			<field name="name">All Province Institution - Readonly</field>
+			<field name="model_id" ref="model_res_institution" />
+			<field name="domain_force">[('rel_province_id','!=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_members_rp_rule">
+			<field name="name">Province Members</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">[('rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_rp_bishop_rule">
+			<field name="name">Province Bishops</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">[('member_type','=','bishop'),('diocese_id','in',user.rel_province_id.diocese_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_life_membership_rp_rule">
+			<field name="name">Province Life Membership</field>
+			<field name="model_id" ref="model_res_membership" />
+			<field name="domain_force">[('member_id.rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_house_member_rp_rule">
+			<field name="name">Province House Member</field>
+			<field name="model_id" ref="model_house_member" />
+			<field name="domain_force">[('member_id','in',user.rel_province_id.member_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<!-- <record model="ir.rule" id="res_ecclesia_diocese_rp_rule">
+			<field name="name">Province Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('id','in',user.rel_province_id.diocese_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_rp_rule">
+			<field name="name">Province Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('id','in',user.rel_province_id.diocese_ids.vicariate_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_rp_rule">
+			<field name="name">Province Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record> -->
+		
+		<record model="ir.rule" id="res_member_education_rp_rule">
+			<field name="name">Province Member Education</field>
+			<field name="model_id" ref="model_res_member_education" />
+			<field name="domain_force">[('member_id.rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_profession_rp_rule">
+			<field name="name">Province Member Profession</field>
+			<field name="model_id" ref="model_res_profession" />
+			<field name="domain_force">[('member_id.rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_formation_rp_rule">
+			<field name="name">Province Member Formation</field>
+			<field name="model_id" ref="model_res_formation" />
+			<field name="domain_force">[('member_id.rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_holyorder_rp_rule">
+			<field name="name">Province Member HolyOrder</field>
+			<field name="model_id" ref="model_res_holyorder" />
+			<field name="domain_force">[('member_id.rel_province_id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_province'))]" />
+		</record>
+		
+		<!-- Religious House/Community -->
+		
+		<record model="ir.rule" id="res_partner_rc_rule">
+			<field name="name">Community Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">['|','|','|','|','|','|','|','|',('id','=',user.community_id.partner_id.id),('id','=',user.rel_province_id.house_id.partner_id.id),('id','=',user.rel_province_id.rel_region_id.house_id.partner_id.id),('id','in',user.community_id.institution_ids.mapped('partner_id.id')),('id','in',user.community_id.member_ids.mapped('partner_id.id')),('id','=',user.partner_id.id),('id','in',user.rel_province_id.member_ids.filtered(lambda m: m.member_type == 'bishop').mapped('partner_id.id')),('active','!=',True),('community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_partner_rc_restricted_rule">
+			<field name="name">House User Edit Restricted Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">['|','|','|','|',('id','in',user.rel_province_id.rel_zone_ids.mapped('partner_id.id')),('main_category_code','in',['DI','VI','PA','AS','LE','ER','EP']),('id','=',user.rel_province_id.institute_id.partner_id.id),('id','=',user.rel_province_id.rel_region_id.partner_id.id),('id','=',user.rel_province_id.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_community_rc_rule">
+			<field name="name">Own Religious Community</field>
+			<field name="model_id" ref="model_res_community" />
+			<field name="domain_force">['|','|','|',('id','=',user.community_id.id),('id','=',user.rel_province_id.house_id.id),('id','=',user.institute_id.community_id.id),('id','=',user.rel_province_id.rel_region_id.house_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_province_rc_rule">
+			<field name="name">Community Province</field>
+			<field name="model_id" ref="model_res_religious_province" />
+			<field name="domain_force">[('id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institute_rc_rule">
+			<field name="name">Community Institute</field>
+			<field name="model_id" ref="model_res_religious_institute" />
+			<field name="domain_force">[('id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_region_rc_rule">
+			<field name="name">Community Region</field>
+			<field name="model_id" ref="model_res_religious_region" />
+			<field name="domain_force">[('id','=',user.rel_province_id.rel_region_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_zone_rc_rule">
+			<field name="name">Community Zone</field>
+			<field name="model_id" ref="model_res_religious_zone" />
+			<field name="domain_force">[('id','in',user.rel_province_id.rel_zone_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institution_rc_rule">
+			<field name="name">Community Institution</field>
+			<field name="model_id" ref="model_res_institution" />
+			<field name="domain_force">[('community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record> 
+		
+		<record model="ir.rule" id="res_religious_members_rc_rule">
+			<field name="name">Community Members</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">['|',('community_id','=',user.community_id.id),('id','=',user.member_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record> 
+		
+		<record model="ir.rule" id="res_religious_members_rc_bishop_rule">
+			<field name="name">Edit Restrict for Bishop</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">[('member_type','=','bishop'),('diocese_id','in',user.rel_province_id.diocese_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record> 
+		
+		<record model="ir.rule" id="res_religious_life_membership_rc_rule">
+			<field name="name">Community Life Membership</field>
+			<field name="model_id" ref="model_res_membership" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_house_member_rc_rule">
+			<field name="name">Community House Member</field>
+			<field name="model_id" ref="model_house_member" />
+			<field name="domain_force">[('member_id','in',user.community_id.member_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<!-- <record model="ir.rule" id="res_ecclesia_diocese_rc_rule">
+			<field name="name">Province Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('id','in',user.rel_province_id.diocese_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_rc_rule">
+			<field name="name">Province Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('id','in',user.rel_province_id.diocese_ids.vicariate_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_rc_rule">
+			<field name="name">Province Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record> -->
+		
+		<record model="ir.rule" id="res_member_education_rc_rule">
+			<field name="name">Community Member Education</field>
+			<field name="model_id" ref="model_res_member_education" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_profession_rc_rule">
+			<field name="name">Community Member Profession</field>
+			<field name="model_id" ref="model_res_profession" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_formation_rc_rule">
+			<field name="name">Community Member Formation</field>
+			<field name="model_id" ref="model_res_formation" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_holyorder_rc_rule">
+			<field name="name">Community Member HolyOrder</field>
+			<field name="model_id" ref="model_res_holyorder" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_religious_house'))]" />
+		</record>
+		
+		<!-- Religious Institution  -->
+		
+		<record model="ir.rule" id="res_partner_rinst_rule">
+			<field name="name">Institution Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">['|','|','|','|','|','|','|',('id','=',user.institution_id.partner_id.id),('id','=',user.rel_province_id.house_id.partner_id.id),('id','=',user.rel_province_id.rel_region_id.house_id.partner_id.id),('id','in',user.institution_id.member_ids.mapped('member_id.partner_id.id')),('id','=',user.partner_id.id),('code','=','E'),('active','!=',True),('institution_id','=',user.institution_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_partner_rinst_restricted_rule">
+			<field name="name">Institution User Edit Restricted Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">['|','|','|','|','|',('main_category_code','in',['DI','VI','PA','AS','LE','ER','EP']),('id','=',user.rel_province_id.institute_id.partner_id.id),('id','=',user.rel_province_id.rel_region_id.partner_id.id),('id','=',user.rel_province_id.partner_id.id),('id','=',user.community_id.rel_zone_id.partner_id.id),('id','=',user.institution_id.community_id.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institution_rinst_rule">
+			<field name="name">Own Religious Institution</field>
+			<field name="model_id" ref="model_res_institution" />
+			<field name="domain_force">[('id','=',user.institution_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_institute_rinst_rule">
+			<field name="name">Institution Institute</field>
+			<field name="model_id" ref="model_res_religious_institute" />
+			<field name="domain_force">[('id','=',user.institute_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_region_rinst_rule">
+			<field name="name">Institution Region</field>
+			<field name="model_id" ref="model_res_religious_region" />
+			<field name="domain_force">[('id','=',user.rel_province_id.rel_region_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_province_rinst_rule">
+			<field name="name">Institution Province</field>
+			<field name="model_id" ref="model_res_religious_province" />
+			<field name="domain_force">[('id','=',user.rel_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_zone_rinst_rule">
+			<field name="name">Institution Zone</field>
+			<field name="model_id" ref="model_res_religious_zone" />
+			<field name="domain_force">[('id','=',user.community_id.rel_zone_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_community_rinst_rule">
+			<field name="name">Institution Community</field>
+			<field name="model_id" ref="model_res_community" />
+			<field name="domain_force">['|','|','|','|',('id','=',user.community_id.id),('id','=',user.rel_province_id.house_id.id),('id','=',user.institute_id.community_id.id),('id','=',user.rel_province_id.rel_region_id.house_id.id),('active','!=',True)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_members_rinst_rule">
+			<field name="name">Institution Members</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">['|',('id','=',user.institution_id.member_ids.mapped('member_id.id')),('member_type','=','bishop')]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_religious_life_membership_rinst_rule">
+			<field name="name">Institution Life Membership</field>
+			<field name="model_id" ref="model_res_membership" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_house_member_rinst_rule">
+			<field name="name">Institution House Member</field>
+			<field name="model_id" ref="model_house_member" />
+			<field name="domain_force">[('member_id','in',user.community_id.member_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<!-- <record model="ir.rule" id="res_ecclesia_diocese_rinst_rule">
+			<field name="name">Province Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('id','in',user.rel_province_id.diocese_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_rinst_rule">
+			<field name="name">Province Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('id','in',user.rel_province_id.diocese_ids.vicariate_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_rinst_rule">
+			<field name="name">Province Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record> -->
+		
+		<record model="ir.rule" id="res_member_education_rinst_rule">
+			<field name="name">Institution Member Education</field>
+			<field name="model_id" ref="model_res_member_education" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_profession_rinst_rule">
+			<field name="name">Institution Member Profession</field>
+			<field name="model_id" ref="model_res_profession" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_formation_rinst_rule">
+			<field name="name">Institution Member Formation</field>
+			<field name="model_id" ref="model_res_formation" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_member_holyorder_rinst_rule">
+			<field name="name">Institution Member HolyOrder</field>
+			<field name="model_id" ref="model_res_holyorder" />
+			<field name="domain_force">[('member_id.community_id','=',user.community_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_apostolic_institution'))]" />
+		</record>
+		
+		<!-- Ecclesia Region -->
+		
+		<record model="ir.rule" id="res_ecclesia_region_er_rule">
+			<field name="name">Own Ecclesia Region</field>
+			<field name="model_id" ref="model_res_ecclesia_region" />
+			<field name="domain_force">[('id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_region'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_province_er_rule">
+			<field name="name">Region Province</field>
+			<field name="model_id" ref="model_res_ecclesia_province" />
+			<field name="domain_force">[('ecc_reg_id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_region'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_er_rule">
+			<field name="name">Region Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('ecc_province_id.ecc_reg_id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_region'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_er_rule">
+			<field name="name">Region Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('diocese_id.ecc_province_id.ecc_reg_id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_region'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_er_rule">
+			<field name="name">Region Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[('vicariate_id.diocese_id.ecc_province_id.ecc_reg_id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_region'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_sub_station_er_rule">
+			<field name="name">Region Sub Station</field>
+			<field name="model_id" ref="model_res_parish_sub_station" />
+			<field name="domain_force">[('diocese_id.ecc_province_id.ecc_reg_id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_region'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_zone_er_rule">
+			<field name="name">Region Zone</field>
+			<field name="model_id" ref="model_res_ecclesia_zone" />
+			<field name="domain_force">[('diocese_id.ecc_province_id.ecc_reg_id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_region'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_bcc_er_rule">
+			<field name="name">Region BCC</field>
+			<field name="model_id" ref="model_res_parish_bcc" />
+			<field name="domain_force">[('diocese_id.ecc_province_id.ecc_reg_id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_region'))]" />
+		</record>
+		
+		<!-- Ecclesia Province -->
+		
+		<record model="ir.rule" id="res_ecclesia_region_ep_rule">
+			<field name="name">Own Ecclesia Province</field>
+			<field name="model_id" ref="model_res_ecclesia_province" />
+			<field name="domain_force">[('id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_province_ep_rule">
+			<field name="name">Province Region</field>
+			<field name="model_id" ref="model_res_ecclesia_region" />
+			<field name="domain_force">[('id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_ep_rule">
+			<field name="name">Province Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('ecc_province_id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_ep_rule">
+			<field name="name">Province Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('diocese_id.ecc_province_id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_ep_rule">
+			<field name="name">Province Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[('vicariate_id.diocese_id.ecc_province_id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_sub_station_ep_rule">
+			<field name="name">Province Sub Station</field>
+			<field name="model_id" ref="model_res_parish_sub_station" />
+			<field name="domain_force">[('diocese_id.ecc_province_id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_zone_ep_rule">
+			<field name="name">Province Zone</field>
+			<field name="model_id" ref="model_res_ecclesia_zone" />
+			<field name="domain_force">[('diocese_id.ecc_province_id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_province'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_bcc_ep_rule">
+			<field name="name">Province BCC</field>
+			<field name="model_id" ref="model_res_parish_bcc" />
+			<field name="domain_force">[('diocese_id.ecc_province_id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_ec_province'))]" />
+		</record>
+		
+		<!-- Ecclesia Diocese -->
+		
+		<record model="ir.rule" id="res_partner_ed_rule">
+			<field name="name">Diocese Partner</field>
+			<field name="model_id" ref="model_res_partner"/>
+			<field name="domain_force">['|','|','|','|','|','|','|','|','|','|','|','|','|','|','|',
+			('id','=',user.diocese_id.ecc_province_id.ecc_reg_id.partner_id.id),
+			('id','=',user.diocese_id.ecc_province_id.partner_id.id),
+			('id','=',user.diocese_id.partner_id.id),
+			('id','in',user.diocese_id.vicariate_ids.mapped('partner_id.id')),
+			('id','in',user.diocese_id.parish_ids.mapped('partner_id.id')),
+			('id','in',user.diocese_id.parish_ids.sub_station_ids.mapped('partner_id.id')),
+			('id','in',user.diocese_id.parish_ids.bcc_ids.mapped('partner_id.id')),
+			('id','in',user.diocese_id.parish_ids.zone_ids.mapped('partner_id.id')),
+			('id','=',user.partner_id.id),
+			('id','=',user.diocese_id.family_ids.mapped('partner_id.id')),
+			('id','=',user.diocese_id.current_bishop_id.partner_id.id),
+			('active','!=',True),
+			('diocese_id','=',user.diocese_id.id),
+			('id','in',user.diocese_id.parish_ids.member_ids.filtered(lambda m: m.membership_type in ('LT','SE')).mapped('partner_id.id')),
+			('id','in',user.diocese_id.parish_ids.institution_ids.mapped('partner_id.id')),
+			('id','in',user.diocese_id.parish_ids.community_ids.mapped('partner_id.id')),
+			]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_partner_restricted_ed_rule">
+			<field name="name">Diocese User Edit Restricted Partner</field>
+			<field name="model_id" ref="model_res_partner"/>
+			<field name="domain_force">['|',('id','=',user.ecc_province_id.partner_id.id),('id','=',user.ecc_reg_id.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="False"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+		</record>
+
+		<record model="ir.rule" id="res_house_member_ed_rule">
+			<field name="name">Diocese House Member</field>
+			<field name="model_id" ref="model_house_member" />
+			<field name="domain_force">[('member_id','in',user.diocese_id.parish_ids.member_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_life_membership_ed_rule">
+			<field name="name">Diocese Life Membership</field>
+			<field name="model_id" ref="model_res_membership" />
+			<field name="domain_force">[('diocese_ids','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_ed_rule">
+			<field name="name">Own Ecclesia Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]"/>
+		</record>
+
+		<!-- <record model="ir.rule" id="res_ecclesia_other_diocese_ed_rule">
+			<field name="name">Other Ecclesia Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('id','!=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record> -->
+		
+		<record model="ir.rule" id="res_ecclesia_region_ed_rule">
+			<field name="name">Diocese Region</field>
+			<field name="model_id" ref="model_res_ecclesia_region" />
+			<field name="domain_force">[('id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_province_ed_rule">
+			<field name="name">Diocese Province</field>
+			<field name="model_id" ref="model_res_ecclesia_province" />
+			<field name="domain_force">[('id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_ed_rule">
+			<field name="name">Diocese Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('diocese_id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<!-- <record model="ir.rule" id="res_ecclesia_vicariate_all_ed_rule">
+			<field name="name">All Diocese Vicariate - Readonly</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('diocese_id','!=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record> -->
+		
+		<record model="ir.rule" id="res_ecclesia_parish_ed_rule">
+			<field name="name">Diocese Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[('diocese_id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<!-- <record model="ir.rule" id="res_parish_all_ed_rule">
+			<field name="name">All Diocese Parish - Readonly</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[('diocese_id','!=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record> -->
+		
+		<record model="ir.rule" id="res_ecclesia_sub_station_ed_rule">
+			<field name="name">Diocese Sub Station</field>
+			<field name="model_id" ref="model_res_parish_sub_station" />
+			<field name="domain_force">[('diocese_id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<!-- <record model="ir.rule" id="res_ecclesia_sub_station_all_ed_rule">
+			<field name="name">All Diocese Sub Station - Readonly</field>
+			<field name="model_id" ref="model_res_parish_sub_station" />
+			<field name="domain_force">[('diocese_id','!=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record> -->
+		
+		<record model="ir.rule" id="res_ecclesia_zone_ed_rule">
+			<field name="name">Diocese Zone</field>
+			<field name="model_id" ref="model_res_ecclesia_zone" />
+			<field name="domain_force">[('diocese_id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<!-- <record model="ir.rule" id="res_ecclesia_zone_all_ed_rule">
+			<field name="name">All Diocese Zone - Readonly</field>
+			<field name="model_id" ref="model_res_ecclesia_zone" />
+			<field name="domain_force">[('diocese_id','!=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+			<field name="perm_unlink" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_create" eval="False"/>
+		</record> -->
+		
+		<record model="ir.rule" id="res_ecclesia_bcc_ed_rule">
+			<field name="name">Diocese BCC</field>
+			<field name="model_id" ref="model_res_parish_bcc" />
+			<field name="domain_force">[('diocese_id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_family_ed_rule">
+			<field name="name">Diocese Family</field>
+			<field name="model_id" ref="model_res_family" />
+			<field name="domain_force">[('diocese_id', '=', user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_member_ed_rule">
+			<field name="name">Diocese Member</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">['|','&amp;',('diocese_id','=',user.diocese_id.id),('membership_type','in',('LT','SE')),('member_type','=','bishop')]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_baptism_ed_rule">
+			<field name="name">Diocese Baptism</field>
+			<field name="model_id" ref="model_res_baptism" />
+			<field name="domain_force">[('diocese_id', '=', user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_communion_ed_rule">
+			<field name="name">Diocese Communion</field>
+			<field name="model_id" ref="model_res_communion" />
+			<field name="domain_force">[('diocese_id', '=', user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_confirmation_ed_rule">
+			<field name="name">Diocese Confirmation</field>
+			<field name="model_id" ref="model_res_confirmation" />
+			<field name="domain_force">[('diocese_id', '=', user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_marriage_ed_rule">
+			<field name="name">Diocese Marriage</field>
+			<field name="model_id" ref="model_res_marriage" />
+			<field name="domain_force">[('diocese_id', '=', user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_death_ed_rule">
+			<field name="name">Diocese Death</field>
+			<field name="model_id" ref="model_res_death" />
+			<field name="domain_force">[('diocese_id', '=', user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+		
+		<!-- Ecclesia Diocese House/Community -->
+		
+		<record model="ir.rule" id="res_ecclesia_community_ed_rule">
+			<field name="name">Diocese House/Community</field>
+			<field name="model_id" ref="model_res_community" />
+			<field name="domain_force">[('owned_by', '=','diocese'),('diocese_id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+		
+		<!-- Ecclesia Diocese Institution -->
+		
+		<record model="ir.rule" id="res_ecclesia_institution_ed_rule">
+			<field name="name">Diocese Institution</field>
+			<field name="model_id" ref="model_res_institution" />
+			<field name="domain_force">[('community_id.owned_by', '=','diocese'),('diocese_id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_diocese'))]" />
+		</record>
+
+		<!-- Ecclesia Diocese Vicariate -->
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_ev_rule">
+			<field name="name">Own Ecclesia Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('id','=',user.vicariate_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_vicarate'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_region_ev_rule">
+			<field name="name">Vicariate Region</field>
+			<field name="model_id" ref="model_res_ecclesia_region" />
+			<field name="domain_force">[('id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_vicarate'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_province_ev_rule">
+			<field name="name">Vicariate Province</field>
+			<field name="model_id" ref="model_res_ecclesia_province" />
+			<field name="domain_force">[('id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_vicarate'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_ev_rule">
+			<field name="name">Vicariate Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_vicarate'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_ev_rule">
+			<field name="name">Vicariate Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[('vicariate_id','=',user.vicariate_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_vicarate'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_sub_station_ev_rule">
+			<field name="name">Vicariate Sub Station</field>
+			<field name="model_id" ref="model_res_parish_sub_station" />
+			<field name="domain_force">[('vicariate_id','=',user.vicariate_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_vicarate'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_zone_ev_rule">
+			<field name="name">Vicariate Zone</field>
+			<field name="model_id" ref="model_res_ecclesia_zone" />
+			<field name="domain_force">[('vicariate_id','=',user.vicariate_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_vicarate'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_bcc_ev_rule">
+			<field name="name">Vicariate BCC</field>
+			<field name="model_id" ref="model_res_parish_bcc" />
+			<field name="domain_force">[('vicariate_id','=',user.vicariate_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_vicarate'))]" />
+		</record>
+	</data>
+	
+	<!-- Ecclesia Parish -->
+	
+		<record model="ir.rule" id="res_partner_epa_rule">
+			<field name="name">Parish Partner</field>
+			<field name="model_id" ref="model_res_partner"/>
+			<field name="domain_force">['|','|','|','|','|','|','|','|','|','|','|','|','|','|','|',
+				('id','=',user.parish_id.diocese_id.ecc_province_id.ecc_reg_id.partner_id.id),
+				('id','=',user.parish_id.diocese_id.ecc_province_id.partner_id.id),
+				('id','=',user.parish_id.diocese_id.partner_id.id),
+				('id','=',user.parish_id.vicariate_id.partner_id.id),
+				('id','=',user.parish_id.partner_id.id),
+				('id','in',user.parish_id.sub_station_ids.mapped('partner_id.id')),
+				('id','in',user.parish_id.bcc_ids.mapped('partner_id.id')),
+				('id','in',user.parish_id.zone_ids.mapped('partner_id.id')),
+				('id','in',user.parish_id.family_ids.mapped('partner_id.id')),
+				('id','=',user.partner_id.id),
+				('parish_id','=',user.parish_id.id),
+				('id','=',user.parish_id.diocese_id.current_bishop_id.partner_id.id),
+				('active','!=',True),
+				('id','in',user.parish_id.member_ids.filtered(lambda m: m.membership_type in ('LT','SE')).mapped('partner_id.id')),
+				('id','in',user.parish_id.institution_ids.mapped('partner_id.id')),
+				('id','in',user.parish_id.community_ids.mapped('partner_id.id')),
+				]
+			</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_house_member_epa_rule">
+			<field name="name">Parish House Member</field>
+			<field name="model_id" ref="model_house_member" />
+			<field name="domain_force">[('member_id','in',user.parish_id.member_ids.ids)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_epa_rule">
+			<field name="name">Own Ecclesia Parish</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[('id','=',user.parish_id.id),('diocese_id','=',user.parish_id.diocese_id.id,)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_region_epa_rule">
+			<field name="name">Parish Region</field>
+			<field name="model_id" ref="model_res_ecclesia_region" />
+			<field name="domain_force">[('id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_province_epa_rule">
+			<field name="name">Parish Province</field>
+			<field name="model_id" ref="model_res_ecclesia_province" />
+			<field name="domain_force">[('id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_epa_rule">
+			<field name="name">Parish Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_epa_rule">
+			<field name="name">Parish Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('id','=',user.vicariate_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_sub_station_epa_rule">
+			<field name="name">Parish Sub Station</field>
+			<field name="model_id" ref="model_res_parish_sub_station" />
+			<field name="domain_force">[('parish_id','=',user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_zone_epa_rule">
+			<field name="name">Parish Zone</field>
+			<field name="model_id" ref="model_res_ecclesia_zone" />
+			<field name="domain_force">[('parish_id','=',user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_bcc_epa_rule">
+			<field name="name">Parish BCC</field>
+			<field name="model_id" ref="model_res_parish_bcc" />
+			<field name="domain_force">[('parish_id','=',user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_family_epa_rule">
+			<field name="name">Parish Family</field>
+			<field name="model_id" ref="model_res_family" />
+			<field name="domain_force">[('parish_id', '=', user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_member_epa_rule">
+			<field name="name">Parish Member</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">[('parish_id','=',user.parish_id.id),('membership_type','in',('LT','SE'))]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+			
+		<!-- Member Record Rule for Ecclesia Parish Bishop -->
+		
+		<record model="ir.rule" id="res_ecclesia_members_epa_bishop_rule">
+			<field name="name">Create Restrict for Ecclesia Bishop</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">['|','&amp;',('parish_id','=',user.parish_id.id),('membership_type','in',('LT','SE')),('member_type','=','bishop')]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="False"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+		</record> 	
+
+		<record model="ir.rule" id="res_ecclesia_baptism_epa_rule">
+			<field name="name">Parish Baptism</field>
+			<field name="model_id" ref="model_res_baptism" />
+			<field name="domain_force">[('parish_id', '=', user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_communion_epa_rule">
+			<field name="name">Parish Communion</field>
+			<field name="model_id" ref="model_res_communion" />
+			<field name="domain_force">[('parish_id', '=', user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_confirmation_epa_rule">
+			<field name="name">Parish Confirmation</field>
+			<field name="model_id" ref="model_res_confirmation" />
+			<field name="domain_force">[('parish_id', '=', user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_marriage_epa_rule">
+			<field name="name">Parish Marriage</field>
+			<field name="model_id" ref="model_res_marriage" />
+			<field name="domain_force">[('parish_id', '=', user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+
+		<record model="ir.rule" id="res_ecclesia_death_epa_rule">
+			<field name="name">Parish Death</field>
+			<field name="model_id" ref="model_res_death" />
+			<field name="domain_force">[('parish_id', '=', user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<!-- Ecclesia Parish House/Community -->
+		
+		<record model="ir.rule" id="res_ecclesia_community_epa_rule">
+			<field name="name">Parish House/Community</field>
+			<field name="model_id" ref="model_res_community" />
+			<field name="domain_force">[('owned_by','=','diocese'),('parish_id','=',user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<!-- Ecclesia Parish Institution -->
+		
+		<record model="ir.rule" id="res_ecclesia_institution_epa_rule">
+			<field name="name">Parish Institution</field>
+			<field name="model_id" ref="model_res_institution" />
+			<field name="domain_force">[('community_id.owned_by','=','diocese'),('parish_id','=',user.parish_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_parish_ms'))]" />
+		</record>
+		
+		<!-- Ecclesia BCC -->
+		
+		<record model="ir.rule" id="res_ecclesia_bcc_ebcc_rule">
+			<field name="name">Own Ecclesia BCC</field>
+			<field name="model_id" ref="model_res_parish" />
+			<field name="domain_force">[('id','=',user.parish_bcc_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bcc'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_region_ebcc_rule">
+			<field name="name">BCC Region</field>
+			<field name="model_id" ref="model_res_ecclesia_region" />
+			<field name="domain_force">[('id','=',user.ecc_reg_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bcc'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_province_ebcc_rule">
+			<field name="name">BCC Province</field>
+			<field name="model_id" ref="model_res_ecclesia_province" />
+			<field name="domain_force">[('id','=',user.ecc_province_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bcc'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_diocese_ebcc_rule">
+			<field name="name">BCC Diocese</field>
+			<field name="model_id" ref="model_res_ecclesia_diocese" />
+			<field name="domain_force">[('id','=',user.diocese_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bcc'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_vicariate_ebcc_rule">
+			<field name="name">BCC Vicariate</field>
+			<field name="model_id" ref="model_res_vicariate" />
+			<field name="domain_force">[('id','=',user.vicariate_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bcc'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_sub_station_ebcc_rule">
+			<field name="name">BCC Sub Station</field>
+			<field name="model_id" ref="model_res_parish_sub_station" />
+			<field name="domain_force">[('id','=',user.parish_bcc_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bcc'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_zone_ebcc_rule">
+			<field name="name">BCC Zone</field>
+			<field name="model_id" ref="model_res_ecclesia_zone" />
+			<field name="domain_force">[('id','=',user.parish_bcc_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bcc'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_ecclesia_parish_ebcc_rule">
+			<field name="name">BCC Parish</field>
+			<field name="model_id" ref="model_res_parish_bcc" />
+			<field name="domain_force">[('id','=',user.parish_bcc_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_bcc'))]" />
+		</record>
+		
+		<!-- Members -->
+		
+		<record model="ir.rule" id="res_partner_member_rule">
+			<field name="name">Member Partner</field>
+			<field name="model_id" ref="model_res_partner" />
+			<field name="domain_force">['|','|','|','|','|','|','|',('id','=',user.member_id.institute_id.partner_id.id),('id','in',user.member_id.institute_id.rel_region_ids.mapped('partner_id.id')),('id','=',user.member_id.rel_province_id.partner_id.id),('id','=',user.member_id.rel_zone_id.partner_id.id),('id','=',user.member_id.community_id.partner_id.id),('id','=',user.member_id.diocese_id.partner_id.id),('id','=',user.member_id.parish_id.partner_id.id),('id','=',user.member_id.partner_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_individual'))]" />
+		</record>
+		
+		<record model="ir.rule" id="res_parish_member_rule">
+			<field name="name">Own Parish Member</field>
+			<field name="model_id" ref="model_res_member" />
+			<field name="domain_force">[('id','=',user.member_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_individual'))]" />
+		</record>
+		
+		<record model="ir.rule" id="member_life_membership_rule">
+			<field name="name">Member Life Membership</field>
+			<field name="model_id" ref="model_res_membership" />
+			<field name="domain_force">[('member_id','=',user.member_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_individual'))]" />
+		</record>
+		
+		<!-- Families -->
+		
+		<record model="ir.rule" id="res_parish_family_rule">
+			<field name="name">Own Parish Family</field>
+			<field name="model_id" ref="model_res_family" />
+			<field name="domain_force">[('id','=',user.family_id.id)]</field>
+			<field name="groups" eval="[(4, ref('cristo.group_role_cristo_family'))]" />
+		</record>
+		
+</odoo>

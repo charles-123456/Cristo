@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+
+		<report id="report_assignment_xlsx"
+			    model="member.assignment"
+			    string="Assignment XLSX"
+			    report_type="xlsx"
+			    name="cristo_assignment.report_assignment"
+			    file="Due List"
+			    menu="False"
+			    
+				/>
+				
+	</data>
+</odoo>

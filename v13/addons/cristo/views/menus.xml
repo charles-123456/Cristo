@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Ecclesia Menus -->
+	<menuitem id="organization_main_menu" name="Institute" sequence="3" web_icon="cristo,static/description/institute.png"/>
+	
+	<menuitem id="res_ecclesia_main_menu" name="Church" parent="organization_main_menu" sequence="1"  web_icon="" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_ec_region,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms,cristo.group_role_cristo_bcc" />
+	<menuitem id="res_ecclesia_region_menu" parent="res_ecclesia_main_menu" name="Ecclesia Region" sequence="1" action="action_ecclesia_region" />
+	<menuitem id="res_ecclesia_province_menu" parent="res_ecclesia_main_menu" name="Ecclesia Province" sequence="2" action="action_ecclesia_province" />
+	<menuitem id="res_ecclesia_diocese_menu" parent="res_ecclesia_main_menu" name="Diocese" sequence="3" action="action_ecclesia_diocese" />
+	<menuitem id="res_vicariate_menu" parent="res_ecclesia_main_menu" name="Vicariate" sequence="4" action="action_vicariate" />
+	<menuitem id="res_parish_menu" parent="res_ecclesia_main_menu" name="Parish/Mission Station" sequence="5" action="action_parish" />
+	<menuitem id="res_parish_sub_station_menu" parent="res_ecclesia_main_menu" name="Sub Station" sequence="6" action="action_parish_sub_station" />
+	<menuitem id="res_ecclesia_zone_menu" parent="res_ecclesia_main_menu" name="Zone" sequence="7" action="action_ecclesia_zone" groups="base.group_erp_manager,group_role_cristo_bsa_super_admin,group_role_cristo_ec_region,group_role_cristo_ec_province,group_role_cristo_diocese,group_role_cristo_vicarate,group_role_cristo_parish_ms,group_role_cristo_bcc,group_role_cristo_family" />
+	<menuitem id="res_parish_bcc_menu" parent="res_ecclesia_main_menu" name="Basic Christian Community" sequence="8" action="action_parish_bcc" />
+	<menuitem id="res_ecclesia_community_menu" parent="res_ecclesia_main_menu" name="House/Community" sequence="9" action="action_ecclesia_community" />
+	<menuitem id="res_ecclesia_institution_menu" parent="res_ecclesia_main_menu" name="Institution" sequence="10" action="action_ecclesia_institution" />
+
+<!-- Religious Menus -->
+	<menuitem id="res_religious_main_menu" name="Religious" parent="organization_main_menu" sequence="2" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution,cristo.group_role_cristo_individual" />
+	
+	<menuitem id="res_religious_institute_menu" parent="res_religious_main_menu" name="Congregation" sequence="1" action="action_religious_institute" />
+	<menuitem id="res_religious_region_menu" parent="res_religious_main_menu" name="Region" sequence="2" action="action_religious_region" />
+	<menuitem id="res_religious_province_menu" parent="res_religious_main_menu" name="Province" sequence="3" action="action_religious_province" />
+	<menuitem id="res_religious_zone_menu" parent="res_religious_main_menu" name="Area" sequence="4" action="action_religious_zone" groups="base.group_erp_manager,group_role_cristo_bsa_super_admin,group_role_cristo_religious_institute_admin,group_role_cristo_religious_province,group_role_cristo_religious_house,group_role_cristo_apostolic_institution,group_role_cristo_apostolic_association" />
+	<menuitem id="res_religious_community_menu" parent="res_religious_main_menu" name="House/Community" sequence="5" action="action_religious_community" />
+	<menuitem id="res_institution_menu" parent="res_religious_main_menu" name="Institution" sequence="6" action="action_institution" />
+	
+<!-- Association -->
+	<menuitem id="res_association_menu"  name="Association" parent="organization_main_menu" sequence="3" action="action_association" groups="base.group_erp_manager,group_role_cristo_bsa_super_admin,group_role_cristo_religious_institute_admin,group_role_cristo_religious_province,group_role_cristo_religious_house,group_role_cristo_apostolic_institution,group_role_cristo_apostolic_association"/>
+	
+<!-- Legal Entity Menus -->
+	<menuitem id="res_legal_entity_main_menu" name="Legal Entity" parent="organization_main_menu" sequence="4" action="action_legal_entity" web_icon="" />
+	
+<!-- Member Menus -->
+	<menuitem id="members_main_menu" name="Members" sequence="2" web_icon="cristo,static/description/members.png"/>
+	
+	<menuitem id="res_members_master_menu" parent="members_main_menu" name="Master" sequence="1" />
+	<menuitem id="all_member_menu" parent="res_members_master_menu" name="All Members" sequence="1" action="action_all_member" />
+	
+<!-- Secular Members -->
+	<menuitem id="res_members_secular_main_menu" parent="res_members_master_menu" name="Secular" sequence="2" groups="base.group_erp_manager,group_role_cristo_bsa_super_admin,group_role_cristo_parish_ms,group_role_cristo_diocese"/>
+	
+	<menuitem id="res_secular_priests_main_menu" parent="res_members_secular_main_menu" name="Priests" sequence="2" action="action_res_secular_priest" />
+	<menuitem id="res_deacon_main_menu" parent="res_members_secular_main_menu" name="Deacons" sequence="3" action="action_res_deacon" />
+	<menuitem id="res_secular_brothers_main_menu" parent="res_members_secular_main_menu" name="Seminarians" sequence="4" action="action_res_secular_brother" />
+	<menuitem id="res_bishops_main_menu" parent="res_members_secular_main_menu" name="Bishops" sequence="10" action="action_res_bishop" />
+	
+<!-- Religious Members -->
+	<menuitem id="res_members_religious_main_menu" parent="res_members_master_menu" name="Religious" sequence="3" />
+	
+	<menuitem id="res_religious_priests_main_menu" parent="res_members_religious_main_menu" name="Priests" sequence="2" action="action_res_religious_priest" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_priest_menu,cristo.group_role_cristo_lay_brother_menu"/>
+	<menuitem id="res_religious_laybrothers_main_menu" parent="res_members_religious_main_menu" name="Lay Brothers" sequence="3" action="action_res_laybrother" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_lay_brother_menu"/>
+	<menuitem id="res_religious_deacons_main_menu" parent="res_members_religious_main_menu" name="Deacons" sequence="4" action="action_res_religious_deacon" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_priest_menu"/>
+	<menuitem id="res_brothers_main_menu" parent="res_members_religious_main_menu" name="Brothers" sequence="5" action="action_res_brother" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_priest_menu"/>
+	<menuitem id="res_sisters_main_menu" parent="res_members_religious_main_menu" name="Sisters" sequence="6" action="action_res_sister" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_sisters_menu" />
+	<menuitem id="res_junior_sisters_main_menu" parent="res_members_religious_main_menu" name="Junior Sisters" sequence="7" action="action_res_junior_sister" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_sisters_menu"/>
+	<menuitem id="res_novices_main_menu" parent="res_members_religious_main_menu" name="Novices" sequence="8" action="action_novice" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_priest_menu,cristo.group_role_cristo_lay_brother_menu,cristo.group_role_cristo_sisters_menu"/>
+	<menuitem id="res_religious_bishops_main_menu" parent="res_members_religious_main_menu" name="Bishops" sequence="10" action="action_res_religious_bishop" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_priest_menu" />
+	
+ 	<!-- Menu for ecclesia parish -->	
+ 	<menuitem id="res_member_main_menu"  name="Parish" web_icon="cristo,static/description/church_parish.png" groups="cristo.group_role_cristo_bsa_super_admin,group_role_cristo_ec_region,group_role_cristo_ec_province,group_role_cristo_diocese,group_role_cristo_vicarate,group_role_cristo_parish_ms,group_role_cristo_bcc,group_role_cristo_family"/>
+	<menuitem id="res_member_menu" parent="res_member_main_menu" name="Members" sequence="1" action="action_res_member" />
+	<menuitem id="res_family_menu" parent="res_member_main_menu" name="Families" sequence="2" action="action_res_family" />
+	
+<!-- Sacraments Menu -->
+	<menuitem id="res_sacraments_main_menu" parent="res_member_main_menu" name="Sacraments" sequence="3" />
+	
+	<menuitem id="res_baptism_menu" parent="res_sacraments_main_menu" name="Baptism" sequence="1" action="action_baptism" />
+	<menuitem id="res_first_holy_communion_menu" parent="res_sacraments_main_menu" name="First Holy Communion" sequence="2" action="action_first_holy_communion" />
+	<menuitem id="res_confirmation_menu" parent="res_sacraments_main_menu" name="Confirmation" sequence="3" action="action_confirmation" />
+	<menuitem id="res_marriage_menu" parent="res_sacraments_main_menu" name="Marriage" sequence="4" action="action_marriage" />
+	<menuitem id="res_death_menu" parent="res_sacraments_main_menu" name="Death" sequence="5" action="action_death" />
+	
+	<menuitem id="res_ecclesia_parish_report" parent="res_member_main_menu" name="Reports"/>
+	<!-- <menuitem id="res_all_anniversary_report" parent="res_ecclesia_parish_report" name="All Anniversary"  action="action_view_all_anniversary_parish_reports"  groups="base.group_erp_manager"/> -->
+	
+	
+<!-- Updates Menus -->
+	<menuitem id="res_members_updates_menu" parent="members_main_menu" name="Updates" sequence="2" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution" />
+<!-- Lifelog Menus -->
+	<menuitem id="res_membership_main_menu" parent="res_members_updates_menu" name="Lifelog" sequence="5" action="action_res_membership" groups="cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province"/>
+
+<!-- House Member Menus -->
+	<menuitem id="res_house_member_main_menu" parent="members_main_menu" name="Member Ministry" sequence="6" action="action_house_members" />
+
+<!-- Reports Menus -->
+	<menuitem id="reports_main_menu" parent="members_main_menu" name="Reports" sequence="7" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms" />
+	
+	<menuitem id="statistics_main_menu" parent="reports_main_menu" name="Statistics" sequence="8" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms" />
+	<menuitem id="confreres_menu" parent="reports_main_menu" name="Members List" sequence="1" action="action_statistics_confreres" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution" />
+	<menuitem id="anniversary_menu" parent="reports_main_menu" name="Anniversaries" sequence="2" action="action_anniversary_report" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution" />
+	
+	<!-- Family Reports-->
+	<menuitem id="family_menu" parent="reports_main_menu" name="Family" groups="base.group_erp_manager,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms" />
+	<menuitem id="family_statistics_menu" parent="family_menu" name="Family Statistics" sequence="1" action="action_statistics_family" />
+	<menuitem id="family_list_menu" parent="family_menu" name="Family List" action="action_family_list" sequence="2" />
+	<menuitem id="family_census_menu" parent="family_menu" name="Family Census" action="action_family_census" sequence="3" />
+	
+	<!-- Sacraments Reports Menu -->
+	<menuitem id="reports_sacraments_menu" parent="reports_main_menu" name="Sacraments" groups="base.group_erp_manager,cristo.group_role_cristo_ec_province,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms" />
+	
+	<menuitem id="reports_sacraments_marriage_menu" parent="reports_sacraments_menu" name="Marriage" action="action_view_marriage_report" sequence="1" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_diocese,cristo.group_role_cristo_vicarate,cristo.group_role_cristo_parish_ms" />
+	
+<!-- Configuration Menus -->
+	<menuitem id="configuration_main_menu" name="Configuration" sequence="5"  web_icon="cristo,static/description/configuration.png" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin" />
+	
+	<menuitem id="geographical_main_menu" name="Geographical" parent="configuration_main_menu" sequence="1"/>
+	<menuitem id="res_countries_menu" name="Country" parent="geographical_main_menu" sequence="1" action="base.action_country"/>
+	<menuitem id="res_states_menu" name="State" parent="geographical_main_menu" sequence="2" action="base.action_country_state"/>
+	<menuitem id="res_districts_menu" name="District" parent="geographical_main_menu" sequence="3" action="action_state_district"/>
+	<menuitem id="res_languages_menu" name="Languages" parent="geographical_main_menu" sequence="4" action="action_languages"/>			
+	<menuitem id="res_month_menu" name="Month" parent="geographical_main_menu" sequence="5" action="action_month"/>
+	
+<!-- Contacts -->
+	<menuitem id="cristo_contacts_main_menu" name="Contacts" sequence="4" web_icon="cristo,static/description/contacts.png"/>
+	
+	<menuitem id="res_all_contacts_main_menu" parent="cristo_contacts_main_menu" name="All Contacts" sequence="1" action="action_cristo_res_partner"/>
+	<menuitem id="res_contacts_main_menu" parent="cristo_contacts_main_menu" name="Associates" sequence="2" action="action_cristo_res_partner_outsiders" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution"/>
+	
+<!-- Personal Menus -->
+	<menuitem id="personal_main_menu" name="Personal" parent="configuration_main_menu" sequence="2"/>
+	
+	<menuitem id="res_contact_titles_menu" parent="personal_main_menu" name="Contact Titles" sequence="1" action="base.action_partner_title_contact"/>
+	<menuitem id="res_physical_status_menu" parent="personal_main_menu" name="Physical Status" sequence="2" action="action_physical_status"/>
+	<menuitem id="res_citizenship_status_menu" parent="personal_main_menu" name="Citizenship" sequence="3" action="action_citizenship_status"/>
+	<menuitem id="res_blood_group_menu" parent="personal_main_menu" name="Blood Group" sequence="4" action="action_blood_group"/>
+	<menuitem id="res_marital_status_menu" parent="personal_main_menu" name="Marital Status" sequence="6" action="action_marital_status"/>
+	<menuitem id="res_relationship_menu" parent="personal_main_menu" name="Relationship" sequence="7" action="action_relationship_status"/>
+	<menuitem id="res_member_religion_menu" parent="personal_main_menu" name="Religion" sequence="8" action="action_member_religion_status" />
+	<menuitem id="res_member_role_menu" parent="personal_main_menu" name="Member Role" sequence="9" action="action_member_role"/>
+	<menuitem id="res_occupation_menu" parent="personal_main_menu" name="Occupation" sequence="10" action="action_occupation"/>
+	<menuitem id="res_house_type_menu" parent="personal_main_menu" name="House Type" sequence="11" action="action_house_type"/>
+	<menuitem id="res_disease_disorder_menu" parent="personal_main_menu" name="Disease Disorder" sequence="12" action="action_disease_disorder"/>
+	<menuitem id="res_formation_stages_menu" parent="personal_main_menu" name="Formation Stages" sequence="13" action="action_formation_stages"/>
+	<menuitem id="res_main_category_menu" parent="personal_main_menu" name="Main Category" sequence="14" action="action_main_category"/>
+	<menuitem id="res_publication_type_menu" parent="personal_main_menu" name="Publication Type" sequence="15" action="action_publication_type" />
+	<menuitem id="renewal_doc_type_menu" parent="personal_main_menu" name="Renewal Doc Type" sequence="16" action="action_renewal_doc_type" />
+	<menuitem id="anniversary_type_menu" parent="personal_main_menu" name="Anniversary Type" sequence="17" action="action_anniversary_type" />
+	
+	
+<!-- Educational Menus -->
+	<menuitem id="educational_main_menu" name="Educational" parent="configuration_main_menu" sequence="3"/>
+	
+	<menuitem id="res_study_level_menu" parent="educational_main_menu" name="Study Level" sequence="1" action="action_study_level"/>
+	<menuitem id="res_member_program_menu" parent="educational_main_menu" name="Program" sequence="2" action="action_member_program"/>
+	<menuitem id="res_core_disiplines_menu" parent="educational_main_menu" name="Core Disiplines" sequence="3" action="action_core_disiplines"/>
+	<menuitem id="res_institution_category" parent="educational_main_menu" name="Institution Category" sequence="4" action="action_institution_category"/>
+	<menuitem id="res_board_category" parent="educational_main_menu" name="Institution Board" sequence="5" action="action_board_type"/>
+	
+<!-- Ecclesial Menu -->
+	<menuitem id="res_ecclesial_main_menu" name="Ecclesial" parent="configuration_main_menu" sequence="4"/>
+	
+	<menuitem id="res_patron_menu" parent="res_ecclesial_main_menu" name="Patron" sequence="1" action="action_patron"/>
+	<menuitem id="res_rite_menu" parent="res_ecclesial_main_menu" name="Rite" sequence="2" action="action_rite"/>
+	
+<!-- Religious Menu -->
+	<menuitem id="res_religious_menu" name="Religious" parent="configuration_main_menu" sequence="5"/>
+	
+	<menuitem id="entity_nature_menu" parent="res_religious_menu" name="Entity Nature" sequence="1" action="action_entity_nature"/>
+	<menuitem id="fiscal_year_menu" parent="res_religious_menu" name="Fiscal Year" sequence="2" action="action_fiscal_year"/>
+
+<!-- Member Configuration Menus -->
+	<menuitem id="member_configuration_main_menu" parent="members_main_menu" name="Configuration" sequence="8" groups="base.group_erp_manager,cristo.group_role_cristo_bsa_super_admin,cristo.group_role_cristo_religious_institute_admin,cristo.group_role_cristo_religious_province,cristo.group_role_cristo_religious_house,cristo.group_role_cristo_apostolic_institution" />
+	
+	<menuitem id="member_tags_main_menu" parent="member_configuration_main_menu" name="Member Tags" action="action_member_tags" sequence="1" />
+	
+	<menuitem name="Settings" id="base.menu_administration" web_icon="cristo,static/description/settings.png" sequence="500" groups="base.group_erp_manager"/>
+	
+</odoo>

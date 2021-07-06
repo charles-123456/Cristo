@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="report_ecc_diocese_profile">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+                    <div class="page">
+                        <style>
+                            .page{
+                                font-family: Calibri;
+                            }
+                            th,td{
+                                padding: 8px;
+                                }
+                            tr{
+                                page-break-inside: avoid;
+                                }
+                            .align_left{
+                                text-align:left;
+                                }
+                            .hide_color{
+                                background-color:white;
+                                color:black;
+                                }
+                            table{
+                                border-collapse:collapse;
+                                width:100%;
+                            }
+                            .table thead{
+                                background-color: #008B8B;
+                                color:white;
+                                font-size:20px;
+                            }
+                            .table tr:nth-child(even){
+                                background-color: #f2f2f2;
+                                }
+                            .light-border th{
+									border:1px solid #eee;
+								}
+                            .light-border td{
+									border:1px solid #eee;
+								}
+                        </style>
+                        <table width="100%">
+                            <tr>
+                                <td class="align-left">
+                                    <t t-if="o.diocese_logo">
+                                        <img t-att-src="image_data_uri(o.diocese_logo)" style="height:75px;width:75px;"/>
+                                    </t>
+                                </td>
+                                <td width="80%" style="vertical-align: middle;font-size:20px;">
+                                    <center>
+                                        <strong style="font-size:27px;margin-left:-150px;">
+                                            <span t-field="o.name"/>
+                                            <t t-if="o.is_archdiocese">Archdiocese</t>
+                                            <t t-else="">Diocese</t>
+                                        </strong>
+                                        <div width="100" style="margin-left:-75px;margin-right:75px;">
+                                          <span t-field="o.street"/>
+                                          <t t-if="o.street and o.street2">, </t>
+                                          <span t-field="o.street2"/>
+                                          <span t-field="o.place"/>
+                                          <t t-if="o.place and o.city">, </t>
+                                          <span t-field="o.city"/>
+                                          <span t-field="o.state_id"/>
+                                          <t t-if="o.state_id and o.country_id">, </t>
+                                          <span t-field="o.country_id"/>
+                                          <t t-if="o.zip and o.country_id">-</t>
+                                          <span t-field="o.zip"/>
+                                        </div>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br/>
+                        <table width="100%" class="light-border" style="font-size:18px;">
+                            <tr>
+                                <th width="50%" class="hide_colo align_left">
+                                    Ecclesia Province
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <span t-field="o.ecc_province_id.sudo().name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Code
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <span t-field="o.code"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left"> Bishop </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.current_bishop_id">
+                                        <span t-field="o.current_bishop_id.member_name"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Establishment Date
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.establishment_date">
+                                        <span t-field="o.establishment_date" t-options="{'widget':'date','format': 'dd-MMM-yyyy'}"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Patron Saint
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.patron_id">
+                                        <span t-field="o.patron_id.name"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Feast Day
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.feast_day and o.feast_month">
+                                        <span t-field="o.feast_day"/>-<span t-field="o.feast_month"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Mobile
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.mobile">
+                                        <span t-field="o.mobile"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Phone No.
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.phone">
+                                        <span t-field="o.phone"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Email
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.email">
+                                        <span t-field="o.email"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="50%" class="hide_color align_left">
+                                    Website
+                                </th>
+                                <td width="50%" class="hide_color align_left">
+                                    <t t-if="o.website">
+                                        <span t-field="o.website"/>
+                                    </t>
+                                    <t t-else=""><span>-</span></t>
+                                </td>
+                            </tr>
+                            <t t-if="o.data_source == 'static'">
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Diocesian Priest 
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_dio_priest">
+	                                       <span t-field="o.total_dio_priest"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                            <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Religious Priest 
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_rel_priest">
+	                                       <span t-field="o.total_rel_priest"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Parishes
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_parish">
+	                                       <span t-field="o.total_parish"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Diocese Institutions
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_dio_institutions">
+	                                       <span t-field="o.total_dio_institutions"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Religious Institutions
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_rel_institutions">
+	                                       <span t-field="o.total_rel_institutions"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Diocesian Health Center
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_dio_health_center">
+	                                       <span t-field="o.total_dio_health_center"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Religious Health Center
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_rel_health_center">
+	                                       <span t-field="o.total_rel_health_center"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Diocesian Formation House
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_dio_formation_house">
+	                                       <span t-field="o.total_dio_formation_house"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Religious Formation House
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_rel_formation_house">
+	                                       <span t-field="o.total_rel_formation_house"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Number of Centers
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_centers">
+	                                       <span t-field="o.total_centers"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Congregation of Fathers
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_cong_fathers">
+	                                       <span t-field="o.total_cong_fathers"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Congregation of Sisters
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_cong_sisters">
+	                                       <span t-field="o.total_cong_sisters"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                   Congregation of Brothers
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_cong_brothers">
+	                                       <span t-field="o.total_cong_brothers"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                 	 Number of Religious - Sisters
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_rel_sisters">
+	                                       <span t-field="o.total_rel_sisters"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                 	 Number of Religious - Priest/Brothers
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_rel_priest">
+	                                       <span t-field="o.total_rel_priest"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                 	 Number of Deaneries
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_deaneries">
+	                                       <span t-field="o.total_deaneries"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                 	 Number of Deaneries - Run by Diocese
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_dio_deaneries">
+	                                       <span t-field="o.total_dio_deaneries"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+	                           <tr>
+	                               <th width="50%" class="hide_color align_left">
+	                                 	 Number of Deaneries - Run by Religious
+	                               </th>
+	                               <td width="50%" class="hide_color align_left">
+	                                   <t t-if="o.total_rel_deaneries">
+	                                       <span t-field="o.total_rel_deaneries"/>
+	                                   </t>
+	                                   <t t-else=""><span>-</span></t>
+	                               </td>
+	                           </tr>
+                            </t>
+                        </table>
+                        <br/>
+                        <br/>
+                        <div class="row" width="100%">
+                            <center>
+                                <p style="font-size:20px;">
+                                    <b>Bishop Details</b>
+                                </p>
+                            </center>
+                        </div>
+                        <table border="1px" class="table table-stripped">
+                            <thead>
+                                <th>Role</th>
+                                <th>Name</th>
+                                <th>Phone No.</th>
+                                <th>Email</th>
+                                <th>Date of Birth</th>
+                                <!-- <th>Feast Day</th> -->
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <t t-if="o.current_bishop_id">
+                                        <t t-if="o.is_archdiocese">
+                                            <th>Archbishop</th>
+                                        </t>
+                                        <t t-else="">
+                                            <th>Bishop</th>
+                                        </t>
+                                        <td><span t-field="o.current_bishop_id.full_name"/></td>
+                                        <td><span t-field="o.current_bishop_id.mobile"/></td>
+                                        <td><span t-field="o.current_bishop_id.email"/></td>
+                                        <td><span t-field="o.current_bishop_id.dob" t-options="{'widget':'date','format': 'dd-MMM-yyyy'}"/></td>
+                                       <!--  <td>
+                                            <t t-if="o.current_bishop_id.feast_day and o.current_bishop_id.feast_month">
+                                                <span t-field="o.current_bishop_id.feast_day"/>-<span t-field="o.current_bishop_id.feast_month"/>
+                                            </t>
+                                        </td> -->
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <t t-if="o.bishop_emeritus_id">
+                                        <th>Bishop Emeritus</th>
+                                        <td><span t-field="o.sudo().bishop_emeritus_id.full_name"/></td>
+                                        <td><span t-field="o.sudo().bishop_emeritus_id.mobile"/></td>
+                                        <td><span t-field="o.sudo().bishop_emeritus_id.email"/></td>
+                                        <td><span t-field="o.sudo().bishop_emeritus_id.dob" t-options="{'widget':'date','format': 'dd-MMM-yyyy'}"/></td>
+                                        <!-- <td>
+                                            <t t-if="o.bishop_emeritus_id.feast_day and o.bishop_emeritus_id.feast_month">
+                                                <span t-field="o.bishop_emeritus_id.feast_day"/>-<span t-field="o.bishop_emeritus_id.feast_month"/>
+                                            </t>
+                                        </td> -->
+                                    </t>
+                                </tr>
+                                <t t-if="o.deputy_bishop_role_id">
+                                    <t t-set="vicar_general" t-value="get_deputy_bishop_detail(o.id,o.deputy_bishop_role_id.id)"/>
+                                    <t t-if="vicar_general">
+                                        <tr>
+                                            <th><t t-esc="o.deputy_bishop_role_id.name"/></th>
+                                            <td><t t-esc="vicar_general['name']"/></td>
+                                            <td><t t-esc="vicar_general['phone']"/></td>
+                                            <td><t t-esc="vicar_general['email']"/></td>
+                                            <td><t t-esc="vicar_general['birthday']"/></td>
+                                            <td><t t-esc="vicar_general['feastday']"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <t t-if="o.current_bishop_id">
+                            <t t-if="o.current_bishop_id.community_id">
+                                <div class="row" width="100%">
+                                    <center>
+                                        <p style="font-size:20px;">
+                                            <b>Bishop's House Address</b>
+                                        </p>
+                                    </center>
+                                </div>
+                                <table width="100%" class="light-border">
+                                    <tr>
+                                        <th width="50%" class="hide_colo align_left">
+                                            Address
+                                        </th>
+                                        <td width="50%" class="hide_color align_left">
+                                            <t t-set="community_address" t-value="o.current_bishop_id.sudo().community_id"/>
+                                            <t t-if="community_address">
+                                                <span t-field="community_address.street" />
+                                                <t t-if="community_address.street and community_address.street2">, </t>
+                                                <span t-field="community_address.street2" />
+                                                <span t-field="community_address.place" />
+                                                <t t-if="community_address.place and community_address.city">, </t>
+                                                <span t-field="community_address.city" />
+                                                <br />
+                                                <span t-field="community_address.state_id" />
+                                                <t t-if="community_address.country_id and community_address.state_id">, </t>
+                                                <span t-field="community_address.country_id" />
+                                                <t t-if="community_address.zip and community_address.country_id">-</t>
+                                                <span t-field="community_address.zip" />
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="50%" class="hide_colo align_left">
+                                            Phone No.
+                                        </th>
+                                        <td width="50%" class="hide_color align_left">
+                                            <span t-field="o.current_bishop_id.sudo().community_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="50%" class="hide_colo align_left">
+                                            Email ID
+                                        </th>
+                                        <td width="50%" class="hide_color align_left">
+                                            <span t-field="o.current_bishop_id.sudo().community_id.email"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="50%" class="hide_colo align_left">
+                                            Website
+                                        </th>
+                                        <td width="50%" class="hide_color align_left">
+                                            <span t-field="o.current_bishop_id.sudo().community_id.website"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                        </t>
+                        <br/>
+                        <t t-if="o.data_source == 'extract'">
+	                        <div class="row" width="100%">
+	                            <center>
+	                                <p style="font-size:20px;">
+	                                    <b>Statistics</b>
+	                                </p>
+	                            </center>
+	                        </div>
+	                        <table width="100%" border="1px">
+	                            <tr>
+	                              <th width="50%" style="background-color:#CD5C5C;color:white;font-size:20px;">Particulars</th>
+	                              <th width="50%" style="background-color:#CD5C5C;color:white;font-size:20px;">Count</th>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Number of Priests</th>
+	                                <td width="50%" class="hide_color align_left"><span t-esc="get_priest_count(o.id)"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Number of Diocesan Priests</th>
+	                                <td width="50%" class="hide_color align_left"><span t-esc="get_diocesen_priest_count(o.id)"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Number of Religious Priests</th>
+	                                <td width="50%" class="hide_color align_left"><span t-esc="get_religious_priest_count(o.id)"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Congregation of Fathers</th>
+	                                <td width="50%" class="hide_color align_left"><span t-esc="get_congregation_father_count()"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Congregation of Brothers</th>
+	                                <td width="50%" class="hide_color align_left"><span t-esc="get_congregation_brother_count()"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Congregation of Sisters</th>
+	                                <td width="50%" class="hide_color align_left"><span t-esc="get_congregation_sister_count()"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Number of Generalate</th>
+	                                <td width="50%" class="hide_color align_left"><span t-field="o.generalate"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Number of Provincialate</th>
+	                                <td width="50%" class="hide_color align_left"><span t-field="o.provincialate"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Number of Regionalate</th>
+	                                <td width="50%" class="hide_color align_left"><span t-field="o.regionalate"/></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="50%" class="hide_color align_left">Number of Deaneries/Vicariates</th>
+	                                <td width="50%" class="hide_color align_left"><span t-field="o.vicariate_count"/></td>
+	                            </tr>
+	                          </table>
+	                        <table width="100%" border="1px">
+	                          <tr>
+	                              <th width="50%" class="hide_color align_left" rowspan="2">Number of Institutions</th>
+	                              <th width="25%" class="hide_color align_left">Owned By Religious</th>
+	                              <th width="25%" class="hide_color align_left">Owned By Diocese</th>
+	                          </tr>
+	                          <tr>
+	                              <td width="25%" class="hide_color align_left"><span t-esc="get_institution_count(o.id)[1]"/></td>
+	                              <td width="25%" class="hide_color align_left"><span t-esc="get_institution_count(o.id)[0]"/></td>
+	                          </tr>
+	                        </table>
+                        </t>
+                        <br/>
+                        <t t-set="formation_house" t-value="get_formation_institution_detail(o.id)"/>
+                        <t t-if="formation_house">
+                            <div class="row" width="100%">
+                                <center>
+                                    <p style="font-size:20px;">
+                                        <b>Formation Houses</b>
+                                    </p>
+                                </center>
+                            </div>
+                            <table width="100%" border="1px">
+                                  <thead>
+                                      <th width="50%" style="background-color:#CD5C5C;color:white;font-size:20px;">Institutions</th>
+                                      <th width="50%" style="background-color:#CD5C5C;color:white;font-size:20px;">Category</th>
+                                  </thead>
+                                  <tbody>
+                                     <t t-foreach="formation_house" t-as="data">
+                                        <tr>
+                                            <td width="50%"><t t-esc="data[1]"/></td>
+                                            <td width="50%"><t t-esc="data[0]"/></td>
+                                        </tr>
+                                     </t>
+                                  </tbody>
+                            </table>
+                            <br/>
+                        </t>
+                        <t t-set="health_center" t-value="get_health_center_detail(o.id)"/>
+                        <t t-if="health_center">
+                            <div class="row" width="100%">
+                                <center>
+                                    <p style="font-size:20px;">
+                                        <b>Health Centers</b>
+                                    </p>
+                                </center>
+                            </div>
+                            <table width="100%" border="1px">
+                                  <thead>
+                                      <th width="50%" style="background-color:#CD5C5C;color:white;font-size:20px;">Institutions</th>
+                                      <th width="50%" style="background-color:#CD5C5C;color:white;font-size:20px;">Category</th>
+                                  </thead>
+                                  <tbody>
+                                     <t t-foreach="health_center" t-as="data">
+                                        <tr>
+                                            <td width="50%"><t t-esc="data[1]"/></td>
+                                            <td width="50%"><t t-esc="data[0]"/></td>
+                                        </tr>
+                                     </t>
+                                  </tbody>
+                            </table>
+                            <br/>
+                        </t>
+                        <!--<t t-if="o.vicariate_ids">
+                            <div class="row" width="100%">
+                                <center>
+                                    <p style="font-size:20px;">
+                                        <b>Vicariates</b>
+                                    </p>
+                                </center>
+                            </div>
+                            <table border="1px" class="table table-stripped">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Vicar Forane</th>
+                                    <th>Establishment Date</th>
+                                </thead>
+                                <tbody >
+                                    <t t-foreach="o.vicariate_ids" t-as="vic">
+                                        <tr>
+                                            <td><t t-esc="vic.name"/></td>
+                                            <td><t t-esc="vic.code"/></td>
+                                            <td><t t-if="vic.current_vicar_forane_id"><t t-esc="vic.current_vicar_forane_id.full_name"/></t></td>
+                                            <td><span t-field="vic.establishment_date" t-options='{"widget":"date","format": "dd-MM-yyyy"}'/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <br/>
+                        <t t-if="o.parish_ids">
+                            <div class="row" width="100%">
+                                <center>
+                                    <p style="font-size:20px;">
+                                        <b>Parishes</b>
+                                    </p>
+                                </center>
+                            </div>
+                            <table border="1px" class="table table-stripped">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Vicariate</th>
+                                    <th>Parish Priest</th>
+                                    <th>Establishment Date</th>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.parish_ids" t-as="par">
+                                        <tr>
+                                            <td><t t-esc="par.name"/></td>
+                                            <td><t t-esc="par.code"/></td>
+                                            <td><t t-if="par.vicariate_id"><t t-esc="par.vicariate_id.name"/></t></td>
+                                            <td><t t-if="par.current_parishpriest_id"><t t-esc="par.current_parishpriest_id.full_name"/></t></td>
+                                            <td><span t-field="par.establishment_date" t-options='{"widget":"date","format": "dd-MM-yyyy"}'/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>-->
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

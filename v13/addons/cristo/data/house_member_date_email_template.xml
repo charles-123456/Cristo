@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+        <record id="email_template_house_member_date" model="mail.template">
+			<field name="name">House Member Date</field>
+			<field name="model_id" ref="cristo.model_house_member"/>
+			<field name="email_from">cristo@boscosofttech.com</field>
+			<field name="email_to">myaugustin777@gmail.com,adurai088@gmail.com</field>
+			<field name="auto_delete">False</field>
+			<field name="subject">House Member Inconsistency Data</field>
+			<field name="body_html"><![CDATA[
+				 <table style="border: 1px solid black;border-collapse: collapse;">
+					<thead>
+						<tr style="border: 1px solid black;border-collapse: collapse;">
+							<th style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="30%">Member</th>
+							<th style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="30%">House</th>
+							<th style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="10%">Date From</th>
+							<th style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="10%">Date To</th>
+						</tr>
+					</thead>
+					% set members = ctx.get('house_members')
+					% if members:
+						% for member in members:
+							<tr style="border: 1px solid black;border-collapse: collapse;">
+								<td style="border: 1px solid black;border-collapse: collapse;" width="30%">
+									% if member.member_id.full_name:
+										<span>${member.member_id.full_name}</span>
+									% endif
+								</td>
+								<td style="border: 1px solid black;border-collapse: collapse;" width="30%">
+									% if member.house_id.name:
+										<span>${member.house_id.name}</span>
+									% endif
+								</td>
+								<td style="border: 1px solid black;border-collapse: collapse;" width="10%">
+									% if member.date_from:
+										<span>${member.date_from}</span>
+									% endif
+								</td>
+								<td style="border: 1px solid black;border-collapse: collapse;" width="10%">
+									% if member.date_to:
+										<span>${member.date_to}</span>
+									% endif
+								</td>
+							</tr>
+						% endfor
+					% endif
+				</table>
+				<br/>
+				<div>Thank you.</div>
+				]]></field>
+		</record>
+    </data>
+</odoo>
